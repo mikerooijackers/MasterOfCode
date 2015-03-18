@@ -1,13 +1,19 @@
 package Domein;
 
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Hint {
 
 	/**
 	 * numeber of a hint
 	 */
-	private int hintId;
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	/**
 	 * name of a hint
 	 */
@@ -19,10 +25,39 @@ public class Hint {
 	/**
 	 * delay of a hint
 	 */
-	private Calendar delay;
+	private int delayInSeconds;
+        
+        private Assignment assignment;
+
+    public Hint() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getDelayInSeconds() {
+        return delayInSeconds;
+    }
+
+    public void setDelayInSeconds(int delayInSeconds) {
+        this.delayInSeconds = delayInSeconds;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
 
 	public int getHintId() {
-		return this.hintId;
+		return this.id;
 	}
 
 	public String getName() {
@@ -39,14 +74,6 @@ public class Hint {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Calendar getDelay() {
-		return this.delay;
-	}
-
-	public void setDelay(Calendar delay) {
-		this.delay = delay;
 	}
 
 }

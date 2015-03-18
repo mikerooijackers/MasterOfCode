@@ -1,7 +1,12 @@
 package Domein;
 
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Round {
 
 	/**
@@ -11,11 +16,63 @@ public class Round {
 	/**
 	 * duration of a round
 	 */
-	private Calendar duration;
+	private int durationInSeconds;
 	/**
 	 * Status of a round
 	 */
 	private Status status;
+        
+        private Competition competition;
+        
+        private Assignment assignment;
+        
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+
+    public Round() {
+    }
+
+    public int getDurationInSeconds() {
+        return durationInSeconds;
+    }
+
+    public void setDurationInSeconds(int durationInSeconds) {
+        this.durationInSeconds = durationInSeconds;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Competition getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+        
+        
 
 	public int getRoundNr() {
 		return this.roundNr;
@@ -23,22 +80,6 @@ public class Round {
 
 	public void setRoundNr(int roundNr) {
 		this.roundNr = roundNr;
-	}
-
-	public Calendar getDuration() {
-		return this.duration;
-	}
-
-	public void setDuration(Calendar duration) {
-		this.duration = duration;
-	}
-
-	public Status getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 }

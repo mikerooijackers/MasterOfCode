@@ -7,7 +7,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>Domein</module>
-    </modules>
+    <module>WorkspaceManagementModule</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

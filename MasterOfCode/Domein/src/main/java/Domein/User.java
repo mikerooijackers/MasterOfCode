@@ -1,5 +1,11 @@
 package Domein;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
 	/**
@@ -17,11 +23,35 @@ public class User {
 	/**
 	 * name of a user
 	 */
-	private String name;
+	private String fullName;
 	/**
 	 * privileges of a user
 	 */
 	private Privilege privileges;
+        
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+
+    public User() {
+    }
+
+        
+        
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 	public String getUsername() {
 		return this.username;
@@ -48,11 +78,11 @@ public class User {
 	}
 
 	public String getName() {
-		return this.name;
+		return this.fullName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.fullName = name;
 	}
 
 	public Privilege getPrivileges() {
