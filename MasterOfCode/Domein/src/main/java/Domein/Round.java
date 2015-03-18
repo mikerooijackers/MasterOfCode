@@ -1,5 +1,7 @@
 package Domein;
 
+import java.util.Calendar;
+
 public class Round {
 
 	/**
@@ -9,7 +11,7 @@ public class Round {
 	/**
 	 * duration of a round
 	 */
-	private dateTime duration;
+	private Calendar duration;
 	/**
 	 * Status of a round
 	 */
@@ -23,11 +25,11 @@ public class Round {
 		this.roundNr = roundNr;
 	}
 
-	public dateTime getDuration() {
+	public Calendar getDuration() {
 		return this.duration;
 	}
 
-	public void setDuration(dateTime duration) {
+	public void setDuration(Calendar duration) {
 		this.duration = duration;
 	}
 
