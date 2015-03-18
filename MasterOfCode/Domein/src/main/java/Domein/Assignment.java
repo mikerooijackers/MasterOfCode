@@ -25,7 +25,7 @@ public class Assignment {
     
     private String path;
     
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="competition")
+    @ManyToMany(cascade=CascadeType.ALL)
     private Collection<Competition> competitions;
 
     public Assignment() {

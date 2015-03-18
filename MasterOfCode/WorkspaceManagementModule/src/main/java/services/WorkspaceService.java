@@ -23,4 +23,8 @@ public class WorkspaceService {
     public void createWorkspace(Team team) {
         dao.createWorkspace(team);
     }
+    
+    public Team addTeam(Team team) {
+        return dao.addTeam(team);
+    }
 }

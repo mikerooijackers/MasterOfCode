@@ -13,4 +13,7 @@ import Domein.Team;
  */
 public interface WorkspaceDAO {
     void createWorkspace(Team team);
+    
+    //delete
+    Team addTeam(Team team);
 }

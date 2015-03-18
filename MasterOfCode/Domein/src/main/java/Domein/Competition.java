@@ -27,12 +27,23 @@ public class Competition {
 	/**
 	 * start time of a competition
 	 */
-	private Calendar startTime;
+	private int startTime;
 	private Status status;
         
-        @ManyToMany(cascade=CascadeType.ALL, mappedBy="competition")
+        @ManyToMany(cascade=CascadeType.ALL, mappedBy="competitions")
         private Collection<Assignment> assignments;
 
+    public Competition() {
+    }
+
+    public Collection<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(Collection<Assignment> assignments) {
+        this.assignments = assignments;
+    }
+        
 	public int getCompetitionId() {
 		return this.id;
 	}
@@ -61,11 +72,11 @@ public class Competition {
         this.status = status;
     }
 
-	public Calendar getStartTime() {
+	public int getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(Calendar startTime) {
+	public void setStartTime(int startTime) {
 		this.startTime = startTime;
 	}
 
