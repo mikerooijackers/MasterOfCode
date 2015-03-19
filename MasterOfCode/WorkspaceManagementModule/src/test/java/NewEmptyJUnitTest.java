@@ -49,9 +49,10 @@ public class NewEmptyJUnitTest {
         //MOCUser retUser = service.addUser(user);
         
         
-        Team team = new Team();
-        Team retTeam = service.addTeam(team);
-        
+        //Team team = new Team();
+        //Team retTeam = service.addTeam(team);
+        Team team = service.findTeam();
+        service.createWorkspace(team);
         
         //assertTrue(retTeam.getId() != 0);
         //em.persist(team);

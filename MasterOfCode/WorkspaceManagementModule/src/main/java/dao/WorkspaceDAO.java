@@ -18,4 +18,5 @@ public interface WorkspaceDAO {
     //delete
     Team addTeam(Team team);
     MOCUser addUser(MOCUser user);
+    Team findTeam();
 }

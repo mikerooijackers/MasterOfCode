@@ -30,13 +30,21 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
     }    
     
     @Override
+    public Team findTeam() {
+        return em.find(Team.class, 1);
+    }
+    
+    @Override
     public void createWorkspace(Team team) {
         // TODO
+        
         String path = "C:\\workspaces\\" + team.getId();
-        new File(path).mkdir();
+        new File(path).mkdirs();
         team.setWorkspacePath(path);
         
+        em.getTransaction().begin();
         em.merge(team);
+        em.getTransaction().commit();
     }
 
     @Override

@@ -32,4 +32,8 @@ public class WorkspaceService {
     public MOCUser addUser(MOCUser user) {
         return dao.addUser(user);
     }
+    
+    public Team findTeam() {
+        return dao.findTeam();
+    }
 }
