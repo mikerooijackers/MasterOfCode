@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Domein.Competition;
 import Domein.Team;
 import Domein.MOCUser;
 import javax.persistence.EntityManager;
@@ -50,6 +51,8 @@ public class NewEmptyJUnitTest {
         
         Team team = new Team();
         Team retTeam = service.addTeam(team);
+        
+        
         //assertTrue(retTeam.getId() != 0);
         //em.persist(team);
     }

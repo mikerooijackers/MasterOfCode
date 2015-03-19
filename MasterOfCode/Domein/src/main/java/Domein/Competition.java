@@ -27,7 +27,7 @@ public class Competition {
 	/**
 	 * start time of a competition
 	 */
-	private int startTime;
+	private Calendar startTime;
 	private Status status;
         
         @ManyToMany(cascade=CascadeType.ALL, mappedBy="competitions")
@@ -72,11 +72,11 @@ public class Competition {
         this.status = status;
     }
 
-	public int getStartTime() {
+	public Calendar getStartTime() {
 		return this.startTime;
 	}
 
-	public void setStartTime(int startTime) {
+	public void setStartTime(Calendar startTime) {
 		this.startTime = startTime;
 	}
 

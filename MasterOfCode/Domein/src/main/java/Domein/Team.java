@@ -8,11 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Team {
 
-    @ManyToOne(cascade=CascadeType.ALL, targetEntity = MOCUser.class)
+    @Transient
     private Collection<MOCUser> members;
     private int score;
     private String workspacePath;
