@@ -6,6 +6,7 @@
 package services;
 
 import Domein.Team;
+import Domein.MOCUser;
 import dao.WorkspaceDAO;
 import dao.WorkspaceDAOImpl;
 
@@ -26,5 +27,9 @@ public class WorkspaceService {
     
     public Team addTeam(Team team) {
         return dao.addTeam(team);
+    }
+    
+    public MOCUser addUser(MOCUser user) {
+        return dao.addUser(user);
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class MOCUser {
 
 	/**
 	 * username of a user
@@ -27,12 +27,12 @@ public class User {
 	/**
 	 * privileges of a user
 	 */
-	private Privilege privileges;
+	private Privilege privilege;
         
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
-    public User() {
+    public MOCUser() {
     }
 
         
@@ -85,12 +85,12 @@ public class User {
 		this.fullName = name;
 	}
 
-	public Privilege getPrivileges() {
-		return this.privileges;
+	public Privilege getPrivilege() {
+		return this.privilege;
 	}
 
-	public void setPrivileges(Privilege privileges) {
-		this.privileges = privileges;
+	public void setPrivilege(Privilege privilege) {
+		this.privilege = privilege;
 	}
 
 }

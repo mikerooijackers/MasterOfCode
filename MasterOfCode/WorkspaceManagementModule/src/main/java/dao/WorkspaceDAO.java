@@ -6,6 +6,7 @@
 package dao;
 
 import Domein.Team;
+import Domein.MOCUser;
 
 /**
  *
@@ -16,4 +17,5 @@ public interface WorkspaceDAO {
     
     //delete
     Team addTeam(Team team);
+    MOCUser addUser(MOCUser user);
 }

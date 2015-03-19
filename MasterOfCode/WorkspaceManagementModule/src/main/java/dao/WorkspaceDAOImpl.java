@@ -6,6 +6,7 @@
 package dao;
 
 import Domein.Team;
+import Domein.MOCUser;
 import java.io.File;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,8 +41,18 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 
     @Override
     public Team addTeam(Team team) {
+        em.getTransaction().begin();
         em.persist(team);
+        em.getTransaction().commit();
         return team;
+    }
+
+    @Override
+    public MOCUser addUser(MOCUser user) {
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
+        return user;
     }
     
     

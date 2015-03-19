@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Team {
 
-    @OneToMany(cascade=CascadeType.ALL)
-    private Collection<User> members;
+    @ManyToOne(cascade=CascadeType.ALL, targetEntity = MOCUser.class)
+    private Collection<MOCUser> members;
     private int score;
     private String workspacePath;
     
@@ -33,11 +33,11 @@ public class Team {
     public Team() {
     }
 
-    public Collection<User> getMembers() {
+    public Collection<MOCUser> getMembers() {
             return this.members;
     }
 
-    public void setMembers(Collection<User> members) {
+    public void setMembers(Collection<MOCUser> members) {
             this.members = members;
     }
 
