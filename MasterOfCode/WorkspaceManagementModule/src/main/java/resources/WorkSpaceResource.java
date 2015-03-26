@@ -6,6 +6,10 @@
 package resources;
 
 import Domein.Team;
+import domain.SourceCode;
+import java.util.List;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,13 +19,30 @@ import services.WorkspaceService;
  *
  * @author Gebruiker
  */
-@Path("/workspace")
+@Path("workspace")
 public class WorkSpaceResource {
     
     private static final WorkspaceService service = new WorkspaceService();
     
     @POST
-    public void createWorkspace(Team team) {
-        service.createWorkspace(team);
+    public void createWorkspace(Team team, String workspacePath) {
+        service.createWorkspace(team, workspacePath);
+    }
+    
+    @DELETE
+    public void deleteWorkspace(Team team, String workspacePath) {
+        service.deleteWorkspace(team, workspacePath);
+    }
+    
+    @GET
+    @Path("{assignment}")
+    public List<SourceCode> readSourceCodeOfAssignment(@PathParam("assignment") String assignment, Team team, String workspacePath, String sourceCodePath) {
+        return service.readSourceCode(team, workspacePath, assignment, sourceCodePath);
+    }
+    
+    @POST
+    @Path("editSourceCode")
+    public void saveSourceCode(String sourceCodePath, String sourceCode) {
+        service.editSourceCode(sourceCodePath, sourceCode);
     }
 }

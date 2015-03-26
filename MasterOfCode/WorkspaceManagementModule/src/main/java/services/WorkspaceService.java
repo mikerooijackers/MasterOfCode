@@ -9,6 +9,8 @@ import Domein.Team;
 import Domein.MOCUser;
 import dao.WorkspaceDAO;
 import dao.WorkspaceDAOImpl;
+import domain.SourceCode;
+import java.util.List;
 
 /**
  *
@@ -21,19 +23,31 @@ public class WorkspaceService {
         dao = new WorkspaceDAOImpl();
     }
     
-    public void createWorkspace(Team team) {
-        dao.createWorkspace(team);
+    public void createWorkspace(Team team, String workspacePath) {
+        dao.createWorkspace(team, workspacePath);
     }
     
-    public Team addTeam(Team team) {
-        return dao.addTeam(team);
+    public void deleteWorkspace(Team team, String workspacePath) {
+        dao.deleteWorkspace(team, workspacePath);
     }
     
-    public MOCUser addUser(MOCUser user) {
-        return dao.addUser(user);
+    public void editSourceCode(String sourceCodePath, String sourceCode) {
+        dao.editSourceCode(sourceCodePath, sourceCode);
     }
     
-    public Team findTeam() {
-        return dao.findTeam();
+    public List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath) {
+        return dao.readSourceCode(team, workspacePath, assignment, sourceCodePath);
     }
+    
+//    public Team addTeam(Team team) {
+//        return dao.addTeam(team);
+//    }
+//    
+//    public MOCUser addUser(MOCUser user) {
+//        return dao.addUser(user);
+//    }
+//    
+//    public Team findTeam() {
+//        return dao.findTeam();
+//    }
 }
