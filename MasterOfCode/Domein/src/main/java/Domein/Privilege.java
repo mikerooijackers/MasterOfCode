@@ -1,5 +1,9 @@
 package Domein;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 public enum Privilege {
     admin(0), teamMember(1), initiator(2);
     
@@ -9,6 +13,10 @@ public enum Privilege {
         this.id = nr;
     }
 
+    /**
+     * get privelilege id
+     * @return int
+     */
     public int getId() {
         return id;
     }
