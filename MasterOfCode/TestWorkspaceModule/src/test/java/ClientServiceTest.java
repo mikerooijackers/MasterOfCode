@@ -11,17 +11,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import service.WorkspaceService;
+import service.ClientService;
 
 /**
  *
  * @author May
  */
-public class WorkspaceServiceTest {
+public class ClientServiceTest {
     
-    WorkspaceService service;
+    ClientService service;
     
-    public WorkspaceServiceTest() {
+    public ClientServiceTest() {
     }
     
     @BeforeClass
@@ -34,7 +34,7 @@ public class WorkspaceServiceTest {
     
     @Before
     public void setUp() {
-        service = new WorkspaceService();
+        service = new ClientService();
     }
     
     @After
