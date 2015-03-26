@@ -19,6 +19,16 @@ public interface WorkspaceDAO {
     void deleteWorkspace(Team team, String workspacePath);
     void editSourceCode(String sourceCodePath, String sourceCode);
     List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath);
+    
+     /**
+     * Compiles the given application and shows a stack trace if the compilation
+     * fails.
+     * @param sourcePath
+     * @return false if compilation fails, true if it succeeds
+     */
+    boolean requestCompile(String sourcePath);
+    
+    
     //delete
     //Team addTeam(Team team);
     //MOCUser addUser(MOCUser user);

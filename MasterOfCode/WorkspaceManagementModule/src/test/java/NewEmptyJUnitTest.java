@@ -4,14 +4,10 @@
  * and open the template in the editor.
  */
 
-import Domein.Competition;
 import Domein.Team;
-import Domein.MOCUser;
 import Domein.SourceCode;
 import java.io.File;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -121,10 +117,12 @@ public class NewEmptyJUnitTest {
         
         assertTrue("content valid", expectedContent.equals(sc.getContent()));
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    
+    // TODO: add test to ensure that a valid project can be compiled
+     @Test
+     public void testRequestCompileFail() {
+         boolean compileResult = service.requestCompile(null);
+         assertEquals(false, compileResult);
+     }
 }

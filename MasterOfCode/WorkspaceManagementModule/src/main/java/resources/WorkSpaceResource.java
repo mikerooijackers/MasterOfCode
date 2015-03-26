@@ -45,4 +45,10 @@ public class WorkSpaceResource {
     public void saveSourceCode(String sourceCodePath, String sourceCode) {
         service.editSourceCode(sourceCodePath, sourceCode);
     }
+    
+    @GET
+    public boolean requestCompile(String sourcePath)
+    {
+        return service.requestCompile(sourcePath);
+    }
 }
