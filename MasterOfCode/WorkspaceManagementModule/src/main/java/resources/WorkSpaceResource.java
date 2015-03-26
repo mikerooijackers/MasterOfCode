@@ -6,7 +6,7 @@
 package resources;
 
 import Domein.Team;
-import domain.SourceCode;
+import Domein.SourceCode;
 import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

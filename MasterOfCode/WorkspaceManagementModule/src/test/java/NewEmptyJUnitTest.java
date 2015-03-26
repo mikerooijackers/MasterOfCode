@@ -7,7 +7,7 @@
 import Domein.Competition;
 import Domein.Team;
 import Domein.MOCUser;
-import domain.SourceCode;
+import Domein.SourceCode;
 import java.io.File;
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -7,7 +7,7 @@ package dao;
 
 import Domein.Team;
 import Domein.MOCUser;
-import domain.SourceCode;
+import Domein.SourceCode;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
