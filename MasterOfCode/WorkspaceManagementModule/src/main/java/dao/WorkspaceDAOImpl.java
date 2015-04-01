@@ -8,16 +8,27 @@ package dao;
 import Domein.Team;
 import Domein.MOCUser;
 import Domein.SourceCode;
+import domain.AnnotationData;
+//import domain.Annotation;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
+import java.net.MalformedURLException;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -27,6 +38,15 @@ import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.scanners.TypeElementsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import utils.FileUtils;
+import utils.ReflectionUtils;
+
 /**
  *
  * @author Gebruiker
@@ -34,17 +54,15 @@ import javax.tools.ToolProvider;
 public class WorkspaceDAOImpl implements WorkspaceDAO {
 
     //@PersistenceContext
-    private EntityManager em;
-    
+    //private EntityManager em;
     //@PersistenceUnit(unitName = "MasterOfCodeDB")
     //private EntityManagerFactory factory;
-
     public WorkspaceDAOImpl() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("MasterOfCodeDB");
-        em = factory.createEntityManager();
-        
-    }  
-    
+        //EntityManagerFactory factory = Persistence.createEntityManagerFactory("MasterOfCodeDB");
+        //em = factory.createEntityManager();
+
+    }
+
     @Override
     public void createWorkspace(Team team, String workspacePath) {
         // TODO
@@ -56,8 +74,6 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 //        em.merge(team);
 //        em.getTransaction().commit();
     }
-    
-    
 
 //    @Override
 //    public Team addTeam(Team team) {
@@ -79,18 +95,17 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 //    public Team findTeam() {
 //        return em.find(Team.class, 1);
 //    }
-
     @Override
     public void deleteWorkspace(Team team, String workspacePath) {
         String path = workspacePath + "\\" + team.getId();
         this.deleteFolder(new File(path));
     }
-    
+
     private void deleteFolder(File folder) {
         File[] files = folder.listFiles();
-        if(files != null) { //some JVMs return null for empty dirs
-            for(File f : files) {
-                if(f.isDirectory()) {
+        if (files != null) { //some JVMs return null for empty dirs
+            for (File f : files) {
+                if (f.isDirectory()) {
                     deleteFolder(f);
                 } else {
                     f.delete();
@@ -107,10 +122,10 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
             String sourceFilePath = sourceCodePath; //workspacePath + "\\" + team.getId() + "\\" + assignmentDirectory + "\\" + sourceCodePath;
             String path = sourceFilePath.substring(0, sourceFilePath.lastIndexOf("\\")); //+ "\\" + sourceCodeFileName;
             File sourceFile = new File(sourceFilePath);
-            
+
             writer = new FileWriter(sourceFile);
             writer.write(sourceCode);
-            
+
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, Locale.FRENCH, null);
             fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Arrays.asList(new File(path)));
@@ -126,78 +141,51 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
             }
         }
     }
-    
+
     @Override
-    public List<SourceCode> readSourceCode(Team team, String workspacePath, String assignmentDirectory, String sourceCodePath) {
-        String path = workspacePath + "\\" + team.getId() + "\\" + assignmentDirectory; //+ "\\" + sourceCodePath;
-        
+    public List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath, String assignmentPath) {
+        List<SourceCode> sourceCodeFiles = new ArrayList<>();
+        String path = assignmentPath;
+        List<AnnotationData> annotationData = ReflectionUtils.readAnnotationData(path, domain.ReadOnly.class);
+
+        path = workspacePath + "\\" + team.getId() + "\\" + assignment; //+ "\\" + sourceCodePath;
+
         File folder = new File(path);
         File[] files = folder.listFiles();
         path += "\\" + files[0].getName() + "\\" + sourceCodePath;
-        
-        return this.getClassFilesPath(new File(path));
-    }
-    
-    private List<SourceCode> getClassFilesPath(File folder) {
-        List<SourceCode> sourceCodeFiles = new ArrayList<>();
-        File[] files = folder.listFiles();
-        
-        if(files != null) { //some JVMs return null for empty dirs
-            for(File f : files) {
-                if(f.isDirectory()) {
-                    sourceCodeFiles.addAll(getClassFilesPath(f));
-                } else {
-                    if (f.isFile()) {
-                        String fileName = f.getName();
-                        int index = fileName.lastIndexOf('.');
-                        
-                        if (index >= 0) {
-                            String extension = fileName.substring(index);
-                            
-                            if (extension.equals(".java")) {
-                                SourceCode sc = new SourceCode();
-                                sc.setFileName(fileName);
-                                sc.setPath(f.getAbsolutePath());
-                                sc.setContent(this.readContentOfSourceCode(f));
-                                sourceCodeFiles.add(sc);
-                            }
-                        }
-                        
-                    }
-                }
-            }
+
+        for (AnnotationData ad : annotationData) {
+            String sourceCodeFilePath = ad.getClassName().replace(".", "\\");
+            String absolutePath = path + "\\" + sourceCodeFilePath + ".java";
+
+            SourceCode sc = new SourceCode();
+            sc.setFileName(ad.getClassName());
+            sc.setPath(absolutePath);
+            sc.setContent(FileUtils.readContentOfSourceCode(new File(absolutePath)));
+            sc.setIsEditable(!"domain.ReadOnly".equals(ad.getAnnotationName()));
+            sourceCodeFiles.add(sc);
         }
-        
+
         return sourceCodeFiles;
     }
-    
-    private String readContentOfSourceCode(File sourceFile) {
-        String output = "";
-        FileReader reader = null;
-        try {
-            reader = new FileReader(sourceFile);
-            BufferedReader br = new BufferedReader(reader);
-            String line;
-            while ((line = br.readLine()) != null) {
-                output += line + "\n";
-            }
-            
-            int length = output.length();
-            if (length > 0) {
-                output = output.substring(0, length-1);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(WorkspaceDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(WorkspaceDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException ex) {
-                Logger.getLogger(WorkspaceDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+
+    @Override
+    public List<AnnotationData> readAssignmentMetaData(String assignmentPath, String assignment) {
+        String path = assignmentPath + "\\" + assignment;
+
+        return ReflectionUtils.readAnnotationData(path, domain.SomeAnnotation.class);
+    }
+
+    @Override
+    public void extractAssignmentToWorkspace(Team team, String workspacePath, String assignment, String assignmentPath) {
+        String destination = workspacePath + "\\" + team.getId() + "\\" + assignment;
+        File assignmentFolder = new File(assignmentPath);
+        File[] files = assignmentFolder.listFiles();
+        for (File file : files) {
+            if (FileUtils.checkFileExtension(file, ".zip")) {
+                FileUtils.extractZIPFile(file, destination);
+                break;
             }
         }
-        
-        return output;
     }
 }

@@ -11,8 +11,17 @@ public class SourceCode {
     private String fileName;
     private String path;
     private String content;
+    private boolean isEditable;
 
     public SourceCode() {
+    }
+
+    public boolean isIsEditable() {
+        return isEditable;
+    }
+
+    public void setIsEditable(boolean isEditable) {
+        this.isEditable = isEditable;
     }
 
     public String getFileName() {

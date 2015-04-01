@@ -10,6 +10,7 @@ import Domein.MOCUser;
 import dao.WorkspaceDAO;
 import dao.WorkspaceDAOImpl;
 import Domein.SourceCode;
+import domain.AnnotationData;
 import java.util.List;
 
 /**
@@ -35,8 +36,16 @@ public class WorkspaceService {
         dao.editSourceCode(sourceCodePath, sourceCode);
     }
     
-    public List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath) {
-        return dao.readSourceCode(team, workspacePath, assignment, sourceCodePath);
+    public List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath, String assignmentPath) {
+        return dao.readSourceCode(team, workspacePath, assignment, sourceCodePath, assignmentPath);
+    }
+    
+    public List<AnnotationData> readAssignmentMetaData(String assignmentPath, String assignment) {
+        return dao.readAssignmentMetaData(assignmentPath, assignment);
+    }
+    
+    public void extractAssignmentToWorkspace(Team team, String workspacePath, String assignment, String assignmentPath) {
+        dao.extractAssignmentToWorkspace(team, workspacePath, assignment, assignmentPath);
     }
     
 //    public Team addTeam(Team team) {

@@ -36,8 +36,8 @@ public class WorkSpaceResource {
     
     @GET
     @Path("{assignment}")
-    public List<SourceCode> readSourceCodeOfAssignment(@PathParam("assignment") String assignment, Team team, String workspacePath, String sourceCodePath) {
-        return service.readSourceCode(team, workspacePath, assignment, sourceCodePath);
+    public List<SourceCode> readSourceCodeOfAssignment(@PathParam("assignment") String assignment, Team team, String workspacePath, String sourceCodePath, String assignmentPath) {
+        return service.readSourceCode(team, workspacePath, assignment, sourceCodePath, assignmentPath);
     }
     
     @POST

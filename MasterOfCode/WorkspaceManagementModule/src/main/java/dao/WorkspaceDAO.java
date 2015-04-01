@@ -6,8 +6,8 @@
 package dao;
 
 import Domein.Team;
-import Domein.MOCUser;
 import Domein.SourceCode;
+import domain.AnnotationData;
 import java.util.List;
 
 /**
@@ -18,9 +18,7 @@ public interface WorkspaceDAO {
     void createWorkspace(Team team, String workspacePath);
     void deleteWorkspace(Team team, String workspacePath);
     void editSourceCode(String sourceCodePath, String sourceCode);
-    List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath);
-    //delete
-    //Team addTeam(Team team);
-    //MOCUser addUser(MOCUser user);
-    //Team findTeam();
+    List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath, String assignmentPath);
+    List<AnnotationData> readAssignmentMetaData(String assignmentPath, String assignment);
+    void extractAssignmentToWorkspace(Team team, String workspacePath, String assignment, String assignmentPath);
 }

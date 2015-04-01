@@ -8,6 +8,7 @@ import Domein.Competition;
 import Domein.Team;
 import Domein.MOCUser;
 import Domein.SourceCode;
+import domain.AnnotationData;
 import java.io.File;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 import services.WorkspaceService;
+import utils.FileUtils;
 
 /**
  *
@@ -99,27 +101,75 @@ public class NewEmptyJUnitTest {
         team.setId(0);
         String workspacePath = "C:\\workspaces";
         String assignment = "0";
-        String sourceCodePath = "src\\main";
+        String sourceCodePath = "src\\main\\java";
+        String assignmentPath = "C:\\assignments\\0";
         
-        List<SourceCode> sourceCodeFiles = service.readSourceCode(team, workspacePath, assignment, sourceCodePath);
+        List<SourceCode> sourceCodeFiles = service.readSourceCode(team, workspacePath, assignment, sourceCodePath, assignmentPath);
         
         // should only be 1 source code file
         SourceCode sc = sourceCodeFiles.get(0);
         
-        String expectedSourceCodePath = "C:\\workspaces\\0\\0\\assignment\\src\\main\\Hello.java";
+        String expectedSourceCodePath = "C:\\workspaces\\0\\0\\mavenproject1\\src\\main\\java\\domain\\Hello.java";
         assertTrue("source code path valid", expectedSourceCodePath.equals(sc.getPath()));
         
-        String expectedFileName = "Hello.java";
+        String expectedFileName = "domain.Hello";
         assertTrue("file name valid", expectedFileName.equals(sc.getFileName()));
         
-        String expectedContent = "package com;\n\n" +
-            "public class Hello {\n" +
-            "\tpublic void doit() { \n" +
-            "\t\tSystem.out.println(\"Hello world\");\n" +
-            "\t}\n" +
-            "}";
+        String expectedContent = "package domain;\n\n" +
+               "@SomeAnnotation(something=\"bla\")\n" +
+               "@ReadOnly\n" +
+               "public class Hello {\n" +
+               "    public void HelloThere() {\n" +
+               "        System.out.println(\"Hi matey!\");\n" +
+               "    }\n" +
+               "}";
         
         assertTrue("content valid", expectedContent.equals(sc.getContent()));
+        
+        assertFalse("is editable", sc.isIsEditable());
+    }
+    
+    @Test
+    public void readAssignmentMetaDataTest() {
+        String assignmentPath = "C:\\assignments";
+        String assignment = "0";
+        
+        List<AnnotationData> data = service.readAssignmentMetaData(assignmentPath, assignment);
+        
+        String expectedAnnotationName = "domain.SomeAnnotation";
+        String expectedMethodName = "something";
+        Object expectedMethodValue = "bla";
+        int expectedListLength = 1;
+        
+        AnnotationData ad = data.get(0);
+        
+        assertEquals("list length", expectedListLength, data.size());
+        
+        assertEquals("annotation name", expectedAnnotationName, ad.getAnnotationName());
+        
+        assertEquals("method name", expectedMethodName, ad.getMethods().get(0).getName());
+        
+        assertEquals("method value", expectedMethodValue, ad.getMethods().get(0).getValue());
+    }
+    
+    @Test
+    public void extractAssignmentToWorkspaceTest() {
+        Team team = new Team();
+        team.setId(0);
+        String workspacePath = "C:\\workspaces";
+        String assignment = "0";
+        String assignmentPath = "C:\\assignments\\0";
+        
+        service.extractAssignmentToWorkspace(team, workspacePath, assignment, assignmentPath);
+        
+        File expectedFolder = new File("C:\\workspaces\\0\\0");
+        File[] files = expectedFolder.listFiles();
+        
+        int expectedFiles = 1;
+        
+        assertEquals("nrOfFiles", expectedFiles, files.length);
+        
+        assertTrue("fileIsFolder", files[0].isDirectory());
     }
 
     // TODO add test methods here.

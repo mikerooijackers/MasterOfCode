@@ -8,7 +8,7 @@
     <modules>
         <module>Domein</module>
     <module>WorkspaceManagementModule</module>
-  </modules>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
