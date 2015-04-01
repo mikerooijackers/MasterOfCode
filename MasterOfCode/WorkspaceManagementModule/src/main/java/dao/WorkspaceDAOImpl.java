@@ -188,4 +188,22 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
             }
         }
     }
+    
+    @Override
+    public boolean requestCompile(String sourcePath) {
+        // The project cannot be compiled if the sourcePath is null
+        if (sourcePath == null) {
+            System.out.println("The project to compile cannot be found");
+            return false;
+        }
+        // Start a new process with the given sourcePath
+        try {
+            new ProcessBuilder(
+                    "java.exe", "-cp", "bin", sourcePath).start();
+        } catch (IOException ex) {
+            Logger.getLogger(WorkspaceDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Compilation successful");
+        return true;
+    }
 }

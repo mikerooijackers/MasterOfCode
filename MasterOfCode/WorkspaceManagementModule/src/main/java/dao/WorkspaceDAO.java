@@ -21,4 +21,12 @@ public interface WorkspaceDAO {
     List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath, String assignmentPath);
     List<AnnotationData> readAssignmentMetaData(String assignmentPath, String assignment);
     void extractAssignmentToWorkspace(Team team, String workspacePath, String assignment, String assignmentPath);
+    
+     /**
+     * Compiles the given application and shows a stack trace if the compilation
+     * fails.
+     * @param sourcePath
+     * @return false if compilation fails, true if it succeeds
+     */
+    boolean requestCompile(String sourcePath);
 }

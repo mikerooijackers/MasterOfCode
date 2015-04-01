@@ -6,7 +6,6 @@
 package services;
 
 import Domein.Team;
-import Domein.MOCUser;
 import dao.WorkspaceDAO;
 import dao.WorkspaceDAOImpl;
 import Domein.SourceCode;
@@ -46,6 +45,11 @@ public class WorkspaceService {
     
     public void extractAssignmentToWorkspace(Team team, String workspacePath, String assignment, String assignmentPath) {
         dao.extractAssignmentToWorkspace(team, workspacePath, assignment, assignmentPath);
+    }
+    
+    public boolean requestCompile(String sourcePath)
+    {
+        return dao.requestCompile(sourcePath);
     }
     
 //    public Team addTeam(Team team) {
