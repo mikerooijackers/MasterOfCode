@@ -1,5 +1,9 @@
 package Domein;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 public enum Status {
 	waiting(0), playing(1), pause(2);
         
@@ -9,6 +13,10 @@ public enum Status {
             this.id = id;
         }
 
+    /**
+     * get status id
+     * @return in
+     */
     public int getId() {
         return id;
     }

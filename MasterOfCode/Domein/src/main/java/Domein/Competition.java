@@ -1,5 +1,6 @@
 package Domein;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import javax.persistence.CascadeType;
@@ -8,76 +9,137 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 @Entity
-public class Competition {
+public class Competition implements Serializable {
 
-	/**
-	 * id of a competition
-	 */
-     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	/**
-	 * name of a competition
-	 */
-	private String name;
+    /**
+     * id of a competition
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    /**
+     * name of a competition
+     */
+    private String name;
 
-	/**
-	 * start time of a competition
-	 */
-	private Calendar startTime;
-	private Status status;
-        
-        @ManyToMany(cascade=CascadeType.ALL, mappedBy="competitions")
-        private Collection<Assignment> assignments;
+    /**
+     * start time of a competition
+     */
+    private Calendar startTime;
+    private Status status;
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "competitions")
+    private Collection<Assignment> assignments;
+
+    /**
+     * Constructor Competition
+     */
     public Competition() {
     }
 
+    /**
+     * get collection of assignment
+     *
+     * @return collection of assignment
+     */
     public Collection<Assignment> getAssignments() {
         return assignments;
     }
 
+    /**
+     * set assignment
+     *
+     * @param assignments
+     */
     public void setAssignments(Collection<Assignment> assignments) {
         this.assignments = assignments;
     }
-        
-	public int getCompetitionId() {
-		return this.id;
-	}
 
-	public String getName() {
-		return this.name;
-	}
+    /**
+     * get Competition ID
+     *
+     * @return int
+     */
+    public int getCompetitionId() {
+        return this.id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * get name
+     *
+     * @return string
+     */
+    public String getName() {
+        return this.name;
+    }
 
+    /**
+     * set name
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * get id
+     *
+     * @return int
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * set id
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * get status
+     *
+     * @return Status
+     */
     public Status getStatus() {
         return status;
     }
 
+    /**
+     * set status
+     *
+     * @param status
+     */
     public void setStatus(Status status) {
         this.status = status;
     }
 
-	public Calendar getStartTime() {
-		return this.startTime;
-	}
+    /**
+     * get starttime
+     *
+     * @return calender
+     */
+    public Calendar getStartTime() {
+        return this.startTime;
+    }
 
-	public void setStartTime(Calendar startTime) {
-		this.startTime = startTime;
-	}
+    /**
+     * set starttime
+     *
+     * @param startTime
+     */
+    public void setStartTime(Calendar startTime) {
+        this.startTime = startTime;
+    }
 
 }

@@ -1,81 +1,143 @@
 package Domein;
 
-import java.util.Calendar;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 @Entity
-public class Hint {
+public class Hint implements Serializable {
 
-	/**
-	 * numeber of a hint
-	 */
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	/**
-	 * name of a hint
-	 */
-	private String name;
-	/**
-	 * description of a hint
-	 */
-	private String description;
-	/**
-	 * delay of a hint
-	 */
-	private int delayInSeconds;
-        
-        @ManyToOne
-        private Assignment assignment;
+    /**
+     * number of a hint
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    /**
+     * name of a hint
+     */
+    private String name;
+    /**
+     * description of a hint
+     */
+    private String description;
+    /**
+     * delay of a hint
+     */
+    private int delayInSeconds;
 
+    @ManyToOne
+    private Assignment assignment;
+
+    /**
+     * Constructor Hint
+     */
     public Hint() {
     }
 
+    /**
+     * get number of a hint
+     *
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * get number of a hint
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * get delay of a hint in seconds
+     *
+     * @return int
+     */
     public int getDelayInSeconds() {
         return delayInSeconds;
     }
 
+    /**
+     * set delay of a hint in seconds
+     *
+     * @param delayInSeconds
+     */
     public void setDelayInSeconds(int delayInSeconds) {
         this.delayInSeconds = delayInSeconds;
     }
 
+    /**
+     * get a Assignment
+     *
+     * @return Assignment
+     */
     public Assignment getAssignment() {
         return assignment;
     }
 
+    /**
+     * set a Assignment
+     *
+     * @param assignment
+     */
     public void setAssignment(Assignment assignment) {
         this.assignment = assignment;
     }
 
-	public int getHintId() {
-		return this.id;
-	}
+    /**
+     * get a hint Id
+     *
+     * @return int
+     */
+    public int getHintId() {
+        return this.id;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    /**
+     * get name of a hint
+     *
+     * @return string
+     */
+    public String getName() {
+        return this.name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * set name of a hint
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    /**
+     * get description of a hint
+     *
+     * @return String
+     */
+    public String getDescription() {
+        return this.description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+    /**
+     * set description of a hint
+     *
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
