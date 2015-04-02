@@ -35,7 +35,7 @@ public class Round implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     /**
      * Constructor Round
@@ -118,18 +118,18 @@ public class Round implements Serializable {
     /**
      * get id round
      *
-     * @return int
+     * @return long
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
     /**
      * set id round
      *
-     * @param id
+     * @param long
      */
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

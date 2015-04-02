@@ -4,20 +4,20 @@ package Domein;
  *
  * @author mikerooijackers
  */
-public enum Privilege {
+public enum Role {
     admin(0), teamMember(1), initiator(2);
     
-    private int id;
+    private long id;
     
-    Privilege(int nr) {
+    Role(long nr) {
         this.id = nr;
     }
 
     /**
      * get privelilege id
-     * @return int
+     * @return long
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 }

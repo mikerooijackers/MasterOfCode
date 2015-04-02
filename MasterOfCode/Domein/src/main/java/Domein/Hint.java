@@ -19,7 +19,7 @@ public class Hint implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     /**
      * name of a hint
      */
@@ -45,9 +45,9 @@ public class Hint implements Serializable {
     /**
      * get number of a hint
      *
-     * @return id
+     * @return long
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -99,9 +99,9 @@ public class Hint implements Serializable {
     /**
      * get a hint Id
      *
-     * @return int
+     * @return long
      */
-    public int getHintId() {
+    public long getHintId() {
         return this.id;
     }
 
