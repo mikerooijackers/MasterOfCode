@@ -65,7 +65,8 @@ public class ReflectionUtils {
                         Class<Annotation> type = (Class<Annotation>) annotation.annotationType();
                         AnnotationData data = new AnnotationData();
                         data.setClassName(foundClass.getName());
-                        data.setAnnotationName(type.getName());
+                        
+                        data.setAnnotationName(type.getSimpleName());
                         for (Method method : type.getDeclaredMethods()) {
                             data.addMethod(new AnnotationMethod(method.getName(), method.invoke(annotation, null)));
                         }

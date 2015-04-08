@@ -11,11 +11,13 @@ import dao.WorkspaceDAOImpl;
 import Domein.SourceCode;
 import domain.AnnotationData;
 import java.util.List;
+import javax.ejb.Singleton;
 
 /**
  *
  * @author Gebruiker
  */
+@Singleton
 public class WorkspaceService {
     private WorkspaceDAO dao;
 

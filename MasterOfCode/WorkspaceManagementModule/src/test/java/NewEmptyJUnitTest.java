@@ -6,8 +6,11 @@
 
 import Domein.Team;
 import Domein.SourceCode;
+import com.mycompany.annotations.Hint;
 import domain.AnnotationData;
+import domain.AnnotationMethod;
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -105,13 +108,41 @@ public class NewEmptyJUnitTest {
         // should only be 1 source code file
         SourceCode sc = sourceCodeFiles.get(0);
         
-        String expectedSourceCodePath = "C:\\workspaces\\0\\0\\mavenproject1\\src\\main\\java\\domain\\Hello.java";
+        String expectedSourceCodePath = "C:\\workspaces\\0\\0\\archetype-1.0-SNAPSHOT\\src\\main\\java\\nl\\sogeti\\sample\\archetype\\ReadOnlyClass.java";
         assertTrue("source code path valid", expectedSourceCodePath.equals(sc.getPath()));
         
-        String expectedFileName = "domain.Hello";
+        String expectedFileName = "nl.sogeti.sample.archetype.ReadOnlyClass";
+        assertTrue("file name valid", expectedFileName.equals(sc.getFileName()));
+
+        String expectedContent = "/*\n" +
+               " * To change this license header, choose License Headers in Project Properties.\n" +
+               " * To change this template file, choose Tools | Templates\n" +
+               " * and open the template in the editor.\n" +
+               " */\n" +
+               "package nl.sogeti.sample.archetype;\n" +
+               "\n" +
+               "import com.mycompany.annotations.Editable;\n" +
+               "\n" +
+               "/**\n" +
+               " *\n" +
+               " * @author JordiK\n" +
+               " */\n" +
+               "    }\n" +
+               "}";
+        
+        assertTrue("content valid", expectedContent.equals(sc.getContent()));
+        
+        assertFalse("is editable", sc.isIsEditable());
+        
+        sc = sourceCodeFiles.get(1);
+        
+        expectedSourceCodePath = "C:\\workspaces\\0\\0\\archetype-1.0-SNAPSHOT\\src\\main\\java\\nl\\sogeti\\sample\\archetype\\EditableClass.java";
+        assertTrue("source code path valid", expectedSourceCodePath.equals(sc.getPath()));
+        
+        expectedFileName = "nl.sogeti.sample.archetype.EditableClass";
         assertTrue("file name valid", expectedFileName.equals(sc.getFileName()));
         
-        String expectedContent = "package domain;\n\n" +
+        expectedContent = "package domain;\n\n" +
                "@SomeAnnotation(something=\"bla\")\n" +
                "@ReadOnly\n" +
                "public class Hello {\n" +
@@ -122,7 +153,7 @@ public class NewEmptyJUnitTest {
         
         assertTrue("content valid", expectedContent.equals(sc.getContent()));
         
-        assertFalse("is editable", sc.isIsEditable());
+        assertTrue("is editable", sc.isIsEditable());
     }
     
     @Test
@@ -132,20 +163,74 @@ public class NewEmptyJUnitTest {
         
         List<AnnotationData> data = service.readAssignmentMetaData(assignmentPath, assignment);
         
-        String expectedAnnotationName = "domain.SomeAnnotation";
-        String expectedMethodName = "something";
-        Object expectedMethodValue = "bla";
-        int expectedListLength = 1;
+        String expectedAssignmentCreatorClassName = "nl.sogeti.sample.archetype.Config";
+        String expectedAssignmentCreatorAnnotationName = "AssignCreator";
+        String expectedAssignmentCreatorMethod1Name = "creatorLogo";
+        String expectedAssignmentCreatorMethod1Value = "Logo url here";
+        String expectedAssignmentCreatorMethod2Name = "creatorWebsite";
+        String expectedAssignmentCreatorMethod2Value = "Website here";
+        String expectedAssignmentCreatorMethod3Name = "creatorName";
+        String expectedAssignmentCreatorMethod3Value = "Fill in creator name here";
+        String expectedAssignmentCreatorMethod4Name = "creatorOrginisation";
+        String expectedAssignmentCreatorMethod4Value = "Orginisation here";
         
-        AnnotationData ad = data.get(0);
+        String expectedAssignmentInformationClassName = "nl.sogeti.sample.archetype.Config";
+        String expectedAssignmentInformationAnnotationName = "AssignInformation";
+        String expectedAssignmentInformationMethod1Name = "name";
+        String expectedAssignmentInformationMethod1Value = "archetype name here";
+        String expectedAssignmentInformationMethod2Name = "difficulty";
+        String expectedAssignmentInformationMethod2Value = "Easy/Medium/Hard";
+        String expectedAssignmentInformationMethod3Name = "spectatorDescription";
+        String expectedAssignmentInformationMethod3Value = "Description for contestants here";
+        String expectedAssignmentInformationMethod4Name = "contestantDescription";
+        String expectedAssignmentInformationMethod4Value = "Description for contestants here";
+        
+        String expectedHintsClassName = "nl.sogeti.sample.archetype.Config";
+        String expectedHintsAnnotationName = "Hints";
+        String expectedHintsMethod1Name = "value";
+
+        int expectedListLength = 3;
+        
+        AnnotationData ad0 = data.get(0);
+        
+        assertEquals(expectedAssignmentCreatorClassName, ad0.getClassName());
+        assertEquals(expectedAssignmentCreatorAnnotationName, ad0.getAnnotationName());
+        assertEquals(expectedAssignmentCreatorMethod1Name, ad0.getMethods().get(0).getName());
+        assertEquals(expectedAssignmentCreatorMethod1Value, ad0.getMethods().get(0).getValue());
+        assertEquals(expectedAssignmentCreatorMethod2Name, ad0.getMethods().get(1).getName());
+        assertEquals(expectedAssignmentCreatorMethod2Value, ad0.getMethods().get(1).getValue());
+        assertEquals(expectedAssignmentCreatorMethod3Name, ad0.getMethods().get(2).getName());
+        assertEquals(expectedAssignmentCreatorMethod3Value, ad0.getMethods().get(2).getValue());
+        assertEquals(expectedAssignmentCreatorMethod4Name, ad0.getMethods().get(3).getName());
+        assertEquals(expectedAssignmentCreatorMethod4Value, ad0.getMethods().get(3).getValue());
+        
+        AnnotationData ad1 = data.get(1);
+        
+        assertEquals(expectedAssignmentInformationClassName, ad1.getClassName());
+        assertEquals(expectedAssignmentInformationAnnotationName, ad1.getAnnotationName());
+        assertEquals(expectedAssignmentInformationMethod1Name, ad1.getMethods().get(0).getName());
+        assertEquals(expectedAssignmentInformationMethod1Value, ad1.getMethods().get(0).getValue());
+        assertEquals(expectedAssignmentInformationMethod2Name, ad1.getMethods().get(1).getName());
+        assertEquals(expectedAssignmentInformationMethod2Value, ad1.getMethods().get(1).getValue());
+        assertEquals(expectedAssignmentInformationMethod3Name, ad1.getMethods().get(2).getName());
+        assertEquals(expectedAssignmentInformationMethod3Value, ad1.getMethods().get(2).getValue());
+        assertEquals(expectedAssignmentInformationMethod4Name, ad1.getMethods().get(3).getName());
+        assertEquals(expectedAssignmentInformationMethod4Value, ad1.getMethods().get(3).getValue());
+        
+        AnnotationData ad2 = data.get(2);
+        
+        List<AnnotationMethod> methods = ad2.getMethods();
+        Hint[] hints = (Hint[]) methods.get(0).getValue();
+        
+        assertEquals(expectedHintsClassName, ad2.getClassName());
+        assertEquals(expectedHintsAnnotationName, ad2.getAnnotationName());
+        assertEquals(expectedHintsMethod1Name, ad2.getMethods().get(0).getName());
+        assertEquals(hints[0].description(), "Enter hint here");
+        assertEquals(hints[0].delay(), 50);
+        assertEquals(hints[1].description(), "Enter hint here");
+        assertEquals(hints[1].delay(), 100);
         
         assertEquals("list length", expectedListLength, data.size());
-        
-        assertEquals("annotation name", expectedAnnotationName, ad.getAnnotationName());
-        
-        assertEquals("method name", expectedMethodName, ad.getMethods().get(0).getName());
-        
-        assertEquals("method value", expectedMethodValue, ad.getMethods().get(0).getValue());
     }
     
     @Test

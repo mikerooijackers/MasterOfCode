@@ -8,6 +8,11 @@ package dao;
 import Domein.Team;
 import Domein.MOCUser;
 import Domein.SourceCode;
+import com.mycompany.annotations.AssignCreator;
+import com.mycompany.annotations.AssignInformation;
+import com.mycompany.annotations.Editable;
+import com.mycompany.annotations.Hints;
+import com.mycompany.annotations.ReadOnly;
 import domain.AnnotationData;
 //import domain.Annotation;
 import java.io.BufferedReader;
@@ -146,7 +151,7 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
     public List<SourceCode> readSourceCode(Team team, String workspacePath, String assignment, String sourceCodePath, String assignmentPath) {
         List<SourceCode> sourceCodeFiles = new ArrayList<>();
         String path = assignmentPath;
-        List<AnnotationData> annotationData = ReflectionUtils.readAnnotationData(path, domain.ReadOnly.class);
+        List<AnnotationData> annotationData = ReflectionUtils.readAnnotationData(path, ReadOnly.class, Editable.class);
 
         path = workspacePath + "\\" + team.getId() + "\\" + assignment; //+ "\\" + sourceCodePath;
 
@@ -162,7 +167,7 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
             sc.setFileName(ad.getClassName());
             sc.setPath(absolutePath);
             sc.setContent(FileUtils.readContentOfSourceCode(new File(absolutePath)));
-            sc.setIsEditable(!"domain.ReadOnly".equals(ad.getAnnotationName()));
+            sc.setIsEditable(Editable.class.getSimpleName().equals(ad.getAnnotationName()));
             sourceCodeFiles.add(sc);
         }
 
@@ -173,7 +178,7 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
     public List<AnnotationData> readAssignmentMetaData(String assignmentPath, String assignment) {
         String path = assignmentPath + "\\" + assignment;
 
-        return ReflectionUtils.readAnnotationData(path, domain.SomeAnnotation.class);
+        return ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class);
     }
 
     @Override
