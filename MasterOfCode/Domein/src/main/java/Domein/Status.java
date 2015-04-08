@@ -7,17 +7,17 @@ package Domein;
 public enum Status {
 	waiting(0), playing(1), pause(2);
         
-        private int id;
+        private long id;
         
-        Status(int id) {
+        Status(long id) {
             this.id = id;
         }
 
     /**
      * get status id
-     * @return in
+     * @return long
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
         

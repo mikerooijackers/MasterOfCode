@@ -18,7 +18,7 @@ public class Assignment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String path;
 
@@ -34,9 +34,9 @@ public class Assignment implements Serializable {
     /**
      * get ID of a Assignment
      *
-     * @return int
+     * @return long
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public class Assignment implements Serializable {
      *
      * @param id
      */
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

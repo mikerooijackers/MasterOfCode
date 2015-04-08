@@ -28,7 +28,7 @@ public class MOCUser {
 	/**
 	 * privileges of a user
 	 */
-	private Privilege privilege;
+	private Role privilege;
         
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
@@ -95,11 +95,11 @@ public class MOCUser {
 		this.fullName = name;
 	}
 
-	public Privilege getPrivilege() {
+	public Role getPrivilege() {
 		return this.privilege;
 	}
 
-	public void setPrivilege(Privilege privilege) {
+	public void setPrivilege(Role privilege) {
 		this.privilege = privilege;
 	}
 

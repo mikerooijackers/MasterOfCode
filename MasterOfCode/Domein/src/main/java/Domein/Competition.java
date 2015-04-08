@@ -22,7 +22,7 @@ public class Competition implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     /**
      * name of a competition
      */
@@ -64,9 +64,9 @@ public class Competition implements Serializable {
     /**
      * get Competition ID
      *
-     * @return int
+     * @return long
      */
-    public int getCompetitionId() {
+    public long getCompetitionId() {
         return this.id;
     }
 
@@ -91,9 +91,9 @@ public class Competition implements Serializable {
     /**
      * get id
      *
-     * @return int
+     * @return long
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -102,7 +102,7 @@ public class Competition implements Serializable {
      *
      * @param id
      */
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
