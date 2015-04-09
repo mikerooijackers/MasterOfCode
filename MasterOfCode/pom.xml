@@ -10,7 +10,7 @@
     <module>WorkspaceManagementModule</module>
         <module>WorkspaceModule</module>
         <module>MoCJMS</module>
-        <module>../../ArchetypeBaseProject/Assignment</module>
+        <module>Assignment</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
