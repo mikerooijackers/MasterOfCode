@@ -1,13 +1,10 @@
 package Domein;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 /**
  *
@@ -21,9 +18,6 @@ public class Assignment implements Serializable {
     private long id;
 
     private String path;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Collection<Competition> competitions;
 
     /**
      * Constructor Assignment
@@ -66,23 +60,4 @@ public class Assignment implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
-
-    /**
-     * get Competitions
-     *
-     * @return Collection of Competition
-     */
-    public Collection<Competition> getCompetitions() {
-        return competitions;
-    }
-
-    /**
-     * set competitions
-     *
-     * @param competitions
-     */
-    public void setCompetitions(Collection<Competition> competitions) {
-        this.competitions = competitions;
-    }
-
 }

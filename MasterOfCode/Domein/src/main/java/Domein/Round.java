@@ -127,7 +127,7 @@ public class Round implements Serializable {
     /**
      * set id round
      *
-     * @param long
+     * @param id
      */
     public void setId(long id) {
         this.id = id;

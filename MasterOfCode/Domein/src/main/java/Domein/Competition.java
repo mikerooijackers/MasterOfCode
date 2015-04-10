@@ -2,13 +2,10 @@ package Domein;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Collection;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 /**
  *
@@ -34,31 +31,10 @@ public class Competition implements Serializable {
     private Calendar startTime;
     private Status status;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "competitions")
-    private Collection<Assignment> assignments;
-
     /**
      * Constructor Competition
      */
     public Competition() {
-    }
-
-    /**
-     * get collection of assignment
-     *
-     * @return collection of assignment
-     */
-    public Collection<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    /**
-     * set assignment
-     *
-     * @param assignments
-     */
-    public void setAssignments(Collection<Assignment> assignments) {
-        this.assignments = assignments;
     }
 
     /**
