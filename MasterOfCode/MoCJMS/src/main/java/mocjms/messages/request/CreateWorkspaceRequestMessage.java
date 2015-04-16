@@ -5,6 +5,7 @@
  */
 package mocjms.messages.request;
 
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import mocjms.messages.main.OperationDrivenMessage;
 
 /**
@@ -14,13 +15,23 @@ import mocjms.messages.main.OperationDrivenMessage;
 public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
     private Long teamId;
     private Long competitionId;
+    private String workspacePath;
 
     public CreateWorkspaceRequestMessage() {
     }
 
-    public CreateWorkspaceRequestMessage(Long teamId, Long competitionId) {
+    public CreateWorkspaceRequestMessage(Long teamId, Long competitionId, String workspacePath) {
         this.teamId = teamId;
         this.competitionId = competitionId;
+        this.workspacePath = workspacePath;
+    }
+
+    public String getWorkspacePath() {
+        return workspacePath;
+    }
+
+    public void setWorkspacePath(String workspacePath) {
+        this.workspacePath = workspacePath;
     }
 
     public Long getTeamId() {
@@ -41,6 +52,6 @@ public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
 
     @Override
     public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        WorkspaceService.getInstance().createWorkspace(competitionId, teamId, workspacePath);
     }
 }
