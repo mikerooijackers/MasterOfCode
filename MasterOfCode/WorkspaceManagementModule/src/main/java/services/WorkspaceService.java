@@ -49,7 +49,7 @@ public class WorkspaceService {
         dao.extractAssignmentToWorkspace(team, workspacePath, assignment, assignmentPath);
     }
     
-    public boolean requestCompile(String sourcePath)
+    public String requestCompile(String sourcePath)
     {
         return dao.requestCompile(sourcePath);
     }
