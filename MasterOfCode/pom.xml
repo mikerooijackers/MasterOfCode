@@ -7,8 +7,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>Domein</module>
-    <module>WorkspaceManagementModule</module>
-        <module>WorkspaceModule</module>
         <module>MoCJMS</module>
         <module>Assignment</module>
         <module>WorkspaceManagementModuleB</module>
