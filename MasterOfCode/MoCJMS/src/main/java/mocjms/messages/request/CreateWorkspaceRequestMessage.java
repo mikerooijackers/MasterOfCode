@@ -15,23 +15,13 @@ import mocjms.messages.main.OperationDrivenMessage;
 public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
     private Long teamId;
     private Long competitionId;
-    private String workspacePath;
 
     public CreateWorkspaceRequestMessage() {
     }
 
-    public CreateWorkspaceRequestMessage(Long teamId, Long competitionId, String workspacePath) {
+    public CreateWorkspaceRequestMessage(Long teamId, Long competitionId) {
         this.teamId = teamId;
         this.competitionId = competitionId;
-        this.workspacePath = workspacePath;
-    }
-
-    public String getWorkspacePath() {
-        return workspacePath;
-    }
-
-    public void setWorkspacePath(String workspacePath) {
-        this.workspacePath = workspacePath;
     }
 
     public Long getTeamId() {
@@ -52,6 +42,6 @@ public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
 
     @Override
     public void doWork() {
-        WorkspaceService.getInstance().createWorkspace(competitionId, teamId, workspacePath);
+        WorkspaceService.getInstance().createWorkspace(competitionId, teamId, WorkspaceService.ASSIGNMENTS_PATH);
     }
 }

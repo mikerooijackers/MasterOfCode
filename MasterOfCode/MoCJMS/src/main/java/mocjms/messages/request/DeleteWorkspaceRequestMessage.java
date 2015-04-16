@@ -5,6 +5,7 @@
  */
 package mocjms.messages.request;
 
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import mocjms.messages.main.OperationDrivenMessage;
 
 /**
@@ -41,6 +42,6 @@ public class DeleteWorkspaceRequestMessage implements OperationDrivenMessage {
 
     @Override
     public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        WorkspaceService.getInstance().deleteWorkspace(competitionId, teamId, WorkspaceService.ASSIGNMENTS_PATH);
     }
 }
