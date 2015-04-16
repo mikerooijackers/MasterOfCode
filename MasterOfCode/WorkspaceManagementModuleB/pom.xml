@@ -6,23 +6,31 @@
         <artifactId>MasterOfCode</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>WorkspaceModule</artifactId>
+    <artifactId>WorkspaceManagementModuleB</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.mycompany</groupId>
             <artifactId>Domein</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Annotations</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>MoCJMS</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>net.lingala.zip4j</groupId>
+            <artifactId>zip4j</artifactId>
+            <version>1.3.2</version>
+            <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.mycompany</groupId>
-            <artifactId>Annotations</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9-RC1</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <properties>

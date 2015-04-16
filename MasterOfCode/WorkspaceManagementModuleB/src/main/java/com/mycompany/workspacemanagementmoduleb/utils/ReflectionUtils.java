@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package com.mycompany.workspacemanagementmoduleb.utils;
 
-import domain.AnnotationData;
-import domain.AnnotationMethod;
+import Domein.AnnotationData;
+import Domein.AnnotationMethod;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
@@ -64,7 +64,7 @@ public class ReflectionUtils {
                         
                         Class<Annotation> type = (Class<Annotation>) annotation.annotationType();
                         AnnotationData data = new AnnotationData();
-                        data.setClassName(foundClass.getName());
+                        data.setName(foundClass.getName());
                         
                         data.setAnnotationName(type.getSimpleName());
                         for (Method method : type.getDeclaredMethods()) {
