@@ -10,6 +10,7 @@
         <module>MoCJMS</module>
         <module>Assignment</module>
         <module>WorkspaceManagementModuleB</module>
+        <module>ServicesModule</module>
     </modules>
     <dependencies>
         <dependency>

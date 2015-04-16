@@ -20,7 +20,10 @@ public class RoundTest {
     
     Round round;
     
+    private int roundNr = 1;
     private int durationInSeconds = 20;
+    private Status status = Status.pause;
+    private Competition competition;
     
     public RoundTest() {
     }
