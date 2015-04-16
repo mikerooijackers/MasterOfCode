@@ -1,5 +1,6 @@
 package mocjms.messaging.requestreply;
 
+import java.io.Serializable;
 import javax.jms.Message;
 import javax.jms.TextMessage;
 import java.util.Hashtable;
@@ -8,6 +9,7 @@ import java.util.logging.Logger;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import mocjms.messaging.MessagingGateway;
 
 /**
@@ -18,17 +20,17 @@ import mocjms.messaging.MessagingGateway;
  * @param <REPLY> is the domain class for replies
  * @author Maja Pesic
  */
-public class AsynchronousRequestor<REQUEST, REPLY> {
+public class AsynchronousRequestor {
     /**
      * Class Pair is just used to make it possible to store
      * pairs of REQUEST, ReplyListener in a hashtable!
      */
     private class Pair {
 
-        private IReplyListener<REQUEST, REPLY> listener;
-        private REQUEST request;
+        private IReplyListener listener;
+        private Serializable request;
 
-        private Pair(IReplyListener<REQUEST, REPLY> listener, REQUEST request) {
+        private Pair(IReplyListener listener, Serializable request) {
             this.listener = listener;
             this.request = request;
         }
@@ -42,11 +44,7 @@ public class AsynchronousRequestor<REQUEST, REPLY> {
     /**
      * contains registered reply listeners for each sent request
      */
-    private Hashtable<String, Pair> listeners;
-    /**
-     * used for serialization of requests and replies
-     */
-    private IRequestReplySerializer<REQUEST, REPLY> serializer;
+    private Hashtable<Serializable, Pair> listeners;
 
     /**
      * The only constructor. This constructor does the following:
@@ -56,16 +54,15 @@ public class AsynchronousRequestor<REQUEST, REPLY> {
      * @param receiverQueue
      * @param senderQueue
      */
-    public AsynchronousRequestor(String requestSenderQueue, String replyReceiverQueue, IRequestReplySerializer<REQUEST, REPLY> serializer) throws Exception {
+    public AsynchronousRequestor(String requestSenderQueue, String replyReceiverQueue) throws Exception {
         super();
-        this.serializer = serializer;
-        this.listeners = new Hashtable<String, Pair>();
+        this.listeners = new Hashtable<Serializable, Pair>();
 
         gateway = new MessagingGateway(requestSenderQueue, replyReceiverQueue);
         gateway.setListener(new MessageListener() {
 
             public void onMessage(Message message) {
-                onReply((TextMessage) message);
+                onReply((ObjectMessage) message);
             }
         });
     }
@@ -91,8 +88,8 @@ public class AsynchronousRequestor<REQUEST, REPLY> {
      * @param request is the request object (a domain class) to be sent
      * @param listener is the listener that will be notified when the reply arrives for this request
      */
-    public synchronized void sendRequest(REQUEST request, IReplyListener<REQUEST, REPLY> listener) {
-        Message requestMessage = gateway.createMsg(serializer.requestToString(request));
+    public synchronized void sendRequest(Serializable request, IReplyListener listener) {
+        Message requestMessage = gateway.createMsg(request);
         try {
             requestMessage.setJMSReplyTo(gateway.getConsumerDestination());
             gateway.send(requestMessage);
@@ -115,11 +112,11 @@ public class AsynchronousRequestor<REQUEST, REPLY> {
      * 4. unregister the listener
      * @param message the reply message
      */
-    private synchronized void onReply(TextMessage message) {
+    private synchronized void onReply(ObjectMessage message) {
         try {
             String id = message.getJMSCorrelationID();
             Pair pair = listeners.get(id);
-            REPLY reply = serializer.replyFromString(message.getText());
+            Serializable reply = message.getObject();
             pair.listener.onReply(pair.request, reply);
             listeners.remove(id);
         } catch (JMSException ex) {
