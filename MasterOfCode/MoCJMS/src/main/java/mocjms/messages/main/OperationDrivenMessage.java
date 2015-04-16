@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mocjms.messaging;
-
-import java.io.Serializable;
+package mocjms.messages.main;
 
 /**
  *
  * @author Gebruiker
  */
-public interface IReplyListenerFAF {
-    public void receivedReply(Serializable reply);
+public interface OperationDrivenMessage {
+    public void doWork();
 }
