@@ -255,7 +255,7 @@ public class NewEmptyJUnitTest {
     
     @Test
     public void testRequestCompile() {
-        String compileResult = service.requestCompile("C:\\Users\\May\\Documents\\NetBeansProjects\\MasterOfCode\\MasterOfCode\\WorkspaceModule");
+        String compileResult = service.requestCompile("C:\\workspaces\\0\\0");
         assertEquals("Compilation succesfull", compileResult);
     }
     
