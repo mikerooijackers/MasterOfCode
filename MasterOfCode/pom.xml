@@ -11,6 +11,7 @@
         <module>WorkspaceModule</module>
         <module>MoCJMS</module>
         <module>Assignment</module>
+        <module>WorkspaceManagementModuleB</module>
     </modules>
     <dependencies>
         <dependency>
