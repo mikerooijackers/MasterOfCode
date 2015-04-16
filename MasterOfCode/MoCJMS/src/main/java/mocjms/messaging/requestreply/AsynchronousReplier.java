@@ -1,13 +1,14 @@
 package mocjms.messaging.requestreply;
 
-import javax.jms.Message;
-import javax.jms.TextMessage;
+import java.io.Serializable;
 import java.util.Hashtable;
+import javax.jms.Message;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import mocjms.messaging.MessagingGateway;
 
 /**
@@ -27,15 +28,12 @@ public class AsynchronousReplier<REQUEST, REPLY> {
      * We need the message later, to get the RetournAddress to which we will
      * send the reply.
      */
-    private Hashtable<REQUEST, Message> activeRequests = null;
-    /**
-     * The serializer for domain classes REQUEST and REPLY
-     */
-    private IRequestReplySerializer<REQUEST, REPLY> serializer = null;
+    private Hashtable<Serializable, Message> activeRequests = null;
+    
     /**
      * The listener that will be informed when each request arrives.
      */
-    private IRequestListener<REQUEST> requestListener = null;
+    private IRequestListener requestListener = null;
 
     /**
      * This constructor:
@@ -45,24 +43,23 @@ public class AsynchronousReplier<REQUEST, REPLY> {
      *        will be received.
      * @param serializer  used to de-serialize REQUESTs and serialize REPLIES.
      */
-    public AsynchronousReplier(String requestReceiverQueue, IRequestReplySerializer<REQUEST, REPLY> serializer) throws Exception {
+    public AsynchronousReplier(String requestReceiverQueue) throws Exception {
         super();
-        this.serializer = serializer;
         gateway = new MessagingGateway(requestReceiverQueue);
         gateway.setListener(new MessageListener() {
 
             public void onMessage(Message message) {
-                onRequest((TextMessage) message);
+                onRequest((ObjectMessage) message);
             }
         });
-        this.activeRequests = new Hashtable<REQUEST, Message>();
+        this.activeRequests = new Hashtable<Serializable, Message>();
     }
 
     /**
      * sets the listener that will be notified when each request arriives
      * @param requestListener
      */
-    public void setRequestListener(IRequestListener<REQUEST> requestListener) {
+    public void setRequestListener(IRequestListener requestListener) {
         this.requestListener = requestListener;
     }
 
@@ -81,9 +78,9 @@ public class AsynchronousReplier<REQUEST, REPLY> {
      * 3. notify the listener about the REQUEST arrival
      * @param message the incomming message containing the request
      */
-    private synchronized void onRequest(TextMessage message) {
+    private synchronized void onRequest(ObjectMessage message) {
         try {
-            REQUEST request = serializer.requestFromString(message.getText());
+            Serializable request = message.getObject(); //serializer.requestFromString(message.getText());
             activeRequests.put(request, message);
             requestListener.receivedRequest(request);
         } catch (JMSException ex) {
@@ -105,10 +102,9 @@ public class AsynchronousReplier<REQUEST, REPLY> {
      * @param reply to the request
      * @return  true if the reply is sent succefully; false if sending reply fails
      */
-    public synchronized boolean sendReply(REQUEST request, REPLY reply) {
+    public synchronized boolean sendReply(Serializable request, Serializable reply) {
         Message requestMessage = activeRequests.get(request);
-        String replyString = serializer.replyToString(reply);
-        Message replyMessage = gateway.createMsg(replyString);       
+        Message replyMessage = gateway.createMsg(reply);       
         
         try {
             replyMessage.setJMSCorrelationID(requestMessage.getJMSMessageID());

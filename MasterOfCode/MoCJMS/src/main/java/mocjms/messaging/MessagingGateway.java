@@ -6,6 +6,7 @@
 
 package mocjms.messaging;
 
+import java.io.Serializable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -85,11 +87,12 @@ public class MessagingGateway {
         }
     }
     
-    public Message createMsg(String body)
+    public Message createMsg(Serializable object)
     {
-        Message message = null;
+        ObjectMessage message = null;
         try {
-            message = ses.createTextMessage(body);
+            message = ses.createObjectMessage();
+            message.setObject(object);
         } catch (JMSException ex) {
             Logger.getLogger(MessagingGateway.class.getName()).log(Level.SEVERE, null, ex);
         }

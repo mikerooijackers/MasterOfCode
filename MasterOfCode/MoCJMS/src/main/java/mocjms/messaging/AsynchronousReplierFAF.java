@@ -5,33 +5,29 @@
  */
 package mocjms.messaging;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.TextMessage;
+import javax.jms.ObjectMessage;
 import mocjms.messaging.requestreply.IRequestListener;
-import mocjms.messaging.requestreply.IRequestReplySerializer;
 
 /**
  *
  * @author Gebruiker
  */
-public class AsynchronousReplierFAF<REQUEST, REPLY> {
+public class AsynchronousReplierFAF {
     /**
      * For sending and receiving messages
      */
     private MessagingGateway gateway;
     
     /**
-     * The serializer for domain classes REQUEST and REPLY
-     */
-    private IRequestReplySerializer<REQUEST, REPLY> serializer = null;
-    /**
      * The listener that will be informed when each request arrives.
      */
-    private IRequestListener<REQUEST> requestListener = null;
+    private IRequestListener requestListener = null;
     
     /**
      * This constructor:
@@ -41,14 +37,14 @@ public class AsynchronousReplierFAF<REQUEST, REPLY> {
      *        will be received.
      * @param serializer  used to de-serialize REQUESTs and serialize REPLIES.
      */
-    public AsynchronousReplierFAF(String requestReceiverQueue, String replySenderQueue, IRequestReplySerializer<REQUEST, REPLY> serializer) throws Exception {
+    public AsynchronousReplierFAF(String requestReceiverQueue, String replySenderQueue) throws Exception {
         super();
-        this.serializer = serializer;
+        //this.serializer = serializer;
         gateway = new MessagingGateway(replySenderQueue, requestReceiverQueue); // other way around
         gateway.setListener(new MessageListener() {
 
             public void onMessage(Message message) {
-                onRequest((TextMessage) message);
+                onRequest((ObjectMessage) message);
             }
         });
     }
@@ -57,7 +53,7 @@ public class AsynchronousReplierFAF<REQUEST, REPLY> {
      * sets the listener that will be notified when each request arriives
      * @param requestListener
      */
-    public void setRequestListener(IRequestListener<REQUEST> requestListener) {
+    public void setRequestListener(IRequestListener requestListener) {
         this.requestListener = requestListener;
     }
 
@@ -76,9 +72,9 @@ public class AsynchronousReplierFAF<REQUEST, REPLY> {
      * 3. notify the listener about the REQUEST arrival
      * @param message the incomming message containing the request
      */
-    private synchronized void onRequest(TextMessage message) {
+    private synchronized void onRequest(ObjectMessage message) {
         try {
-            REQUEST request = serializer.requestFromString(message.getText());
+            Serializable request = message.getObject(); //serializer.requestFromString(message.getText());
             requestListener.receivedRequest(request);
         } catch (JMSException ex) {
             Logger.getLogger(AsynchronousReplierFAF.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,9 +95,8 @@ public class AsynchronousReplierFAF<REQUEST, REPLY> {
      * @param reply to the request
      * @return  true if the reply is sent succefully; false if sending reply fails
      */
-    public synchronized boolean sendReply(REPLY reply) {
-        String replyString = serializer.replyToString(reply);
-        Message replyMessage = gateway.createMsg(replyString);       
+    public synchronized boolean sendReply(Serializable reply) {
+        Message replyMessage = gateway.createMsg(reply);       
         
         return gateway.send(replyMessage);
     }
