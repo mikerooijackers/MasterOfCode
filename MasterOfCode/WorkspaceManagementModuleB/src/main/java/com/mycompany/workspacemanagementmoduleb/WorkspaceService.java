@@ -44,6 +44,9 @@ public class WorkspaceService {
         return instance;
     }
     
+    public static final String WORKSPACES_PATH = "C:\\workspaces";
+    public static final String ASSIGNMENTS_PATH = "C:\\assignments";
+    
     public String createWorkspace(Long competitionId, Long teamId, String workspacePath) {
         String path = workspacePath + File.pathSeparator + competitionId + File.pathSeparator + teamId;
         new File(path).mkdirs();
