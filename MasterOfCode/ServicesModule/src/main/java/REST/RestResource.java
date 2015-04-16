@@ -23,9 +23,58 @@ public class RestResource {
     public RestResource() {
     }
     
-    @GET
+    @POST
     @Path("startcompetition")
     public String startCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("pausecompetition")
+    public String pauseCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("freezecompetition")
+    public String freezeCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("stopcompetition")
+    public String stopCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("startround")
+    public String startRound () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("pauseround")
+    public String pauseRound () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("freezeround")
+    public String freezeRound () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("stopround")
+    public String stopRound () {
         
         return "";
     }
