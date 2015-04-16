@@ -47,7 +47,7 @@ public class WorkSpaceResource {
     }
     
     @GET
-    public boolean requestCompile(String sourcePath)
+    public String requestCompile(String sourcePath)
     {
         return service.requestCompile(sourcePath);
     }

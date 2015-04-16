@@ -26,7 +26,7 @@ public interface WorkspaceDAO {
      * Compiles the given application and shows a stack trace if the compilation
      * fails.
      * @param sourcePath
-     * @return false if compilation fails, true if it succeeds
+     * @return a message that the compilation has been successful or the stacktrace
      */
-    boolean requestCompile(String sourcePath);
+    String requestCompile(String sourcePath);
 }

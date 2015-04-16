@@ -6,7 +6,7 @@
 
 import Domein.Team;
 import Domein.SourceCode;
-import com.mycompany.annotations.Hint;
+//import com.mycompany.annotations.Hint;
 import domain.AnnotationData;
 import domain.AnnotationMethod;
 import java.io.File;
@@ -253,11 +253,17 @@ public class NewEmptyJUnitTest {
         assertTrue("fileIsFolder", files[0].isDirectory());
     }
     
+    @Test
+    public void testRequestCompile() {
+        String compileResult = service.requestCompile("C:\\Users\\May\\Documents\\NetBeansProjects\\MasterOfCode\\MasterOfCode\\WorkspaceModule");
+        assertEquals("Compilation succesfull", compileResult);
+    }
+    
     
     // TODO: add test to ensure that a valid project can be compiled
      @Test
      public void testRequestCompileFail() {
-         boolean compileResult = service.requestCompile(null);
-         assertEquals(false, compileResult);
+         String compileResult = service.requestCompile(null);
+         assertEquals("null", compileResult);
      }
 }
