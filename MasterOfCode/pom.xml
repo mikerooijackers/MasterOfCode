@@ -11,7 +11,8 @@
         <module>WorkspaceModule</module>
         <module>MoCJMS</module>
         <module>Assignment</module>
-    </modules>
+    <module>ServicesModule</module>
+  </modules>
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
