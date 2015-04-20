@@ -160,7 +160,7 @@ public class WorkspaceService {
         // Start a new process with the given sourcePath
         try {
             new ProcessBuilder(
-                    "java.exe", "-cp", "bin", sourcePath).start();
+                    "pom.xml", "-cp", sourcePath).start();
         } catch (IOException ex) {
             Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
         }
