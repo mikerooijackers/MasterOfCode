@@ -20,8 +20,7 @@ public class HintMessage extends BaseMessage implements Serializable {
     
     public HintMessage(){};
     
-    public HintMessage (Long competitionId, String hintMessage) {
-        super(competitionId);
+    public HintMessage (String hintMessage) {
         this.hintMessage = hintMessage;
     }
 
@@ -41,9 +40,8 @@ public class HintMessage extends BaseMessage implements Serializable {
     
     public static HintMessage decodeJSON(String JSON) {
         JSONObject obj = (JSONObject) JSONValue.parse(JSON);
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
         String jsonHintMessage = obj.get("hintMessage").toString();
         
-        return new HintMessage(jsonCompetitionId, jsonHintMessage);
+        return new HintMessage(jsonHintMessage);
     }
 }

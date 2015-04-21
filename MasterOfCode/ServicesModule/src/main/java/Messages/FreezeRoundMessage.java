@@ -18,13 +18,8 @@ public class FreezeRoundMessage extends BaseMessage {
     
     public FreezeRoundMessage(){}
     
-    public FreezeRoundMessage(Long competitionId) {
-        super(competitionId);
-    }
-    
     public static FreezeRoundMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
-        return new FreezeRoundMessage(jsonCompetitionId);
+        return new FreezeRoundMessage();
     }
 }

@@ -6,15 +6,23 @@
 package MessageUtils;
 
 import Messages.BaseMessage;
+import Messages.CompileReplyMessage;
+import Messages.CompileRequestMessage;
 import Messages.ContinueRoundMessage;
+import Messages.EditSourceCodeMessage;
 import Messages.FreezeRoundMessage;
 import Messages.HintMessage;
 import Messages.OtherTeamScoreMessage;
 import Messages.PauseRoundMessage;
+import Messages.RunTestsByGroupReplyMessage;
+import Messages.RunTestsByGroupRequestMessage;
+import Messages.RunTestsByNameReplyMessage;
+import Messages.RunTestsByNameRequestMessage;
 import Messages.StartCompetitionMessage;
 import Messages.StartRoundMessage;
 import Messages.StopCompetitionMessage;
 import Messages.StopRoundMessage;
+import Messages.TeamActionMessage;
 import Messages.UnfreezeRoundMessage;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
@@ -52,6 +60,22 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return FreezeRoundMessage.decodeJSON(s);
             case UnfreezeRoundMessage.MessageType:
                 return UnfreezeRoundMessage.decodeJSON(s);
+            case EditSourceCodeMessage.MessageType:
+                return EditSourceCodeMessage.decodeJSON(s);
+            case TeamActionMessage.MessageType:
+                return TeamActionMessage.decodeJSON(s);
+            case CompileRequestMessage.MessageType:
+                return CompileRequestMessage.decodeJSON(s);
+            case CompileReplyMessage.MessageType:
+                return CompileReplyMessage.decodeJSON(s);
+            case RunTestsByNameRequestMessage.MessageType:
+                return RunTestsByNameRequestMessage.decodeJSON(s);
+            case RunTestsByNameReplyMessage.MessageType:
+                return RunTestsByNameReplyMessage.decodeJSON(s);
+            case RunTestsByGroupRequestMessage.MessageType:
+                return RunTestsByGroupRequestMessage.decodeJSON(s);
+            case RunTestsByGroupReplyMessage.MessageType:
+                return RunTestsByGroupReplyMessage.decodeJSON(s);
         }
         return null;
     }

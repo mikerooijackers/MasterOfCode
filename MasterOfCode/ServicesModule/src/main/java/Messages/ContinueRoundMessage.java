@@ -18,13 +18,8 @@ public class ContinueRoundMessage extends BaseMessage {
     
     public ContinueRoundMessage(){}
     
-    public ContinueRoundMessage(Long competitionId) {
-        super(competitionId);
-    }
-    
     public static ContinueRoundMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
-        return new ContinueRoundMessage(jsonCompetitionId);
+        return new ContinueRoundMessage();
     }
 }

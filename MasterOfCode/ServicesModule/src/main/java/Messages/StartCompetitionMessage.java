@@ -23,8 +23,7 @@ public class StartCompetitionMessage extends BaseMessage {
         
     }
     
-    public StartCompetitionMessage(Long competitionId, int numberOfRounds, String competitionName, Long startTime) {
-        super(competitionId);
+    public StartCompetitionMessage(int numberOfRounds, String competitionName, Long startTime) {
         this.numberOfRounds = numberOfRounds;
         this.competitionName = competitionName;
         this.startTime = startTime;
@@ -75,11 +74,10 @@ public class StartCompetitionMessage extends BaseMessage {
     public static StartCompetitionMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
         int jsonNumberOfRounds = (int) obj.get("numberOfRounds");
         String jsonCompetitionName = obj.get("competitionName").toString();
         Long jsonStartTime = (Long) obj.get("startTime");
         
-        return new StartCompetitionMessage(jsonCompetitionId, jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
+        return new StartCompetitionMessage(jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
     }
 }

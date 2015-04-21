@@ -16,13 +16,11 @@ public class PauseRoundMessage extends BaseMessage {
     
     public static final String MessageType = "pauseRoundMessage";
     
-    public PauseRoundMessage(Long competitionId) {
-        super(competitionId);
+    public PauseRoundMessage() {
     }
     
     public static PauseRoundMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
-        return new PauseRoundMessage(jsonCompetitionId);
+        return new PauseRoundMessage();
     }
 }

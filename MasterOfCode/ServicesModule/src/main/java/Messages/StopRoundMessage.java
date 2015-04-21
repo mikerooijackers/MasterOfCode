@@ -18,13 +18,8 @@ public class StopRoundMessage extends BaseMessage {
     
     public StopRoundMessage(){}
     
-    public StopRoundMessage(Long competitionId) {
-        super(competitionId);
-    }
-    
     public static StopRoundMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
-        return new StopRoundMessage(jsonCompetitionId);
+        return new StopRoundMessage();
     }
 }

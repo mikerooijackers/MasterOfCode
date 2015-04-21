@@ -18,13 +18,8 @@ public class StopCompetitionMessage extends BaseMessage {
     
     public StopCompetitionMessage() {}
     
-    public StopCompetitionMessage(Long competitionId) {
-        super(competitionId);
-    }
-    
     public static StopCompetitionMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonCompetitionId = (Long)obj.get("competitionId");
-        return new StopCompetitionMessage(jsonCompetitionId);
+        return new StopCompetitionMessage();
     }
 }
