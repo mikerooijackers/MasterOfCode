@@ -5,7 +5,7 @@
  */
 package MessageUtils;
 
-import Messages.BaseMessage;
+import Sockets.Messages.BaseMessage;
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
