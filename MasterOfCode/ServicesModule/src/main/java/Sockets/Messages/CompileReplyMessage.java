@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Messages;
+package Sockets.Messages;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -12,16 +12,18 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class RunTestsByGroupReplyMessage extends BaseMessage {
+public class CompileReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "runTestsByGroupReplyMessage";
+    public static final String MessageType = "compileReplyMessage";
     
     private String result;
+    private Long teamId;
     
-    public RunTestsByGroupReplyMessage(){}
+    public CompileReplyMessage(){}
     
-    public RunTestsByGroupReplyMessage(String result) {
+    public CompileReplyMessage(String result, Long teamId) {
         this.result = result;
+        this.teamId = teamId;
     }
 
     /**
@@ -37,10 +39,25 @@ public class RunTestsByGroupReplyMessage extends BaseMessage {
     public void setResult(String result) {
         this.result = result;
     }
+
+    /**
+     * @return the teamId
+     */
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    /**
+     * @param teamId the teamId to set
+     */
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
     
-    public static RunTestsByGroupReplyMessage decodeJSON(String s) {
+    public static CompileReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonResult = obj.get("result").toString();
-        return new RunTestsByGroupReplyMessage(jsonResult);
+        Long jsonTeamId = (Long)obj.get("teamId");
+        return new CompileReplyMessage(jsonResult, jsonTeamId);
     }
 }
