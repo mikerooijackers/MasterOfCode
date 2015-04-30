@@ -27,48 +27,56 @@ public class RestResource {
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
+        return null;
         
     }
     
     @POST
     @Path("register")
     public MOCUser Register(RegisterMessage message) {
+        return null;
         
     }
     
     @POST
     @Path("activationcode")
     public Response ActivationCode(String code) {
+        return null;
         
     }
     
     @POST
     @Path("addtoteam")
     public MOCUser AddToTeam(TeamMessage message) {
+        return null;
         
     }
     
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
+        return null;
         
     }
     
     @GET
     @Path("getallteams")
     public List<Team> GetAllTeams() {
+        return null;
         
     }
     
     @GET
     @Path("getcompetitiondata")
     public CompetitionData GetCompetitionData() {
+        return null;
         
     }
     
     @GET
     @Path("gethintsofcurrentround")
     public List<Hint> GetHintsOfCurrentRound() {
+        return null;
         
     }
 }
