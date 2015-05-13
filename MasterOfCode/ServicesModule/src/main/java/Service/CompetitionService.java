@@ -16,11 +16,11 @@ import javax.persistence.EntityManager;
 public class CompetitionService {
     private EntityManager em;
     
-    public void createCompetition(String name, Calendar startTime) {
+    public void CreateCompetition(String name, Calendar startTime) {
         
     }
     
-    public void updateCompetition(long competitionID, String name, Calendar startTime, Status status) {
+    public void UpdateCompetition(long competitionID, String name, Calendar startTime, Status status) {
         
     }
     
@@ -29,24 +29,24 @@ public class CompetitionService {
         
     }
     
-    public void addRoundToCompetition(long competitionID, String assignmentPath, int duration, int roundNr) {
+    public void AddRoundToCompetition(long competitionID, String assignmentPath, int duration, int roundNr) {
         
     }
     
-    public void editRound(long roundID, int roundNr, int duration, String assignmentPath) {
+    public void EditRound(long roundID, int roundNr, int duration, String assignmentPath) {
         
     }
     
-    public void removeRound(long roundID) {
+    public void RemoveRound(long roundID) {
         
     }
     
-    public Competition findCompetition(long competitionID) {
+    public Competition FindCompetition(long competitionID) {
         return null;
         
     }
     
-    public Round findRound(long roundID) {
+    public Round FindRound(long roundID) {
         return null;
         
     }
