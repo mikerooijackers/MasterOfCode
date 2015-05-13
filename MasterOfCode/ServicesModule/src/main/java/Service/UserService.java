@@ -48,4 +48,23 @@ public class UserService {
     public void addMemberToTeam(long teamID, long memberID) {
         
     }
+    
+    public void editTeam (long teamID, String name, boolean willParticipate) {
+        
+    }
+    
+    public MOCUser findUser(long userID) {
+        return null;
+        
+    }
+    
+    public MOCUser findUser(String username) {
+        return null;
+        
+    }
+    
+    public Team findTeam(long teamID) {
+        return null;
+        
+    }
 }
