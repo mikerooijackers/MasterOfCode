@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Client.Request;
 
+import Sockets.Messages.BaseMessage;
 import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -13,16 +14,16 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class RunTestsByNameRequestMessage extends BaseMessage {
+public class UserTestRequestMessage extends BaseMessage {
     
     public static final String MessageType = "runTestsByNameRequestMessage";
     
     private Long teamId;
     private List<String> testNames;
     
-    public RunTestsByNameRequestMessage(){}
+    public UserTestRequestMessage(){}
     
-    public RunTestsByNameRequestMessage(Long teamId, List<String> testNames) {
+    public UserTestRequestMessage(Long teamId, List<String> testNames) {
         this.teamId = teamId;
         this.testNames = testNames;
     }
@@ -55,10 +56,10 @@ public class RunTestsByNameRequestMessage extends BaseMessage {
         this.testNames = testNames;
     }
     
-    public static RunTestsByNameRequestMessage decodeJSON(String s) {
+    public static UserTestRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("teamId");
         List<String> jsonTestNames = (List<String>) obj.get("testNames");
-        return new RunTestsByNameRequestMessage(jsonTeamId, jsonTestNames);
+        return new UserTestRequestMessage(jsonTeamId, jsonTestNames);
     }
 }

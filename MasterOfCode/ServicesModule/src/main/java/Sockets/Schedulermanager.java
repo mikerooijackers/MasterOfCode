@@ -10,11 +10,13 @@ import Domein.Hint;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Timer;
+import javax.ejb.Singleton;
 
 /**
  *
  * @author mikerooijackers
  */
+@Singleton
 public class Schedulermanager {
     private Timer roundTimer;
     private Timer competitionStartTimer;

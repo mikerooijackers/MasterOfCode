@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Client.Request;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,7 +13,7 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class EditSourceCodeMessage extends BaseMessage {
+public class EditSourceCodeRequestMessage extends BaseMessage {
     
     public static final String MessageType = "editSourceCodeMessage";
     
@@ -21,9 +22,9 @@ public class EditSourceCodeMessage extends BaseMessage {
     private Long roundId;
     private Long teamId;
     
-    public EditSourceCodeMessage(){}
+    public EditSourceCodeRequestMessage(){}
     
-    public EditSourceCodeMessage(String newSourceCode, String sourceCodeFile, Long roundId, Long teamId) {
+    public EditSourceCodeRequestMessage(String newSourceCode, String sourceCodeFile, Long roundId, Long teamId) {
         this.newSourceCode = newSourceCode;
         this.sourceCodeFile = sourceCodeFile;
         this.roundId = roundId;
@@ -86,12 +87,12 @@ public class EditSourceCodeMessage extends BaseMessage {
         this.teamId = teamId;
     }
     
-    public static EditSourceCodeMessage decodeJSON(String s) {
+    public static EditSourceCodeRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonRoundId = (Long) obj.get("roundId");
         Long jsonTeamId = (Long) obj.get("teamId");
         String jsonNewSourceCode = obj.get("newSourceCode").toString();
         String jsonSourceCodeFile = obj.get("sourceCodeFile").toString();
-        return new EditSourceCodeMessage(jsonNewSourceCode, jsonSourceCodeFile, jsonRoundId, jsonTeamId);
+        return new EditSourceCodeRequestMessage(jsonNewSourceCode, jsonSourceCodeFile, jsonRoundId, jsonTeamId);
     }
 }

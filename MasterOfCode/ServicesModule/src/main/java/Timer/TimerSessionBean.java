@@ -16,5 +16,15 @@ public class TimerSessionBean {
     @Resource
     TimerService timerService;
     
+    public void CreateTimer(long duration) {
+        timerService.createTimer(duration, null);
+    }
     
+    public void AddTimer() {
+        timerService.getTimers().add(null);
+    }
+    
+    public void RemoveTimer() {
+        timerService.getTimers().remove(null);
+    }
 }

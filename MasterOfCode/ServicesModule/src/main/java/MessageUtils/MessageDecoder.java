@@ -7,9 +7,9 @@ package MessageUtils;
 
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.CompileReplyMessage;
-import Sockets.Messages.CompileRequestMessage;
+import Sockets.Messages.Client.Request.CompileRequestMessage;
 import Sockets.Messages.ContinueRoundMessage;
-import Sockets.Messages.EditSourceCodeMessage;
+import Sockets.Messages.Client.Request.EditSourceCodeRequestMessage;
 import Sockets.Messages.FreezeRoundMessage;
 import Sockets.Messages.HintMessage;
 import Sockets.Messages.OtherTeamScoreMessage;
@@ -17,7 +17,7 @@ import Sockets.Messages.PauseRoundMessage;
 import Sockets.Messages.RunTestsByGroupReplyMessage;
 import Sockets.Messages.RunTestsByGroupRequestMessage;
 import Sockets.Messages.RunTestsByNameReplyMessage;
-import Sockets.Messages.RunTestsByNameRequestMessage;
+import Sockets.Messages.Client.Request.UserTestRequestMessage;
 import Sockets.Messages.StartCompetitionMessage;
 import Sockets.Messages.StartRoundMessage;
 import Sockets.Messages.StopCompetitionMessage;
@@ -60,16 +60,16 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return FreezeRoundMessage.decodeJSON(s);
             case UnfreezeRoundMessage.MessageType:
                 return UnfreezeRoundMessage.decodeJSON(s);
-            case EditSourceCodeMessage.MessageType:
-                return EditSourceCodeMessage.decodeJSON(s);
+            case EditSourceCodeRequestMessage.MessageType:
+                return EditSourceCodeRequestMessage.decodeJSON(s);
             case TeamActionMessage.MessageType:
                 return TeamActionMessage.decodeJSON(s);
             case CompileRequestMessage.MessageType:
                 return CompileRequestMessage.decodeJSON(s);
             case CompileReplyMessage.MessageType:
                 return CompileReplyMessage.decodeJSON(s);
-            case RunTestsByNameRequestMessage.MessageType:
-                return RunTestsByNameRequestMessage.decodeJSON(s);
+            case UserTestRequestMessage.MessageType:
+                return UserTestRequestMessage.decodeJSON(s);
             case RunTestsByNameReplyMessage.MessageType:
                 return RunTestsByNameReplyMessage.decodeJSON(s);
             case RunTestsByGroupRequestMessage.MessageType:

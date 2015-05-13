@@ -7,12 +7,14 @@ package JMS;
 
 import Sockets.Messages.BaseMessage;
 import java.util.Map;
+import javax.ejb.Singleton;
 import mocjms.messages.main.OperationDrivenMessage;
 
 /**
  *
  * @author mikerooijackers
  */
+@Singleton
 public class JMSManager {
     private Map<String, BaseMessage> requestSend;
     
