@@ -8,6 +8,7 @@ package REST;
 import javax.ws.rs.core.*;
 import javax.ws.rs.*;
 import Domein.*;
+import java.util.List;
 
 /**
  * REST Web Service
@@ -24,58 +25,50 @@ public class RestResource {
     }
     
     @POST
-    @Path("startcompetition")
-    public String startCompetition () {
+    @Path("login")
+    public MOCUser Login(LoginMessage message) {
         
-        return "";
     }
     
     @POST
-    @Path("pausecompetition")
-    public String pauseCompetition () {
+    @Path("register")
+    public MOCUser Register(RegisterMessage message) {
         
-        return "";
     }
     
     @POST
-    @Path("freezecompetition")
-    public String freezeCompetition () {
+    @Path("activationcode")
+    public Response ActivationCode(String code) {
         
-        return "";
     }
     
     @POST
-    @Path("stopcompetition")
-    public String stopCompetition () {
+    @Path("addtoteam")
+    public MOCUser AddToTeam(TeamMessage message) {
         
-        return "";
     }
     
-    @POST
-    @Path("startround")
-    public String startRound () {
+    @GET
+    @Path("getallusers")
+    public List<MOCUser> GetAllUsers() {
         
-        return "";
     }
     
-    @POST
-    @Path("pauseround")
-    public String pauseRound () {
+    @GET
+    @Path("getallteams")
+    public List<Team> GetAllTeams() {
         
-        return "";
     }
     
-    @POST
-    @Path("freezeround")
-    public String freezeRound () {
+    @GET
+    @Path("getcompetitiondata")
+    public CompetitionData GetCompetitionData() {
         
-        return "";
     }
     
-    @POST
-    @Path("stopround")
-    public String stopRound () {
+    @GET
+    @Path("gethintsofcurrentround")
+    public List<Hint> GetHintsOfCurrentRound() {
         
-        return "";
     }
 }
