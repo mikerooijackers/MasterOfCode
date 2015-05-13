@@ -16,6 +16,6 @@ public class UserService {
     private EntityManager em;
     
     public MOCUser Login(String username, String password) {
-        return ;
+        return null;
     }
 }

@@ -24,51 +24,51 @@ public class RestResource {
     public RestResource() {
     }
     
-    @POST
-    @Path("login")
-    public MOCUser Login(LoginMessage message) {
-        
-    }
-    
-    @POST
-    @Path("register")
-    public MOCUser Register(RegisterMessage message) {
-        
-    }
-    
-    @POST
-    @Path("activationcode")
-    public Response ActivationCode(String code) {
-        
-    }
-    
-    @POST
-    @Path("addtoteam")
-    public MOCUser AddToTeam(TeamMessage message) {
-        
-    }
-    
-    @GET
-    @Path("getallusers")
-    public List<MOCUser> GetAllUsers() {
-        
-    }
-    
-    @GET
-    @Path("getallteams")
-    public List<Team> GetAllTeams() {
-        
-    }
-    
-    @GET
-    @Path("getcompetitiondata")
-    public CompetitionData GetCompetitionData() {
-        
-    }
-    
-    @GET
-    @Path("gethintsofcurrentround")
-    public List<Hint> GetHintsOfCurrentRound() {
-        
-    }
+//    @POST
+//    @Path("login")
+//    public MOCUser Login(LoginMessage message) {
+//        
+//    }
+//    
+//    @POST
+//    @Path("register")
+//    public MOCUser Register(RegisterMessage message) {
+//        
+//    }
+//    
+//    @POST
+//    @Path("activationcode")
+//    public Response ActivationCode(String code) {
+//        
+//    }
+//    
+//    @POST
+//    @Path("addtoteam")
+//    public MOCUser AddToTeam(TeamMessage message) {
+//        
+//    }
+//    
+//    @GET
+//    @Path("getallusers")
+//    public List<MOCUser> GetAllUsers() {
+//        
+//    }
+//    
+//    @GET
+//    @Path("getallteams")
+//    public List<Team> GetAllTeams() {
+//        
+//    }
+//    
+//    @GET
+//    @Path("getcompetitiondata")
+//    public CompetitionData GetCompetitionData() {
+//        
+//    }
+//    
+//    @GET
+//    @Path("gethintsofcurrentround")
+//    public List<Hint> GetHintsOfCurrentRound() {
+//        
+//    }
 }

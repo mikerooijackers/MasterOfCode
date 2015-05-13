@@ -3,8 +3,8 @@ package Sockets;
 
 import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
-import Messages.BaseMessage;
-import Messages.HintMessage;
+import Sockets.Messages.BaseMessage;
+import Sockets.Messages.HintMessage;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
