@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Client.Request;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,16 +13,16 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class RunTestsByGroupRequestMessage extends BaseMessage {
+public class GroupTestsRequestMessage extends BaseMessage {
     
     public static final String MessageType = "runTestsByGroupRequestMessage";
     
     private Long teamId;
     private String testGroup;
     
-    public RunTestsByGroupRequestMessage(){}
+    public GroupTestsRequestMessage(){}
     
-    public RunTestsByGroupRequestMessage(Long teamId, String testGroup) {
+    public GroupTestsRequestMessage(Long teamId, String testGroup) {
         this.teamId = teamId;
         this.testGroup = testGroup;
     }
@@ -54,10 +55,10 @@ public class RunTestsByGroupRequestMessage extends BaseMessage {
         this.testGroup = testGroup;
     }
     
-    public static RunTestsByGroupRequestMessage decodeJSON(String s) {
+    public static GroupTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("teamId");
         String jsonTestGroup = obj.get("testGroup").toString();
-        return new RunTestsByGroupRequestMessage(jsonTeamId, jsonTestGroup);
+        return new GroupTestsRequestMessage(jsonTeamId, jsonTestGroup);
     }
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Client.Reply;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,15 +13,15 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class OtherTeamScoreMessage extends BaseMessage {
+public class OtherTeamScoreReplyMessage extends BaseMessage {
     
     public static final String MessageType = "otherTeamScoreMessage";
     private Long teamId;
     private int teamScore;
     
-    public OtherTeamScoreMessage(){};
+    public OtherTeamScoreReplyMessage(){};
     
-    public OtherTeamScoreMessage(Long competitionId, Long teamId, int teamScore) {
+    public OtherTeamScoreReplyMessage(Long competitionId, Long teamId, int teamScore) {
         this.teamId = teamId;
         this.teamScore = teamScore;
     }
@@ -53,13 +54,13 @@ public class OtherTeamScoreMessage extends BaseMessage {
         this.teamScore = teamScore;
     }
     
-    public static OtherTeamScoreMessage decodeJSON(String s) {
+    public static OtherTeamScoreReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
         Long jsonCompetitionId = (Long) obj.get("competitionId");
         Long jsonTeamId = (Long) obj.get("teamID");
         int jsonTeamScore = (int) obj.get("teamScore");
         
-        return new OtherTeamScoreMessage(jsonCompetitionId, jsonTeamId, jsonTeamScore);
+        return new OtherTeamScoreReplyMessage(jsonCompetitionId, jsonTeamId, jsonTeamScore);
     }
 }

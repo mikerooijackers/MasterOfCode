@@ -14,16 +14,16 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class UserTestRequestMessage extends BaseMessage {
+public class UserTestsRequestMessage extends BaseMessage {
     
     public static final String MessageType = "runTestsByNameRequestMessage";
     
     private Long teamId;
     private List<String> testNames;
     
-    public UserTestRequestMessage(){}
+    public UserTestsRequestMessage(){}
     
-    public UserTestRequestMessage(Long teamId, List<String> testNames) {
+    public UserTestsRequestMessage(Long teamId, List<String> testNames) {
         this.teamId = teamId;
         this.testNames = testNames;
     }
@@ -56,10 +56,10 @@ public class UserTestRequestMessage extends BaseMessage {
         this.testNames = testNames;
     }
     
-    public static UserTestRequestMessage decodeJSON(String s) {
+    public static UserTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("teamId");
         List<String> jsonTestNames = (List<String>) obj.get("testNames");
-        return new UserTestRequestMessage(jsonTeamId, jsonTestNames);
+        return new UserTestsRequestMessage(jsonTeamId, jsonTestNames);
     }
 }

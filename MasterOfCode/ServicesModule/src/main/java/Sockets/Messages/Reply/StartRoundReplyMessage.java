@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Reply;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,7 +13,7 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class StartRoundMessage extends BaseMessage {
+public class StartRoundReplyMessage extends BaseMessage {
     
     public static final String MessageType = "startRoundMessage";
     
@@ -24,9 +25,9 @@ public class StartRoundMessage extends BaseMessage {
     private String assignDescriptionCompetitors;
     private String assignDescriptionSpectators;
     
-    public StartRoundMessage(){}
+    public StartRoundReplyMessage(){}
     
-    public StartRoundMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators) {
+    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators) {
         this.assignCreatorName = assignCreatorName;
         this.assignCreatorCompany = assignCreatorCompany;
         this.assignCreatorWeb = assignCreatorWeb;
@@ -119,7 +120,7 @@ public class StartRoundMessage extends BaseMessage {
         this.assignDescriptionSpectators = assignDescriptionSpectators;
     }
     
-    public static StartRoundMessage decodeJSON(String s) {
+    public static StartRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonAssignCreatorName = obj.get("assignCreatorName").toString();
         String jsonAssignCreatorCompany = obj.get("assignCreatorCompany").toString();
@@ -128,6 +129,6 @@ public class StartRoundMessage extends BaseMessage {
         String jsonAssignDescriptionCompetitors = obj.get("assignDescriptionCompetitors").toString();
         String jsonAssignDescriptionSpectators = obj.get("assignDescriptionSpectators").toString();
         
-        return new StartRoundMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators);
+        return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators);
     }
 }

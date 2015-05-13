@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages.Client.Request;
+package Sockets.Messages.Client.Reply;
 
 import Sockets.Messages.BaseMessage;
 
@@ -11,6 +11,6 @@ import Sockets.Messages.BaseMessage;
  *
  * @author mikerooijackers
  */
-public class GetUserTestsRequestMessage extends BaseMessage {
+public class GetUserTestsReplyMessage extends BaseMessage {
     
 }

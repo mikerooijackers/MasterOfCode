@@ -5,10 +5,12 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Sockets.Messages.BaseMessage;
+
 /**
  *
  * @author mikerooijackers
  */
-public class ActionTeamRequestMessage {
+public class ActionTeamRequestMessage extends BaseMessage {
     
 }

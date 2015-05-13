@@ -5,10 +5,12 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Sockets.Messages.BaseMessage;
+
 /**
  *
  * @author mikerooijackers
  */
-public class GetSourceFilesRequestMessage {
+public class GetSourceFilesRequestMessage extends BaseMessage {
     
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Client.Reply;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,15 +13,15 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class RunTestsByGroupReplyMessage extends BaseMessage {
+public class GroupTestsReplyMessage extends BaseMessage {
     
     public static final String MessageType = "runTestsByGroupReplyMessage";
     
     private String result;
     
-    public RunTestsByGroupReplyMessage(){}
+    public GroupTestsReplyMessage(){}
     
-    public RunTestsByGroupReplyMessage(String result) {
+    public GroupTestsReplyMessage(String result) {
         this.result = result;
     }
 
@@ -38,9 +39,9 @@ public class RunTestsByGroupReplyMessage extends BaseMessage {
         this.result = result;
     }
     
-    public static RunTestsByGroupReplyMessage decodeJSON(String s) {
+    public static GroupTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonResult = obj.get("result").toString();
-        return new RunTestsByGroupReplyMessage(jsonResult);
+        return new GroupTestsReplyMessage(jsonResult);
     }
 }

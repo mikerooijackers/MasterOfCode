@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Reply;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,14 +13,14 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class UnfreezeRoundMessage extends BaseMessage {
+public class StopCompetitionReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "unfreezeRoundMessage";
+    public static final String MessageType = "stopCompetitionMessage";
     
-    public UnfreezeRoundMessage(){}
+    public StopCompetitionReplyMessage() {}
     
-    public static UnfreezeRoundMessage decodeJSON(String s) {
+    public static StopCompetitionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        return new UnfreezeRoundMessage();
+        return new StopCompetitionReplyMessage();
     }
 }

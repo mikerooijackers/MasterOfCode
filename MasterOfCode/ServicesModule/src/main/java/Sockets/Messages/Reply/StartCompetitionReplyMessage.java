@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Reply;
 
+import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -12,18 +13,18 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class StartCompetitionMessage extends BaseMessage {
+public class StartCompetitionReplyMessage extends BaseMessage {
     
     public static final String MessageType = "startCompetitionMessage";
     private int numberOfRounds;
     private String competitionName;
     private Long startTime;
     
-    public StartCompetitionMessage() {
+    public StartCompetitionReplyMessage() {
         
     }
     
-    public StartCompetitionMessage(int numberOfRounds, String competitionName, Long startTime) {
+    public StartCompetitionReplyMessage(int numberOfRounds, String competitionName, Long startTime) {
         this.numberOfRounds = numberOfRounds;
         this.competitionName = competitionName;
         this.startTime = startTime;
@@ -71,13 +72,13 @@ public class StartCompetitionMessage extends BaseMessage {
         this.startTime = startTime;
     }
     
-    public static StartCompetitionMessage decodeJSON(String s) {
+    public static StartCompetitionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
         int jsonNumberOfRounds = (int) obj.get("numberOfRounds");
         String jsonCompetitionName = obj.get("competitionName").toString();
         Long jsonStartTime = (Long) obj.get("startTime");
         
-        return new StartCompetitionMessage(jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
+        return new StartCompetitionReplyMessage(jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
     }
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
+package Sockets.Messages.Client.Reply;
 
+import Sockets.Messages.BaseMessage;
 import java.io.Serializable;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -13,14 +14,14 @@ import org.json.simple.JSONValue;
  *
  * @author JordiK
  */
-public class HintMessage extends BaseMessage implements Serializable {
+public class HintReplyMessage extends BaseMessage implements Serializable {
     
     public static final String MessageType = "hintMessage";
     private String hintMessage;
     
-    public HintMessage(){};
+    public HintReplyMessage(){};
     
-    public HintMessage (String hintMessage) {
+    public HintReplyMessage (String hintMessage) {
         this.hintMessage = hintMessage;
     }
 
@@ -38,10 +39,10 @@ public class HintMessage extends BaseMessage implements Serializable {
         this.hintMessage = hintMessage;
     }
     
-    public static HintMessage decodeJSON(String JSON) {
+    public static HintReplyMessage decodeJSON(String JSON) {
         JSONObject obj = (JSONObject) JSONValue.parse(JSON);
         String jsonHintMessage = obj.get("hintMessage").toString();
         
-        return new HintMessage(jsonHintMessage);
+        return new HintReplyMessage(jsonHintMessage);
     }
 }
