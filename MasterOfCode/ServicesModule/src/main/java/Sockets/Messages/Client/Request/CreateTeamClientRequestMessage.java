@@ -11,6 +11,6 @@ import Sockets.Messages.BaseMessage;
  *
  * @author mikerooijackers
  */
-public class CreateTeamRequestMessage extends BaseMessage {
+public class CreateTeamClientRequestMessage extends BaseMessage {
     
 }
