@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package WebSocket;
 
 import MessageUtils.MessageDecoder;
@@ -12,7 +7,7 @@ import Sockets.Messages.BaseMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ConcurrencyManagement;
@@ -28,26 +23,21 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-/**
- *
- * @author JordiK
- */
 @ServerEndpoint(
-        value = "/contestantSocket",
+        value = "/adminSocket",
         encoders = {MessageEncoder.class},
         decoders = {MessageDecoder.class},
         configurator = Configurator.class
 )
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Singleton
-public class CompetitorEndPoint {
+public class AdminEndPoint {
 
     private final HashMap<String, Session> sessions = new HashMap<>();
-    private Session testSession;
 
     @OnOpen
     public void onOpen(EndpointConfig endpointConfig, Session session) {
-        System.out.println("Session opened");
+        System.out.println("Session opened!!!");
     }
 
     @OnMessage
@@ -57,7 +47,6 @@ public class CompetitorEndPoint {
         } else {
             message.doAction();
         }
-        System.out.println("Sessions size: " + sessions.size());
     }
 
     private void addSession(Session session, NewSessionConnectionMessage mess) {
@@ -68,20 +57,20 @@ public class CompetitorEndPoint {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
         } catch (IOException | EncodeException ex) {
-            Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @OnError
     public void onError(Session session, Throwable error) {
-        Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, "An error occured in session " + session, error);
+        Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, "An error occured in session " + session, error);
     }
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         System.out.println("Closing session");
         String usernameToRemove = "";
-        for (Entry<String, Session> entry : sessions.entrySet()) {
+        for (Map.Entry<String, Session> entry : sessions.entrySet()) {
             String username = entry.getKey();
             Session sess = entry.getValue();
             
