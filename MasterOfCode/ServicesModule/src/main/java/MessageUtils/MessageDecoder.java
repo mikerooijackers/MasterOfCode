@@ -22,51 +22,54 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
     @Override
     public BaseMessage decode(String s) throws DecodeException {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        switch ((MessageTypes) obj.get("messageType")) {
+        MessageTypes mt = MessageTypes.valueOf(obj.get("MessageType").toString());
+        switch (mt) {
             case CompileReplyMessage:
-                CompileReplyMessage.decodeJSON(s);
+                return CompileReplyMessage.decodeJSON(s);
             case CompileRequestMessage:
-                CompileRequestMessage.decodeJSON(s);
+                return CompileRequestMessage.decodeJSON(s);
             case RunTestsByGroupRequestMessage:
-                RunTestsByGroupRequestMessage.decodeJSON(s);
+                return RunTestsByGroupRequestMessage.decodeJSON(s);
             case RunTestsByGroupReplyMessage:
-                RunTestsByGroupReplyMessage.decodeJSON(s);
+                return RunTestsByGroupReplyMessage.decodeJSON(s);
             case RunTestsByNameRequestMessage:
-                RunTestsByNameRequestMessage.decodeJSON(s);
+                return RunTestsByNameRequestMessage.decodeJSON(s);
             case RunTestsByNameReplyMessage:
-                RunTestsByNameReplyMessage.decodeJSON(s);
+                return RunTestsByNameReplyMessage.decodeJSON(s);
             case OtherTeamScoreMessage:
-                OtherTeamScoreMessage.decodeJSON(s);
+                return OtherTeamScoreMessage.decodeJSON(s);
             case HintMessage:
-                HintMessage.decodeJSON(s);
+                return HintMessage.decodeJSON(s);
             case TeamActionMessage:
-                TeamActionMessage.decodeJSON(s);
+                return TeamActionMessage.decodeJSON(s);
             case EditSourceCodeMessage:
-                EditSourceCodeMessage.decodeJSON(s);
+                return EditSourceCodeMessage.decodeJSON(s);
             case StartRoundMessage:
-                StartRoundMessage.decodeJSON(s);
+                return StartRoundMessage.decodeJSON(s);
             case StopRoundMessage:
-                StopRoundMessage.decodeJSON(s);
+                return StopRoundMessage.decodeJSON(s);
             case PauseRoundMessage:
-                PauseRoundMessage.decodeJSON(s);
+                return PauseRoundMessage.decodeJSON(s);
             case ContinueRoundMessage:
-                ContinueRoundMessage.decodeJSON(s);
+                return ContinueRoundMessage.decodeJSON(s);
             case FreezeRoundMessage:
-                FreezeRoundMessage.decodeJSON(s);
+                return FreezeRoundMessage.decodeJSON(s);
             case UnfreezeRoundMessage:
-                UnfreezeRoundMessage.decodeJSON(s);
+                return UnfreezeRoundMessage.decodeJSON(s);
             case StartCompetitionMessage:
-                StartCompetitionMessage.decodeJSON(s);
+                return StartCompetitionMessage.decodeJSON(s);
             case StopCompetitionMessage:
-                StopCompetitionMessage.decodeJSON(s);
+                return StopCompetitionMessage.decodeJSON(s);
             case AddMembersToTeamRequestMessage:
-                AddMembersToTeamRequestMessage.decodeJSON(s);
+                return AddMembersToTeamRequestMessage.decodeJSON(s);
             case CreateTeamRequestMessage:
-                CreateTeamRequestMessage.decodeJSON(s);
+                return CreateTeamRequestMessage.decodeJSON(s);
             case RemoveMemberFromTeamRequestMessage:
-                RemoveMemberFromTeamRequestMessage.decodeJSON(s);
+                return RemoveMemberFromTeamRequestMessage.decodeJSON(s);
             case GetSourceFilesRequestMessage:
-                GetSourceFilesRequestMessage.decodeJSON(s);
+                return GetSourceFilesRequestMessage.decodeJSON(s);
+            case NewSessionConnectionMessage:
+                return NewSessionConnectionMessage.decodeJSON(s);
         }
         return null;
     }
@@ -85,5 +88,5 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
     public void destroy() {
         System.out.println("Decoder destroyed");
     }
-    
+
 }

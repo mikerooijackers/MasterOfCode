@@ -5,24 +5,23 @@
  */
 package REST;
 
-import javax.ws.rs.core.*;
+import Sockets.Messages.HintMessage;
+import WebSocket.CompetitorEndPoint;
+import javax.ejb.Stateless;
 import javax.ws.rs.*;
-import Domein.*;
-import java.util.List;
+import javax.inject.Inject;
 
 /**
  * REST Web Service
  *
  * @author mikerooijackers
  */
-@Path("")
+@Path("/RestResource")
+@Stateless
 public class RestResource {
 
-    /**
-     * Creates a new instance of RestResource
-     */
-    public RestResource() {
-    }
+    @Inject
+    private CompetitorEndPoint endPoint;
     
 //    @POST
 //    @Path("login")
