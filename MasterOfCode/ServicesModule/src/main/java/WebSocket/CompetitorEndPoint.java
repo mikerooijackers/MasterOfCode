@@ -60,7 +60,7 @@ public class CompetitorEndPoint {
         System.out.println("Sessions size: " + sessions.size());
     }
 
-    public void addSession(Session session, NewSessionConnectionMessage mess) {
+    private void addSession(Session session, NewSessionConnectionMessage mess) {
         this.sessions.put(mess.getUsername(), session);
     }
 
