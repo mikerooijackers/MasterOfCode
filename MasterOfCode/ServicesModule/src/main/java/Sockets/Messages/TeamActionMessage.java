@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class TeamActionMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.TeamActionMessage;
+    public static final String messageType = MessageTypes.TeamActionMessage.toString();
     
     private String action;
     
@@ -40,6 +40,9 @@ public class TeamActionMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("Action", this.action);
+        return obj.toString();
     }
 }

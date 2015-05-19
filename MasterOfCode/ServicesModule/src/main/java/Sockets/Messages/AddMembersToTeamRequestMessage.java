@@ -18,7 +18,7 @@ import org.json.simple.JSONValue;
  */
 public class AddMembersToTeamRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.AddMembersToTeamRequestMessage;
+    public static final String messageType = MessageTypes.AddMembersToTeamRequestMessage.toString();
     
     private List<MOCUser> usersToAdd;
     
@@ -61,7 +61,10 @@ public class AddMembersToTeamRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("UsersToAdd", this.usersToAdd);
+        return obj.toString();
     }
     
 }

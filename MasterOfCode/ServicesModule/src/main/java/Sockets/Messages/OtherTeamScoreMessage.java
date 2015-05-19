@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class OtherTeamScoreMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.OtherTeamScoreMessage;
+    public static final String messageType = MessageTypes.OtherTeamScoreMessage.toString();
     private Long teamId;
     private int teamScore;
     
@@ -71,6 +71,10 @@ public class OtherTeamScoreMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        obj.put("TeamScore", this.teamScore);
+        return obj.toString();
     }
 }

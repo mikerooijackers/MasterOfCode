@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class StartRoundMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.StartRoundMessage;
+    public static final String messageType = MessageTypes.StartRoundMessage.toString();
     
     private String assignCreatorName;
     private String assignCreatorCompany;
@@ -139,6 +139,14 @@ public class StartRoundMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("AssignCreatorName", this.assignCreatorName);
+        obj.put("AssignCreatorCompany", this.assignCreatorCompany);
+        obj.put("AssignCreatorWeb", this.assignCreatorWeb);
+        obj.put("AssignName", this.assignName);
+        obj.put("AssignDescriptionCompetitors", this.assignDescriptionCompetitors);
+        obj.put("AssignDescriptionSpectators", this.assignDescriptionSpectators);
+        return obj.toString();
     }
 }

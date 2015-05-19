@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class RunTestsByGroupRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.RunTestsByGroupRequestMessage;
+    public static final String messageType = MessageTypes.RunTestsByGroupRequestMessage.toString();
     
     private Long teamId;
     private String testGroup;
@@ -69,6 +69,10 @@ public class RunTestsByGroupRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        obj.put("TestGroup", this.testGroup);
+        return obj.toString();
     }
 }

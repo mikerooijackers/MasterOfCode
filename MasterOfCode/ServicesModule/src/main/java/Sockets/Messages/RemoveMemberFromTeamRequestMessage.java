@@ -16,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.RemoveMemberFromTeamRequestMessage;
+    public static final String messageType = MessageTypes.RemoveMemberFromTeamRequestMessage.toString();
     
     private MOCUser userToRemove;
     
@@ -53,7 +53,10 @@ public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("UserToRemove", this.userToRemove);
+        return obj.toString();
     }
     
 }

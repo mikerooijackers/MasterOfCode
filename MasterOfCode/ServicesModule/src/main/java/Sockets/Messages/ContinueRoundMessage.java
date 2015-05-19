@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class ContinueRoundMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.ContinueRoundMessage;
+    public static final String messageType = MessageTypes.ContinueRoundMessage.toString();
     
     public ContinueRoundMessage(){}
     
@@ -31,6 +31,8 @@ public class ContinueRoundMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
 }

@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class StartCompetitionMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.StartCompetitionMessage;
+    public static final String messageType = MessageTypes.StartCompetitionMessage.toString();
     private int numberOfRounds;
     private String competitionName;
     private Long startTime;
@@ -89,6 +89,11 @@ public class StartCompetitionMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("NumberOfRounds", this.numberOfRounds);
+        obj.put("CompetitionName", this.competitionName);
+        obj.put("StartTime", this.startTime);
+        return obj.toString();
     }
 }
