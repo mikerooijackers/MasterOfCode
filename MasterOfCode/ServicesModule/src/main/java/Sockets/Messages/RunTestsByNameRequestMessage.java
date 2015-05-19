@@ -16,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class RunTestsByNameRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.RunTestsByNameRequestMessage;
+    public static final String messageType = MessageTypes.RunTestsByNameRequestMessage.toString();
     
     private Long teamId;
     private List<String> testNames;
@@ -70,6 +70,10 @@ public class RunTestsByNameRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        obj.put("TestNames", this.testNames);
+        return obj.toString();
     }
 }

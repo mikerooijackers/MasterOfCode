@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class FreezeRoundMessage extends BaseMessage {
     
-    public static final MessageTypes messageTypes = MessageTypes.FreezeRoundMessage;
+    public static final String messageType = MessageTypes.FreezeRoundMessage.toString();
     
     public FreezeRoundMessage(){}
     
@@ -31,6 +31,8 @@ public class FreezeRoundMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
 }

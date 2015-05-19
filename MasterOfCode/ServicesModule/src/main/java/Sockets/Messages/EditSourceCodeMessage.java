@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class EditSourceCodeMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.EditSourceCodeMessage;
+    public static final String messageType = MessageTypes.EditSourceCodeMessage.toString();
     
     private String newSourceCode;
     private String sourceCodeFile;
@@ -103,6 +103,12 @@ public class EditSourceCodeMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("NewSourceCode", this.newSourceCode);
+        obj.put("SourceCodeFile", this.sourceCodeFile);
+        obj.put("RoundId", this.roundId);
+        obj.put("TeamId", this.teamId);
+        return obj.toString();
     }
 }

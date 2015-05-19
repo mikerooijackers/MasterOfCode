@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class CompileRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.CompileRequestMessage;
+    public static final String messageType = MessageTypes.CompileRequestMessage.toString();
     
     private Long teamId;
     
@@ -52,6 +52,9 @@ public class CompileRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        return obj.toString();
     }
 }

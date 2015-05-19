@@ -15,7 +15,7 @@ import org.json.simple.JSONValue;
  */
 public class GetSourceFilesRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.GetSourceFilesRequestMessage;
+    public static final String messageType = MessageTypes.GetSourceFilesRequestMessage.toString();
     
     private Long teamId;
     private Long roundId;
@@ -69,7 +69,11 @@ public class GetSourceFilesRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        obj.put("RoundId", this.roundId);
+        return obj.toString();
     }
     
 }

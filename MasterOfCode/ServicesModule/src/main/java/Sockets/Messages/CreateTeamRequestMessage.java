@@ -16,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class CreateTeamRequestMessage extends BaseMessage {
     
-    public static final MessageTypes messageType = MessageTypes.CreateTeamRequestMessage;
+    public static final String messageType = MessageTypes.CreateTeamRequestMessage.toString();
     
     private String teamName;
     private MOCUser initiator;
@@ -70,7 +70,11 @@ public class CreateTeamRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamName", this.teamName);
+        obj.put("Initiator", this.initiator);
+        return obj.toString();
     }
     
 }
