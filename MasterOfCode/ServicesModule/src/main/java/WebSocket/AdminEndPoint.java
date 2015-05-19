@@ -4,9 +4,10 @@ import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.HintMessage;
+import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ConcurrencyManagement;
@@ -23,7 +24,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint(
-        value = "/contestantSocket",
+        value = "/adminSocket",
         encoders = {MessageEncoder.class},
         decoders = {MessageDecoder.class},
         configurator = Configurator.class
@@ -31,6 +32,7 @@ import javax.websocket.server.ServerEndpoint;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Singleton
 public class AdminEndPoint {
+
     private final HashMap<String, Session> sessions = new HashMap<>();
 
     @OnOpen
@@ -40,27 +42,46 @@ public class AdminEndPoint {
 
     @OnMessage
     public void onMessage(final Session session, final BaseMessage message) {
-        
-        message.doAction();
+        if (message instanceof NewSessionConnectionMessage) {
+            this.addSession(session, (NewSessionConnectionMessage) message);
+        } else {
+            message.doAction();
+        }
+    }
+
+    private void addSession(Session session, NewSessionConnectionMessage mess) {
+        this.sessions.put(mess.getUsername(), session);
     }
 
     public void sendMessage(String username, Object message) {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
-        } catch (IOException ex) {
-            Logger.getLogger(EndPoint.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (EncodeException ex) {
-            Logger.getLogger(EndPoint.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | EncodeException ex) {
+            Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @OnError
     public void onError(Session session, Throwable error) {
-        Logger.getLogger(EndPoint.class.getName()).log(Level.SEVERE, "An error occured in session " + session, error);
+        Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, "An error occured in session " + session, error);
     }
-    
+
     @OnClose
     public void onClose(Session session, CloseReason reason) {
-        Logger.getLogger(EndPoint.class.getName()).log(Level.INFO, "Session {0} was closed with reason {1}", new Object[]{session, reason});
+        System.out.println("Closing session");
+        String usernameToRemove = "";
+        for (Map.Entry<String, Session> entry : sessions.entrySet()) {
+            String username = entry.getKey();
+            Session sess = entry.getValue();
+            
+            if (sess == session) {
+                usernameToRemove = username;
+                break;
+            }
+        }
+        if (!usernameToRemove.equals("")) {
+            sessions.remove(usernameToRemove);
+        }
+        System.out.println("Sessions size: " + sessions.size());
     }
 }

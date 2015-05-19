@@ -67,9 +67,7 @@ public class CompetitorEndPoint {
     public void sendMessage(String username, Object message) {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
-        } catch (IOException ex) {
-            Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (EncodeException ex) {
+        } catch (IOException | EncodeException ex) {
             Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
