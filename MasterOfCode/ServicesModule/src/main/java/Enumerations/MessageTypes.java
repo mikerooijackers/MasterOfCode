@@ -31,7 +31,8 @@ public enum MessageTypes {
     AddMembersToTeamRequestMessage("AddMembersToTeamRequestMessage"),
     CreateTeamRequestMessage("CreateTeamRequestMessage"),
     RemoveMemberFromTeamRequestMessage("RemoveMemberFromTeamRequestMessage"),
-    GetSourceFilesRequestMessage("GetSourceFilesRequestMessage");
+    GetSourceFilesRequestMessage("GetSourceFilesRequestMessage"),
+    NewSessionConnectionMessage("NewSessionConnectionMessage");
     
     private String name;
     
