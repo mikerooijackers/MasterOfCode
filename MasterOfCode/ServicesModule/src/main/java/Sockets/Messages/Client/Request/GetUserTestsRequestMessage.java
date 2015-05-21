@@ -5,13 +5,29 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import java.util.List;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author mikerooijackers
  */
 public class GetUserTestsRequestMessage extends BaseMessage {
+
+    public static final String messageType = MessageTypes.GetUserTestsRequestMessage.toString();
+
+    private long teamId;
+    private List<String> testNames;
+
+    public void GetUserTestsRequestMessage() {
+    }
+
+    public void GetUserTestsRequestMessage(long teamId, List<String> testNames) {
+        this.teamId = teamId;
+        this.testNames = testNames;
+    }
 
     @Override
     public void doAction() {
@@ -20,7 +36,11 @@ public class GetUserTestsRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        obj.put("TestNames", this.testNames);
+        return obj.toString();
     }
-    
+
 }
