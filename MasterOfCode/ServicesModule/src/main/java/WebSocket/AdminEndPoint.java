@@ -4,6 +4,8 @@ import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.DebugMessage;
+import Sockets.Messages.HintMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -44,6 +46,8 @@ public class AdminEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
+        } else if (message instanceof DebugMessage) {
+            sendMessage("Jordi", new HintMessage("Because I'm a potato!"));
         } else {
             message.doAction();
         }
@@ -56,6 +60,7 @@ public class AdminEndPoint {
     public void sendMessage(String username, Object message) {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
+            System.out.println("Message send!!!");
         } catch (IOException | EncodeException ex) {
             Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }

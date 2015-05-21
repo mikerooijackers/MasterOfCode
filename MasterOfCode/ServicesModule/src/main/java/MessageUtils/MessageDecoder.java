@@ -70,6 +70,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return GetSourceFilesRequestMessage.decodeJSON(s);
             case NewSessionConnectionMessage:
                 return NewSessionConnectionMessage.decodeJSON(s);
+            case DebugMessage:
+                return DebugMessage.decodeJSON(s);
         }
         return null;
     }
