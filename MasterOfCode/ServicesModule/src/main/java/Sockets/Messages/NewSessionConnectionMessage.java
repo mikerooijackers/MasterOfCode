@@ -6,8 +6,6 @@
 package Sockets.Messages;
 
 import Enumerations.MessageTypes;
-import WebSocket.CompetitorEndPoint;
-import javax.inject.Inject;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -52,7 +50,8 @@ public class NewSessionConnectionMessage extends BaseMessage {
     
     public static NewSessionConnectionMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        String jsonUsername = obj.get("Username").toString();
+        String jsonUsername;
+        jsonUsername = obj.get("Username").toString();
         return new NewSessionConnectionMessage(jsonUsername);
     }
 }
