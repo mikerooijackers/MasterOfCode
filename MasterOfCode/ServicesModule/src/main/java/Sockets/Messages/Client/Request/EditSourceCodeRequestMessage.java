@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class EditSourceCodeRequestMessage extends BaseMessage {
     
-    public static final String MessageType = "editSourceCodeMessage";
+    public static final String messageType = MessageTypes.EditSourceCodeRequestMessage.toString();
     
     private String newSourceCode;
     private String sourceCodeFile;
@@ -94,5 +95,21 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
         String jsonNewSourceCode = obj.get("newSourceCode").toString();
         String jsonSourceCodeFile = obj.get("sourceCodeFile").toString();
         return new EditSourceCodeRequestMessage(jsonNewSourceCode, jsonSourceCodeFile, jsonRoundId, jsonTeamId);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("NewSourceCode", this.newSourceCode);
+        obj.put("SourceCodeFile", this.sourceCodeFile);
+        obj.put("RoundId", this.roundId);
+        obj.put("TeamId", this.teamId);
+        return obj.toString();
     }
 }

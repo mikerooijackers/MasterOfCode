@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class GroupTestsRequestMessage extends BaseMessage {
     
-    public static final String MessageType = "runTestsByGroupRequestMessage";
+    public static final String messageType = MessageTypes.GroupTestsRequestMessage.toString();
     
     private Long teamId;
     private String testGroup;
@@ -60,5 +61,19 @@ public class GroupTestsRequestMessage extends BaseMessage {
         Long jsonTeamId = (Long) obj.get("teamId");
         String jsonTestGroup = obj.get("testGroup").toString();
         return new GroupTestsRequestMessage(jsonTeamId, jsonTestGroup);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
+        obj.put("TestGroup", this.testGroup);
+        return obj.toString();
     }
 }

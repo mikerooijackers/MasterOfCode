@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import java.util.List;
 import org.json.simple.JSONObject;
@@ -16,7 +17,7 @@ import org.json.simple.JSONValue;
  */
 public class UserTestsReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "runTestsByNameReplyMessage";
+    public static final String messageType = MessageTypes.UserTestsReplyMessage.toString();
     
     private List<String> results;
     
@@ -44,5 +45,18 @@ public class UserTestsReplyMessage extends BaseMessage {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<String> jsonResults = (List<String>) obj.get("results");
         return new UserTestsReplyMessage(jsonResults);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("Results", this.results);
+        return obj.toString();
     }
 } 

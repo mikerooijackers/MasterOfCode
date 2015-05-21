@@ -65,6 +65,5 @@ public class UserService {
     
     public Team findTeam(long teamID) {
         return null;
-        
     }
 }

@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class TeamActionReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "teamActionMessage";
+    public static final String messageType = MessageTypes.TeamActionReplyMessage.toString();
     
     private String action;
     
@@ -31,5 +32,18 @@ public class TeamActionReplyMessage extends BaseMessage {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonAction = obj.get("action").toString();
         return new TeamActionReplyMessage(jsonAction);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("Action", this.action);
+        return obj.toString();
     }
 }
