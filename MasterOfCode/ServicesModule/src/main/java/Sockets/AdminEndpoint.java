@@ -4,7 +4,7 @@ package Sockets;
 import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.HintMessage;
+import Sockets.Messages.Client.Reply.HintReplyMessage;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -47,7 +47,7 @@ public class AdminEndpoint {
     public void onOpen(Session session) throws IOException, EncodeException {
         LOG.info("Connection opened ...");
         sessions.add(session);
-        BaseMessage test = new HintMessage("TEST");
+        BaseMessage test = new HintReplyMessage("TEST");
         session.getBasicRemote().sendObject(test);
     }
 

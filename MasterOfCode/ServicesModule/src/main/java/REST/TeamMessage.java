@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages;
-
-import org.json.simple.JSONAware;
+package REST;
 
 /**
  *
- * @author JordiK
+ * @author mikerooijackers
  */
-public abstract class BaseMessage implements JSONAware {
-    public abstract void doAction();
+class TeamMessage {
+    
 }
