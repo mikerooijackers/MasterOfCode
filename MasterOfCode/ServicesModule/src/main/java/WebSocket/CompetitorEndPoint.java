@@ -9,6 +9,7 @@ import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.DebugMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -54,13 +55,14 @@ public class CompetitorEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
+        } else if (message instanceof DebugMessage) {
         } else {
             message.doAction();
         }
         System.out.println("Sessions size: " + sessions.size());
     }
 
-    public void addSession(Session session, NewSessionConnectionMessage mess) {
+    private void addSession(Session session, NewSessionConnectionMessage mess) {
         this.sessions.put(mess.getUsername(), session);
     }
 

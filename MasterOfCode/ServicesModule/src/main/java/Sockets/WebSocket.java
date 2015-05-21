@@ -18,35 +18,35 @@ public class WebSocket {
     private Map<Long, Session> userPeers;
     private Map<Long, Session> participantTeam;
     
-    public void onMessage(Long userID, Long teamID, Session client, String message) {
+    public void OnMessage(Long userID, Long teamID, Session client, String message) {
         
     }
     
-    public void onClose(Long userID, Long teamID, Session client) {
+    public void OnClose(Long userID, Long teamID, Session client) {
         
     }
     
-    public void onOpen(Long userID, Long teamID, Session client) {
+    public void OnOpen(Long userID, Long teamID, Session client) {
         
     }
     
-    public void onError(Throwable t) {
+    public void OnError(Throwable t) {
         
     }
     
-    public void sendMessageToUser(long UserID, Object message) {
+    public void SendMessageToUser(long UserID, Object message) {
         
     }
     
-    public void sendMessageToTeam(long TeamID, Object message) {
+    public void SendMessageToTeam(long TeamID, Object message) {
         
     }
     
-    public void sendMessageToSpectator(Object message) {
+    public void SendMessageToSpectator(Object message) {
         
     }
     
-    public void sendMessageToParticipant(Object message) {
+    public void SendMessageToParticipant(Object message) {
         
     }
 }
