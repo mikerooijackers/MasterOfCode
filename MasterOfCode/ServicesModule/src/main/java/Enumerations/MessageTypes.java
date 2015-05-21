@@ -32,7 +32,8 @@ public enum MessageTypes {
     CreateTeamRequestMessage("CreateTeamRequestMessage"),
     RemoveMemberFromTeamRequestMessage("RemoveMemberFromTeamRequestMessage"),
     GetSourceFilesRequestMessage("GetSourceFilesRequestMessage"),
-    NewSessionConnectionMessage("NewSessionConnectionMessage");
+    NewSessionConnectionMessage("NewSessionConnectionMessage"),
+    DebugMessage("DebugMessage");
     
     private String name;
     

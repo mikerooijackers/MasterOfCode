@@ -22,7 +22,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
     @Override
     public BaseMessage decode(String s) throws DecodeException {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        MessageTypes mt = MessageTypes.valueOf(obj.get("MessageType").toString());
+        String messageTypeString = obj.get("MessageType").toString();
+        MessageTypes mt = MessageTypes.valueOf(messageTypeString);
         switch (mt) {
             case CompileReplyMessage:
                 return CompileReplyMessage.decodeJSON(s);
@@ -70,6 +71,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return GetSourceFilesRequestMessage.decodeJSON(s);
             case NewSessionConnectionMessage:
                 return NewSessionConnectionMessage.decodeJSON(s);
+            case DebugMessage:
+                return DebugMessage.decodeJSON(s);
         }
         return null;
     }

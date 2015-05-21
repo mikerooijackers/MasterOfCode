@@ -9,7 +9,9 @@ import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.DebugMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
+import Sockets.Messages.StartRoundMessage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -54,6 +56,8 @@ public class CompetitorEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
+        } else if (message instanceof DebugMessage) {
+            this.sendMessage("Noor", new StartRoundMessage("Jordi", "Fontys Hogescholen", "http://www.fontys.nl/", "Test assignment", "This description will be shown to the competitors.", "This description will be shown to the spectators."));
         } else {
             message.doAction();
         }
