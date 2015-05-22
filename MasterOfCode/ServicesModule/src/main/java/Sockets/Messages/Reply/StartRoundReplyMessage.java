@@ -123,12 +123,12 @@ public class StartRoundReplyMessage extends BaseMessage {
     
     public static StartRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        String jsonAssignCreatorName = obj.get("assignCreatorName").toString();
-        String jsonAssignCreatorCompany = obj.get("assignCreatorCompany").toString();
-        String jsonAssignCreatorWeb = obj.get("assignCreatorWeb").toString();
-        String jsonAssignName = obj.get("assignName").toString();
-        String jsonAssignDescriptionCompetitors = obj.get("assignDescriptionCompetitors").toString();
-        String jsonAssignDescriptionSpectators = obj.get("assignDescriptionSpectators").toString();
+        String jsonAssignCreatorName = obj.get("AssignCreatorName").toString();
+        String jsonAssignCreatorCompany = obj.get("AssignCreatorCompany").toString();
+        String jsonAssignCreatorWeb = obj.get("AssignCreatorWeb").toString();
+        String jsonAssignName = obj.get("AssignName").toString();
+        String jsonAssignDescriptionCompetitors = obj.get("AssignDescriptionCompetitors").toString();
+        String jsonAssignDescriptionSpectators = obj.get("AssignDescriptionSpectators").toString();
         
         return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators);
     }

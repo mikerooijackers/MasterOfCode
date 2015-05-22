@@ -4,6 +4,7 @@ import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Client.Reply.HintReplyMessage;
 import Sockets.Messages.DebugMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class AdminEndPoint {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
         } else if (message instanceof DebugMessage) {
-            //sendMessage("Jordi", new HintMessage("Because I'm a potato!"));
+            sendMessage("Jordi", new HintReplyMessage("Because I'm a potato!"));
         } else {
             message.doAction();
         }

@@ -1,0 +1,104 @@
+
+#loginButton {
+    margin-top: 120px;
+    margin-bottom: 120px;
+    width: 150px;
+}
+
+#bordered {
+    border: 1px solid black;
+    padding: 7px;
+}
+
+.content {
+    margin-bottom: 30px;
+}
+
+.menuBar {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.menuBar table {
+    width:100%;
+}
+.menuBar table tr td {
+    border: 1px solid black;
+    text-align: center;
+    height: 50px;
+    background-color: lightgray;
+}
+.menuBar table tr td a {
+    display:block;
+    width:100%;
+}
+.menuBar table tr td a:link {
+    color: #000000;
+}
+/* visited link */
+.menuBar table tr td a:visited {
+    color: #000000;
+}
+/* mouse over link */
+.menuBar table tr td a:hover {
+    color: #000000;
+}
+/* selected link */
+.menuBar table tr td a:active {
+    color: #000000;
+}
+
+#submenu {
+    margin-top: 0px;
+}
+
+#submenu table tr td{
+    height: 30px;
+}
+
+.borderedTable {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+ .borderedTable tr td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+.borderedTable tr:nth-child(even) {
+    background-color: lightgrey;
+}
+
+.borderedTable tr:nth-child(odd) {
+    background-color: darkgrey;
+}
+
+.borderedTable a:link a:visited a:hover a:active {
+    color: black;
+}
+
+.borderedTable a:hover a:active {
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+}
+
+#marginBtn {
+    margin-top: 30px;
+}
+
+.form-horizontal .control-label {
+    text-align: left !important;
+}
+
+#marginTop10 {
+    margin-top: 10px;
+}
+
+#centered {
+    text-align: center;
+}

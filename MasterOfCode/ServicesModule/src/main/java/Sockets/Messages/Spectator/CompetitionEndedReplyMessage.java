@@ -5,7 +5,10 @@
  */
 package Sockets.Messages.Spectator;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -13,6 +16,15 @@ import Sockets.Messages.BaseMessage;
  */
 public class CompetitionEndedReplyMessage extends BaseMessage {
 
+    public static final String messageType = MessageTypes.CompetitionEndedReplyMessage.toString();
+    
+    public CompetitionEndedReplyMessage(){}
+    
+    public static CompetitionEndedReplyMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new CompetitionEndedReplyMessage();
+    }
+    
     @Override
     public void doAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,7 +32,9 @@ public class CompetitionEndedReplyMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
     
 }
