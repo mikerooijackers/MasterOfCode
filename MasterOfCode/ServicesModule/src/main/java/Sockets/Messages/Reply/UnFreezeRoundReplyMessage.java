@@ -7,7 +7,9 @@ package Sockets.Messages.Reply;
 
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Spectator.CompetitionEndedReplyMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -17,7 +19,12 @@ public class UnFreezeRoundReplyMessage extends BaseMessage {
 
     public static final String messageType = MessageTypes.UnFreezeRoundReplyMessage.toString();
     
-    public void UnFreezeRoundReplyMessage() {}
+    public UnFreezeRoundReplyMessage() {}
+    
+    public static UnFreezeRoundReplyMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new UnFreezeRoundReplyMessage();
+    }
     
     @Override
     public void doAction() {

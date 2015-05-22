@@ -59,8 +59,8 @@ public class UserTestsRequestMessage extends BaseMessage {
     
     public static UserTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonTeamId = (Long) obj.get("teamId");
-        List<String> jsonTestNames = (List<String>) obj.get("testNames");
+        Long jsonTeamId = (Long) obj.get("TeamId");
+        List<String> jsonTestNames = (List<String>) obj.get("TestNames");
         return new UserTestsRequestMessage(jsonTeamId, jsonTestNames);
     }
 
