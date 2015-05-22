@@ -5,13 +5,26 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
  * @author mikerooijackers
  */
 public class GetUserTestsReplyMessage extends BaseMessage {
+    
+    public static final String messageType = MessageTypes.GetUserTestsReplyMessage.toString();
+    
+    public GetUserTestsReplyMessage(){}
+    
+    public static GetUserTestsReplyMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        
+        return new GetUserTestsReplyMessage();
+    }
 
     @Override
     public void doAction() {
@@ -20,7 +33,9 @@ public class GetUserTestsReplyMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toJSONString();
     }
     
 }

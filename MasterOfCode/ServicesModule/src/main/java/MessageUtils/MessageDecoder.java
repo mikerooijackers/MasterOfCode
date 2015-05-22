@@ -8,6 +8,7 @@ package MessageUtils;
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.CompileReplyMessage;
+import Sockets.Messages.DebugMessage;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
@@ -28,6 +29,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
         switch (mt) {
             case CompileReplyMessage:
                 return CompileReplyMessage.decodeJSON(s);
+            case DebugMessage:
+                return DebugMessage.decodeJSON(s);
         }
         return null;
     }

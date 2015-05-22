@@ -6,6 +6,7 @@
 package Sockets.Messages;
 
 import Enumerations.MessageTypes;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -28,7 +29,9 @@ public class DebugMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toJSONString();
     }
     
 }
