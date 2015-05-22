@@ -16,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class UnfreezeRoundReplyMessage extends BaseMessage {
     
-    public static final String messageType = MessageTypes.UnfreezeRoundReplyMessage.toString();
+    public static final String messageType = MessageTypes.UnFreezeRoundReplyMessage.toString();
     
     /**
      * Constructor

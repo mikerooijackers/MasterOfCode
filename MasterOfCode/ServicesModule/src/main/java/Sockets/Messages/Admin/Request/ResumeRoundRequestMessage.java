@@ -14,25 +14,25 @@ import org.json.simple.JSONValue;
  *
  * @author mikerooijackers
  */
-public class AddMemberToTeamRequestMessage extends BaseMessage {
+public class ResumeRoundRequestMessage extends BaseMessage {
     
-    public static final String messageType = MessageTypes.AddMemberToTeamRequestMessage.toString();
+    public static final String messageType = MessageTypes.ResumeRequestMessage.toString();
     
-    private Long teamId;
-    private Long userId;
+    private Long competitionId;
+    private Long roundId;
     
-    public AddMemberToTeamRequestMessage() {}
+    public ResumeRoundRequestMessage(){}
     
-    public AddMemberToTeamRequestMessage(Long teamId, Long userId) {
-        this.teamId = teamId;
-        this.userId = userId;
+    public ResumeRoundRequestMessage(Long competitionId, Long roundId) {
+        this.competitionId = competitionId;
+        this.roundId = roundId;
     }
     
-    public static AddMemberToTeamRequestMessage decodeJSON(String s) {
+    public static ResumeRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonTeamId = (Long) obj.get("TeamId");
-        Long jsonUserId = (Long) obj.get("UserId");
-        return new AddMemberToTeamRequestMessage(jsonTeamId, jsonUserId);
+        Long jsonCompetitionId = (Long) obj.get("CompetitionId");
+        Long jsonRoundId = (Long) obj.get("RoundId");
+        return new ResumeRoundRequestMessage(jsonCompetitionId, jsonRoundId);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class AddMemberToTeamRequestMessage extends BaseMessage {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
-        obj.put("TeamId", this.teamId);
-        obj.put("UserId", this.userId);
+        obj.put("CompetitionId", this.competitionId);
+        obj.put("RoundId", this.roundId);
         return obj.toJSONString();
     }
     
