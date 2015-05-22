@@ -5,7 +5,9 @@
  */
 package Sockets.Messages.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -13,6 +15,10 @@ import Sockets.Messages.BaseMessage;
  */
 public class PauzeRoundReplyMessage extends BaseMessage {
 
+    public static final String messageType = MessageTypes.PauzeRoundReplyMessage.toString();
+    
+    public void PauzeRoundReplyMessage() {}
+    
     @Override
     public void doAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,7 +26,9 @@ public class PauzeRoundReplyMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
     
 }

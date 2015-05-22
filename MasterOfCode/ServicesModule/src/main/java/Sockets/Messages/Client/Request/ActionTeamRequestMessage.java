@@ -5,7 +5,9 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -13,6 +15,10 @@ import Sockets.Messages.BaseMessage;
  */
 public class ActionTeamRequestMessage extends BaseMessage {
 
+    public static final String messageType = MessageTypes.ActionTeamRequestMessage.toString();
+    
+    public void ActionTeamRequestMessage() {}
+    
     @Override
     public void doAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,7 +26,9 @@ public class ActionTeamRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
     
 }
