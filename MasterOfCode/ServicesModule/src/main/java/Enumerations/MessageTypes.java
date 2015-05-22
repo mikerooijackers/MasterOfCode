@@ -36,7 +36,7 @@ public enum MessageTypes {
     HintReplyMessage("HintReplyMessage"),
     OtherTeamScoreReplyMessage("OtherTeamScoreReplyMessage"),
     PauseRoundReplyMessage("PauseRoundReplyMessage"),
-    UnfreezeRoundReplyMessage("UnfreezeRoundReplyMessage"),
+    UnFreezeRoundReplyMessage("UnFreezeRoundReplyMessage"),
     UserTestsReplyMessage("UserTestsReplyMessage"),
     ActionTeamRequestMessage("ActionTeamRequestMessage"),
     AddMemberToTeamClientRequestMessage("AddMemberToTeamClientRequestMessage"),
