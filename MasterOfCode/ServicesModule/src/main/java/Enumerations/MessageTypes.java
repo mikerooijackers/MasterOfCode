@@ -59,7 +59,6 @@ public enum MessageTypes {
     StopCompetitionReplyMessage("StopCompetitionReplyMessage"),
     StopRoundReplyMessage("StopRoundReplyMessage"),
     TeamActionReplyMessage("TeamActionReplyMessage"),
-    UnFreezeRoundReplyMessage("UnFreezeRoundReplyMessage"),
     CompetitionEndedReplyMessage("CompetitionEndedReplyMessage"),
     CompetitionInfoReplyMessage("CompetitionInfoReplyMessage"),
     CompetitionNotStartetReplyMessage("CompetitionNotStartetReplyMessage"),

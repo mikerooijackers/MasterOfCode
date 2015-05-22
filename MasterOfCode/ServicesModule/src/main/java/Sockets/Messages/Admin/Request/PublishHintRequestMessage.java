@@ -5,13 +5,32 @@
  */
 package Sockets.Messages.Admin.Request;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
  * @author mikerooijackers
  */
 public class PublishHintRequestMessage extends BaseMessage {
+    
+    public static final String messageType = MessageTypes.PublishHintRequestMessage.toString();
+    
+    private Long hintId;
+    
+    public PublishHintRequestMessage(){}
+    
+    public PublishHintRequestMessage(Long hintId){
+        this.hintId = hintId;
+    }
+    
+    public static PublishHintRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        Long jsonHintId = (Long) obj.get("HintId");
+        return new PublishHintRequestMessage(jsonHintId);
+    }
 
     @Override
     public void doAction() {
@@ -20,7 +39,10 @@ public class PublishHintRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("HintId", this.hintId);
+        return obj.toJSONString();
     }
     
 }
