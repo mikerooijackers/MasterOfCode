@@ -5,7 +5,11 @@
  */
 package Sockets.Messages.Client.Request;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.PauzeRoundReplyMessage;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -13,6 +17,15 @@ import Sockets.Messages.BaseMessage;
  */
 public class SubmitRequestMessage extends BaseMessage {
 
+    public static final String messageType = MessageTypes.SubmitRequestMessage.toString();
+    
+    public SubmitRequestMessage() {}
+    
+    public static SubmitRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new SubmitRequestMessage();
+    }
+    
     @Override
     public void doAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,7 +33,9 @@ public class SubmitRequestMessage extends BaseMessage {
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
     
 }

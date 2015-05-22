@@ -66,5 +66,4 @@ public class AddMemberToTeamRequestMessage extends BaseMessage {
         obj.put("UsersToAdd", this.usersToAdd);
         return obj.toString();
     }
-    
 }
