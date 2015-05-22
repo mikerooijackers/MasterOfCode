@@ -1,12 +1,7 @@
 package Sockets.Messages;
 
-import Domein.MOCUser;
 import Enumerations.MessageTypes;
 import org.json.simple.JSONObject;
-<<<<<<< HEAD
-=======
-import org.json.simple.JSONValue;
->>>>>>> origin/Message
 
 public class DebugMessage extends BaseMessage {
 
