@@ -6,25 +6,40 @@
 package Timer;
 
 import javax.annotation.Resource;
+import javax.ejb.Singleton;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
 import javax.ejb.TimerService;
 
 /**
  *
  * @author mikerooijackers
  */
+@Singleton
 public class TimerSessionBean {
     @Resource
     TimerService timerService;
     
-    public void CreateTimer(long duration) {
-        timerService.createTimer(duration, null);
+    public void CreateTimer(long duration, TimerData timerData) {
+        timerService.createTimer(duration, timerData);
     }
     
-    public void AddTimer() {
-        timerService.getTimers().add(null);
+    @Timeout
+    public void TimerExpired(Timer timer) {
+        TimerData timerData = (TimerData) timer.getInfo();
+        TimerType timerType = timerData.getTimerType();
+        switch (timerType) {
+            case CompetitionCountDownTimer:
+                //TO DO
+                break;
+            case HintTimer:
+                //TO DO
+                String Hint = timerData.getData();
+                break;
+            case RoundTimer:
+                //TO DO
+                break;
+        }
     }
     
-    public void RemoveTimer() {
-        timerService.getTimers().remove(null);
-    }
 }

@@ -5,9 +5,12 @@
  */
 package Sockets.Messages;
 
+import org.json.simple.JSONAware;
+
 /**
  *
  * @author JordiK
  */
-public class BaseMessage {
+public abstract class BaseMessage implements JSONAware {
+    public abstract void doAction();
 }

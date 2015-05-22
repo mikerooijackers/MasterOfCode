@@ -1,0 +1,195 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 30, 2015, 2:12:28 PM
+    Author     : May
+*/
+
+/* Basic html elements */
+
+body {
+    font: 12pt Calibri;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    margin: 0px;
+}
+h1 {
+    font: 30pt Arial;
+}
+
+h2 {
+    font: 24pt Garamond;
+    border-bottom: 1px solid #ebebeb;
+}
+
+h3 {
+    font: 16pt Arial;
+    margin: 10px 0px;
+}
+
+select {
+    width: 98%;
+    height: 87%;
+    margin: 4% 1%;
+    border: 1px solid #ebebeb;
+}
+
+table {
+    width: 90%;
+    height: 50%;
+    margin-left: 5%;
+    text-align: center;
+}
+
+/* Elements that define the layout of the web page */
+
+#container {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#content {
+    height: 550px;
+    background-color: #f2f2f2;
+    padding: 15px;
+    border: 2px solid #000000;
+}
+
+
+/* Menu bar (navigation) */
+
+#nav {
+    height: 70px;
+    background-color: #f2f2f2;
+    text-align: center;
+    border: 2px solid #000000;
+}
+
+#nav ul {
+    list-style: none;
+    padding: 5px;
+}
+
+#nav a {
+    display: inline-block;
+    width: 8%;
+    margin: 0px 7px;
+    border-radius: 10px;
+    font: 16pt Garamond;
+    -webkit-transition: background-color 0.7s, color 0.5s;
+    -moz-transition: background-color 0.7s, color 0.5s;
+    -o-transition: background-color 0.7s, color 0.5s;
+    transition: background-color 0.7s, color 0.5s;
+}
+
+#nav a:hover {
+    background-color: #c0c0c0;
+    color: #ffffff;
+}
+
+#nav ul li a {
+    float: left;
+    text-decoration: none;
+    color: #000000;
+    padding: 0px 40px;
+    text-align: center;
+    line-height: 40px;
+    height: 100%;
+}
+
+/* Banner and timer */
+
+#banner {
+    width: 110%;
+    height: auto;
+    margin-left: -5%;
+}
+
+#timer {
+    height: auto;
+    background-color: #c0c0c0;
+    padding: 5px;
+    font: 18pt Calibri;
+    color: #ffffff;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    text-align: center;
+}
+
+/* Widgets */
+
+.widgetsmall, .widgetmedium, .widgetbig, .widgetleft, .widgetright {
+    background-color: #ffffff;
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 3%;
+    padding: 0px 8px;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+.widgetbig {
+    width: 93%;
+    height: 84%;
+}
+
+.widgetmedium {
+    width: 44%;
+    height: 40%;
+}
+
+.widgetsmall {
+    width: 44%;
+    height: 30%;
+    margin-top: 5%;
+}
+
+.widgetleft {
+    float: left;
+    width: 25%;
+    height: 84%;
+}
+
+.widgetright {
+   float: right; 
+   width: 63%;
+   height: 84%;
+   margin-right: 3%;
+}
+
+.footerlink {
+    text-align: right;
+}
+
+/* Other elements */
+
+#filter {
+    height: 73%;
+    margin: 4% 0%;
+    padding: 2%;
+    overflow: auto;
+    border: 1px solid #ebebeb;
+}
+
+.btnsmall {
+    position: relative;
+    bottom: 0%;
+    left: 35%;
+    width: 30%;
+    height: 30px;
+    margin-top: 1%;
+    font: 11pt Calibri;
+}
+
+.btnbig {
+    width: 70%;
+    height: 40px;
+    margin-left: 15%;
+    font: 12pt Calibri;
+}

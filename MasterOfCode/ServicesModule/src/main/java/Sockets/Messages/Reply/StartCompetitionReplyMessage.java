@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class StartCompetitionReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "startCompetitionMessage";
+    public static final String messageType = MessageTypes.StartCompetitionReplyMessage.toString();
     private int numberOfRounds;
     private String competitionName;
     private Long startTime;
@@ -80,5 +81,20 @@ public class StartCompetitionReplyMessage extends BaseMessage {
         Long jsonStartTime = (Long) obj.get("startTime");
         
         return new StartCompetitionReplyMessage(jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("NumberOfRounds", this.numberOfRounds);
+        obj.put("CompetitionName", this.competitionName);
+        obj.put("StartTime", this.startTime);
+        return obj.toString();
     }
 }

@@ -19,6 +19,7 @@ public class MessageEncoder implements Encoder.Text<BaseMessage> {
 
     @Override
     public String encode(BaseMessage object) throws EncodeException {
+        System.out.println("Encoding: " + JSONValue.toJSONString(object));
         return JSONValue.toJSONString(object);
     }
 

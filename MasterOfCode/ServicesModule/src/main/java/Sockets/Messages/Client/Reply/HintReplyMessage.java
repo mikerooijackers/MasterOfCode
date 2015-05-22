@@ -5,8 +5,10 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import java.io.Serializable;
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -16,7 +18,7 @@ import org.json.simple.JSONValue;
  */
 public class HintReplyMessage extends BaseMessage implements Serializable {
     
-    public static final String MessageType = "hintMessage";
+    public static final String messageType = MessageTypes.HintReplyMessage.toString();
     private String hintMessage;
     
     public HintReplyMessage(){};
@@ -44,5 +46,18 @@ public class HintReplyMessage extends BaseMessage implements Serializable {
         String jsonHintMessage = obj.get("hintMessage").toString();
         
         return new HintReplyMessage(jsonHintMessage);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("HintMessage", this.hintMessage);
+        return obj.toString();
     }
 }

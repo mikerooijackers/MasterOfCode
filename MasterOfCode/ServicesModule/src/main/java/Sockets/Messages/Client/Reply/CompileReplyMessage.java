@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class CompileReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "compileReplyMessage";
+    public static final String messageType = MessageTypes.CompileReplyMessage.toString();
     
     private String result;
     private Long teamId;
@@ -60,5 +61,19 @@ public class CompileReplyMessage extends BaseMessage {
         String jsonResult = obj.get("result").toString();
         Long jsonTeamId = (Long)obj.get("teamId");
         return new CompileReplyMessage(jsonResult, jsonTeamId);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("Result", this.result);
+        obj.put("TeamId", this.teamId);
+        return obj.toString();
     }
 }

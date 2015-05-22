@@ -12,5 +12,15 @@ import Sockets.Messages.BaseMessage;
  * @author mikerooijackers
  */
 public class StopCompetitionRequestMessage extends BaseMessage {
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

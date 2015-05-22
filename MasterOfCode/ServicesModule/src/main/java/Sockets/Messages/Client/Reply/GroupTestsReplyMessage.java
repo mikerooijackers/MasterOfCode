@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class GroupTestsReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "runTestsByGroupReplyMessage";
+    public static final String messageType = MessageTypes.GroupTestsReplyMessage.toString();
     
     private String result;
     
@@ -43,5 +44,18 @@ public class GroupTestsReplyMessage extends BaseMessage {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonResult = obj.get("result").toString();
         return new GroupTestsReplyMessage(jsonResult);
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("Result", this.result);
+        return obj.toString();
     }
 }

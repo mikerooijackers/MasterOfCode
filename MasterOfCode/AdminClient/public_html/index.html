@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <title>Admin client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <link href="CSS_Files/masterCSS.css" rel="stylesheet" type="text/css"/>
+
+        <!--AngularJS-->
+        <script src="bower_components/angular/angular.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+        <script src="bower_components/ng-websocket/ng-websocket.js" type="text/javascript"></script>
+        
+        <!--Javascript-->
+        <script src="JavascriptFiles/index.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/websocketService.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/manageActiveRound.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/manageGameCreate.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/manageGameCurrent.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/manageParticipants.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/manageTeam.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/registerParticipant.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/registerTeam.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/team.js" type="text/javascript"></script>
+        
+    </head>
+    <body ng-app="adminClient" ng-controller="indexController">
+        <div class="container-fluid">
+            <!--BANNER-->
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <img src="Images/blank-scroll-clip-art-xcgL7rkcA.gif" alt="" class="img-responsive"/>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-default" id="loginButton">Login</button>
+                </div>
+            </div>
+
+            <!--PLAY BUTTONS-->
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2 text-center">
+                    <p>Current game</p>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5 text-center">
+                    <p>Current game</p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <!--Game buttons-->
+                <div class="col-md-2"></div>
+                <div class="col-md-2" id="bordered">
+                    <div class="col-md-6 text-center"><button class="btn btn-default">Start</button></div>
+                    <div class="col-md-6 text-center"><button class="btn btn-default">Stop</button></div>
+                </div>
+
+                <!--Round buttons-->
+                <div class="col-md-1"></div>
+                <div class="col-md-5" id="bordered">
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Start</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Pause</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Freeze</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Stop</button></div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-5" id="bordered">
+                    <div class="col-md-9"><p>Remaining time: 00:15:00 </p></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Add time</button></div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <!--MENU BAR-->
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="menuBar">
+                        <table>
+                            <tr>
+                                <td><a href="#/" ng-click="showCategoryUsers()">Manage users</a></td>
+                                <td><a href="#/currentGame" ng-click="showCategoryGame()">Manage game</a></td>
+                                <td><a href="#/servers" ng-click="showCategoryServers()">Servers</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <!--SUB MENU BARS-->
+
+            <!--Sub menu users-->
+
+            <div class="row" ng-style="MenuUserVisibility">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="menuBar" id="submenu">
+                        <table>
+                            <tr>
+                                <td><a href="#/">Manage participants</a></td>
+                                <td><a href="#/registerParticipant">Register participant</a></td>
+                                <td><a href="#/manageTeam">Manage team</a></td>
+                                <td><a href="#/registerTeam">Register team</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <!--Sub menu game-->
+
+            <div class="row" ng-style="MenuGameVisibility">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="menuBar" id="submenu">
+                        <table>
+                            <tr>
+                                <td><a href="#/currentGame">Current game</a></td>
+                                <td><a href="#/currentRound">Current round</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <!--CONTENT-->
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" ng-view></div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

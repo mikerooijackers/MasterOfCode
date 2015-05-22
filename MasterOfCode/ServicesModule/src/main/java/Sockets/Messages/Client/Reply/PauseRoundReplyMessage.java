@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,7 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class PauseRoundReplyMessage extends BaseMessage {
     
-    public static final String MessageType = "pauseRoundMessage";
+    public static final String messageType = MessageTypes.PauseRoundReplyMessage.toString();
     
     public PauseRoundReplyMessage() {
     }
@@ -23,5 +24,17 @@ public class PauseRoundReplyMessage extends BaseMessage {
     public static PauseRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new PauseRoundReplyMessage();
+    }
+
+    @Override
+    public void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toString();
     }
 }

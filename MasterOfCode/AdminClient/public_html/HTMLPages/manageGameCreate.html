@@ -1,0 +1,205 @@
+<!--SUB MENU-->
+
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="menuBar" id="submenu">
+            <table>
+                <tr>
+                    <td><a href="#">Manage participants</a></td>
+                    <td><a href="#">Register participant</a></td>
+                    <td><a href="#">Manage team</a></td>
+                    <td><a href="#">Register team</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>-->
+
+<!--CONTENT-->
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <p>Create game</p>
+    </div>
+</div>
+
+<!--Game information-->
+<div class="row" id="bordered">
+    <div class="col-md-12">
+        <form class="form-horizontal">
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="competitionDate">Start date:</label>
+                    <div class="col-md-9">
+                        <input type="date" class="form-control" id="competitionDate">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="competitionTime">Start time:</label>
+                    <div class="col-md-9">
+                        <input type="time" class="form-control" id="competitionTime">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="competitionName">Competition name:</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="competitionName" placeholder="name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>Global information - participants</p>
+                </div>
+            </div>      
+
+            <div class="row" id="bordered">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in urna bibendum, condimentum urna non, pharetra eros. In vitae leo arcu. Vivamus vestibulum imperdiet tortor vel blandit. Sed vitae volutpat mi, aliquet gravida quam. Quisque quis est auctor odio egestas egestas quis in velit. Sed tempor massa rutrum lorem interdum tempor.</p>
+            </div>
+
+            <div class="row" id="marginTop10">
+                <div class="col-md-12 text-center">
+                    <p>Global information - spectators</p>
+                </div>
+            </div>
+
+            <div class="row" id="bordered">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in urna bibendum, condimentum urna non, pharetra eros. In vitae leo arcu. Vivamus vestibulum imperdiet tortor vel blandit. Sed vitae volutpat mi, aliquet gravida quam. Quisque quis est auctor odio egestas egestas quis in velit. Sed tempor massa rutrum lorem interdum tempor.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" id="marginTop10">
+                    <p>Manage rounds</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div>
+                        <table class="borderedTable">
+                            <tr><td>Round1</td></tr>
+                            <tr><td>Round2</td></tr>
+                            <tr><td>Round3</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-10" id="bordered">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p id="centered">Assignment</p>
+
+                            <div class="form-group" id="marginTop10">
+                                <label class="col-md-3 control-label" for="assignmentSelect">Select assignment:</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="assignmentSelect"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row" id="bordered">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in urna bibendum, condimentum urna non, pharetra eros. In vitae leo arcu. Vivamus vestibulum imperdiet tortor vel blandit. Sed vitae volutpat mi, aliquet gravida quam. Quisque quis est auctor odio egestas egestas quis in velit. Sed tempor massa rutrum lorem interdum tempor.</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 text-center" id="marginTop10">
+                                    <p>Round time</p>
+                                </div>
+
+                                <div class="col-md-4 text-center" id="marginTop10">
+                                    <p>Start time</p>
+                                </div>
+
+                                <div class="col-md-4 text-center" id="marginTop10">
+                                    <p>Difficulty</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <input type="number" class="form-control" id="roundTime">
+                                </div>
+
+                                <div class="col-md-4 text-center">
+                                    <input type="time" class="form-control" id="roundStartTime">
+                                </div>
+
+                                <div class="col-md-4 text-center">
+                                    <select class="form-control" id="assignmentDifficulty">
+                                        <option value="easy">Easy</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="hard">Hard</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 text-right" id="marginTop10">
+                                    <a href="">Remove round</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" id="marginTop10">
+                    <p>Manage hints</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div>
+                        <table class="borderedTable">
+                            <tr><td>Hint1</td></tr>
+                            <tr><td>Hint2</td></tr>
+                            <tr><td>Hint3</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-10" id="bordered">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="row" id="bordered">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in urna bibendum, condimentum urna non, pharetra eros. In vitae leo arcu. Vivamus vestibulum imperdiet tortor vel blandit. Sed vitae volutpat mi, aliquet gravida quam. Quisque quis est auctor odio egestas egestas quis in velit. Sed tempor massa rutrum lorem interdum tempor.</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 text-center" id="marginTop10">
+                                    <p>Time</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4 text-center">
+                                    <input type="number" class="form-control" id="hintTime">
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 text-right" id="marginTop10">
+                                    <a href="">Remove hint</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-default pull-right" id="marginBtn">Save</button>
+            
+    </div>
+</form>
+</div>
+</div>

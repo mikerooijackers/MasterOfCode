@@ -27,6 +27,7 @@ import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
+import org.testng.annotations.Test;
 
 /**
  *
@@ -48,14 +49,14 @@ public class WorkspaceService {
     public static final String ASSIGNMENTS_PATH = "C:\\assignments";
     
     public String createWorkspace(Long competitionId, Long teamId, String workspacePath) {
-        String path = workspacePath + File.pathSeparator + competitionId + File.pathSeparator + teamId;
+        String path = workspacePath + File.separator + competitionId + File.separator + teamId;
         new File(path).mkdirs();
         
         return path;
     }
     
     public String deleteWorkspace(Long competitionId, Long teamId, String workspacePath) {
-        String path = workspacePath + File.pathSeparator + competitionId + File.pathSeparator + teamId ;
+        String path = workspacePath + File.separator + competitionId + File.separator + teamId ;
         this.deleteFolder(new File(path));
         
         return path;
@@ -110,15 +111,15 @@ public class WorkspaceService {
         String path = assignmentPath;
         List<AnnotationData> annotationData = ReflectionUtils.readAnnotationData(path, ReadOnly.class, Editable.class);
 
-        path = workspacePath + File.pathSeparator + teamId + File.pathSeparator + competitionId + File.pathSeparator + roundId; //+ "\\" + sourceCodePath;
+        path = workspacePath + File.separator + teamId + File.separator + competitionId + File.separator + roundId; //+ "\\" + sourceCodePath;
 
         File folder = new File(path);
         File[] files = folder.listFiles();
-        path += "\\" + files[0].getName() + "\\" + sourceCodePath;
+        path += File.separator + files[0].getName() + File.separator + sourceCodePath;
 
         for (AnnotationData ad : annotationData) {
-            String sourceCodeFilePath = ad.getName().replace(".", "\\");
-            String absolutePath = path + "\\" + sourceCodeFilePath + ".java";
+            String sourceCodeFilePath = ad.getName().replace(".", File.separator);
+            String absolutePath = path + File.separator + sourceCodeFilePath + ".java";
 
             SourceCode sc = new SourceCode();
             sc.setFileName(ad.getName());
@@ -132,13 +133,16 @@ public class WorkspaceService {
     }
 
     public List<AnnotationData> readAssignmentMetaData(String assignmentPath, Long assignmentId) {
-        String path = assignmentPath + File.pathSeparator + assignmentId;
+        String path = assignmentPath + File.separator + assignmentId;
 
-        return ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class);
+        List<AnnotationData> annotationData = ReflectionUtils.readTestAnnotationData(path, org.testng.annotations.Test.class);
+        annotationData.addAll(ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class));
+        
+        return annotationData;
     }
 
     public void extractAssignmentToWorkspace(Long teamId, Long competitionId, Long roundId, String workspacePath, Long assignmentId, String assignmentPath) {
-        String destination = workspacePath + File.pathSeparator + teamId + File.pathSeparator + competitionId + File.pathSeparator + roundId;
+        String destination = workspacePath + File.separator + teamId + File.separator + competitionId + File.separator + roundId;
         new File(destination).mkdir();
         
         File assignmentFolder = new File(assignmentPath);

@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages.Client.Request;
-
-import Sockets.Messages.BaseMessage;
+package REST;
 
 /**
  *
  * @author mikerooijackers
  */
-public class CreateTeamRequestMessage extends BaseMessage {
+class LoginMessage {
     
 }
