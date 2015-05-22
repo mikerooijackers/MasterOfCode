@@ -8,6 +8,7 @@ package Sockets.Messages.Reply;
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -23,7 +24,12 @@ public class ResumeRoundReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public void ResumeRoundReplyMessage() {}
+    public ResumeRoundReplyMessage() {}
+    
+    public static ResumeRoundReplyMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new ResumeRoundReplyMessage();
+    }
     
     @Override
     public void doAction() {

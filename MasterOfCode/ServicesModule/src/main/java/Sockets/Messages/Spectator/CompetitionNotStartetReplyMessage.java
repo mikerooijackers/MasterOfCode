@@ -8,6 +8,7 @@ package Sockets.Messages.Spectator;
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -23,7 +24,13 @@ public class CompetitionNotStartetReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public void CompetitionNotStartedReplyMessage(){}
+    public CompetitionNotStartetReplyMessage() {
+    }
+    
+    public static CompetitionNotStartetReplyMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new CompetitionNotStartetReplyMessage();
+    }
     
     @Override
     public void doAction() {
@@ -36,5 +43,5 @@ public class CompetitionNotStartetReplyMessage extends BaseMessage {
         obj.put("MessageType", this.messageType);
         return obj.toString();
     }
-    
+
 }

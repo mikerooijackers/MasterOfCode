@@ -8,6 +8,7 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -23,8 +24,15 @@ public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public void RemoveMemberFromTeamRequestMessage() {}
-    
+        
+    public RemoveMemberFromTeamRequestMessage() {
+    }
+
+    public static RemoveMemberFromTeamRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new RemoveMemberFromTeamRequestMessage();
+    }
+
     @Override
     public void doAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -36,5 +44,5 @@ public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
         obj.put("MessageType", this.messageType);
         return obj.toString();
     }
-    
+
 }

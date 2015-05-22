@@ -45,7 +45,7 @@ public class TeamActionReplyMessage extends BaseMessage {
      */
     public static TeamActionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        String jsonAction = obj.get("action").toString();
+        String jsonAction = obj.get("Action").toString();
         return new TeamActionReplyMessage(jsonAction);
     }
 

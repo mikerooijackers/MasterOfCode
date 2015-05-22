@@ -93,9 +93,9 @@ public class StartCompetitionReplyMessage extends BaseMessage {
     public static StartCompetitionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
-        int jsonNumberOfRounds = (int) obj.get("numberOfRounds");
-        String jsonCompetitionName = obj.get("competitionName").toString();
-        Long jsonStartTime = (Long) obj.get("startTime");
+        int jsonNumberOfRounds = (int) obj.get("NumberOfRounds");
+        String jsonCompetitionName = obj.get("CompetitionName").toString();
+        Long jsonStartTime = (Long) obj.get("StartTime");
         
         return new StartCompetitionReplyMessage(jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
     }

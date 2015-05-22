@@ -8,6 +8,7 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -20,7 +21,12 @@ public class InviteMemberToTeamRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public void InviteMemberToRequestMessage() {}
+    public InviteMemberToTeamRequestMessage() {}
+    
+    public static InviteMemberToTeamRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new InviteMemberToTeamRequestMessage();
+    }
     
     @Override
     public void doAction() {

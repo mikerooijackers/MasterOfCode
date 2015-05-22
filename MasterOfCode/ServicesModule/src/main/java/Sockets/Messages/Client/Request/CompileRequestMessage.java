@@ -57,7 +57,7 @@ public class CompileRequestMessage extends BaseMessage {
      */
     public static CompileRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonTeamId = (Long) obj.get("teamId");
+        Long jsonTeamId = (Long) obj.get("TeamId");
         return new CompileRequestMessage(jsonTeamId);
     }
 

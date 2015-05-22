@@ -74,8 +74,8 @@ public class GroupTestsRequestMessage extends BaseMessage {
      */
     public static GroupTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonTeamId = (Long) obj.get("teamId");
-        String jsonTestGroup = obj.get("testGroup").toString();
+        Long jsonTeamId = (Long) obj.get("TeamId");
+        String jsonTestGroup = obj.get("TestGroup").toString();
         return new GroupTestsRequestMessage(jsonTeamId, jsonTestGroup);
     }
 

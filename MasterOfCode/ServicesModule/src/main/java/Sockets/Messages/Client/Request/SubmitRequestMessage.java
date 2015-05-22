@@ -7,7 +7,9 @@ package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.PauzeRoundReplyMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -23,7 +25,12 @@ public class SubmitRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public void SubmitRequestMessage() {}
+    public SubmitRequestMessage() {}
+    
+    public static SubmitRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new SubmitRequestMessage();
+    }
     
     @Override
     public void doAction() {

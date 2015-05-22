@@ -108,10 +108,10 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
      */
     public static EditSourceCodeRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonRoundId = (Long) obj.get("roundId");
-        Long jsonTeamId = (Long) obj.get("teamId");
-        String jsonNewSourceCode = obj.get("newSourceCode").toString();
-        String jsonSourceCodeFile = obj.get("sourceCodeFile").toString();
+        Long jsonRoundId = (Long) obj.get("RoundId");
+        Long jsonTeamId = (Long) obj.get("TeamId");
+        String jsonNewSourceCode = obj.get("NewSourceCode").toString();
+        String jsonSourceCodeFile = obj.get("SourceCodeFile").toString();
         return new EditSourceCodeRequestMessage(jsonNewSourceCode, jsonSourceCodeFile, jsonRoundId, jsonTeamId);
     }
 

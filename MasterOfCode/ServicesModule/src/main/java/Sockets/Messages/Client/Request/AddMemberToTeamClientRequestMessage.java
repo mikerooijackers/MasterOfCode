@@ -7,7 +7,9 @@ package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.TeamActionReplyMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -23,7 +25,12 @@ public class AddMemberToTeamClientRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public void AddMemberToTeamClientRequestMessage() {}
+    public AddMemberToTeamClientRequestMessage() {}
+    
+    public static AddMemberToTeamClientRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new AddMemberToTeamClientRequestMessage();
+    }
     
     @Override
     public void doAction() {
