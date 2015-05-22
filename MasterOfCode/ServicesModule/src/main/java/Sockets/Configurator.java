@@ -5,8 +5,6 @@
  */
 package Sockets;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.websocket.HandshakeResponse;
 import javax.websocket.server.HandshakeRequest;

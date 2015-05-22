@@ -17,8 +17,14 @@ import org.json.simple.JSONValue;
  */
 public class GetSourceFilesRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetSourceFilesRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public GetSourceFilesRequestMessage() {}
     
     public static GetSourceFilesRequestMessage decodeJSON(String s) {

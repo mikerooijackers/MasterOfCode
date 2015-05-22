@@ -18,6 +18,9 @@ public class InviteMemberToTeamRequestMessage extends BaseMessage {
 
     public static final String messageType = MessageTypes.InviteMemberToTeamRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public InviteMemberToTeamRequestMessage() {}
     
     public static InviteMemberToTeamRequestMessage decodeJSON(String s) {

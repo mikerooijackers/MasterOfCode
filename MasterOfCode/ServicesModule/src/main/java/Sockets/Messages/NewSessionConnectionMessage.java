@@ -15,11 +15,21 @@ import org.json.simple.JSONValue;
  */
 public class NewSessionConnectionMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.NewSessionConnectionMessage.toString();
     private String username;
     
+    /**
+     * Constructor
+     */
     public NewSessionConnectionMessage(){};
     
+    /**
+     * Constructor
+     * @param username
+     */
     public NewSessionConnectionMessage(String username) {
         this.username = username;
     }

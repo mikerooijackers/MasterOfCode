@@ -37,11 +37,21 @@ public class AdminEndPoint {
 
     private final HashMap<String, Session> sessions = new HashMap<>();
 
+    /**
+     *
+     * @param endpointConfig
+     * @param session
+     */
     @OnOpen
     public void onOpen(EndpointConfig endpointConfig, Session session) {
         System.out.println("Session opened!!!");
     }
 
+    /**
+     *
+     * @param session
+     * @param message
+     */
     @OnMessage
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
@@ -57,6 +67,11 @@ public class AdminEndPoint {
         this.sessions.put(mess.getUsername(), session);
     }
 
+    /**
+     *
+     * @param username
+     * @param message
+     */
     public void sendMessage(String username, Object message) {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
@@ -66,11 +81,21 @@ public class AdminEndPoint {
         }
     }
 
+    /**
+     *
+     * @param session
+     * @param error
+     */
     @OnError
     public void onError(Session session, Throwable error) {
         Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, "An error occured in session " + session, error);
     }
 
+    /**
+     *
+     * @param session
+     * @param reason
+     */
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         System.out.println("Closing session");

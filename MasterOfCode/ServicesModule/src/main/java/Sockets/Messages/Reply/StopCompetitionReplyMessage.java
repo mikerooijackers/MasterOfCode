@@ -18,8 +18,16 @@ public class StopCompetitionReplyMessage extends BaseMessage {
     
     public static final String messageType = MessageTypes.StopCompetitionReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public StopCompetitionReplyMessage() {}
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StopCompetitionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new StopCompetitionReplyMessage();

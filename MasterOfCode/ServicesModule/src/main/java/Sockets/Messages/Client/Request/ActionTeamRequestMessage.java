@@ -17,8 +17,14 @@ import org.json.simple.JSONValue;
  */
 public class ActionTeamRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.ActionTeamRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public ActionTeamRequestMessage() {}
     
     public static ActionTeamRequestMessage decodeJSON(String s) {

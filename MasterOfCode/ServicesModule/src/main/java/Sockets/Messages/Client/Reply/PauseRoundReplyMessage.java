@@ -18,9 +18,17 @@ public class PauseRoundReplyMessage extends BaseMessage {
     
     public static final String messageType = MessageTypes.PauseRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public PauseRoundReplyMessage() {
     }
     
+    /**
+     * Constructor
+     * @param s
+     * @return
+     */
     public static PauseRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new PauseRoundReplyMessage();

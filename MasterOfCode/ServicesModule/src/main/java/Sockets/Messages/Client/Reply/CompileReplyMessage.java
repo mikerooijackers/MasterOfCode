@@ -16,13 +16,24 @@ import org.json.simple.JSONValue;
  */
 public class CompileReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompileReplyMessage.toString();
     
     private String result;
     private Long teamId;
     
+    /**
+     * Constructor
+     */
     public CompileReplyMessage(){}
     
+    /**
+     * Constructor
+     * @param result
+     * @param teamId
+     */
     public CompileReplyMessage(String result, Long teamId) {
         this.result = result;
         this.teamId = teamId;

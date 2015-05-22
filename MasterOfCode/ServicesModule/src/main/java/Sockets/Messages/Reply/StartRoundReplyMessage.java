@@ -16,6 +16,9 @@ import org.json.simple.JSONValue;
  */
 public class StartRoundReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StartRoundReplyMessage.toString();
     
     private String assignCreatorName;
@@ -26,8 +29,20 @@ public class StartRoundReplyMessage extends BaseMessage {
     private String assignDescriptionCompetitors;
     private String assignDescriptionSpectators;
     
+    /**
+     * Constructor
+     */
     public StartRoundReplyMessage(){}
     
+    /**
+     * Constructor
+     * @param assignCreatorName
+     * @param assignCreatorCompany
+     * @param assignCreatorWeb
+     * @param assignName
+     * @param assignDescriptionCompetitors
+     * @param assignDescriptionSpectators
+     */
     public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators) {
         this.assignCreatorName = assignCreatorName;
         this.assignCreatorCompany = assignCreatorCompany;
@@ -121,6 +136,11 @@ public class StartRoundReplyMessage extends BaseMessage {
         this.assignDescriptionSpectators = assignDescriptionSpectators;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StartRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonAssignCreatorName = obj.get("AssignCreatorName").toString();

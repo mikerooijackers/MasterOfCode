@@ -16,8 +16,14 @@ import org.json.simple.JSONValue;
  */
 public class CompetitionInfoReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompetitionInfoReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public CompetitionInfoReplyMessage(){}
     
     public static CompetitionInfoReplyMessage decodeJSON(String s) {
