@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.RemoveMemberFromTeamRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void RemoveMemberFromTeamRequestMessage() {}
     
     @Override

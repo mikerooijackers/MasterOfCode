@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class ResumeRoundReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.ResumeRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void ResumeRoundReplyMessage() {}
     
     @Override

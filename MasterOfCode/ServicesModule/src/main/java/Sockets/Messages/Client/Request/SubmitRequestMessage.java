@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class SubmitRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.SubmitRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void SubmitRequestMessage() {}
     
     @Override

@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class ActionTeamRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.ActionTeamRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void ActionTeamRequestMessage() {}
     
     @Override

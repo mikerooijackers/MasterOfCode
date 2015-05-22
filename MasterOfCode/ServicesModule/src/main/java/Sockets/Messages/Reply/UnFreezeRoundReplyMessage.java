@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class UnFreezeRoundReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.UnFreezeRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void UnFreezeRoundReplyMessage() {}
     
     @Override

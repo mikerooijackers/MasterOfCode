@@ -8,7 +8,6 @@ package Sockets.Messages.Client.Reply;
 import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import java.io.Serializable;
-import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -18,9 +17,15 @@ import org.json.simple.JSONValue;
  */
 public class HintReplyMessage extends BaseMessage implements Serializable {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.HintReplyMessage.toString();
     private String hintMessage;
     
+    /**
+     * Constructor
+     */
     public HintReplyMessage(){};
     
     public HintReplyMessage (String hintMessage) {
@@ -41,6 +46,11 @@ public class HintReplyMessage extends BaseMessage implements Serializable {
         this.hintMessage = hintMessage;
     }
     
+    /**
+     *
+     * @param JSON
+     * @return
+     */
     public static HintReplyMessage decodeJSON(String JSON) {
         JSONObject obj = (JSONObject) JSONValue.parse(JSON);
         String jsonHintMessage = obj.get("hintMessage").toString();

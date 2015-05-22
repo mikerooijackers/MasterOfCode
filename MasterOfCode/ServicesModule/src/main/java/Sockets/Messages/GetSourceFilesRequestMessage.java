@@ -15,18 +15,34 @@ import org.json.simple.JSONValue;
  */
 public class GetSourceFilesRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetSourceFilesRequestMessage.toString();
     
     private Long teamId;
     private Long roundId;
     
+    /**
+     * constructor
+     */
     public GetSourceFilesRequestMessage(){}
     
+    /**
+     * Constructor
+     * @param teamId
+     * @param roundId
+     */
     public GetSourceFilesRequestMessage(Long teamId, Long roundId) {
         this.teamId = teamId;
         this.roundId = roundId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetSourceFilesRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("teamId");

@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class GetSourceFilesRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetSourceFilesRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void GetSourceFilesRequestMessage() {}
     
     @Override

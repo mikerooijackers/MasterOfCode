@@ -16,13 +16,24 @@ import org.json.simple.JSONValue;
  */
 public class GroupTestsRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GroupTestsRequestMessage.toString();
     
     private Long teamId;
     private String testGroup;
     
+    /**
+     * Constructor
+     */
     public GroupTestsRequestMessage(){}
     
+    /**
+     * Constructor
+     * @param teamId
+     * @param testGroup
+     */
     public GroupTestsRequestMessage(Long teamId, String testGroup) {
         this.teamId = teamId;
         this.testGroup = testGroup;
@@ -56,6 +67,11 @@ public class GroupTestsRequestMessage extends BaseMessage {
         this.testGroup = testGroup;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GroupTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("teamId");

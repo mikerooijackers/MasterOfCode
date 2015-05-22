@@ -16,12 +16,24 @@ import org.json.simple.JSONValue;
  */
 public class OtherTeamScoreReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.OtherTeamScoreReplyMessage.toString();
     private Long teamId;
     private int teamScore;
     
+    /**
+     * Constructor
+     */
     public OtherTeamScoreReplyMessage(){};
     
+    /**
+     * Constructor
+     * @param competitionId
+     * @param teamId
+     * @param teamScore
+     */
     public OtherTeamScoreReplyMessage(Long competitionId, Long teamId, int teamScore) {
         this.teamId = teamId;
         this.teamScore = teamScore;
@@ -55,6 +67,11 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
         this.teamScore = teamScore;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static OtherTeamScoreReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         

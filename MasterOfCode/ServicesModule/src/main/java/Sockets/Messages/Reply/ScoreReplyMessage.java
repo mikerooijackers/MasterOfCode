@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class ScoreReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.ScoreReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void ScoreReplyMessage() {}
     
     @Override

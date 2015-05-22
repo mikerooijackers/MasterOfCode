@@ -16,8 +16,14 @@ import org.json.simple.JSONValue;
  */
 public class ContinueRoundReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.ContinueRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public ContinueRoundReplyMessage(){}
     
     public static ContinueRoundReplyMessage decodeJSON(String s) {

@@ -21,13 +21,26 @@ public class CreateTeamRequestMessage extends BaseMessage {
     private String teamName;
     private MOCUser initiator;
     
+    /**
+     *
+     */
     public CreateTeamRequestMessage(){}
     
+    /**
+     *
+     * @param teamName
+     * @param initiator
+     */
     public CreateTeamRequestMessage(String teamName, MOCUser initiator) {
         this.teamName = teamName;
         this.initiator = initiator;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CreateTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonTeamName = obj.get("teamName").toString();

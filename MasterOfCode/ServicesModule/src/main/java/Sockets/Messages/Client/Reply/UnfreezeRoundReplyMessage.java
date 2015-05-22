@@ -18,8 +18,16 @@ public class UnfreezeRoundReplyMessage extends BaseMessage {
     
     public static final String messageType = MessageTypes.UnfreezeRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public UnfreezeRoundReplyMessage(){}
     
+    /**
+     * 
+     * @param s
+     * @return
+     */
     public static UnfreezeRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new UnfreezeRoundReplyMessage();

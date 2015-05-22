@@ -16,14 +16,25 @@ import org.json.simple.JSONObject;
  */
 public class GetUserTestsRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetUserTestsRequestMessage.toString();
 
     private long teamId;
     private List<String> testNames;
 
+    /**
+     * Constructor
+     */
     public void GetUserTestsRequestMessage() {
     }
 
+    /**
+     * Constructor
+     * @param teamId
+     * @param testNames
+     */
     public void GetUserTestsRequestMessage(long teamId, List<String> testNames) {
         this.teamId = teamId;
         this.testNames = testNames;

@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class CompetitionEndedReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompetitionEndedReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void CompetitionEndedReplyMessage(){}
     
     @Override

@@ -17,6 +17,9 @@ public class InviteMemberToTeamRequestMessage extends BaseMessage {
 
     public static final String messageType = MessageTypes.InviteMemberToTeamRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void InviteMemberToRequestMessage() {}
     
     @Override

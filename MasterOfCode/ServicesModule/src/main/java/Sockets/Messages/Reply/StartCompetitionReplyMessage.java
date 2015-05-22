@@ -16,15 +16,27 @@ import org.json.simple.JSONValue;
  */
 public class StartCompetitionReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StartCompetitionReplyMessage.toString();
     private int numberOfRounds;
     private String competitionName;
     private Long startTime;
     
+    /**
+     * Constructor
+     */
     public StartCompetitionReplyMessage() {
         
     }
     
+    /**
+     *
+     * @param numberOfRounds
+     * @param competitionName
+     * @param startTime
+     */
     public StartCompetitionReplyMessage(int numberOfRounds, String competitionName, Long startTime) {
         this.numberOfRounds = numberOfRounds;
         this.competitionName = competitionName;
@@ -73,6 +85,11 @@ public class StartCompetitionReplyMessage extends BaseMessage {
         this.startTime = startTime;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StartCompetitionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         

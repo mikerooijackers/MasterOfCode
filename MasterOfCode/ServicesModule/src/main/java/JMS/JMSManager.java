@@ -18,10 +18,20 @@ import mocjms.messages.main.OperationDrivenMessage;
 public class JMSManager {
     private Map<String, BaseMessage> requestSend;
     
+    /**
+     * add request send
+     * @param messageID
+     * @param message
+     */
     public void AddRequestSend(long messageID, OperationDrivenMessage message) {
         
     }
     
+    /**
+     * get request send
+     * @param messageID
+     * @return
+     */
     public OperationDrivenMessage GetRequestSend(String messageID) {
         return null;
         

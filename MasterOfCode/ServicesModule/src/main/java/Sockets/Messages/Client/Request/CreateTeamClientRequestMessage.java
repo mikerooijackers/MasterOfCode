@@ -17,6 +17,9 @@ public class CreateTeamClientRequestMessage extends BaseMessage {
 
     public static final String messageType = MessageTypes.CreateTeamClientRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void CreateTeamClientRequestMessage() {}
     
     @Override

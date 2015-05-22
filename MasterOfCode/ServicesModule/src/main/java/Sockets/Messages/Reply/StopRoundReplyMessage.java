@@ -16,10 +16,21 @@ import org.json.simple.JSONValue;
  */
 public class StopRoundReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StopRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public StopRoundReplyMessage(){}
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StopRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new StopRoundReplyMessage();

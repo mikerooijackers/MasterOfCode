@@ -15,8 +15,14 @@ import org.json.simple.JSONObject;
  */
 public class PauzeRoundReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.PauzeRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public void PauzeRoundReplyMessage() {}
     
     @Override
