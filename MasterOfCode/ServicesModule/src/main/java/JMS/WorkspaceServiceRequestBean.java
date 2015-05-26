@@ -5,6 +5,7 @@
  */
 package JMS;
 
+import javax.ejb.Stateless;
 import javax.jms.Queue;
 import javax.jms.QueueConnectionFactory;
 import mocjms.messages.main.OperationDrivenMessage;
@@ -13,6 +14,7 @@ import mocjms.messages.main.OperationDrivenMessage;
  *
  * @author mikerooijackers
  */
+@Stateless
 public class WorkspaceServiceRequestBean {
     private Queue quequeServer1;
     private Queue quequeServer2;

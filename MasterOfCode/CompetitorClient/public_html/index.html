@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" ng-app="competitorClientApp">
+    <head>
+        <title>Contestant client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Codemirror scripts and stylesheets -->
+        <link rel="stylesheet" href="JavascriptFiles/codemirror-5.2/lib/codemirror.css">
+        <link href="JavascriptFiles/codemirror-5.2/addon/fold/foldgutter.css" rel="stylesheet" type="text/css"/>
+        <link href="JavascriptFiles/codemirror-5.2/addon/fold/foldgutter.css" rel="stylesheet" type="text/css"/>
+        <link href="JavascriptFiles/codemirror-5.2/addon/display/fullscreen.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS_files/mastercss.css" rel="stylesheet" type="text/css"/>
+        <link href="JavascriptFiles/codemirror-5.2/theme/neat.css" rel="stylesheet" type="text/css"/>
+
+        <script src="JavascriptFiles/codemirror-5.2/lib/codemirror.js"></script>
+        <script src="JavascriptFiles/codemirror-5.2/addon/edit/matchbrackets.js"></script>
+        <script src="JavascriptFiles/codemirror-5.2/mode/clike/clike.js"></script>
+        <script src="JavascriptFiles/codemirror-5.2/addon/fold/foldgutter.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/codemirror-5.2/addon/fold/foldcode.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/codemirror-5.2/addon/fold/brace-fold.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/codemirror-5.2/addon/fold/comment-fold.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/codemirror-5.2/addon/display/fullscreen.js" type="text/javascript"></script>
+
+        <!--AngularJS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+        <script src="bower_components/ng-websocket/ng-websocket.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="JavascriptFiles/index.js" type="text/javascript"></script>
+        <script src="JavascriptFiles/WebsocketFactory.js" type="text/javascript"></script>
+
+        <style>.CodeMirror {border: 2px inset #dee;}</style>
+
+        <script type="text/javascript">
+            function displayLogoutButton(toVisible) {
+                if (toVisible) {
+                    document.getElementById("logoutButton").style.marginTop = 0;
+                } else {
+                    document.getElementById("logoutButton").style.marginTop = '-57px';
+                }
+            }
+        </script>
+    </head>
+    <body ng-controller="mainController">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <img src="Images/blank-scroll-clip-art-xcgL7rkcA.gif" class="img-responsive" alt=""/>
+                </div>
+                <div class="col-md-2">
+                    <button id="accountButton" class="btn btn-default" type="submit" onmouseover="displayLogoutButton(true)" onmouseout="displayLogoutButton(false)">Account</button>
+                    <button id="logoutButton" class="btn btn-default" type="submit" onmouseover="displayLogoutButton(true)" onmouseout="displayLogoutButton(false)">Logout</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div id="newsFeed" class="col-md-8">
+                    <div id="newsFeedTitle">Hello world</div>
+                    <div id="newsFeedContent"><p>This is the newsfeed that will contain an overview of all the recent events that have happened during the contest</p></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="menuBar">
+                        <table>
+                            <tr>
+                                <td><a href="#">Assignment</a></td>
+                                <td><a href="#/codeFiles">Code Files</a></td>
+                                <td><a href="#/compiling">Compiling</a></td>
+                                <td><a href="#/testing">Testing</a></td>
+                                <td><a href="#/javadoc">Javadoc</a></td>
+                                <td><a href="#/hints">Hints</a></td>
+                                <td><a href="#/turnIn">Turn In</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-8" ng-view></div>
+
+                <div class="col-md-2">
+                    <div id="remainingTimeContainer">
+                        <p id="remainingTime">Remaining time:<br> 00:05:00</p>
+                    </div>
+                    <div id="currentScoreContainer">
+                        <p id="currentScore">Current Score:<br> 300</p>
+                    </div>
+                    <p id="otherTeamsInfo">See how other teams are doing:</p>
+                    <table id="otherTeamScores">
+                        <tr>
+                            <th>Team</th>
+                            <th>Score</th>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>900</td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>800</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </body>
+</html>
