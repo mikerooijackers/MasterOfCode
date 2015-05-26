@@ -1,73 +1,40 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>Scores</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="../style.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <div id="container">
-            <img src="../Images/MOCbanner.png" alt="Master of Code" id="banner">
-            
-            <div id="nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="scores.html">Scores</a></li>
-                    <li><a href="teams.html">Teams</a></li>
-                    <li><a href="newsfeed.html">Newsfeed</a></li>
-                    <li><a href="rounds.html">Rounds</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </div>
-            <div id="timer"> 3:22 </div>
+<h1>Scores</h1> 
 
-            <div id="content">
+<div class="widgetleft">
+    <h2>Rounds</h2>
+    
+    <select ng-model="filterCondition.operator" size="22">
+        <option ng-selected="{{operator.value === filterCondition.operator}}"
+                ng-repeat="operator in operators"
+                value="{{operator.value}}">
+            {{operator.displayName}}
+        </option>
+    </select>
+    
+</div>
 
-                <h1>Scores</h1> 
+<div class="widgetright">
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><a href="teams.html">Team C</a></td>
+            <td>2500</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href="teams.html">Team A</a></td>
+            <td>2200</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><a href="teams.html">Team B</a></td>
+            <td>1800</td>
+        </tr>
+    </table> 
+</div>
 
-                <div class="widgetleft">
-                    <h2>Rounds</h2>
-                    <select name="rounds" size="6">
-                        <option selected>Round 1</option>
-                        <option>Round 2</option>
-                        <option>Round 3</option>
-                        <option>Round 4</option>
-                        <option>Round 5</option>
-                        <option>Round 6</option>
-                    </select>
-                </div>
-
-                <div class="widgetright">
-                    <table>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Team</th>
-                            <th>Score</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="teams.html">Team C</a></td>
-                            <td>2500</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="teams.html">Team A</a></td>
-                            <td>2200</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="teams.html">Team B</a></td>
-                            <td>1800</td>
-                        </tr>
-                    </table> 
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
