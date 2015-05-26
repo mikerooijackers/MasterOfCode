@@ -18,6 +18,11 @@ import javax.websocket.server.ServerEndpointConfig;
  */
 public class HttpSessionProvider extends ServerEndpointConfig.Configurator{
     
+    /**
+     * 
+     * @param config
+     * @return
+     */
     public static HttpSession provide(EndpointConfig config){
         return (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
     }

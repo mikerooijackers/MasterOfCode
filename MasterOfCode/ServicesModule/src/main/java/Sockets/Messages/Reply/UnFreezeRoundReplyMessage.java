@@ -17,9 +17,17 @@ import org.json.simple.JSONValue;
  */
 public class UnFreezeRoundReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.UnFreezeRoundReplyMessage.toString();
     
-    public UnFreezeRoundReplyMessage() {}
+    /**
+     * Constructor
+     */
+
+    public UnFreezeRoundReplyMessage() {
+    }
     
     public static UnFreezeRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);

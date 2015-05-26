@@ -17,12 +17,22 @@ import org.json.simple.JSONValue;
  */
 public class UserTestsReplyMessage extends BaseMessage {
     
+    /**
+     * 
+     */
     public static final String messageType = MessageTypes.UserTestsReplyMessage.toString();
     
     private List<String> results;
     
+    /**
+     * Constructor
+     */
     public UserTestsReplyMessage() {}
     
+    /**
+     *
+     * @param results
+     */
     public UserTestsReplyMessage(List<String> results) {
         this.results = results;
     }
@@ -41,6 +51,11 @@ public class UserTestsReplyMessage extends BaseMessage {
         this.results = results;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static UserTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<String> jsonResults = (List<String>) obj.get("results");

@@ -16,8 +16,14 @@ import org.json.simple.JSONValue;
  */
 public class PauzeRoundReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.PauzeRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public PauzeRoundReplyMessage() {}
     
     public static PauzeRoundReplyMessage decodeJSON(String s) {

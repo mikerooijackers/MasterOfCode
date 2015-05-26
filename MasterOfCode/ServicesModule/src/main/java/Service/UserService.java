@@ -17,6 +17,12 @@ import javax.persistence.EntityManager;
 public class UserService {
     private EntityManager em;
     
+    /**
+     * login of a user
+     * @param username
+     * @param password
+     * @return
+     */
     public MOCUser Login(String username, String password) {
         return null;
     }

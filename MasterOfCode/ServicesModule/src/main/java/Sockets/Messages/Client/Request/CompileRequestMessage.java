@@ -16,12 +16,22 @@ import org.json.simple.JSONValue;
  */
 public class CompileRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompileRequestMessage.toString();
     
     private Long teamId;
     
+    /**
+     * Constructor
+     */
     public CompileRequestMessage(){}
     
+    /**
+     * Constructor
+     * @param teamId
+     */
     public CompileRequestMessage(Long teamId) {
         this.teamId = teamId;
     }
@@ -40,6 +50,11 @@ public class CompileRequestMessage extends BaseMessage {
         this.teamId = teamId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CompileRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("TeamId");

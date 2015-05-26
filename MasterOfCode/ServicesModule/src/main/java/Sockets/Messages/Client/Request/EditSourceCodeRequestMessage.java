@@ -16,6 +16,9 @@ import org.json.simple.JSONValue;
  */
 public class EditSourceCodeRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.EditSourceCodeRequestMessage.toString();
     
     private String newSourceCode;
@@ -23,8 +26,18 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
     private Long roundId;
     private Long teamId;
     
+    /**
+     * Constructor
+     */
     public EditSourceCodeRequestMessage(){}
     
+    /**
+     *
+     * @param newSourceCode
+     * @param sourceCodeFile
+     * @param roundId
+     * @param teamId
+     */
     public EditSourceCodeRequestMessage(String newSourceCode, String sourceCodeFile, Long roundId, Long teamId) {
         this.newSourceCode = newSourceCode;
         this.sourceCodeFile = sourceCodeFile;
@@ -88,6 +101,11 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
         this.teamId = teamId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static EditSourceCodeRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonRoundId = (Long) obj.get("RoundId");

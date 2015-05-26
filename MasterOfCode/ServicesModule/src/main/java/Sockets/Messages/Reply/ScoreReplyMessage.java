@@ -16,8 +16,14 @@ import org.json.simple.JSONValue;
  */
 public class ScoreReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.ScoreReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public ScoreReplyMessage() {}
     
     public static ScoreReplyMessage decodeJSON(String s) {

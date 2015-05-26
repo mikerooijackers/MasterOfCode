@@ -16,18 +16,33 @@ import org.json.simple.JSONValue;
  */
 public class TeamActionReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.TeamActionReplyMessage.toString();
     
     private String action;
     
+    /**
+     * Constructor
+     */
     public TeamActionReplyMessage(){
         
     }
     
+    /**
+     * Constructor
+     * @param action
+     */
     public TeamActionReplyMessage(String action) {
         this.action = action;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static TeamActionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonAction = obj.get("Action").toString();

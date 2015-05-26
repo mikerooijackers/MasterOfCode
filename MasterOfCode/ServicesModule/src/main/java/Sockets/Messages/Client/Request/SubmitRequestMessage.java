@@ -17,8 +17,14 @@ import org.json.simple.JSONValue;
  */
 public class SubmitRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.SubmitRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public SubmitRequestMessage() {}
     
     public static SubmitRequestMessage decodeJSON(String s) {

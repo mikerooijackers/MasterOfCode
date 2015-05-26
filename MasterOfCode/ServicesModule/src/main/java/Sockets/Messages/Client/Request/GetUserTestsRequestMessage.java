@@ -18,14 +18,25 @@ import org.json.simple.JSONValue;
  */
 public class GetUserTestsRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetUserTestsRequestMessage.toString();
 
     private long teamId;
     private List<String> testNames;
 
-    public GetUserTestsRequestMessage() {
+    /**
+     * Constructor
+     */
+     public GetUserTestsRequestMessage() {
     }
 
+    /**
+     * Constructor
+     * @param teamId
+     * @param testNames
+     */
     public GetUserTestsRequestMessage(long teamId, List<String> testNames) {
         this.teamId = teamId;
         this.testNames = testNames;

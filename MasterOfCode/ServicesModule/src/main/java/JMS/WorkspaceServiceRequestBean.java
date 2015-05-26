@@ -23,10 +23,19 @@ public class WorkspaceServiceRequestBean {
     private Queue nextGroupRequestQueue;
     private QueueConnectionFactory factory;
     
+    /**
+     * send message
+     * @param message
+     */
     public void Send(OperationDrivenMessage message) {
         
     }
     
+    /**
+     * send message with teamID
+     * @param message
+     * @param teamID
+     */
     public void Send(OperationDrivenMessage message, long teamID) {
         
     }

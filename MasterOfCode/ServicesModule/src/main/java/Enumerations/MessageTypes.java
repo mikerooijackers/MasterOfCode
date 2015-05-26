@@ -7,7 +7,7 @@ package Enumerations;
 
 /**
  *
- * @author JordiK
+ * @author JordiK, Mike Rooijackers
  */
 public enum MessageTypes {
     AddMemberToTeamRequestMessage("AddMemberToTeamRequestMessage"), 

@@ -16,8 +16,15 @@ import org.json.simple.JSONValue;
  */
 public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.RemoveMemberFromTeamRequestMessage.toString();
-
+    
+    /**
+     * Constructor
+     */
+        
     public RemoveMemberFromTeamRequestMessage() {
     }
 

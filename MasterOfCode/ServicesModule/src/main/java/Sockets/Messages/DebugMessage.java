@@ -5,6 +5,9 @@ import org.json.simple.JSONObject;
 
 public class DebugMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.DebugMessage.toString();
     
         public static DebugMessage decodeJSON(String s) {

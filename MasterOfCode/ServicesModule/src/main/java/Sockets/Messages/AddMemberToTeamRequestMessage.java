@@ -22,18 +22,34 @@ public class AddMemberToTeamRequestMessage extends BaseMessage {
     
     private List<MOCUser> usersToAdd;
     
+    /**
+     *
+     */
     public AddMemberToTeamRequestMessage() {
         usersToAdd = new ArrayList<>();
     }
     
+    /**
+     *
+     * @param users
+     */
     public AddMemberToTeamRequestMessage(List<MOCUser> users) {
         this.usersToAdd = users;
     }
     
+    /**
+     *
+     * @param user
+     */
     public void addMemberToMessage(MOCUser user) {
         this.getUsersToAdd().add(user);
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static AddMemberToTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<MOCUser> jsonUsers = (List<MOCUser>) obj.get("usersToAdd");

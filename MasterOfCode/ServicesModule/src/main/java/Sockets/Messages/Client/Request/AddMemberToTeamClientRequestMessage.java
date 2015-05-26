@@ -17,8 +17,14 @@ import org.json.simple.JSONValue;
  */
 public class AddMemberToTeamClientRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.AddMemberToTeamClientRequestMessage.toString();
     
+    /**
+     * Constructor
+     */
     public AddMemberToTeamClientRequestMessage() {}
     
     public static AddMemberToTeamClientRequestMessage decodeJSON(String s) {
