@@ -6,8 +6,11 @@
 package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.PauzeRoundReplyMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -15,12 +18,23 @@ import org.json.simple.JSONObject;
  */
 public class SubmitRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.SubmitRequestMessage.toString();
     
-    public void SubmitRequestMessage() {}
+    /**
+     * Constructor
+     */
+    public SubmitRequestMessage() {}
+    
+    public static SubmitRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new SubmitRequestMessage();
+    }
     
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

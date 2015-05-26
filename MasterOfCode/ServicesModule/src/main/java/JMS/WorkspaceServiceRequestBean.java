@@ -5,6 +5,7 @@
  */
 package JMS;
 
+import javax.ejb.Stateless;
 import javax.jms.Queue;
 import javax.jms.QueueConnectionFactory;
 import mocjms.messages.main.OperationDrivenMessage;
@@ -13,6 +14,7 @@ import mocjms.messages.main.OperationDrivenMessage;
  *
  * @author mikerooijackers
  */
+@Stateless
 public class WorkspaceServiceRequestBean {
     private Queue quequeServer1;
     private Queue quequeServer2;
@@ -21,10 +23,19 @@ public class WorkspaceServiceRequestBean {
     private Queue nextGroupRequestQueue;
     private QueueConnectionFactory factory;
     
+    /**
+     * send message
+     * @param message
+     */
     public void Send(OperationDrivenMessage message) {
         
     }
     
+    /**
+     * send message with teamID
+     * @param message
+     * @param teamID
+     */
     public void Send(OperationDrivenMessage message, long teamID) {
         
     }

@@ -5,22 +5,47 @@
  */
 package Sockets.Messages.Admin.Request;
 
+import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
  * @author mikerooijackers
  */
 public class FreezeRoundRequestMessage extends BaseMessage {
+    
+    public static final String messageType = MessageTypes.FreezeRoundRequestMessage.toString();
+    
+    private Long competitionId;
+    private Long roundId;
+    
+    public FreezeRoundRequestMessage(){}
+    
+    public FreezeRoundRequestMessage(Long competitionId, Long roundId) {
+        this.competitionId = competitionId;
+        this.roundId = roundId;
+    }
+    
+    public static FreezeRoundRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new FreezeRoundRequestMessage((Long) obj.get("CompetitionId"), (Long) obj.get("RoundId"));
+    }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        obj.put("CompetitionId", this.competitionId);
+        obj.put("RoundId", this.roundId);
+        return obj.toJSONString();
     }
     
 }

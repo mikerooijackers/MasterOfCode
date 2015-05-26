@@ -6,6 +6,7 @@
 package Sockets.Messages;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -15,17 +16,27 @@ import org.json.simple.JSONValue;
  */
 public class NewSessionConnectionMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.NewSessionConnectionMessage.toString();
     private String username;
     
+    /**
+     * Constructor
+     */
     public NewSessionConnectionMessage(){};
     
+    /**
+     * Constructor
+     * @param username
+     */
     public NewSessionConnectionMessage(String username) {
         this.username = username;
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

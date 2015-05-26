@@ -7,6 +7,7 @@ package Sockets.Messages;
 
 import Domein.MOCUser;
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -16,16 +17,31 @@ import org.json.simple.JSONValue;
  */
 public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.RemoveMemberFromTeamRequestMessage.toString();
     
     private MOCUser userToRemove;
     
+    /**
+     * Constructor
+     */
     public RemoveMemberFromTeamRequestMessage(){}
     
+    /**
+     *
+     * @param user
+     */
     public RemoveMemberFromTeamRequestMessage(MOCUser user) {
         this.userToRemove = user;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static RemoveMemberFromTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         MOCUser jsonUser = (MOCUser) obj.get("userToRemove");
@@ -33,7 +49,7 @@ public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

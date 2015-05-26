@@ -6,9 +6,12 @@
 package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.TeamActionReplyMessage;
 import java.util.List;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -16,21 +19,39 @@ import org.json.simple.JSONObject;
  */
 public class GetUserTestsRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetUserTestsRequestMessage.toString();
 
     private long teamId;
     private List<String> testNames;
 
-    public void GetUserTestsRequestMessage() {
+    /**
+     * Constructor
+     */
+     public GetUserTestsRequestMessage() {
     }
 
-    public void GetUserTestsRequestMessage(long teamId, List<String> testNames) {
+    /**
+     * Constructor
+     * @param teamId
+     * @param testNames
+     */
+    public GetUserTestsRequestMessage(long teamId, List<String> testNames) {
         this.teamId = teamId;
         this.testNames = testNames;
     }
 
+    public static GetUserTestsRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        long jsonTeamId = (long)obj.get("TeamId");
+        List<String> jsonTestNames = (List<String>)obj.get("TestNames");
+        return new GetUserTestsRequestMessage(jsonTeamId, jsonTestNames);
+    }
+    
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

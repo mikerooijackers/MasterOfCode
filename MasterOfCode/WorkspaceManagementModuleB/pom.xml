@@ -6,7 +6,7 @@
         <artifactId>MasterOfCode</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>WorkspaceManagementModuleB</artifactId>
+    <artifactId>JMSLayerModule</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -32,9 +32,16 @@
             <version>0.9.9-RC1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+    <name>JMSLayerModule</name>
 </project>

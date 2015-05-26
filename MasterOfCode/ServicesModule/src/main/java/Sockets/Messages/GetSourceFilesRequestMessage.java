@@ -6,6 +6,7 @@
 package Sockets.Messages;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -15,18 +16,34 @@ import org.json.simple.JSONValue;
  */
 public class GetSourceFilesRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetSourceFilesRequestMessage.toString();
     
     private Long teamId;
     private Long roundId;
     
+    /**
+     * constructor
+     */
     public GetSourceFilesRequestMessage(){}
     
+    /**
+     * Constructor
+     * @param teamId
+     * @param roundId
+     */
     public GetSourceFilesRequestMessage(Long teamId, Long roundId) {
         this.teamId = teamId;
         this.roundId = roundId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetSourceFilesRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("teamId");
@@ -35,7 +52,7 @@ public class GetSourceFilesRequestMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

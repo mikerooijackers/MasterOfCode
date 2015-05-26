@@ -7,6 +7,7 @@ package Sockets.Messages;
 
 import Domein.MOCUser;
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -21,13 +22,26 @@ public class CreateTeamRequestMessage extends BaseMessage {
     private String teamName;
     private MOCUser initiator;
     
+    /**
+     *
+     */
     public CreateTeamRequestMessage(){}
     
+    /**
+     *
+     * @param teamName
+     * @param initiator
+     */
     public CreateTeamRequestMessage(String teamName, MOCUser initiator) {
         this.teamName = teamName;
         this.initiator = initiator;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CreateTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonTeamName = obj.get("teamName").toString();
@@ -36,7 +50,7 @@ public class CreateTeamRequestMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

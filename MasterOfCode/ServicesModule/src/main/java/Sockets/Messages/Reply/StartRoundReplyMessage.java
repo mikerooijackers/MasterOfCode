@@ -6,6 +6,7 @@
 package Sockets.Messages.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,6 +17,9 @@ import org.json.simple.JSONValue;
  */
 public class StartRoundReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StartRoundReplyMessage.toString();
     
     private String assignCreatorName;
@@ -26,8 +30,20 @@ public class StartRoundReplyMessage extends BaseMessage {
     private String assignDescriptionCompetitors;
     private String assignDescriptionSpectators;
     
+    /**
+     * Constructor
+     */
     public StartRoundReplyMessage(){}
     
+    /**
+     * Constructor
+     * @param assignCreatorName
+     * @param assignCreatorCompany
+     * @param assignCreatorWeb
+     * @param assignName
+     * @param assignDescriptionCompetitors
+     * @param assignDescriptionSpectators
+     */
     public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators) {
         this.assignCreatorName = assignCreatorName;
         this.assignCreatorCompany = assignCreatorCompany;
@@ -121,20 +137,25 @@ public class StartRoundReplyMessage extends BaseMessage {
         this.assignDescriptionSpectators = assignDescriptionSpectators;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StartRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        String jsonAssignCreatorName = obj.get("assignCreatorName").toString();
-        String jsonAssignCreatorCompany = obj.get("assignCreatorCompany").toString();
-        String jsonAssignCreatorWeb = obj.get("assignCreatorWeb").toString();
-        String jsonAssignName = obj.get("assignName").toString();
-        String jsonAssignDescriptionCompetitors = obj.get("assignDescriptionCompetitors").toString();
-        String jsonAssignDescriptionSpectators = obj.get("assignDescriptionSpectators").toString();
+        String jsonAssignCreatorName = obj.get("AssignCreatorName").toString();
+        String jsonAssignCreatorCompany = obj.get("AssignCreatorCompany").toString();
+        String jsonAssignCreatorWeb = obj.get("AssignCreatorWeb").toString();
+        String jsonAssignName = obj.get("AssignName").toString();
+        String jsonAssignDescriptionCompetitors = obj.get("AssignDescriptionCompetitors").toString();
+        String jsonAssignDescriptionSpectators = obj.get("AssignDescriptionSpectators").toString();
         
         return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators);
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

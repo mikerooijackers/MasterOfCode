@@ -11,6 +11,7 @@
         <module>Assignment</module>
         <module>WorkspaceManagementModuleB</module>
         <module>ServicesModule</module>
+		<module>Annotations</module>
     </modules>
     <dependencies>
         <dependency>

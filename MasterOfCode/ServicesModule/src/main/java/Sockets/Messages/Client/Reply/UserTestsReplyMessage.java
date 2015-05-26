@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import java.util.List;
 import org.json.simple.JSONObject;
@@ -17,12 +18,22 @@ import org.json.simple.JSONValue;
  */
 public class UserTestsReplyMessage extends BaseMessage {
     
+    /**
+     * 
+     */
     public static final String messageType = MessageTypes.UserTestsReplyMessage.toString();
     
     private List<String> results;
     
+    /**
+     * Constructor
+     */
     public UserTestsReplyMessage() {}
     
+    /**
+     *
+     * @param results
+     */
     public UserTestsReplyMessage(List<String> results) {
         this.results = results;
     }
@@ -41,6 +52,11 @@ public class UserTestsReplyMessage extends BaseMessage {
         this.results = results;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static UserTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<String> jsonResults = (List<String>) obj.get("results");
@@ -48,7 +64,7 @@ public class UserTestsReplyMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
