@@ -7,6 +7,7 @@ package WebSocket;
 
 import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
+import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.DebugMessage;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.websocket.CloseReason;
 import javax.websocket.EncodeException;
 import javax.websocket.EndpointConfig;
@@ -42,6 +44,9 @@ import javax.websocket.server.ServerEndpoint;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Singleton
 public class CompetitorEndPoint {
+    
+    @Inject
+    private CommunicationBean communicationBean;
 
     private final HashMap<String, Session> sessions = new HashMap<>();
     private Session testSession;
@@ -67,7 +72,7 @@ public class CompetitorEndPoint {
             this.addSession(session, (NewSessionConnectionMessage) message);
         } else if (message instanceof DebugMessage) {
         } else {
-            message.doAction();
+            message.doAction(communicationBean);
         }
         System.out.println("Sessions size: " + sessions.size());
     }

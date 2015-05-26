@@ -7,6 +7,7 @@ package Sockets.Messages;
 
 import Domein.MOCUser;
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONObject;
@@ -57,7 +58,7 @@ public class AddMemberToTeamRequestMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

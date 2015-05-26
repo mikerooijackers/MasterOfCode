@@ -11,10 +11,7 @@
         <module>Assignment</module>
         <module>WorkspaceManagementModuleB</module>
         <module>ServicesModule</module>
-		<module>AdminClient</module>
 		<module>Annotations</module>
-		<module>AudienceClientModule</module>
-		<module>CompetitorClient</module>
     </modules>
     <dependencies>
         <dependency>
