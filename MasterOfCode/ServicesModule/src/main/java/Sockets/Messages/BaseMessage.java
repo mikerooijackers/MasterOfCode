@@ -5,6 +5,7 @@
  */
 package Sockets.Messages;
 
+import Service.CommunicationBean;
 import org.json.simple.JSONAware;
 
 /**
@@ -12,5 +13,5 @@ import org.json.simple.JSONAware;
  * @author JordiK
  */
 public abstract class BaseMessage implements JSONAware {
-    public abstract void doAction();
+    public abstract void doAction(CommunicationBean communicationBean);
 }

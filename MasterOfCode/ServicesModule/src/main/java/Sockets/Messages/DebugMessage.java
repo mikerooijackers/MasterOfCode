@@ -1,6 +1,7 @@
 package Sockets.Messages;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import org.json.simple.JSONObject;
 
 public class DebugMessage extends BaseMessage {
@@ -15,7 +16,7 @@ public class DebugMessage extends BaseMessage {
     }
     
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

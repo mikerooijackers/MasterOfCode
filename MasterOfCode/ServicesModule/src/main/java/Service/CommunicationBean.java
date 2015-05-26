@@ -8,12 +8,14 @@ package Service;
 import JMS.WorkspaceServiceRequestBean;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
+import javax.ejb.Singleton;
 import javax.inject.Inject;
 
 /**
  *
  * @author JordiK
  */
+@Singleton
 public class CommunicationBean {
     
     @Inject

@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import java.io.Serializable;
 import org.json.simple.JSONObject;
@@ -59,7 +60,7 @@ public class HintReplyMessage extends BaseMessage implements Serializable {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

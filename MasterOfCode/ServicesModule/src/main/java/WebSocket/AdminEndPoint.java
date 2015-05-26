@@ -2,6 +2,7 @@ package WebSocket;
 
 import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
+import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.HintReplyMessage;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.websocket.CloseReason;
 import javax.websocket.EncodeException;
 import javax.websocket.EndpointConfig;
@@ -34,6 +36,9 @@ import javax.websocket.server.ServerEndpoint;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Singleton
 public class AdminEndPoint {
+    
+    @Inject
+    private CommunicationBean communicationBean;
 
     private final HashMap<String, Session> sessions = new HashMap<>();
 
@@ -59,7 +64,7 @@ public class AdminEndPoint {
         } else if (message instanceof DebugMessage) {
             sendMessage("Jordi", new HintReplyMessage("Because I'm a potato!"));
         } else {
-            message.doAction();
+            message.doAction(communicationBean);
         }
     }
 
