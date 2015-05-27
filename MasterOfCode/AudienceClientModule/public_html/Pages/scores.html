@@ -1,32 +1,31 @@
-<div ng-controller="manageScores">
-    <h1>Scores</h1> 
+<h1>Scores</h1> 
 
-    <div class="widgetleft">
-        <h2>Rounds</h2>
-        
-        <select ng-model="filterCondition.operator" size="22">
-            <option ng-selected="{{operator.value === filterCondition.operator}}"
-                    ng-repeat="operator in operators"
-                    value="{{operator.value}}">
-                {{operator.name}}
-            </option>
-        </select>
+<div class="widgetleft">
+    <h2>Rounds</h2>
 
-    </div>
+    <select ng-model="filterCondition.operator" size="22">
+        <option ng-selected="{{operator.value === filterCondition.operator}}"
+                ng-repeat="operator in operators"
+                value="{{operator.value}}">
+            {{operator.name}}
+        </option>
+    </select>
 
-    <div class="widgetright">
-        <table>
-            <tr>
-                <th>Rank</th>
-                <th>Team</th>
-                <th>Score</th>
-            </tr>
-            <tr ng-repeat="s in Scores">
-                <td>{{s.rank}}</td>
-                <td>{{s.team}}</td>
-                <td>{{s.score}}</td>
-            </tr>
-        </table> 
-    </div>
+
+</div>
+
+<div class="widgetright">
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Score</th>
+        </tr>
+        <tr ng-repeat="s in Scores">
+            <td>{{s.rank}}</td>
+            <td>{{s.team}}</td>
+            <td>{{s.score}}</td>
+        </tr>
+    </table> 
 </div>
 

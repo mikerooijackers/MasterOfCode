@@ -1,23 +1,21 @@
-<div ng-controller="manageNewsfeed">
-    <h1>Newsfeed</h1>
+<h1>Newsfeed</h1>
 
-    <div class="widgetleft">
-        <h2>Filter</h2>
-        <div id="filter">
-            <div class="item" ng-repeat="item in Items">
-                <input type="checkbox" ng-model="item.Selected"> {{item.name}} <br>
-            </div>
+<div class="widgetleft">
+    <h2>Filter</h2>
+    <div id="filter">
+        <div class="item" ng-repeat="item in Items">
+            <input type="checkbox" ng-model="item.Selected"> {{item.name}} <br>
         </div>
-        <button type="button" class="btnbig" ng-model="selectedAll" ng-click="checkAll()">Check/uncheck all</button> 
     </div>
+    <button type="button" class="btnbig" ng-model="selectedAll" ng-click="checkAll()">Check/uncheck all</button> 
+</div>
 
-    <div class="widgetright">
-        <h2>News</h2>
-        <table>
-            <tr ng-repeat="n in News">
-                <td>{{n.team}} {{n.message}} </td>
-                <td>{{n.time}}</td>
-            </tr>
-        </table> 
-    </div>
+<div class="widgetright">
+    <h2>News</h2>
+    <table>
+        <tr ng-repeat="n in News">
+            <td>{{n.team}} {{n.message}} </td>
+            <td>{{n.time}}</td>
+        </tr>
+    </table> 
 </div>

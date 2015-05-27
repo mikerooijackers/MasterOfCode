@@ -1,5 +1,5 @@
 angular.module('audienceClient')
-        .controller('manageNewsfeed', function ($scope) {
+        .controller('manageNewsfeedController', function ($scope) {
 
             $scope.checkAll = function () {
                 if ($scope.selectedAll) {

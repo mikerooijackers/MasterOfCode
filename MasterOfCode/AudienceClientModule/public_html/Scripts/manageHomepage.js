@@ -1,3 +1,3 @@
 angular.module('audienceClient')
-        .controller('manageHomepage', function ($scope) {
+        .controller('manageHomepageController', function ($scope) {
         });

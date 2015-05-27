@@ -1,15 +1,9 @@
 angular.module('audienceClient')
-        .controller('manageScores', function ($scope) {
+        .controller('manageScoresController', function ($scope) {
             
+
+            // MOCK DATA!!! ----------------------------------------------------   
             
-            
-            
-            
-            
-            
-            
-            
-            // MOCK DATA!!! ----------------------------------------------------
             $scope.operators = [{
                     name: "Round 1"
                 }, {
