@@ -7,12 +7,6 @@
             <div class="item" ng-repeat="item in Items">
                 <input type="checkbox" ng-model="item.Selected"> {{item.name}} <br>
             </div>
-            
-<!--            <input type="checkbox" value="TeamB" ng-model="item.Selected"> Team B <br>
-            <input type="checkbox" value="TeamC" ng-model="item.Selected"> Team C <br>
-            <input type="checkbox" value="TeamD" ng-model="item.Selected"> Team D <br>
-            <input type="checkbox" value="TeamE" ng-model="item.Selected"> Team E <br>
-            <input type="checkbox" value="TeamF" ng-model="item.Selected"> Team F <br>-->
         </div>
         <button type="button" class="btnbig" ng-model="selectedAll" ng-click="checkAll()">Check/uncheck all</button> 
     </div>
@@ -20,29 +14,9 @@
     <div class="widgetright">
         <h2>News</h2>
         <table>
-            <tr>
-                <td><a href="">Team C</a> did ...</td>
-                <td>5 seconds ago</td>
-            </tr>
-            <tr>
-                <td><a href="">Team A</a> did ...</td>
-                <td>1 minute ago</td>
-            </tr>
-            <tr>
-                <td><a href="">Team B</a> did ...</td>
-                <td>1 minute ago</td>
-            </tr>
-            <tr>
-                <td><a href="">Team A</a> did ...</td>
-                <td>2 minutes ago</td>
-            </tr>
-            <tr>
-                <td><a href="">Team B</a> did ...</td>
-                <td>4 minutes ago</td>
-            </tr>
-            <tr>
-                <td><a href="">Team C</a> did ...</td>
-                <td>4 minutes ago</td>
+            <tr ng-repeat="n in News">
+                <td>{{n.team}} {{n.message}} </td>
+                <td>{{n.time}}</td>
             </tr>
         </table> 
     </div>

@@ -1,48 +1,52 @@
-<h1>Teams</h1>
+<div ng-controller="manageTeams">
+    <h1>Teams</h1>
 
-<div class="widgetleft">
-    <h2>Teams</h2>
+    <div class="widgetleft">
+        <h2>Teams</h2>
 
-    <select ng-model="filterCondition.operator" size="22">
-        <option ng-selected="{{operator.value == filterCondition.operator}}"
-                ng-repeat="operator in operators"
-                value="{{operator.value}}">
-            {{operator.displayName}}
-        </option>
-    </select>
-    
-</div>
+        <select ng-model="filterCondition.operator" size="23">
+            <option ng-selected="{{operator.value == filterCondition.operator}}"
+                    ng-repeat="operator in operators"
+                    value="{{operator.value}}">
+                {{operator.displayName}}
+            </option>
+        </select>
 
-<div class="widgetright" style="height: 40%">
-    <h2>Members</h2>
-    Member 1 <br>
-    Member 2 <br>
-    Member 3 <br>
-</div>
-
-<div class="widgetright" style="height: 21%">
-    <h2>Most recent news</h2>
-    <table>
-        <tr>
-            <td>Team A did ...</td>
-            <td>1 minute ago</td>
-        </tr>
-    </table>
-    <div class="footerlink">
-        <a href="#/newsfeed">View more news from Team A</a>
     </div>
-</div>
 
-<div class="widgetright" style="height: 16%">
-    <h2>Current score</h2>
-    <table>
-        <tr>
-            <th>Rank</th>
-            <th>Score</th>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2200</td>
-        </tr>
-    </table> 
+    <div ng-controller="manageTeams">
+        <div class="widgetright" style="height: 40%">
+            <h2>Members</h2>
+            Member 1 <br>
+            Member 2 <br>
+            Member 3 <br>
+        </div>
+
+        <div class="widgetright" style="height: 21%">
+            <h2>Most recent news</h2>
+            <table>
+                <tr>
+                    <td>Team A did ...</td>
+                    <td>1 minute ago</td>
+                </tr>
+            </table>
+            <div class="footerlink">
+                <a href="#/newsfeed">View more news from Team A</a>
+            </div>
+        </div>
+
+        <div class="widgetright" style="height: 16%">
+            <h2>Current score</h2>
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Score</th>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2200</td>
+                </tr>
+            </table> 
+        </div>
+    </div>
 </div>
