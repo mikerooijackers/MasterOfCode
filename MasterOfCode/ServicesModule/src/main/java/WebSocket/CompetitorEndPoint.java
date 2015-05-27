@@ -10,7 +10,6 @@ import MessageUtils.MessageEncoder;
 import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.DebugMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -70,7 +69,6 @@ public class CompetitorEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
-        } else if (message instanceof DebugMessage) {
         } else {
             message.doAction(communicationBean);
         }
@@ -86,11 +84,21 @@ public class CompetitorEndPoint {
      * @param username
      * @param message
      */
-    public void sendMessage(String username, Object message) {
+    public void sendMessage(String username, BaseMessage message) {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
         } catch (IOException | EncodeException ex) {
             Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void sendToAll(BaseMessage message) {
+        for (String username : sessions.keySet()) {
+            try {
+                sessions.get(username).getBasicRemote().sendObject(message);
+            } catch (IOException | EncodeException ex) {
+                Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

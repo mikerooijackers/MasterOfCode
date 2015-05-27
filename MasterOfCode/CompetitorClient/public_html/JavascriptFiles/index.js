@@ -54,8 +54,6 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                 informationString += "\n\n Hello world";
                 document.getElementById('assignmentTextArea').innerHTML = informationString;
             });
-    
-            SocketService.sendMessage({MessageType: "DebugMessage"});
         })
 
         .controller('editorController', function ($scope) {
@@ -94,10 +92,10 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
             $scope.hintNumber = 1;
             
             $scope.debug = function() {
-//                SocketService.sendMessage({MessageType : "DebugMessage"});
+                SocketService.sendMessage({MessageType : "DebugMessage"});
             };
             
-            $rootScope.$on("hintMessage", function(event, data) {
+            $rootScope.$on("HintReplyMessage", function(event, data) {
                 var hintsContainer = document.getElementById('hintsContainer');
                 hintsContainer.innerHTML += "<div class='col-md-3'><table class='hintTable'><tr><th>Hint " + $scope.hintNumber + "</th></tr><tr><td>" + data.HintMessage + "</td></tr></table></div>";
                 $scope.hintNumber++;
