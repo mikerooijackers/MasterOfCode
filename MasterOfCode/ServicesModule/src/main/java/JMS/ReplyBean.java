@@ -14,7 +14,7 @@ import javax.jms.MessageListener;
  *
  * @author mikerooijackers
  */
-@MessageDriven(mappedName = "ReplyBean")
+//@MessageDriven(mappedName = "ReplyBean")
 public class ReplyBean implements MessageListener {
     
     @Override

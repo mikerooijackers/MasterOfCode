@@ -9,6 +9,7 @@ import Enumerations.MessageTypes;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.CompileReplyMessage;
 import Sockets.Messages.DebugMessage;
+import Sockets.Messages.NewSessionConnectionMessage;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
@@ -29,6 +30,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
         switch (mt) {
             case CompileReplyMessage:
                 return CompileReplyMessage.decodeJSON(s);
+            case NewSessionConnectionMessage:
+                return NewSessionConnectionMessage.decodeJSON(s);
             case DebugMessage:
                 return DebugMessage.decodeJSON(s);
         }
