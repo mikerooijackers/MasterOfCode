@@ -86,6 +86,16 @@ public class AdminEndPoint {
         }
     }
 
+    public void sendToAll(Object message) {
+        for (String username : sessions.keySet()) {
+            try {
+                sessions.get(username).getBasicRemote().sendObject(message);
+            } catch (IOException | EncodeException ex) {
+                Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     /**
      *
      * @param session

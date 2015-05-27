@@ -36,4 +36,8 @@ public class CommunicationBean {
     public void sendMessageToAllCompetitors(BaseMessage message) {
         competitorEndpoint.sendToAll(message);
     }
+    
+    public void sendMessageToAllAdmins(BaseMessage message) {
+        adminEndpoint.sendToAll(message);
+    }
 }
