@@ -56,13 +56,12 @@ th {
 }
 
 #content {
-    height: 650px;
+    height: 550px;
     background-color: #f2f2f2;
     margin-bottom: 3%;
     padding: 15px;
     border: 2px solid #000000;
 }
-
 
 /* Menu bar (navigation) */
 
@@ -138,19 +137,13 @@ th {
 }
 
 .widgetbig {
-    width: 93%;
+    width: 94%;
     height: 84%;
 }
 
-.widgetmedium {
-    width: 44%;
-    height: 40%;
-}
-
 .widgetsmall {
-    width: 44%;
-    height: 30%;
-    margin-top: 5%;
+    width: 45%;
+    height: 38%;
 }
 
 .widgetleft {
@@ -173,7 +166,7 @@ th {
 /* Other elements */
 
 #filter {
-    height: 78%;
+    height: 74%;
     margin: 4% 0%;
     padding: 2%;
     overflow: auto;

@@ -7,13 +7,13 @@ angular.module('audienceClient')
                 } else {
                     $scope.selectedAll = true;
                 }
-                angular.forEach($scope.Items, function (item) {
+                angular.forEach($scope.items, function (item) {
                     item.Selected = $scope.selectedAll;
                 });
             };
 
             // MOCK DATA!!! ----------------------------------------------------
-            $scope.Items = [{
+            $scope.items = [{
                     name: "Team A"
                 }, {
                     name: "Team B"
@@ -27,7 +27,7 @@ angular.module('audienceClient')
                     name: "Team F"
                 }];
             
-            $scope.News = [{
+            $scope.news = [{
                     team: "Team A",
                     message: "did a compile request.",
                     time: "10 seconds ago"

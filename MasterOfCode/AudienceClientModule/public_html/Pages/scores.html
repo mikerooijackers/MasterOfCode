@@ -3,7 +3,7 @@
 <div class="widgetleft">
     <h2>Rounds</h2>
 
-    <select ng-model="filterCondition.operator" size="22">
+    <select ng-model="filterCondition.operator" size="18">
         <option ng-selected="{{operator.value === filterCondition.operator}}"
                 ng-repeat="operator in operators"
                 value="{{operator.value}}">
@@ -23,7 +23,7 @@
         </tr>
         <tr ng-repeat="s in Scores">
             <td>{{s.rank}}</td>
-            <td>{{s.team}}</td>
+            <td><a href="#/teams">{{s.team}}</a></td>
             <td>{{s.score}}</td>
         </tr>
     </table> 

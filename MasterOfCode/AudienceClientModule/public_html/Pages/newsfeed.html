@@ -3,7 +3,7 @@
 <div class="widgetleft">
     <h2>Filter</h2>
     <div id="filter">
-        <div class="item" ng-repeat="item in Items">
+        <div class="item" ng-repeat="item in items">
             <input type="checkbox" ng-model="item.Selected"> {{item.name}} <br>
         </div>
     </div>
@@ -13,9 +13,9 @@
 <div class="widgetright">
     <h2>News</h2>
     <table>
-        <tr ng-repeat="n in News">
-            <td>{{n.team}} {{n.message}} </td>
-            <td>{{n.time}}</td>
+        <tr ng-repeat="n in news">
+            <td style="text-align: left">{{n.team}} {{n.message}} </td>
+            <td style="text-align: right">{{n.time}}</td>
         </tr>
     </table> 
 </div>

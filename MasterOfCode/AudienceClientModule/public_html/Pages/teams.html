@@ -1,52 +1,48 @@
-<div ng-controller="manageTeams">
-    <h1>Teams</h1>
+<h1>Teams</h1>
 
-    <div class="widgetleft">
-        <h2>Teams</h2>
+<div class="widgetleft">
+    <h2>Teams</h2>
 
-        <select ng-model="filterCondition.operator" size="23">
-            <option ng-selected="{{operator.value == filterCondition.operator}}"
-                    ng-repeat="operator in operators"
-                    value="{{operator.value}}">
-                {{operator.displayName}}
-            </option>
-        </select>
+    <select ng-model="filterCondition.operator" size="18">
+        <option ng-selected="{{operator.value === filterCondition.operator}}"
+                ng-repeat="operator in operators"
+                value="{{operator.value}}">
+            {{operator.name}}
+        </option>
+    </select>
 
+</div>
+
+<div class="widgetright" style="height: 36%">
+    <h2>Members</h2>
+    <div class="item" ng-repeat="member in members">
+    {{member.name}}
     </div>
+</div>
 
-    <div ng-controller="manageTeams">
-        <div class="widgetright" style="height: 40%">
-            <h2>Members</h2>
-            Member 1 <br>
-            Member 2 <br>
-            Member 3 <br>
-        </div>
-
-        <div class="widgetright" style="height: 21%">
-            <h2>Most recent news</h2>
-            <table>
-                <tr>
-                    <td>Team A did ...</td>
-                    <td>1 minute ago</td>
-                </tr>
-            </table>
-            <div class="footerlink">
-                <a href="#/newsfeed">View more news from Team A</a>
-            </div>
-        </div>
-
-        <div class="widgetright" style="height: 16%">
-            <h2>Current score</h2>
-            <table>
-                <tr>
-                    <th>Rank</th>
-                    <th>Score</th>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2200</td>
-                </tr>
-            </table> 
-        </div>
+<div class="widgetright" style="height: 23%">
+    <h2>Most recent news</h2>
+    <table>
+        <tr>
+            <td style="text-align: left">{{name}} {{message}} </td>
+            <td>{{time}}</td>
+        </tr>
+    </table>
+    <div class="footerlink">
+        <a href="#/newsfeed">View more news from {{name}}</a>
     </div>
+</div>
+
+<div class="widgetright" style="height: 17%">
+    <h2>Current score</h2>
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td>{{rank}}</td>
+            <td>{{score}}</td>
+        </tr>
+    </table> 
 </div>
