@@ -38,22 +38,30 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                     });
         })
 
-        .controller('mainController', function ($scope, SocketService) {
+        .controller('mainController', function ($scope, SocketService, $rootScope, InformationService) {
             $scope.message = 'This is the main controller';
             SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
-            var NewSessionConnectionMessage = {MessageType : "NewSessionConnectionMessage", Username : "Noor"};
+            var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
             SocketService.sendMessage(NewSessionConnectionMessage);
+
+            $rootScope.$on("HintReplyMessage", function (event, data) {
+                InformationService.hints.push(data.HintMessage);
+            });
         })
 
         .controller('homeController', function ($scope, $rootScope, SocketService) {
             $scope.message = 'Home controller';
-            
-            $rootScope.$on('StartRoundMessage', function(event, data) {
+
+            $rootScope.$on('StartRoundMessage', function (event, data) {
                 var informationString = "Assignment creator: \n";
                 informationString += data.AssignCreatorName;
                 informationString += "\n\n Hello world";
                 document.getElementById('assignmentTextArea').innerHTML = informationString;
             });
+
+            $scope.debug = function () {
+                SocketService.sendMessage({MessageType: "DebugMessage"});
+            };
         })
 
         .controller('editorController', function ($scope) {
@@ -84,22 +92,6 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
         .controller('javadocController', function ($scope) {
             $scope.message = "Javadoc controller";
             $scope.pdfLink = "https://portal.fhict.nl/IS/S6/Lesmateriaal/PTSE6-Master%20of%20Code-Studiewijzer.pdf";
-        })
-
-        .controller('hintsController', function ($scope, $rootScope, SocketService) {
-            $scope.message = "Hints controller";
-            $scope.hints = [];
-            $scope.hintNumber = 1;
-            
-            $scope.debug = function() {
-                SocketService.sendMessage({MessageType : "DebugMessage"});
-            };
-            
-            $rootScope.$on("HintReplyMessage", function(event, data) {
-                var hintsContainer = document.getElementById('hintsContainer');
-                hintsContainer.innerHTML += "<div class='col-md-3'><table class='hintTable'><tr><th>Hint " + $scope.hintNumber + "</th></tr><tr><td>" + data.HintMessage + "</td></tr></table></div>";
-                $scope.hintNumber++;
-            });
         })
 
         .controller('turninController', function ($scope) {
