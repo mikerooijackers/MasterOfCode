@@ -5,8 +5,6 @@ import MessageUtils.MessageEncoder;
 import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.Client.Reply.HintReplyMessage;
-import Sockets.Messages.DebugMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -61,8 +59,6 @@ public class AdminEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
-        } else if (message instanceof DebugMessage) {
-            sendMessage("Jordi", new HintReplyMessage("Because I'm a potato!"));
         } else {
             message.doAction(communicationBean);
         }
@@ -70,6 +66,7 @@ public class AdminEndPoint {
 
     private void addSession(Session session, NewSessionConnectionMessage mess) {
         this.sessions.put(mess.getUsername(), session);
+        System.out.println("Number of sessions: " + sessions.size());
     }
 
     /**

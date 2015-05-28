@@ -31,14 +31,16 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                     });
         })
         .controller('indexController', function ($scope, websocketService) {
-            $scope.msg = "...";
+            $scope.msg = "Index message";
             $scope.hints = [];
 
             websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
+            
             var NewSessionConnectionMessage = {
                 MessageType: "NewSessionConnectionMessage",
                 Username: "Jordi"
             };
+            
             websocketService.sendMessage(NewSessionConnectionMessage);
 
             $scope.MenuUserVisibility = {'display': 'block'};

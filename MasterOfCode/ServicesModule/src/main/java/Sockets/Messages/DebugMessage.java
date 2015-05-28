@@ -19,7 +19,7 @@ public class DebugMessage extends BaseMessage {
     @Override
     public void doAction(CommunicationBean communicationBean) {
         HintReplyMessage mess = new HintReplyMessage("Test hint message");
-        communicationBean.sendMessageToCompetitor("Noor", mess);
+        communicationBean.sendMessageToAdmin("Jordi", mess);
     }
 
     @Override
