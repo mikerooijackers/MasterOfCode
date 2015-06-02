@@ -81,13 +81,15 @@ public class SpectatorEndpoint {
         this.sessions.add(session);
     }
 
-    // TODO: implement this method for all sessions
     public void sendMessage(Object message) {
-//        try {
-//            sessions.get(username).getBasicRemote().sendObject(message);
-//        } catch (IOException | EncodeException ex) {
-//            Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            for (Session sess : sessions)
+            {
+               sess.getBasicRemote().sendObject(message); 
+            }            
+        } catch (IOException | EncodeException ex) {
+            Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -108,9 +110,9 @@ public class SpectatorEndpoint {
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         System.out.println("Closing session");
-        for (int i = 0; i < sessions.size(); i++) {
-            if (sessions.get(i) == session) {
-                sessions.remove(i);
+        for (Session sess : sessions) {
+            if (sess == session) {
+                sessions.remove(sess);
             }
         }
         System.out.println("Sessions size: " + sessions.size());
