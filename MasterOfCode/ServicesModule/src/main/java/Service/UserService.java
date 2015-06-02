@@ -6,16 +6,20 @@
 package Service;
 
 import Domein.MOCUser;
-import Domein.Team;
-import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author mikerooijackers
  */
+@Stateless
 public class UserService {
+    
+    @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
+    
     
     /**
      * login of a user
@@ -25,5 +29,13 @@ public class UserService {
      */
     public MOCUser Login(String username, String password) {
         return null;
+    }
+
+    public void test() {
+        MOCUser user = new MOCUser();
+        user.setId(1);
+        em.persist(user);
+        MOCUser find = em.find(MOCUser.class, 1);
+        System.out.println(find.getId());
     }
 }
