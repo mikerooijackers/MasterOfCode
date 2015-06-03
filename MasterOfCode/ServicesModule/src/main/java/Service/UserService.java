@@ -6,6 +6,7 @@
 package Service;
 
 import Domein.MOCUser;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,12 +41,27 @@ public class UserService {
         System.out.println(find.getId());
     }
 
-    public String Register() {
-        MOCUser user = new MOCUser();
-        user.setUsername("username");
-        user.setEmail("email");
-        user.setPassword("password");
-        em.persist(user);
-        return "geregistreerd";
+    public MOCUser Register() {
+        return null;
+    }
+    
+    public List<MOCUser> GetAllUsers() {
+        List<MOCUser> listUsers = em.createQuery("SELECT m.* FROM MOCUSER m").getResultList();
+        if (listUsers.isEmpty()) {
+            System.out.println("No persons found.");
+        }
+        else {
+            for (MOCUser user : listUsers) {
+                System.out.print("UserID= " + user.getId()
+                    + ", Username" + user.getUsername() 
+                    + ", Email=" + user.getEmail() 
+                    + ", Password=" + user.getPassword()
+                    + ", Fullname= " + user.getFullName()
+                    + ", Privilege= " + user.getPrivilege()
+                    + ", TeamID= " + user.getTeam());
+            }
+        }
+        return listUsers;
+        
     }
 }
