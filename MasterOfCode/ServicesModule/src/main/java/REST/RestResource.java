@@ -43,6 +43,7 @@ public class RestResource {
     @POST
     @Path("register")
     public MOCUser Register(RegisterMessage message) {
+        
         return null;
         
     }
@@ -64,8 +65,7 @@ public class RestResource {
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
-        return null;
-        
+        return userService.GetAllUsers();
     }
     
     @GET
