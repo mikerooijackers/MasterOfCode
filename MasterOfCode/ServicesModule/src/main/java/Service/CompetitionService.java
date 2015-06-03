@@ -7,13 +7,18 @@ package Service;
 
 import Domein.*;
 import java.util.*;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author mikerooijackers
  */
+@Stateless
 public class CompetitionService {
+    
+    @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
     
     /**
