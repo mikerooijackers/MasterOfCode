@@ -9,7 +9,7 @@
     <!--Select participant-->
     <div class="col-md-3">
         <div>
-            <table class="borderedTable">
+            <table id="participantTable" class="borderedTable">
                 <tr><td><a href="">Participant1</a></td></tr>
                 <tr><td><a href="">Participant2</a></td></tr>
                 <tr><td><a href="">Participant3</a></td></tr>
@@ -23,21 +23,17 @@
     </div>
 
     <!--Participant information-->
-    <div class="col-md-1"></div>
-    
-    <div class="col-md-8">
-        <textarea rows="7">
-            Full name: [name]
-            E-mail: [e-mail]
-            Company: [company name]
-            Phone number: [phone number]
-            Team: [team name]
-        </textarea>
+   
+    <div class="col-md-9">
+        <div class="bordered" id="participantInfoTable">
+            Click on a user to display their information in this box.
+        </div>
     </div>
+    <div class="col-md-3"></div>
     
-    <div class="col-md-1"></div>
-    <div class="col-md-8 text-right">
-        <button class="btn btn-default" id="editBtn">Edit</button>
+    <div class="col-md-9 text-right" id="marginTop10">
+        <button class="btn btn-default pull-right" id="editBtn">Edit</button>
     </div>
+    <div class="col-md-3"></div>
     
 </div>

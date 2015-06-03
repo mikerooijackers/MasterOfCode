@@ -1,8 +1,12 @@
 package Sockets.Messages;
 
+import Domein.MOCUser;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
-import Sockets.Messages.Client.Reply.HintReplyMessage;
+import Sockets.Messages.Reply.GetParticipantsReplyMessage;
+import Sockets.Messages.Reply.NewParticipantReplyMessage;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.simple.JSONObject;
 
 public class DebugMessage extends BaseMessage {
@@ -18,8 +22,13 @@ public class DebugMessage extends BaseMessage {
     
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        HintReplyMessage mess = new HintReplyMessage("Test hint message");
-        communicationBean.sendMessageToAdmin("Jordi", mess);
+        List<MOCUser> userList = new ArrayList<MOCUser>();
+        userList.add(new MOCUser("John", "password", "email", "John Schipper", null, null));
+        userList.add(new MOCUser("Jordi", "password", "email", "Jordi Knol", null, null));
+        userList.add(new MOCUser("Maaike", "password", "email", "Maaike Jansen", null, null));
+        
+        GetParticipantsReplyMessage message = new GetParticipantsReplyMessage(userList);
+        communicationBean.sendMessageToAdmin("Jordi", message);
     }
 
     @Override

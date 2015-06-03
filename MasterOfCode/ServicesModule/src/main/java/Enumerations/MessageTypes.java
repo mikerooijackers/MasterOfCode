@@ -63,7 +63,9 @@ public enum MessageTypes {
     CompetitionInfoReplyMessage("CompetitionInfoReplyMessage"),
     CompetitionNotStartetReplyMessage("CompetitionNotStartetReplyMessage"),
     DebugMessage("DebugMessage"),
-    NewSessionConnectionMessage("NewSessionConnectionMessage");
+    NewSessionConnectionMessage("NewSessionConnectionMessage"),
+    NewParticipantReplyMessage("NewParticipantReplyMessage"),
+    GetParticipantsReplyMessage("GetParticipantsReplyMessage");
     
     private String name;
     

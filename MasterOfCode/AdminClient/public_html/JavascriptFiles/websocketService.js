@@ -13,6 +13,7 @@ angular.module('adminClient')
                     };
 
                     websocket.onmessage = function (evt) {
+                        console.log(evt.data);
                         var message = JSON.parse(evt.data);
                         $rootScope.$broadcast(message.MessageType, message);
                         console.log("Message received: " + message.MessageType + "!!!");

@@ -10,6 +10,11 @@
     padding: 7px;
 }
 
+.bordered {
+    border: 1px solid black;
+    padding: 7px;
+}
+
 .content {
     margin-bottom: 30px;
 }
@@ -74,7 +79,7 @@
     background-color: darkgrey;
 }
 
-.borderedTable tr td a:link {
+.borderedTable tr td a {
     color: black;
 }
 
@@ -95,6 +100,10 @@
 textarea {
     width: 100%;
     resize: none;
+}
+
+#participantInfoTable {
+    height: 200px;
 }
 
 #marginBtn {

@@ -30,17 +30,17 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                         controller: 'manageParticipantsController'
                     });
         })
-        .controller('indexController', function ($scope, websocketService) {
+        .controller('indexController', function ($scope, $rootScope, websocketService, InformationService) {
             $scope.msg = "Index message";
             $scope.hints = [];
 
             websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
-            
+
             var NewSessionConnectionMessage = {
                 MessageType: "NewSessionConnectionMessage",
                 Username: "Jordi"
             };
-            
+
             websocketService.sendMessage(NewSessionConnectionMessage);
 
             $scope.MenuUserVisibility = {'display': 'block'};
@@ -58,5 +58,16 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                 $scope.MenuUserVisibility = {'display': 'none'};
                 $scope.MenuGameVisibility = {'display': 'none'};
             };
+
+            $rootScope.$on("GetParticipantsReplyMessage", function (event, data) {
+                for (var u in data.Users) {
+                    var user = {};
+                    user.Username = data.Users[u].Username;
+                    user.Email = data.Users[u].Email;
+                    user.FullName = data.Users[u].FullName;
+                    InformationService.participants[user.Username] = user;
+                    console.log(InformationService.participants);
+                }
+            });
         });
 

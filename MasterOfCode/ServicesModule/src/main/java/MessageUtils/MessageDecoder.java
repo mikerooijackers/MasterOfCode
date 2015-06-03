@@ -138,6 +138,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return CompetitionInfoReplyMessage.decodeJSON(s);
             case CompetitionNotStartetReplyMessage:
                 return CompetitionNotStartetReplyMessage.decodeJSON(s);
+            case GetParticipantsReplyMessage:
+                return GetParticipantsReplyMessage.decodeJSON(s);
         }
         return null;
     }
