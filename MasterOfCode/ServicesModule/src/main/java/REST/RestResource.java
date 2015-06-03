@@ -40,10 +40,11 @@ public class RestResource {
         
     }
     
-    @POST
+    @GET
     @Path("register")
-    public MOCUser Register(RegisterMessage message) {
-        return null;
+    public String Register(RegisterMessage message) {
+        
+        return userService.Register();
         
     }
     

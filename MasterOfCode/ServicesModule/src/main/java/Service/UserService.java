@@ -35,7 +35,17 @@ public class UserService {
         MOCUser user = new MOCUser();
         user.setId(1);
         em.persist(user);
+        em.flush();
         MOCUser find = em.find(MOCUser.class, 1);
         System.out.println(find.getId());
+    }
+
+    public String Register() {
+        MOCUser user = new MOCUser();
+        user.setUsername("username");
+        user.setEmail("email");
+        user.setPassword("password");
+        em.persist(user);
+        return "geregistreerd";
     }
 }
