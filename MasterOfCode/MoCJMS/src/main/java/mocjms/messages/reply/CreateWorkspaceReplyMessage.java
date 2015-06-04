@@ -5,6 +5,7 @@
  */
 package mocjms.messages.reply;
 
+import com.mycompany.jmslayermodule.ReplyBean;
 import mocjms.messages.main.OperationDrivenMessage;
 
 /**
@@ -14,12 +15,32 @@ import mocjms.messages.main.OperationDrivenMessage;
 public class CreateWorkspaceReplyMessage implements OperationDrivenMessage {
 
     private String workspacePath;
+    private Long teamId;
+    private Long competitionId;
 
-    public CreateWorkspaceReplyMessage(String workspacePath) {
+    public CreateWorkspaceReplyMessage(String workspacePath, Long teamId, Long competitionId) {
         this.workspacePath = workspacePath;
+        this.teamId = teamId;
+        this.competitionId = competitionId;
     }
 
     public CreateWorkspaceReplyMessage() {
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    public Long getCompetitionId() {
+        return competitionId;
+    }
+
+    public void setCompetitionId(Long competitionId) {
+        this.competitionId = competitionId;
     }
 
     public String getWorkspacePath() {
@@ -31,8 +52,8 @@ public class CreateWorkspaceReplyMessage implements OperationDrivenMessage {
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void doWork(ReplyBean replyBean) {
+        //replyBean.send(this);
     }
     
 }

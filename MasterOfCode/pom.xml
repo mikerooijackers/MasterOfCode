@@ -9,9 +9,10 @@
         <module>Domein</module>
         <module>MoCJMS</module>
         <module>Assignment</module>
-        <module>WorkspaceManagementModuleB</module>
         <module>ServicesModule</module>
-		<module>Annotations</module>
+        <module>JMSLayerModule</module>
+        <module>UtilitiesModule</module>
+        <module>Annotations</module>
     </modules>
     <dependencies>
         <dependency>

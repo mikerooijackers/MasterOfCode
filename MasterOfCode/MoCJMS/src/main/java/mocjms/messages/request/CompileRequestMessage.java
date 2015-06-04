@@ -5,15 +5,18 @@
  */
 package mocjms.messages.request;
 
+import com.mycompany.jmslayermodule.ReplyBean;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import mocjms.messages.main.CompetitionBaseMessage;
 import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.reply.CompileReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
 public class CompileRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
-
+    
     public CompileRequestMessage() {
     }
 
@@ -22,8 +25,11 @@ public class CompileRequestMessage extends CompetitionBaseMessage implements Ope
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void doWork(ReplyBean replyBean) {
+        WorkspaceService.getInstance().requestCompile(super.getTeamId(), super.getCompetitionId(), super.getRoundId());
+        
+        OperationDrivenMessage message = new CompileReplyMessage("TO SPECIFY", super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        replyBean.send(message);
     }
     
 }
