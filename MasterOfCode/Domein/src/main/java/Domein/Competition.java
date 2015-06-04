@@ -2,6 +2,7 @@ package Domein;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +34,8 @@ public class Competition implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar startTime;
     private Status status;
+    @Column(length = 10000)
+    private String description;
 
     /**
      * Constructor Competition

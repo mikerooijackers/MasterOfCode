@@ -15,7 +15,7 @@ public class Team implements Serializable {
     @Transient
     private Collection<MOCUser> members;
     private int score;
-    private String workspacePath;
+    private String serverName;
     
     @ManyToOne
     private Competition competition;
@@ -77,22 +77,6 @@ public class Team implements Serializable {
     }
 
     /**
-     * Get WorkspacePath
-     * @return string
-     */
-    public String getWorkspacePath() {
-        return workspacePath;
-    }
-
-    /**
-     * Set WorkspacePath
-     * @param workspacePath
-     */
-    public void setWorkspacePath(String workspacePath) {
-        this.workspacePath = workspacePath;
-    }
-
-    /**
      * Get Competition
      * @return Competition
      */
@@ -108,5 +92,15 @@ public class Team implements Serializable {
         this.competition = competition;
     }
 
-        
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public int getNumberofMembers() {
+        return this.members.size();
+    };
 }
