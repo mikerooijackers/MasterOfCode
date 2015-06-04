@@ -17,11 +17,11 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UserService {
-    
+
     @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
-    
-    
+
+
     /**
      * login of a user
      * @param username
@@ -32,6 +32,9 @@ public class UserService {
         return null;
     }
 
+    /**
+     *
+     */
     public void test() {
         MOCUser user = new MOCUser();
         user.setId(1);
@@ -41,27 +44,33 @@ public class UserService {
         System.out.println(find.getId());
     }
 
+    /**
+     *
+     * @return
+     */
     public MOCUser Register() {
         return null;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public List<MOCUser> GetAllUsers() {
-        List<MOCUser> listUsers = em.createQuery("SELECT m.* FROM MOCUSER m").getResultList();
+        List<MOCUser> listUsers;
+        List resultList = em.createNamedQuery("AllUsers").getResultList();
+        listUsers = resultList;
         if (listUsers.isEmpty()) {
             System.out.println("No persons found.");
         }
         else {
             for (MOCUser user : listUsers) {
                 System.out.print("UserID= " + user.getId()
-                    //+ ", Username" + user.getUsername() 
-                    + ", Email=" + user.getEmail() 
-                    + ", Password=" + user.getPassword()
-                    + ", Fullname= " + user.getFullName()
-                    + ", Privilege= " + user.getPrivilege()
-                    + ", TeamID= " + user.getTeam());
+                    + ", Email=" + user.getEmail()
+                    + ", Fullname= " + user.getFullName());
             }
         }
         return listUsers;
-        
+
     }
 }

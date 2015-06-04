@@ -33,6 +33,11 @@ public class RestResource {
     @Inject
     private CompetitorEndPoint endPoint;
 
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
@@ -40,6 +45,11 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("register")
     public MOCUser Register(RegisterMessage message) {
@@ -48,6 +58,11 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @param code
+     * @return
+     */
     @POST
     @Path("activationcode")
     public Response ActivationCode(String code) {
@@ -55,6 +70,11 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("addtoteam")
     public MOCUser AddToTeam(TeamMessage message) {
@@ -62,12 +82,20 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
         return userService.GetAllUsers();
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("getallteams")
     public List<Team> GetAllTeams() {
@@ -75,6 +103,10 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("getcompetitiondata")
     public CompetitionData GetCompetitionData() {
@@ -82,6 +114,10 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("gethintsofcurrentround")
     public List<Hint> GetHintsOfCurrentRound() {
@@ -89,6 +125,10 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("test")
     public String test() {

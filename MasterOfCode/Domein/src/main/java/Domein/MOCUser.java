@@ -6,12 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author mikerooijackers
  */
 @Entity
+@NamedQueries ({
+    @NamedQuery(name = "AllUsers", query = "select m FROM MOCUser m")
+})
 public class MOCUser implements Serializable {
 
     private String activationCode;
