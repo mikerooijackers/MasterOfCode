@@ -94,4 +94,12 @@ public class MOCUser {
 		this.privilege = privilege;
 	}
 
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
 }

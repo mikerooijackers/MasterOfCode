@@ -2,6 +2,7 @@ package Domein;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Team implements Serializable {
     @Transient
     private Collection<MOCUser> members;
     private int score;
+    private String teamName;
     private String serverName;
     
     @ManyToOne
@@ -103,4 +105,12 @@ public class Team implements Serializable {
     public int getNumberofMembers() {
         return this.members.size();
     };
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
 }
