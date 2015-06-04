@@ -39,7 +39,7 @@ public class NewEmptyJUnitTest {
     public void tearDown() {
     }
     
-    @org.testng.annotations.Test
+    //@org.testng.annotations.Test
     public void testReadAnnotationData() {
         WorkspaceService service = new WorkspaceService();
         String path = "C:\\assignments";

@@ -1,5 +1,6 @@
 package Domein;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,7 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
 @Entity
-public class MOCUser implements JSONAware{
+public class MOCUser implements JSONAware, Serializable{
 
     /**
      * username of a user
@@ -31,6 +32,10 @@ public class MOCUser implements JSONAware{
      * privileges of a user
      */
     private Role privilege;
+    
+    private String company;
+    
+    private String telephoneNumber;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,13 +47,15 @@ public class MOCUser implements JSONAware{
     public MOCUser() {
     }
 
-    public MOCUser(String username, String password, String email, String fullName, Role privilege, Team team) {
+    public MOCUser(String username, String password, String email, String fullName, Role privilege, Team team, String company, String telephoneNumber) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.fullName = fullName;
         this.privilege = privilege;
         this.team = team;
+        this.company = company;
+        this.telephoneNumber = telephoneNumber;
     }
 
     public Team getTeam() {
@@ -114,6 +121,34 @@ public class MOCUser implements JSONAware{
     public void setPrivilege(Role privilege) {
         this.privilege = privilege;
     }
+    
+        /**
+     * @return the company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    /**
+     * @return the telephoneNumber
+     */
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+    
+    /**
+     * @param telephoneNumber the telephoneNumber to set
+     */
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
 
     @Override
     public String toJSONString() {
@@ -123,17 +158,8 @@ public class MOCUser implements JSONAware{
 //        obj.put("Id", this.id);
         obj.put("Email", this.email);
         obj.put("Password", this.password);
-        return obj.toJSONString();
-    }
-    
-    @Override
-    public String toString() {
-        JSONObject obj = new JSONObject();
-        obj.put("Username", this.username);
-        obj.put("Fullname", this.fullName);
-//        obj.put("Id", this.id);
-        obj.put("Email", this.email);
-        obj.put("Password", this.password);
+        obj.put("Company", this.company);
+        obj.put("TelephoneNumber", this.telephoneNumber);
         return obj.toJSONString();
     }
 }

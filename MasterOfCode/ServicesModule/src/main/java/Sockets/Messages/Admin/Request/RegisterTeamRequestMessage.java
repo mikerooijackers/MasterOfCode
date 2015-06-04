@@ -21,6 +21,7 @@ public class RegisterTeamRequestMessage extends BaseMessage {
     
     private Long teamId;
     private Long competitionId;
+    private String teamName;
     
     public RegisterTeamRequestMessage(){}
     

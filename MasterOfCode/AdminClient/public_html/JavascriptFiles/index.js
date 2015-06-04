@@ -7,27 +7,27 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                     })
                     .when('/registerParticipant', {
                         templateUrl: 'HTMLPages/registerParticipant.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'registerParticipantController'
                     })
                     .when('/manageTeam', {
                         templateUrl: 'HTMLPages/manageTeam.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'manageTeamController'
                     })
                     .when('/registerTeam', {
                         templateUrl: 'HTMLPages/registerTeam.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'registerTeamController'
                     })
                     .when('/currentGame', {
                         templateUrl: 'HTMLPages/manageGameCurrent.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'manageGameCurrentController'
                     })
                     .when('/currentRound', {
                         templateUrl: 'HTMLPages/manageActiveRound.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'manageActiveRoundController'
                     })
                     .when('/servers', {
                         templateUrl: 'HTMLPages/servers.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'serverController'
                     });
         })
         .controller('indexController', function ($scope, $rootScope, websocketService, InformationService) {
@@ -65,6 +65,9 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                     user.Username = data.Users[u].Username;
                     user.Email = data.Users[u].Email;
                     user.FullName = data.Users[u].FullName;
+                    user.Company = data.Users[u].Company;
+                    user.TelephoneNumber = data.Users[u].TelephoneNumber;
+                    user.Team = data.Users[u].Team;
                     InformationService.participants[user.Username] = user;
                     console.log(InformationService.participants);
                 }

@@ -8,22 +8,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import org.json.simple.JSONAware;
+import org.json.simple.JSONObject;
 
 @Entity
-public class Team implements Serializable {
+public class Team implements JSONAware, Serializable {
 
     @Transient
     private Collection<MOCUser> members;
     private int score;
     private String workspacePath;
-    
+    private String teamName;
+
     @ManyToOne
     private Competition competition;
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
      * get Team ID
+     *
      * @return long
      */
     public long getId() {
@@ -32,6 +37,7 @@ public class Team implements Serializable {
 
     /**
      * set Team ID
+     *
      * @param id
      */
     public void setId(long id) {
@@ -46,22 +52,25 @@ public class Team implements Serializable {
 
     /**
      * get Members
+     *
      * @return collection
      */
     public Collection<MOCUser> getMembers() {
-            return this.members;
+        return this.members;
     }
 
     /**
      * Set Members
+     *
      * @param members
      */
     public void setMembers(Collection<MOCUser> members) {
-            this.members = members;
+        this.members = members;
     }
 
     /**
      * Get Score
+     *
      * @return int
      */
     public int getScore() {
@@ -70,6 +79,7 @@ public class Team implements Serializable {
 
     /**
      * Set Score
+     *
      * @param score
      */
     public void setScore(int score) {
@@ -78,6 +88,7 @@ public class Team implements Serializable {
 
     /**
      * Get WorkspacePath
+     *
      * @return string
      */
     public String getWorkspacePath() {
@@ -86,6 +97,7 @@ public class Team implements Serializable {
 
     /**
      * Set WorkspacePath
+     *
      * @param workspacePath
      */
     public void setWorkspacePath(String workspacePath) {
@@ -94,6 +106,7 @@ public class Team implements Serializable {
 
     /**
      * Get Competition
+     *
      * @return Competition
      */
     public Competition getCompetition() {
@@ -102,11 +115,37 @@ public class Team implements Serializable {
 
     /**
      * Set Competition
-     * @param competition 
+     *
+     * @param competition
      */
     public void setCompetition(Competition competition) {
         this.competition = competition;
     }
+    
+        /**
+     * @return the teamName
+     */
+    public String getTeamName() {
+        return teamName;
+    }
 
-        
+    /**
+     * @param teamName the teamName to set
+     */
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("Members", this.members);
+        obj.put("Score", this.score);
+        obj.put("Workspacepath", this.workspacePath);
+        obj.put("Competition", this.competition);
+        obj.put("Id", this.id);
+        obj.put("TeamName", this.teamName);
+        return obj.toJSONString();
+    }
+
 }

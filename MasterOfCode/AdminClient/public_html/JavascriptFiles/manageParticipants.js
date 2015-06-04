@@ -33,9 +33,9 @@ angular.module('adminClient')
                 participantInfoTable.innerHTML += "<b>Username:</b> " + InformationService.participants[username].Username + "<br>";
                 participantInfoTable.innerHTML += "<b>Full name:</b> " + InformationService.participants[username].FullName + "<br>";
                 participantInfoTable.innerHTML += "<b>E-mail:</b> " + InformationService.participants[username].Email + "<br>";
-                participantInfoTable.innerHTML += "<b>Company:</b> " + "<br>";
-                participantInfoTable.innerHTML += "<b>Telephone:</b> " + "<br>";
-                participantInfoTable.innerHTML += "<b>Team:</b> " + "<br>";
+                participantInfoTable.innerHTML += "<b>Company:</b> " + InformationService.participants[username].Company + "<br>";
+                participantInfoTable.innerHTML += "<b>Telephone:</b> " + InformationService.participants[username].TelephoneNumber + "<br>";
+                participantInfoTable.innerHTML += "<b>Team:</b> " + InformationService.participants[username].Team + "<br>";
                 
                 // TODO
                 // Missing: company, telephone number, team name

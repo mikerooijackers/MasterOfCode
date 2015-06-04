@@ -52,7 +52,10 @@ public class GetParticipantsReplyMessage extends BaseMessage {
             json += "{";
             json += "\"Username\": \"" + user.getUsername() + "\", ";
             json += "\"FullName\": \"" + user.getFullName() + "\", ";
-            json += "\"Email\": \"" + user.getEmail() + "\"";
+            json += "\"Email\": \"" + user.getEmail() + "\", ";
+            json += "\"Company\": \"" + user.getCompany() + "\", ";
+            json += "\"TelephoneNumber\": \"" + user.getTelephoneNumber()+ "\", ";
+            json += "\"Team\": \"" + user.getTeam().getId() + "\"";
             json += "}";
             
             if (index != userAmount - 1) {

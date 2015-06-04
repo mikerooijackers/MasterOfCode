@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UserService {
     
-    @PersistenceContext(unitName = "masterofcodedb")
+//    @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
     
     
