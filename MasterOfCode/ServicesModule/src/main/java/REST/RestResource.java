@@ -99,7 +99,7 @@ public class RestResource {
     @GET
     @Path("getallteams")
     public List<Team> GetAllTeams() {
-        return null;
+        return userService.GetAllTeams();
         
     }
     

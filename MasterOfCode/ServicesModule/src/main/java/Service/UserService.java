@@ -6,6 +6,7 @@
 package Service;
 
 import Domein.MOCUser;
+import Domein.Team;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -58,8 +59,7 @@ public class UserService {
      */
     public List<MOCUser> GetAllUsers() {
         List<MOCUser> listUsers;
-        List resultList = em.createNamedQuery("AllUsers").getResultList();
-        listUsers = resultList;
+        listUsers = em.createNamedQuery("AllUsers").getResultList();
         if (listUsers.isEmpty()) {
             System.out.println("No persons found.");
         }
@@ -72,5 +72,21 @@ public class UserService {
         }
         return listUsers;
 
+    }
+
+    public List<Team> GetAllTeams() {
+        List<Team> listTeams;
+        listTeams = em.createNamedQuery("AllTeams").getResultList();
+        if (listTeams.isEmpty()) {
+            System.out.println("No persons found.");
+        }
+        else {
+            for (Team team : listTeams) {
+                System.out.print("UserID= " + team.getId()
+                    + ", Email=" + team.getTeamName()
+                    + ", Fullname= " + team.getServerName());
+            }
+        }
+        return listTeams;
     }
 }

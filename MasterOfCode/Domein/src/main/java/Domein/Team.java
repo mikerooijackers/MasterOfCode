@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
 /**
@@ -14,6 +16,9 @@ import javax.persistence.Transient;
  * @author mikerooijackers
  */
 @Entity
+@NamedQueries ({
+    @NamedQuery(name = "AllTeams", query = "select t FROM Team t")
+})
 public class Team implements Serializable {
 
     @Transient
