@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,6 +30,7 @@ public class Competition implements Serializable {
     /**
      * start time of a competition
      */
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar startTime;
     private Status status;
 
