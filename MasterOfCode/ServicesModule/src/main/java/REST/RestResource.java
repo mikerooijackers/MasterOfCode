@@ -53,8 +53,13 @@ public class RestResource {
     @POST
     @Path("register")
     public MOCUser Register(RegisterMessage message) {
-        
-        return null;
+        String email = message.getEmail();
+        String fullname = message.getFullname();
+        String password = message.getPassword();
+        int privilege = message.getPrivilege();
+        int teamID = message.getTeamID();
+        String activationCode = message.getActivationCode();
+        return userService.Register(email, fullname, password, privilege, teamID, activationCode);
         
     }
     
@@ -83,7 +88,7 @@ public class RestResource {
     }
     
     /**
-     *
+     * get all users
      * @return
      */
     @GET
@@ -93,7 +98,7 @@ public class RestResource {
     }
     
     /**
-     *
+     * get all teams 
      * @return
      */
     @GET

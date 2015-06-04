@@ -47,9 +47,15 @@ public class UserService {
 
     /**
      *
+     * @param email
+     * @param fullname
+     * @param activationCode
+     * @param privilege
+     * @param teamID
+     * @param password
      * @return
      */
-    public MOCUser Register() {
+    public MOCUser Register(String email, String fullname, String password, int privilege, int teamID, String activationCode) {
         return null;
     }
 
