@@ -10,7 +10,8 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
 @Entity
-public class MOCUser implements JSONAware, Serializable{
+
+public class MOCUser implements JSONAware, Serializable {
 
     /**
      * username of a user
@@ -32,10 +33,12 @@ public class MOCUser implements JSONAware, Serializable{
      * privileges of a user
      */
     private Role privilege;
-    
+
     private String company;
-    
+
     private String telephoneNumber;
+    
+    private String activationCode;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,8 +124,8 @@ public class MOCUser implements JSONAware, Serializable{
     public void setPrivilege(Role privilege) {
         this.privilege = privilege;
     }
-    
-        /**
+
+    /**
      * @return the company
      */
     public String getCompany() {
@@ -142,7 +145,7 @@ public class MOCUser implements JSONAware, Serializable{
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
-    
+
     /**
      * @param telephoneNumber the telephoneNumber to set
      */
@@ -162,4 +165,13 @@ public class MOCUser implements JSONAware, Serializable{
         obj.put("TelephoneNumber", this.telephoneNumber);
         return obj.toJSONString();
     }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
 }

@@ -2,6 +2,7 @@ package Domein;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Team implements JSONAware, Serializable {
     private int score;
     private String workspacePath;
     private String teamName;
+    private String serverName;
 
     @ManyToOne
     private Competition competition;
@@ -148,4 +150,15 @@ public class Team implements JSONAware, Serializable {
         return obj.toJSONString();
     }
 
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public int getNumberofMembers() {
+        return this.members.size();
+    };
 }
