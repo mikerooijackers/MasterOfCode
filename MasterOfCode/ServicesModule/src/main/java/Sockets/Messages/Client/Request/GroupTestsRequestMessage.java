@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,13 +17,24 @@ import org.json.simple.JSONValue;
  */
 public class GroupTestsRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GroupTestsRequestMessage.toString();
     
     private Long teamId;
     private String testGroup;
     
+    /**
+     * Constructor
+     */
     public GroupTestsRequestMessage(){}
     
+    /**
+     * Constructor
+     * @param teamId
+     * @param testGroup
+     */
     public GroupTestsRequestMessage(Long teamId, String testGroup) {
         this.teamId = teamId;
         this.testGroup = testGroup;
@@ -56,15 +68,20 @@ public class GroupTestsRequestMessage extends BaseMessage {
         this.testGroup = testGroup;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GroupTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonTeamId = (Long) obj.get("teamId");
-        String jsonTestGroup = obj.get("testGroup").toString();
+        Long jsonTeamId = (Long) obj.get("TeamId");
+        String jsonTestGroup = obj.get("TestGroup").toString();
         return new GroupTestsRequestMessage(jsonTeamId, jsonTestGroup);
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

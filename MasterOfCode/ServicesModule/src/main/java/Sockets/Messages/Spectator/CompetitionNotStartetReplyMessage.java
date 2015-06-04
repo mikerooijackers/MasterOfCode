@@ -6,8 +6,10 @@
 package Sockets.Messages.Spectator;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -15,12 +17,24 @@ import org.json.simple.JSONObject;
  */
 public class CompetitionNotStartetReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompetitionNotStartetReplyMessage.toString();
     
-    public void CompetitionNotStartedReplyMessage(){}
+    /**
+     * Constructor
+     */
+    public CompetitionNotStartetReplyMessage() {
+    }
+    
+    public static CompetitionNotStartetReplyMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new CompetitionNotStartetReplyMessage();
+    }
     
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,5 +44,5 @@ public class CompetitionNotStartetReplyMessage extends BaseMessage {
         obj.put("MessageType", this.messageType);
         return obj.toString();
     }
-    
+
 }

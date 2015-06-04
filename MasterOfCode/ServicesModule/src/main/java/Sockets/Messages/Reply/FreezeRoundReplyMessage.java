@@ -6,6 +6,7 @@
 package Sockets.Messages.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,17 +17,28 @@ import org.json.simple.JSONValue;
  */
 public class FreezeRoundReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.FreezeRoundReplyMessage.toString();
     
+    /**
+     * Constructor
+     */
     public FreezeRoundReplyMessage(){}
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static Sockets.Messages.Reply.FreezeRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new Sockets.Messages.Reply.FreezeRoundReplyMessage();
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

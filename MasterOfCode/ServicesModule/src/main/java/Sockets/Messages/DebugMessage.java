@@ -1,12 +1,15 @@
 package Sockets.Messages;
 
-import Domein.MOCUser;
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
+import Sockets.Messages.Client.Reply.HintReplyMessage;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 public class DebugMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.DebugMessage.toString();
     
         public static DebugMessage decodeJSON(String s) {
@@ -14,13 +17,16 @@ public class DebugMessage extends BaseMessage {
     }
     
     @Override
-    public void doAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void doAction(CommunicationBean communicationBean) {
+        HintReplyMessage mess = new HintReplyMessage("Test hint message");
+        communicationBean.sendMessageToCompetitor("Noor", mess);
     }
 
     @Override
     public String toJSONString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JSONObject obj = new JSONObject();
+        obj.put("MessageType", this.messageType);
+        return obj.toJSONString();
     }
     
 }

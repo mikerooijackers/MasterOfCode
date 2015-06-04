@@ -6,8 +6,10 @@
 package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -17,10 +19,18 @@ public class InviteMemberToTeamRequestMessage extends BaseMessage {
 
     public static final String messageType = MessageTypes.InviteMemberToTeamRequestMessage.toString();
     
-    public void InviteMemberToRequestMessage() {}
+    /**
+     * Constructor
+     */
+    public InviteMemberToTeamRequestMessage() {}
+    
+    public static InviteMemberToTeamRequestMessage decodeJSON(String s) {
+        JSONObject obj = (JSONObject) JSONValue.parse(s);
+        return new InviteMemberToTeamRequestMessage();
+    }
     
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

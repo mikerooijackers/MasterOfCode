@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,12 +17,22 @@ import org.json.simple.JSONValue;
  */
 public class CompileRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompileRequestMessage.toString();
     
     private Long teamId;
     
+    /**
+     * Constructor
+     */
     public CompileRequestMessage(){}
     
+    /**
+     * Constructor
+     * @param teamId
+     */
     public CompileRequestMessage(Long teamId) {
         this.teamId = teamId;
     }
@@ -40,14 +51,19 @@ public class CompileRequestMessage extends BaseMessage {
         this.teamId = teamId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CompileRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonTeamId = (Long) obj.get("teamId");
+        Long jsonTeamId = (Long) obj.get("TeamId");
         return new CompileRequestMessage(jsonTeamId);
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

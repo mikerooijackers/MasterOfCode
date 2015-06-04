@@ -10,8 +10,9 @@
         <module>MoCJMS</module>
         <module>Assignment</module>
         <module>ServicesModule</module>
-    <module>JMSLayerModule</module>
+        <module>JMSLayerModule</module>
         <module>UtilitiesModule</module>
+        <module>Annotations</module>
     </modules>
     <dependencies>
         <dependency>

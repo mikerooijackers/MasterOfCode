@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,13 +17,24 @@ import org.json.simple.JSONValue;
  */
 public class CompileReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CompileReplyMessage.toString();
     
     private String result;
     private Long teamId;
     
+    /**
+     * Constructor
+     */
     public CompileReplyMessage(){}
     
+    /**
+     * Constructor
+     * @param result
+     * @param teamId
+     */
     public CompileReplyMessage(String result, Long teamId) {
         this.result = result;
         this.teamId = teamId;
@@ -64,7 +76,7 @@ public class CompileReplyMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

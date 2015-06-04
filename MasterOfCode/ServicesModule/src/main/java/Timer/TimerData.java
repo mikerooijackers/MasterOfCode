@@ -16,15 +16,28 @@ public class TimerData implements Serializable {
     private String data;
     private TimerType timerType;
 
+    /**
+     * Constructor
+     * @param data
+     * @param timerType
+     */
     public TimerData(String data, TimerType timerType) {
         this.data = data;
         this.timerType = timerType;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getData() {
         return data;
     }
 
+    /**
+     *
+     * @return
+     */
     public TimerType getTimerType() {
         return timerType;
     }

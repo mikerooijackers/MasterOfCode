@@ -8,6 +8,8 @@ package REST;
 import Domein.Hint;
 import Domein.MOCUser;
 import Domein.Team;
+import Service.CompetitionService;
+import Service.UserService;
 import WebSocket.CompetitorEndPoint;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -23,7 +25,11 @@ import javax.ws.rs.core.Response;
 @Path("/RestResource")
 @Stateless
 public class RestResource {
-
+    
+    @Inject
+    UserService userService;
+    @Inject
+    CompetitionService competitionService;
     @Inject
     private CompetitorEndPoint endPoint;
 
@@ -37,6 +43,7 @@ public class RestResource {
     @POST
     @Path("register")
     public MOCUser Register(RegisterMessage message) {
+        
         return null;
         
     }
@@ -58,8 +65,7 @@ public class RestResource {
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
-        return null;
-        
+        return userService.GetAllUsers();
     }
     
     @GET
@@ -81,5 +87,12 @@ public class RestResource {
     public List<Hint> GetHintsOfCurrentRound() {
         return null;
         
+    }
+    
+    @GET
+    @Path("test")
+    public String test() {
+        userService.test();
+        return "hello";
     }
 }

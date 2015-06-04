@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Request;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,6 +17,9 @@ import org.json.simple.JSONValue;
  */
 public class EditSourceCodeRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.EditSourceCodeRequestMessage.toString();
     
     private String newSourceCode;
@@ -23,8 +27,18 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
     private Long roundId;
     private Long teamId;
     
+    /**
+     * Constructor
+     */
     public EditSourceCodeRequestMessage(){}
     
+    /**
+     *
+     * @param newSourceCode
+     * @param sourceCodeFile
+     * @param roundId
+     * @param teamId
+     */
     public EditSourceCodeRequestMessage(String newSourceCode, String sourceCodeFile, Long roundId, Long teamId) {
         this.newSourceCode = newSourceCode;
         this.sourceCodeFile = sourceCodeFile;
@@ -88,17 +102,22 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
         this.teamId = teamId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static EditSourceCodeRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonRoundId = (Long) obj.get("roundId");
-        Long jsonTeamId = (Long) obj.get("teamId");
-        String jsonNewSourceCode = obj.get("newSourceCode").toString();
-        String jsonSourceCodeFile = obj.get("sourceCodeFile").toString();
+        Long jsonRoundId = (Long) obj.get("RoundId");
+        Long jsonTeamId = (Long) obj.get("TeamId");
+        String jsonNewSourceCode = obj.get("NewSourceCode").toString();
+        String jsonSourceCodeFile = obj.get("SourceCodeFile").toString();
         return new EditSourceCodeRequestMessage(jsonNewSourceCode, jsonSourceCodeFile, jsonRoundId, jsonTeamId);
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

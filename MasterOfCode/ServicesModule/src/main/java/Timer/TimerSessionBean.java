@@ -15,15 +15,24 @@ import javax.ejb.TimerService;
  *
  * @author mikerooijackers
  */
-@Singleton
+//@Singleton
 public class TimerSessionBean {
     @Resource
     TimerService timerService;
     
+    /**
+     *
+     * @param duration
+     * @param timerData
+     */
     public void CreateTimer(long duration, TimerData timerData) {
         timerService.createTimer(duration, timerData);
     }
     
+    /**
+     *
+     * @param timer
+     */
     @Timeout
     public void TimerExpired(Timer timer) {
         TimerData timerData = (TimerData) timer.getInfo();

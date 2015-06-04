@@ -6,6 +6,7 @@
 package Sockets.Messages.Client.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,12 +17,24 @@ import org.json.simple.JSONValue;
  */
 public class OtherTeamScoreReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.OtherTeamScoreReplyMessage.toString();
     private Long teamId;
     private int teamScore;
     
+    /**
+     * Constructor
+     */
     public OtherTeamScoreReplyMessage(){};
     
+    /**
+     * Constructor
+     * @param competitionId
+     * @param teamId
+     * @param teamScore
+     */
     public OtherTeamScoreReplyMessage(Long competitionId, Long teamId, int teamScore) {
         this.teamId = teamId;
         this.teamScore = teamScore;
@@ -55,6 +68,11 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
         this.teamScore = teamScore;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static OtherTeamScoreReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
@@ -66,7 +84,7 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

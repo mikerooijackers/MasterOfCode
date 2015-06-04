@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-md-4"></div>
+    <div id="fullscreenInfo" class="col-md-8">
+        Click inside the editor and press "F11" to open the editor in full screen
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+        <table class="javaFileTable">
+            <tr class="tableHeader">
+                <th>Editable sourcecode</th>
+            </tr>
+            <tr class="package">
+                <td>Package 1</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 1</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 2</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 3</td>
+            </tr>
+            <tr class="package">
+                <td>Package 2</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 4</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 5</td>
+            </tr>
+        </table>
+        <table class="javaFileTable">
+            <tr class="tableHeader">
+                <th>Read-Only sourcecode</th>
+            </tr>
+            <tr class="package">
+                <td>Package 1</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 1</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 2</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 3</td>
+            </tr>
+            <tr class="package">
+                <td>Package 2</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 4</td>
+            </tr>
+            <tr class="javaclass">
+                <td>Class 5</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-7">
+        <textarea id="myTextArea">
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package REST;
+
+import javax.ws.rs.core.*;
+import javax.ws.rs.*;
+import Domein.*;
+
+/**
+ * REST Web Service
+ *
+ * @author mikerooijackers
+ */
+@Path("")
+public class RestResource {
+
+    /**
+     * Creates a new instance of RestResource
+     */
+    public RestResource() {
+    }
+    
+    @POST
+    @Path("startcompetition")
+    public String startCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("pausecompetition")
+    public String pauseCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("freezecompetition")
+    public String freezeCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("stopcompetition")
+    public String stopCompetition () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("startround")
+    public String startRound () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("pauseround")
+    public String pauseRound () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("freezeround")
+    public String freezeRound () {
+        
+        return "";
+    }
+    
+    @POST
+    @Path("stopround")
+    public String stopRound () {
+        
+        return "";
+    }
+}
+
+        </textarea>
+    </div>
+
+</div>

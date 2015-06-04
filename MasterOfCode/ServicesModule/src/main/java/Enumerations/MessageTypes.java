@@ -7,7 +7,7 @@ package Enumerations;
 
 /**
  *
- * @author JordiK
+ * @author JordiK, Mike Rooijackers
  */
 public enum MessageTypes {
     AddMemberToTeamRequestMessage("AddMemberToTeamRequestMessage"), 
@@ -36,7 +36,7 @@ public enum MessageTypes {
     HintReplyMessage("HintReplyMessage"),
     OtherTeamScoreReplyMessage("OtherTeamScoreReplyMessage"),
     PauseRoundReplyMessage("PauseRoundReplyMessage"),
-    UnfreezeRoundReplyMessage("UnfreezeRoundReplyMessage"),
+    UnFreezeRoundReplyMessage("UnFreezeRoundReplyMessage"),
     UserTestsReplyMessage("UserTestsReplyMessage"),
     ActionTeamRequestMessage("ActionTeamRequestMessage"),
     AddMemberToTeamClientRequestMessage("AddMemberToTeamClientRequestMessage"),
@@ -59,7 +59,6 @@ public enum MessageTypes {
     StopCompetitionReplyMessage("StopCompetitionReplyMessage"),
     StopRoundReplyMessage("StopRoundReplyMessage"),
     TeamActionReplyMessage("TeamActionReplyMessage"),
-    UnFreezeRoundReplyMessage("UnFreezeRoundReplyMessage"),
     CompetitionEndedReplyMessage("CompetitionEndedReplyMessage"),
     CompetitionInfoReplyMessage("CompetitionInfoReplyMessage"),
     CompetitionNotStartetReplyMessage("CompetitionNotStartetReplyMessage"),

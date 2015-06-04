@@ -2,6 +2,7 @@ package WebSocket;
 
 import MessageUtils.MessageDecoder;
 import MessageUtils.MessageEncoder;
+import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.HintReplyMessage;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.websocket.CloseReason;
 import javax.websocket.EncodeException;
 import javax.websocket.EndpointConfig;
@@ -34,14 +36,27 @@ import javax.websocket.server.ServerEndpoint;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Singleton
 public class AdminEndPoint {
+    
+    @Inject
+    private CommunicationBean communicationBean;
 
     private final HashMap<String, Session> sessions = new HashMap<>();
 
+    /**
+     *
+     * @param endpointConfig
+     * @param session
+     */
     @OnOpen
     public void onOpen(EndpointConfig endpointConfig, Session session) {
         System.out.println("Session opened!!!");
     }
 
+    /**
+     *
+     * @param session
+     * @param message
+     */
     @OnMessage
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
@@ -49,7 +64,7 @@ public class AdminEndPoint {
         } else if (message instanceof DebugMessage) {
             sendMessage("Jordi", new HintReplyMessage("Because I'm a potato!"));
         } else {
-            message.doAction();
+            message.doAction(communicationBean);
         }
     }
 
@@ -57,6 +72,11 @@ public class AdminEndPoint {
         this.sessions.put(mess.getUsername(), session);
     }
 
+    /**
+     *
+     * @param username
+     * @param message
+     */
     public void sendMessage(String username, Object message) {
         try {
             sessions.get(username).getBasicRemote().sendObject(message);
@@ -66,11 +86,21 @@ public class AdminEndPoint {
         }
     }
 
+    /**
+     *
+     * @param session
+     * @param error
+     */
     @OnError
     public void onError(Session session, Throwable error) {
         Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, "An error occured in session " + session, error);
     }
 
+    /**
+     *
+     * @param session
+     * @param reason
+     */
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         System.out.println("Closing session");

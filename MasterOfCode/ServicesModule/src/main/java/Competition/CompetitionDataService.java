@@ -19,42 +19,77 @@ public class CompetitionDataService {
     private RoundMetaData roundMetaData;
     private long BackupRemainingRoundTime;
     
+    /**
+     * start coundown of timer Competition
+     */
     public void StartCompetitionCounDownTimer() {
         
     }    
     
+    /**
+     * start round timer
+     */
     public void StartRoundTimer() {
         
     }
     
+    /**
+     * pause round timer
+     */
     public void PauseRoundTimer() {
         
     }
     
+    /**
+     * cancel round timer
+     */
     public void CancelRoundTimer() {
         
     }
     
+    /**
+     * Cancel all timers
+     */
     public void CancelAllTimers() {
         
     }
     
+    /**
+     * resuem round timer
+     */
     public void ResumeRoundTimer() {
         
     }
     
+    /**
+     * set metadata of a round
+     * @param roundMetaData
+     */
     public void SetRoundMetaData(RoundMetaData roundMetaData) {
         
     }
     
+    /**
+     * modify timer of a round
+     * @param deltaIntervalDuration
+     */
     public void ModifyTimeRoundTimer(long deltaIntervalDuration) {
         
     }
     
+    /**
+     * update score of a team
+     * @param teamID
+     * @param score
+     */
     public void UpdateTeamScore(String teamID, long score) {
         
     }
     
+    /**
+     * get all teams 
+     * @return
+     */
     public List<Team> GetTeams() {
         return null;
         

@@ -6,6 +6,7 @@
 package Sockets.Messages.Reply;
 
 import Enumerations.MessageTypes;
+import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,15 +17,27 @@ import org.json.simple.JSONValue;
  */
 public class StartCompetitionReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StartCompetitionReplyMessage.toString();
     private int numberOfRounds;
     private String competitionName;
     private Long startTime;
     
+    /**
+     * Constructor
+     */
     public StartCompetitionReplyMessage() {
         
     }
     
+    /**
+     *
+     * @param numberOfRounds
+     * @param competitionName
+     * @param startTime
+     */
     public StartCompetitionReplyMessage(int numberOfRounds, String competitionName, Long startTime) {
         this.numberOfRounds = numberOfRounds;
         this.competitionName = competitionName;
@@ -73,18 +86,23 @@ public class StartCompetitionReplyMessage extends BaseMessage {
         this.startTime = startTime;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StartCompetitionReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
-        int jsonNumberOfRounds = (int) obj.get("numberOfRounds");
-        String jsonCompetitionName = obj.get("competitionName").toString();
-        Long jsonStartTime = (Long) obj.get("startTime");
+        int jsonNumberOfRounds = (int) obj.get("NumberOfRounds");
+        String jsonCompetitionName = obj.get("CompetitionName").toString();
+        Long jsonStartTime = (Long) obj.get("StartTime");
         
         return new StartCompetitionReplyMessage(jsonNumberOfRounds, jsonCompetitionName, jsonStartTime);
     }
 
     @Override
-    public void doAction() {
+    public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
