@@ -8,6 +8,8 @@
     <class>Domein.Hint</class>
     <class>Domein.MOCUser</class>
     <class>Domein.Round</class>
+    <class>Domein.Configuration</class>
+    <class>Domein.RoundScore</class>
     <class>Domein.Team</class>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

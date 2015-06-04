@@ -8,11 +8,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class MOCUser {
+    
+    private String activationCode;
 
-	/**
-	 * username of a user
-	 */
-	private String username;
 	/**
 	 * password of a user
 	 */
@@ -63,13 +61,6 @@ public class MOCUser {
         this.id = id;
     }
 
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return this.password;
@@ -102,5 +93,13 @@ public class MOCUser {
 	public void setPrivilege(Role privilege) {
 		this.privilege = privilege;
 	}
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
 
 }

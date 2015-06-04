@@ -53,7 +53,7 @@ public class UserService {
         else {
             for (MOCUser user : listUsers) {
                 System.out.print("UserID= " + user.getId()
-                    + ", Username" + user.getUsername() 
+                    //+ ", Username" + user.getUsername() 
                     + ", Email=" + user.getEmail() 
                     + ", Password=" + user.getPassword()
                     + ", Fullname= " + user.getFullName()
