@@ -5,6 +5,7 @@
  */
 package mocjms.messages.reply;
 
+import com.mycompany.jmslayermodule.ReplyBean;
 import mocjms.messages.main.CompetitionBaseMessage;
 import mocjms.messages.main.OperationDrivenMessage;
 
@@ -41,8 +42,8 @@ public class EditSourceCodeReplyMessage extends CompetitionBaseMessage implement
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void doWork(ReplyBean replyBean) {
+        //replyBean.send(this);
     }
     
 }
