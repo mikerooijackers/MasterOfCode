@@ -38,73 +38,103 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                     });
         })
 
-        .controller('mainController', function ($scope, SocketService, $rootScope, InformationService) {
+        .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval) {
             $scope.message = 'This is the main controller';
             SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
             var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
             SocketService.sendMessage(NewSessionConnectionMessage);
 
+            $scope.hoursRemaining = 3;
+            $scope.minutesRemaining = 0;
+            $scope.secondsRemaining = 10;
+
             $rootScope.$on("HintReplyMessage", function (event, data) {
                 InformationService.hints.push(data.HintMessage);
             });
-        })
 
-        .controller('homeController', function ($scope, $rootScope, SocketService) {
-            $scope.message = 'Home controller';
+            $rootScope.$on("StartRoundReplyMessage", function (event, data) {
+                InformationService.assignCreatorName = data.AssignCreatorName;
+                InformationService.assignCreatorCompany = data.AssignCreatorCompany;
+                InformationService.assignCreatorWeb = data.AssignCreatorWeb;
 
-            $rootScope.$on('StartRoundMessage', function (event, data) {
-                var informationString = "Assignment creator: \n";
-                informationString += data.AssignCreatorName;
-                informationString += "\n\n Hello world";
-                document.getElementById('assignmentTextArea').innerHTML = informationString;
+                InformationService.assignName = data.AssignName;
+                InformationService.assignDescriptionCompetitors = data.AssignDescriptionCompetitors;
+                InformationService.assignDescriptionSpectators = data.AssignDescriptionSpectators;
             });
 
-            $scope.debug = function () {
-                SocketService.sendMessage({MessageType: "DebugMessage"});
-            };
-        })
-
-        .controller('editorController', function ($scope) {
-            $scope.editorOption = {
-                lineNumbers: true
-            };
-            var javaEditor = CodeMirror.fromTextArea(document.getElementById("myTextArea"), {
-                lineNumbers: true,
-                theme: "neat",
-                matchBrackets: true,
-                mode: "text/x-java",
-                foldGutter: {
-                    rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)
-                },
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                extraKeys: {"F11": function (cm) {
-                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-                    }
+            $rootScope.$on("GetSourceFilesReplyMessage", function (event, data) {
+                InformationService.sourceFiles = [];
+                for (var file in data.SourceFiles) {
+                    InformationService.sourceFiles[file] = data.SourceFiles[file];
                 }
             });
-            javaEditor.setSize(null, 495);
-        })
 
-        .controller('compileController', function ($scope) {
-            $scope.message = "Controller succesfully linked";
-        })
+            $rootScope.$on("CompileReplyMessage", function (event, data) {
+                InformationService.lastCompileResult = data.Result;
+            });
 
-        .controller('javadocController', function ($scope) {
-            $scope.message = "Javadoc controller";
-            $scope.pdfLink = "https://portal.fhict.nl/IS/S6/Lesmateriaal/PTSE6-Master%20of%20Code-Studiewijzer.pdf";
-        })
+            var fadeIn;
+            var fadeOut;
 
-        .controller('turninController', function ($scope) {
-            $scope.message = "Turn in conroller";
-        })
+            $rootScope.$on("TeamActionReplyMessage", function (event, data) {
+                if (angular.isDefined(fadeOut)) {
+                    $interval.cancel(fadeOut);
+                }
+                
+                document.getElementById("newsFeedContent").style.opacity = 1;
+                
+                fadeOut = $interval(function () {
+                    var opacity = document.getElementById("newsFeedContent").style.opacity;
+                    console.log(opacity);
+                    if (opacity <= 0) {
+                        $interval.cancel(fadeOut);
+                        $scope.startFadeIn(data);
+                    }
+                    opacity -= 0.05;
+                    document.getElementById("newsFeedContent").style.opacity = opacity;
+                }, 10);
+            });
 
-        .controller('testingController', function ($scope) {
-            $scope.message = "Testing controller";
-            $scope.showOutput = function (test, output) {
-                var testOutputTable = document.getElementById('testOutput' + test);
-                testOutputTable.style.marginTop = 0;
-                var testOutputField = document.getElementById('outputField' + test);
-                testOutputField.innerHTML = output;
-                testOutputField.style.height = "50px";
+            $scope.startFadeIn = function (data) {
+                if (angular.isDefined(fadeIn)) {
+                    $interval.cancel(fadeIn);
+                }
+                document.getElementById("newsFeedContent").innerHTML = data.Action;
+                fadeIn = $interval(function () {
+                    var opacity = Number(document.getElementById("newsFeedContent").style.opacity);
+                    if (opacity === 1) {
+                        $interval.cancel(fadeIn);
+                    }
+                    opacity += 0.05;
+                    document.getElementById("newsFeedContent").style.opacity = opacity;
+                }, 10);
+            }
+
+            $scope.debug = function () {
+                var mess = {MessageType: "DebugMessage"};
+                SocketService.sendMessage(mess);
+            }
+
+            $scope.timer = $interval(function () {
+                $scope.secondsRemaining--;
+                if ($scope.secondsRemaining < 0) {
+                    $scope.minutesRemaining--;
+                    $scope.secondsRemaining = 59;
+                }
+                if ($scope.minutesRemaining < 0) {
+                    $scope.hoursRemaining--;
+                    $scope.minutesRemaining = 59;
+                }
+
+                if ($scope.secondsRemaining === 0 && $scope.minutesRemaining === 0 && $scope.hoursRemaining === 0) {
+                    $interval.cancel($scope.timer);
+                }
+            }, 1000);
+
+            $scope.displayWithLeadingZero = function (number) {
+                if (number < 10) {
+                    return "0" + number;
+                }
+                return number;
             }
         });
