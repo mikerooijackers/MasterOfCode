@@ -5,8 +5,11 @@
  */
 package mocjms.messages.request;
 
+import com.mycompany.jmslayermodule.ReplyBean;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import mocjms.messages.main.CompetitionBaseMessage;
 import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.reply.EditSourceCodeReplyMessage;
 
 /**
  *
@@ -51,7 +54,10 @@ public class EditSourceCodeRequestMessage extends CompetitionBaseMessage impleme
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void doWork(ReplyBean replyBean) {
+        boolean success = WorkspaceService.getInstance().editSourceCode(classPath, newCode);
+        
+        OperationDrivenMessage message = new EditSourceCodeReplyMessage(success, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        replyBean.send(message);
     }
 }

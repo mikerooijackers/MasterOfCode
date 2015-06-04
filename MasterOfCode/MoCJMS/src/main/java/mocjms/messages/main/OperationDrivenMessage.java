@@ -5,10 +5,12 @@
  */
 package mocjms.messages.main;
 
+import com.mycompany.jmslayermodule.ReplyBean;
+
 /**
  *
  * @author Gebruiker
  */
 public interface OperationDrivenMessage {
-    public void doWork();
+    public void doWork(ReplyBean replyBean);
 }

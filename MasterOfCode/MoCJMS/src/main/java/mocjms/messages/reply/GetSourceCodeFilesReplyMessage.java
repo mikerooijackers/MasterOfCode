@@ -6,6 +6,7 @@
 package mocjms.messages.reply;
 
 import Domein.SourceCode;
+import com.mycompany.jmslayermodule.ReplyBean;
 import java.util.ArrayList;
 import java.util.List;
 import mocjms.messages.main.CompetitionBaseMessage;
@@ -46,8 +47,8 @@ public class GetSourceCodeFilesReplyMessage extends CompetitionBaseMessage imple
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void doWork(ReplyBean replyBean) {
+        replyBean.send(this);
     }
     
 }
