@@ -2,7 +2,6 @@ package Domein;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 @Entity
 public class Team implements Serializable {
 
@@ -94,22 +97,42 @@ public class Team implements Serializable {
         this.competition = competition;
     }
 
+    /**
+     * get serverName
+     * @return
+     */
     public String getServerName() {
         return serverName;
     }
 
+    /**
+     * set ServerName
+     * @param serverName
+     */
     public void setServerName(String serverName) {
         this.serverName = serverName;
     }
 
+    /**
+     * get number of Members
+     * @return
+     */
     public int getNumberofMembers() {
         return this.members.size();
     };
 
+    /**
+     * get TeamName
+     * @return
+     */
     public String getTeamName() {
         return teamName;
     }
 
+    /**
+     * Set Name
+     * @param teamName
+     */
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }

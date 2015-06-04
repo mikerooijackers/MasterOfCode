@@ -13,6 +13,7 @@
         <module>JMSLayerModule</module>
         <module>UtilitiesModule</module>
         <module>Annotations</module>
+        <module>WorkspaceManagementModuleB</module>
     </modules>
     <dependencies>
         <dependency>
