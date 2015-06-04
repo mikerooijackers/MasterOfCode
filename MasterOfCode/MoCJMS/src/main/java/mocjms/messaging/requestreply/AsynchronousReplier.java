@@ -17,7 +17,7 @@ import mocjms.messaging.MessagingGateway;
  * @param <REPLY>
  * @author Maja Pesic
  */
-public class AsynchronousReplier<REQUEST, REPLY> {
+public class AsynchronousReplier {
 
     /**
      * For sending and receiving messages

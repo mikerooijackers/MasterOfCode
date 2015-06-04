@@ -12,11 +12,14 @@ import com.mycompany.annotations.AssignInformation;
 import com.mycompany.annotations.Editable;
 import com.mycompany.annotations.Hints;
 import com.mycompany.annotations.ReadOnly;
+import com.mycompany.utilitiesmodule.ZipUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.FileUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.ReflectionUtils;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,16 +50,17 @@ public class WorkspaceService {
     
     public static final String WORKSPACES_PATH = "C:\\workspaces";
     public static final String ASSIGNMENTS_PATH = "C:\\assignments";
+    public static final String DEFAULT_JAVA_SOURCECODE_PATH = "src\\main\\java";
     
-    public String createWorkspace(Long competitionId, Long teamId, String workspacePath) {
-        String path = workspacePath + File.separator + competitionId + File.separator + teamId;
+    public String createWorkspace(Long competitionId, Long teamId) {
+        String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId;
         new File(path).mkdirs();
         
         return path;
     }
     
-    public String deleteWorkspace(Long competitionId, Long teamId, String workspacePath) {
-        String path = workspacePath + File.separator + competitionId + File.separator + teamId ;
+    public String deleteWorkspace(Long competitionId, Long teamId) {
+        String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId ;
         this.deleteFolder(new File(path));
         
         return path;
@@ -81,7 +85,7 @@ public class WorkspaceService {
         boolean succesful = false;
         try {
             String sourceFilePath = sourceCodePath; //workspacePath + "\\" + team.getId() + "\\" + assignmentDirectory + "\\" + sourceCodePath;
-            String path = sourceFilePath.substring(0, sourceFilePath.lastIndexOf(File.pathSeparator)); //+ "\\" + sourceCodeFileName;
+            String path = sourceFilePath.substring(0, sourceFilePath.lastIndexOf(File.separator)); //+ "\\" + sourceCodeFileName;
             File sourceFile = new File(sourceFilePath);
 
             writer = new FileWriter(sourceFile);
@@ -106,16 +110,14 @@ public class WorkspaceService {
         return succesful;
     }
 
-    public List<SourceCode> readSourceCode(Long teamId, Long competitionId, Long roundId, String workspacePath, String sourceCodePath, String assignmentPath, Long assignmentId) {
-        List<SourceCode> sourceCodeFiles = new ArrayList<>();
-        String path = assignmentPath;
-        List<AnnotationData> annotationData = ReflectionUtils.readAnnotationData(path, ReadOnly.class, Editable.class);
+    public List<SourceCode> readSourceCode(Long teamId, Long competitionId, Long roundId, List<AnnotationData> annotationData) {
+        List<SourceCode> sourceCodeFiles = new ArrayList<>();      
 
-        path = workspacePath + File.separator + teamId + File.separator + competitionId + File.separator + roundId; //+ "\\" + sourceCodePath;
+        String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId; //+ "\\" + sourceCodePath;
 
         File folder = new File(path);
         File[] files = folder.listFiles();
-        path += File.separator + files[0].getName() + File.separator + sourceCodePath;
+        path += File.separator + files[0].getName() + File.separator + DEFAULT_JAVA_SOURCECODE_PATH;
 
         for (AnnotationData ad : annotationData) {
             String sourceCodeFilePath = ad.getName().replace(".", File.separator);
@@ -141,34 +143,96 @@ public class WorkspaceService {
         return annotationData;
     }
 
-    public void extractAssignmentToWorkspace(Long teamId, Long competitionId, Long roundId, String workspacePath, Long assignmentId, String assignmentPath) {
-        String destination = workspacePath + File.separator + teamId + File.separator + competitionId + File.separator + roundId;
-        new File(destination).mkdir();
+    public boolean extractAssignmentToWorkspaces(Long competitionId, Long roundId, byte[] blob) {
+        String destination = WORKSPACES_PATH + File.separator + competitionId;
+        File zipFile = new File(WORKSPACES_PATH + File.separator + "temp.zip");
+        ZipUtils.writeByteArrayToFile(blob, zipFile);
         
-        File assignmentFolder = new File(assignmentPath);
-        File[] files = assignmentFolder.listFiles();
-        for (File file : files) {
-            if (FileUtils.checkFileExtension(file, ".zip")) {
-                FileUtils.extractZIPFile(file, destination);
-                break;
+        File competitionFolder = new File(destination);
+        File[] teamWorkspaces = competitionFolder.listFiles();
+        
+        for (File teamWorkspace : teamWorkspaces) {
+            String teamWorkspaceDestination = destination + File.separator + teamWorkspace.getName() + File.separator + roundId;
+            
+            new File(teamWorkspaceDestination).mkdir();
+        
+            
+            
+            File assignmentFolder = new File(ASSIGNMENTS_PATH);
+            File[] files = assignmentFolder.listFiles();
+            for (File file : files) {
+                if (FileUtils.checkFileExtension(file, ".zip")) {
+                    FileUtils.extractZIPFile(file, teamWorkspaceDestination);
+                    break;
+                }
             }
         }
+        
+        return true;
+//+ File.separator + teamId + File.separator + roundId;
+        
     }
     
-    public boolean requestCompile(String sourcePath) {
-        // The project cannot be compiled if the sourcePath is null
-        if (sourcePath == null) {
-            System.out.println("The project to compile cannot be found");
-            return false;
-        }
+    public String requestCompile(Long teamId, Long competitionId, Long roundId) {
+        String pomPath = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId;
+        File folder = new File(pomPath);
+        File[] files = folder.listFiles();
+        pomPath += File.separator + files[0].getName();
+        
+        String result;
         // Start a new process with the given sourcePath
         try {
+
             new ProcessBuilder(
-                    "pom.xml", "-cp", sourcePath).start();
+                    "pom.xml", "-cp", pomPath).start();
+            result = "Compilation successful";
+
+            /**
+             * The project cannot be compiled if: 1: The sourcePath is null 2:
+             * The sourcePath is invalid
+             */
         } catch (IOException ex) {
+            // access to the stack trace
+            StackTraceElement[] trace = ex.getStackTrace();
+            result = trace[0].toString();
+        }
+        return result;
+    }
+    
+    public String runTestGroup(String group, Long competitionId, Long teamId, Long roundId) {
+        String pomPath = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId;
+        File folder = new File(pomPath);
+        File[] files = folder.listFiles();
+        pomPath += File.separator + files[0].getName();
+        
+        String command = "cmd.exe /c mvn test -Dgroup=" + group;
+        return runCommand(command, pomPath);
+    }
+    
+    public String runSingleTest(String test, Long competitionId, Long teamId, Long roundId) {
+        String pomPath = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId;
+        File folder = new File(pomPath);
+        File[] files = folder.listFiles();
+        pomPath += File.separator + files[0].getName();
+        
+        String command = "cmd.exe /c mvn test -Dtest=" + test;
+        return runCommand(command, pomPath);
+    }
+    
+    public String runCommand(String command, String directory) {
+        String output = "";
+        Process p;
+        try {
+            p = Runtime.getRuntime().exec(command, null, new File(directory));
+            p.waitFor();
+            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = "";
+            while ((line = r.readLine()) != null) {
+                output += line + "\n";
+            }
+        } catch (IOException | InterruptedException ex) {
             Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Compilation successful");
-        return true;
+        return output;
     }
 }
