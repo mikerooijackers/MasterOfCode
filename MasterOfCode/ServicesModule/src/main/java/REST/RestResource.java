@@ -42,7 +42,9 @@ public class RestResource {
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
-        return null;
+        String email = message.getEmail();
+        String password = message.getPassword();
+        return userService.Login(email, password);
         
     }
     

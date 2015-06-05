@@ -5,10 +5,23 @@
  */
 package REST;
 
+import Domein.Role;
+
 /**
  *
  * @author mikerooijackers
  */
 class LoginMessage {
+    private String email;
+    private String password;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
     
 }

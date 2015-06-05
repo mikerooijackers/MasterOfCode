@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -31,7 +32,17 @@ public class UserService {
      * @return
      */
     public MOCUser Login(String username, String password) {
-        return null;
+        MOCUser user = new MOCUser();
+        user = (MOCUser) em.createNamedQuery("LoginUser").setParameter("user", username).setParameter("password", password).getSingleResult();
+        if (user == null) {
+            System.out.println("No person found.");
+        }
+        else {
+            System.out.print("UserID= " + user.getId()
+                + ", Email=" + user.getEmail()
+                + ", Fullname= " + user.getFullName());
+        }
+        return user;
     }
 
     /**
