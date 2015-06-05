@@ -5,6 +5,8 @@
  */
 package REST;
 
+import Domein.Role;
+
 /**
  *
  * @author mikerooijackers
@@ -14,8 +16,7 @@ class RegisterMessage {
     private String email;
     private String fullname;
     private String password;
-    private int privilege;
-    private int teamID;
+    private Role privilege;
     private String activationCode;
 
     public String getEmail() {
@@ -30,12 +31,8 @@ class RegisterMessage {
         return password;
     }
 
-    public int getPrivilege() {
+    public Role getPrivilege() {
         return privilege;
-    }
-
-    public int getTeamID() {
-        return teamID;
     }
 
     public String getActivationCode() {

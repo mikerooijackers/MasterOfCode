@@ -7,6 +7,7 @@ package REST;
 
 import Domein.Hint;
 import Domein.MOCUser;
+import Domein.Role;
 import Domein.Team;
 import Service.CompetitionService;
 import Service.UserService;
@@ -56,10 +57,9 @@ public class RestResource {
         String email = message.getEmail();
         String fullname = message.getFullname();
         String password = message.getPassword();
-        int privilege = message.getPrivilege();
-        int teamID = message.getTeamID();
+        Role privilege = message.getPrivilege();
         String activationCode = message.getActivationCode();
-        return userService.Register(email, fullname, password, privilege, teamID, activationCode);
+        return userService.Register(email, fullname, password, privilege, activationCode);
         
     }
     

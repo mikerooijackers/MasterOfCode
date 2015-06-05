@@ -6,6 +6,7 @@
 package Service;
 
 import Domein.MOCUser;
+import Domein.Role;
 import Domein.Team;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -55,8 +56,16 @@ public class UserService {
      * @param password
      * @return
      */
-    public MOCUser Register(String email, String fullname, String password, int privilege, int teamID, String activationCode) {
-        return null;
+    public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode) {
+        em.getTransaction().begin();
+        MOCUser user = new MOCUser();
+        user.setEmail(email);
+        user.setFullName(fullname);
+        user.setName(password);
+        user.setPrivilege(Role.initiator);
+        user.setActivationCode(activationCode);
+        em.getTransaction().commit();
+        return user;
     }
 
     /**
