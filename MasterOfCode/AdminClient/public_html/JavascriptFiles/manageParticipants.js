@@ -19,6 +19,7 @@ angular.module('adminClient')
                 var participantTable = document.getElementById("participantTable");
                 participantTable.innerHTML = "";
 
+// Test
                 for (var participant in InformationService.participants) {
                     participantTable.innerHTML += "<tr><td><a ng-click=\"fillParticipantInfoTable('" + participant + "')\">" + participant + "</a></td></tr>";
                 }
