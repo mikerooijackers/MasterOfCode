@@ -14,11 +14,11 @@ import javax.jms.MessageListener;
  *
  * @author mikerooijackers
  */
-//@MessageDriven(mappedName = "ReplyBean")
+@MessageDriven(mappedName = "jms/MasterOfCode/ReplyQueue")
 public class ReplyBean implements MessageListener {
     
     @Override
     public void onMessage(Message message) {
-        
+        System.out.println("reply received");
     }
 }

@@ -5,14 +5,13 @@
  */
 package mocjms.messages.reply;
 
-import com.mycompany.jmslayermodule.ReplyBean;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
- *
+ * @deprecated Use UserTestReplyMessage instead.
  * @author JordiK
  */
-public class RunSingleTestReplyMessage implements OperationDrivenMessage {
+public class RunSingleTestReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
     
     private String output;
     
@@ -37,10 +36,4 @@ public class RunSingleTestReplyMessage implements OperationDrivenMessage {
     public void setOutput(String output) {
         this.output = output;
     }
-
-    @Override
-    public void doWork(ReplyBean replyBean) {
-        replyBean.send(this);
-    }
-    
 }

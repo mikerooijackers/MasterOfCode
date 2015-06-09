@@ -18,8 +18,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UserService {
     
-    @PersistenceContext(unitName = "masterofcodedb")
-    private EntityManager em;
+    //@PersistenceContext(unitName = "masterofcodedb")
+    //private EntityManager em;
     
     
     /**
@@ -32,7 +32,7 @@ public class UserService {
         return null;
     }
 
-    public void test() {
+    /*public void test() {
         MOCUser user = new MOCUser();
         user.setId(1);
         em.persist(user);
@@ -63,5 +63,5 @@ public class UserService {
         }
         return listUsers;
         
-    }
+    }*/
 }

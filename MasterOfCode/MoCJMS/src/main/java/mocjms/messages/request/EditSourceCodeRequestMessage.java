@@ -5,17 +5,16 @@
  */
 package mocjms.messages.request;
 
-import com.mycompany.jmslayermodule.ReplyBean;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
 import mocjms.messages.reply.EditSourceCodeReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class EditSourceCodeRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class EditSourceCodeRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
     private String classPath;
     private String newCode;
 
@@ -54,10 +53,10 @@ public class EditSourceCodeRequestMessage extends CompetitionBaseMessage impleme
     }
     
     @Override
-    public void doWork(ReplyBean replyBean) {
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
         boolean success = WorkspaceService.getInstance().editSourceCode(classPath, newCode);
         
-        OperationDrivenMessage message = new EditSourceCodeReplyMessage(success, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
-        replyBean.send(message);
+        CompetitionBasedOperationDrivenReplyMessage message = new EditSourceCodeReplyMessage(success, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        return message;
     }
 }

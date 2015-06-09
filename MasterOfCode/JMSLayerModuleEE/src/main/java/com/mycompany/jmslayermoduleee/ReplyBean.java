@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.jmslayermodule;
+package com.mycompany.jmslayermoduleee;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -13,11 +14,13 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
-import mocjms.messages.main.OperationDrivenMessage;
 
 /**
  *
@@ -59,7 +62,15 @@ public class ReplyBean {
         }
     }
     
-    public void send(OperationDrivenMessage message) {
-        
+    public void send(Serializable message) {
+        try (JMSContext context = factory.createContext()) {
+            context.createProducer().send(queue, message);
+        }
+//        try {
+//            ObjectMessage om = session.createObjectMessage(message);
+//            producer.send(om);
+//        } catch (JMSException ex) {
+//            Logger.getLogger(ReplyBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

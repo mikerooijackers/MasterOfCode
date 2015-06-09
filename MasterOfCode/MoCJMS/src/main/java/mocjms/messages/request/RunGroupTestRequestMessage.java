@@ -6,14 +6,14 @@
 package mocjms.messages.request;
 
 import java.util.List;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
 
 /**
- *
+ * @deprecated Use GroupTestRequestMessage instead.
  * @author JordiK
  */
-public class RunGroupTestRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class RunGroupTestRequestMessage extends OperationDrivenRequestMessage {
     
     private List<String> group;
     private String directory;
@@ -56,7 +56,8 @@ public class RunGroupTestRequestMessage extends CompetitionBaseMessage implement
     }
 
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public OperationDrivenReplyMessage generateReplyMessage() {
+        return null;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
