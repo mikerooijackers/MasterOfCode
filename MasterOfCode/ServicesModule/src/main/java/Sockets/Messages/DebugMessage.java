@@ -2,7 +2,9 @@ package Sockets.Messages;
 
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
-import Sockets.Messages.Client.Reply.HintReplyMessage;
+import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
+import java.util.HashMap;
+import java.util.Map;
 import org.json.simple.JSONObject;
 
 public class DebugMessage extends BaseMessage {
@@ -11,14 +13,18 @@ public class DebugMessage extends BaseMessage {
      *
      */
     public static final String messageType = MessageTypes.DebugMessage.toString();
-    
-        public static DebugMessage decodeJSON(String s) {
+
+    public static DebugMessage decodeJSON(String s) {
         return new DebugMessage();
     }
-    
+
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        HintReplyMessage mess = new HintReplyMessage("Test hint message");
+        Map<String, String> descriptions = new HashMap<String, String>();
+        descriptions.put("Test1", "This is the first test.");
+        descriptions.put("Test2", "This is the seconds test.");
+        descriptions.put("Test3", "This is the third test.");
+        GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
         communicationBean.sendMessageToCompetitor("Noor", mess);
     }
 
@@ -28,5 +34,5 @@ public class DebugMessage extends BaseMessage {
         obj.put("MessageType", this.messageType);
         return obj.toJSONString();
     }
-    
+
 }
