@@ -5,16 +5,15 @@
  */
 package mocjms.messages.reply;
 
-import com.mycompany.jmslayermodule.ReplyBean;
 import java.util.ArrayList;
 import java.util.List;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
- *
+ * @deprecated Use GroupTestReplyMessage instead.
  * @author JordiK
  */
-public class RunGroupTestReplyMessage implements OperationDrivenMessage {
+public class RunGroupTestReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
     
     private List<String> commandOutput;
     
@@ -38,10 +37,5 @@ public class RunGroupTestReplyMessage implements OperationDrivenMessage {
      */
     public void setCommandOutput(List<String> commandOutput) {
         this.commandOutput = commandOutput;
-    }
-
-    @Override
-    public void doWork(ReplyBean replyBean) {
-        replyBean.send(this);
     }
 }

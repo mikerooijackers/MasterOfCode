@@ -5,17 +5,16 @@
  */
 package mocjms.messages.request;
 
-import com.mycompany.jmslayermodule.ReplyBean;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
 import mocjms.messages.reply.CompileReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class CompileRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class CompileRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
     
     public CompileRequestMessage() {
     }
@@ -25,11 +24,11 @@ public class CompileRequestMessage extends CompetitionBaseMessage implements Ope
     }
     
     @Override
-    public void doWork(ReplyBean replyBean) {
-        WorkspaceService.getInstance().requestCompile(super.getTeamId(), super.getCompetitionId(), super.getRoundId());
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
+        String result = WorkspaceService.getInstance().requestCompile(super.getTeamId(), super.getCompetitionId(), super.getRoundId());
         
-        OperationDrivenMessage message = new CompileReplyMessage("TO SPECIFY", super.getTeamId(), super.getRoundId(), super.getCompetitionId());
-        replyBean.send(message);
+        CompetitionBasedOperationDrivenReplyMessage message = new CompileReplyMessage(result, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        return message;
     }
     
 }

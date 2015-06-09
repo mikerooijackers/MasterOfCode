@@ -11,6 +11,7 @@ import java.io.Serializable;
  *
  * @author Gebruiker
  */
-public interface OperationDrivenMessage {
-    public Serializable generateReplyMessage();
+public abstract class OperationDrivenRequestMessage implements Serializable, OperationDrivenMessage {    
+    @Override
+    public abstract OperationDrivenReplyMessage generateReplyMessage();
 }

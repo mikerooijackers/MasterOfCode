@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.jmslayermodule;
+package com.mycompany.jmslayermoduleee;
 
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -35,9 +35,15 @@ public class RequestBean implements MessageListener {
                 ObjectMessage objectMessage = (ObjectMessage) message;
                 Serializable object = objectMessage.getObject();
                 
+                Serializable reply = null;
+                
                 if (object instanceof OperationDrivenMessage) {
                     OperationDrivenMessage odm = (OperationDrivenMessage) object;
-                    //odm.doWork(replyBean);
+                    reply = odm.generateReplyMessage();
+                }
+                
+                if (reply != null) {
+                    replyBean.send(reply);
                 }
             } catch (JMSException ex) {
                 Logger.getLogger(RequestBean.class.getName()).log(Level.SEVERE, null, ex);

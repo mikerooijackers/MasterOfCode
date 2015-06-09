@@ -5,14 +5,15 @@
  */
 package mocjms.messages.request;
 
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
+
 
 /**
- *
+ * @deprecated Use UserTestRequestMessage instead.
  * @author JordiK
  */
-public class RunSingleTestRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class RunSingleTestRequestMessage extends OperationDrivenRequestMessage {
     
     private String testName;
     private String directory;
@@ -55,8 +56,9 @@ public class RunSingleTestRequestMessage extends CompetitionBaseMessage implemen
     }
 
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public OperationDrivenReplyMessage generateReplyMessage() {
+        return null;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

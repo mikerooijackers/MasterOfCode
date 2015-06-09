@@ -5,46 +5,42 @@
  */
 package mocjms.messages.request;
 
-import java.util.ArrayList;
-import java.util.List;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
+import mocjms.messages.reply.UserTestReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class UserTestRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
-    private List<String> listTests;
+public class UserTestRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
+    /**
+     * Name of the tests, seperated by a comma
+     */
+    private String tests;
 
     public UserTestRequestMessage() {
-        this.listTests = new ArrayList<>();
     }
 
-    public UserTestRequestMessage(List<String> listTests) {
-        this.listTests = listTests;
-    }
-
-    public UserTestRequestMessage(Long teamId, Long roundId, Long competitionId) {
+    public UserTestRequestMessage(String tests, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
-        this.listTests = new ArrayList<>();
+        this.tests = tests;
     }
 
-    public UserTestRequestMessage(List<String> listTests, Long teamId, Long roundId, Long competitionId) {
-        super(teamId, roundId, competitionId);
-        this.listTests = listTests;
+    public String getTests() {
+        return this.tests;
     }
 
-    public List<String> getListTests() {
-        return listTests;
-    }
-
-    public void setListTests(List<String> listTests) {
-        this.listTests = listTests;
+    public void setListTests(String tests) {
+        this.tests = tests;
     }
 
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
+        String result = WorkspaceService.getInstance().runSingleTest(tests, super.getCompetitionId(), super.getTeamId(), super.getRoundId());
+        CompetitionBasedOperationDrivenReplyMessage reply = new UserTestReplyMessage(result, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        
+        return reply;
     }
 }
