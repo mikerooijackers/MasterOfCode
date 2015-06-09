@@ -5,13 +5,15 @@
  */
 package mocjms.messages.request;
 
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
 
 /**
- *
+ * @deprecated This is now supported by the main server. No JMS is involved.
  * @author Gebruiker
  */
-public class ReadMetaDataRequestMessage implements OperationDrivenMessage {
+@Deprecated
+public class ReadMetaDataRequestMessage extends OperationDrivenRequestMessage {
     private Long assignmentId;
 
     public ReadMetaDataRequestMessage(Long assignmentId) {
@@ -30,7 +32,8 @@ public class ReadMetaDataRequestMessage implements OperationDrivenMessage {
     }
 
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public OperationDrivenReplyMessage generateReplyMessage() {
+        return null;
+        //WorkspaceService.getInstance().readAssignmentMetaData(null, assignmentId)
     }
 }

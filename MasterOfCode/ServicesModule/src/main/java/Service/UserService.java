@@ -20,11 +20,8 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UserService {
-
     @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
-
-
     /**
      * login of a user
      * @param username
@@ -97,7 +94,6 @@ public class UserService {
             }
         }
         return listUsers;
-
     }
 
     public List<Team> GetAllTeams() {

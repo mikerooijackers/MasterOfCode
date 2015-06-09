@@ -27,11 +27,11 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class RestResource {
     
-    @Inject
+    //@Inject
     UserService userService;
-    @Inject
+    //@Inject
     CompetitionService competitionService;
-    @Inject
+    //@Inject
     private CompetitorEndPoint endPoint;
 
     /**
@@ -39,6 +39,9 @@ public class RestResource {
      * @param message
      * @return
      */
+    @Inject
+    private JMS.WorkspaceServiceRequestBean bean;
+    
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
@@ -96,7 +99,8 @@ public class RestResource {
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
-        return userService.GetAllUsers();
+        //return userService.GetAllUsers();
+        return null;
     }
     
     /**
@@ -139,7 +143,15 @@ public class RestResource {
     @GET
     @Path("test")
     public String test() {
-        userService.test();
+        //userService.test();
         return "hello";
+    }
+    
+    @GET
+    @Path("testjms")
+    public String testjms() {
+        mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
+        bean.Send(mes);
+        return "ok";
     }
 }

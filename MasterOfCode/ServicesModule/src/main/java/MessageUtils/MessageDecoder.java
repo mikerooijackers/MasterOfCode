@@ -26,6 +26,7 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
 
     @Override
     public BaseMessage decode(String s) throws DecodeException {
+        System.out.println("Decoding: " + s);
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String messageTypeString = obj.get("MessageType").toString();
         MessageTypes mt = MessageTypes.valueOf(messageTypeString);

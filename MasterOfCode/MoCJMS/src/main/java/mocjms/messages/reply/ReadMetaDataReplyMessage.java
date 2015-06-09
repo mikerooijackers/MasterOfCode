@@ -8,14 +8,14 @@ package mocjms.messages.reply;
 import java.util.ArrayList;
 import java.util.List;
 import Domein.AnnotationData;
-import com.mycompany.jmslayermodule.ReplyBean;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
- *
+ * @deprecated This is now supported by the main server. No JMS is involved.
  * @author Gebruiker
  */
-public class ReadMetaDataReplyMessage implements OperationDrivenMessage {
+@Deprecated
+public class ReadMetaDataReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
 
     private AnnotationData assignmentMetaData;
     private List<AnnotationData> testsMetaData;
@@ -44,10 +44,4 @@ public class ReadMetaDataReplyMessage implements OperationDrivenMessage {
     public void setTestsMetaData(List<AnnotationData> testsMetaData) {
         this.testsMetaData = testsMetaData;
     }
-    
-    @Override
-    public void doWork(ReplyBean replyBean) {
-        replyBean.send(this);
-    }
-    
 }

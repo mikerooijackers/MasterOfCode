@@ -5,16 +5,16 @@
  */
 package mocjms.messages.request;
 
-import com.mycompany.jmslayermodule.ReplyBean;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
 import mocjms.messages.reply.DeleteWorkspaceReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class DeleteWorkspaceRequestMessage implements OperationDrivenMessage {
+public class DeleteWorkspaceRequestMessage extends OperationDrivenRequestMessage {
     private Long competitionId;
     private Long teamId;
 
@@ -43,10 +43,10 @@ public class DeleteWorkspaceRequestMessage implements OperationDrivenMessage {
     }
 
     @Override
-    public void doWork(ReplyBean replyBean) {
+    public OperationDrivenReplyMessage generateReplyMessage() {
         String deletedWorkspacePath = WorkspaceService.getInstance().deleteWorkspace(competitionId, teamId);
         
-        OperationDrivenMessage message = new DeleteWorkspaceReplyMessage(deletedWorkspacePath, teamId, competitionId);
-        replyBean.send(message);
+        OperationDrivenReplyMessage message = new DeleteWorkspaceReplyMessage(deletedWorkspacePath, teamId, competitionId);
+        return message;
     }
 }

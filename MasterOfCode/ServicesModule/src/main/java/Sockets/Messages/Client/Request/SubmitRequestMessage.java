@@ -23,25 +23,35 @@ public class SubmitRequestMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.SubmitRequestMessage.toString();
     
+    private Long teamId;
+    
     /**
      * Constructor
      */
     public SubmitRequestMessage() {}
     
+    public SubmitRequestMessage(Long teamId) {
+        this.teamId = teamId;
+    }
+    
     public static SubmitRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        return new SubmitRequestMessage();
+        Long jsonTeamId = (Long) obj.get("TeamId");
+        return new SubmitRequestMessage(jsonTeamId);
     }
     
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*
+        TODO: PERFORM ACTIONS WHEN SOMEONE HANDS IN THEIR ASSIGNMENT
+        */
     }
 
     @Override
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
+        obj.put("TeamId", this.teamId);
         return obj.toString();
     }
     
