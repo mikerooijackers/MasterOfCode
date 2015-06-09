@@ -21,7 +21,7 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
      *
      */
     public static final String messageType = MessageTypes.OtherTeamScoreReplyMessage.toString();
-    private Long teamId;
+    private String teamName;
     private int teamScore;
     
     /**
@@ -35,23 +35,9 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
      * @param teamId
      * @param teamScore
      */
-    public OtherTeamScoreReplyMessage(Long competitionId, Long teamId, int teamScore) {
-        this.teamId = teamId;
+    public OtherTeamScoreReplyMessage(String teamName, int teamScore) {
+        this.teamName = teamName;
         this.teamScore = teamScore;
-    }
-
-    /**
-     * @return the teamId
-     */
-    public Long getTeamId() {
-        return teamId;
-    }
-
-    /**
-     * @param teamId the teamId to set
-     */
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
     }
 
     /**
@@ -76,11 +62,10 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
     public static OtherTeamScoreReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
-        Long jsonCompetitionId = (Long) obj.get("competitionId");
-        Long jsonTeamId = (Long) obj.get("teamID");
-        int jsonTeamScore = (int) obj.get("teamScore");
+        String jsonTeamName = obj.get("TeamName").toString();
+        int jsonTeamScore = (int) obj.get("TeamScore");
         
-        return new OtherTeamScoreReplyMessage(jsonCompetitionId, jsonTeamId, jsonTeamScore);
+        return new OtherTeamScoreReplyMessage(jsonTeamName, jsonTeamScore);
     }
 
     @Override
@@ -92,8 +77,22 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
-        obj.put("TeamId", this.teamId);
+        obj.put("TeamName", this.teamName);
         obj.put("TeamScore", this.teamScore);
         return obj.toString();
+    }
+
+    /**
+     * @return the teamName
+     */
+    public String getTeamName() {
+        return teamName;
+    }
+
+    /**
+     * @param teamName the teamName to set
+     */
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 }

@@ -49,5 +49,6 @@ angular.module('competitorClientApp').controller('editorController', function ($
 
     $scope.save = function () {
         InformationService.sourceFiles[$scope.fileName] = javaEditor.getDoc().getValue();
+        SocketService.sendMessage({MessageType: "EditSourceCodeRequestMessage", NewSourceCode: javaEditor.getDoc().getValue(), SourceCodeFile: $scope.fileName, RoundId: 1, TeamId: 1});
     }
 });

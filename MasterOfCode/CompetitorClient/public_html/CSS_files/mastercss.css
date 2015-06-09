@@ -20,6 +20,7 @@
     height: 80px;
     border: 1px solid black;
     border-radius: 10px;
+    overflow: auto;
 }
 
 #newsFeedTitle {
@@ -32,6 +33,7 @@
 #newsFeedContent {
     font-size:20px;
     overflow:auto;
+    text-align: center;
 }
 
 #newsFeedContent::-webkit-scrollbar {
@@ -169,6 +171,54 @@
     margin-top: 5px;
     text-align: center;
     background-color: green;
+}
+
+#newsFeedTitle a {
+    color:black;
+}
+
+#newsFeedTitle a:link {
+    color:black;
+}
+
+#newsFeedTitle a:visited {
+    color:black;
+}
+
+#newsFeedTitle a:active {
+    color:black;
+}
+
+#newsFeedTitle a:hover {
+    color:black;
+}
+
+#newsFeedHeader {
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#newsFeedTable {
+    width: 100%;
+}
+
+#newsFeedTable td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#newsFeedTable tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+#newsFeedTable tr:nth-child(even) {
+    background-color: darkgrey;
+}
+
+#newsFeedContainer {
+    height: 300px;
+    overflow: auto;
 }
 
 .testOutputTable {

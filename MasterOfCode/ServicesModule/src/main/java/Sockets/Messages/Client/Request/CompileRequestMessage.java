@@ -91,7 +91,7 @@ public class CompileRequestMessage extends BaseMessage {
                 + "[INFO] Copying webapp resources [C:\\Users\\JordiK\\Documents\\School\\JEA6\\GWT-JEE7\\\n"
                 + "[INFO] Webapp assembled in [525 msecs]\n"
                 + "[INFO] ------------------------------------------------------------------------\n"
-                + "[INFO] BUILD FAILED\n"
+                + "[INFO] BUILD SUCCESS\n"
                 + "[INFO] ------------------------------------------------------------------------\n"
                 + "[INFO] Total time: 14.849 s\n"
                 + "[INFO] Finished at: 2015-06-03T13:00:18+02:00\n"

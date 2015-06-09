@@ -2,7 +2,9 @@ package Sockets.Messages;
 
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
-import Sockets.Messages.Reply.TeamActionReplyMessage;
+import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
+import java.util.HashMap;
+import java.util.Map;
 import org.json.simple.JSONObject;
 
 public class DebugMessage extends BaseMessage {
@@ -18,7 +20,11 @@ public class DebugMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        TeamActionReplyMessage mess = new TeamActionReplyMessage("Team 5 is compiling their code!");
+        Map<String, String> descriptions = new HashMap<String, String>();
+        descriptions.put("Test1", "This is the first test.");
+        descriptions.put("Test2", "This is the seconds test.");
+        descriptions.put("Test3", "This is the third test.");
+        GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
         communicationBean.sendMessageToCompetitor("Noor", mess);
     }
 

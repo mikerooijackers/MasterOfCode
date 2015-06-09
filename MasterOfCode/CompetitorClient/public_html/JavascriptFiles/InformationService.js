@@ -9,7 +9,13 @@ angular.module('competitorClientApp').service('InformationService', function() {
     this.assignDescriptionCompetitors = "";
     this.assignDescriptionSpectators = "";
     
+    this.assignDifficulty = -1;
+    
     this.sourceFiles = [];
     
     this.lastCompileResult = "";
+    
+    this.teamActions = [];
+    
+    this.testDescriptions = [];
 });

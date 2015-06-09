@@ -9,11 +9,15 @@ angular.module('competitorClientApp').controller('compileController', function (
         SocketService.sendMessage(message);
     };
     
-    $rootScope.$on("CompileReplyMessage", function(event, data) {
+    $scope.compileReplyListener = $rootScope.$on("CompileReplyMessage", function(event, data) {
         var result = InformationService.lastCompileResult;
         result = result.replace(/\n/g,'<br>');
         result = result.replace('BUILD SUCCESS', "<font color='green'><b>BUILD SUCCESS</b></font>");
         result = result.replace('BUILD FAILED', "<font color='red'><b>BUILD FAILED</b></font>");
         document.getElementById("compileResultContainer").innerHTML = result;
+    });
+    
+    $scope.$on("$destroy", function() {
+        $scope.compileReplyListener();
     });
 });
