@@ -100,4 +100,21 @@ public class CompetitionService {
         return null;
         
     }
+
+//    public CompetitionData GetCompetitionsData() {
+//        List<Competition> ListCompetitionData;
+//        ListCompetitionData = em.createNamedQuery("GetCompetitionsData").getResultList();
+//        if (ListCompetitionData.isEmpty()) {
+//            System.out.println("No competitions found.");
+//        }
+//        else {
+//            for (Competition competition : ListCompetitionData) {
+//                System.out.print("CompetitionID= " + competition.getId()
+//                    + ", name=" + competition.getName()
+//                    + ", starttime= " + competition.getStartTime()
+//                    + ", Status" + competition.getStatus());
+//            }
+//        }
+//        return ListCompetitionData;
+//    }
 }
