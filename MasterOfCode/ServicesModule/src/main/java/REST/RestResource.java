@@ -117,7 +117,7 @@ public class RestResource {
     @GET
     @Path("getcompetitionsdata")
     public CompetitionData GetCompetitionsData() {
-        return competitionService.GetCompetitionsData();
+        return null; //competitionService.GetCompetitionsData();
         
     }
     
