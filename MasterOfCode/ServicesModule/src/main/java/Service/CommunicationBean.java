@@ -9,9 +9,9 @@ import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 /**
  *
@@ -35,5 +35,9 @@ public class CommunicationBean {
     
     public void sendMessageToAllCompetitors(BaseMessage message) {
         competitorEndpoint.sendToAll(message);
+    }
+    
+    public void sendMessageToWorkspaceManegementBean(Serializable message) {
+        workspaceServiceRequestBean.Send(message);
     }
 }

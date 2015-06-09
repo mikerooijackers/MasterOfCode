@@ -67,37 +67,8 @@ public class CompileRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        CompileReplyMessage mess = new CompileReplyMessage("[INFO] Scanning for projects...\n"
-                + "[INFO]\n"
-                + "[INFO] ------------------------------------------------------------------------\n"
-                + "[INFO] Building Kwetter GWT 1.0-SNAPSHOT\n"
-                + "[INFO] ------------------------------------------------------------------------\n"
-                + "[INFO]\n"
-                + "[INFO] --- gwt-maven-plugin:2.6.1:i18n (default) @ Kwetter-GWT-JEE7 ---\n"
-                + "[INFO]\n"
-                + "[INFO] --- gwt-maven-plugin:2.6.1:generateAsync (default) @ Kwetter-GWT-JEE7 ---\n"
-                + "[INFO]\n"
-                + "[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ Kwetter-GW\n"
-                + "[INFO] Using 'UTF-8' encoding to copy filtered resources.\n"
-                + "[INFO] Copying 4 resources\n"
-                + "[INFO]\n"
-                + "[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ Kwetter-GWT-J\n"
-                + "[INFO] Compiling 1 source file to C:\\Users\\JordiK\\Documents\\School\\JEA6\\GWT-JEE7\n"
-                + "[INFO]\n"
-                + "[INFO] --- maven-war-plugin:2.1.1:exploded (default) @ Kwetter-GWT-JEE7 ---\n"
-                + "[INFO] Exploding webapp\n"
-                + "[INFO] Assembling webapp [Kwetter-GWT-JEE7] in [C:\\Users\\JordiK\\Documents\\School\n"
-                + "[INFO] Processing war project\n"
-                + "[INFO] Copying webapp resources [C:\\Users\\JordiK\\Documents\\School\\JEA6\\GWT-JEE7\\\n"
-                + "[INFO] Webapp assembled in [525 msecs]\n"
-                + "[INFO] ------------------------------------------------------------------------\n"
-                + "[INFO] BUILD SUCCESS\n"
-                + "[INFO] ------------------------------------------------------------------------\n"
-                + "[INFO] Total time: 14.849 s\n"
-                + "[INFO] Finished at: 2015-06-03T13:00:18+02:00\n"
-                + "[INFO] Final Memory: 18M/50M\n"
-                + "[INFO] ------------------------------------------------------------------------", 0L);
-        communicationBean.sendMessageToCompetitor("Noor", mess);
+        mocjms.messages.request.CompileRequestMessage mess = new mocjms.messages.request.CompileRequestMessage(this.teamId, 2L, 2L);
+        communicationBean.sendMessageToWorkspaceManegementBean(mess);
     }
 
     @Override
