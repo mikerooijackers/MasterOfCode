@@ -45,7 +45,7 @@
     <h2>Teams</h2>
     <table>
         <tr>
-            <td ng-repeat="t in teams | orderBy:'name' | limitTo: 6"><a href="#/teams">{{t.name}}</a></td>
+            <td ng-repeat="t in teams | orderBy:'name' | limitTo: 6">{{t.name}}</td>
         </tr>
     </table>
     <form action="#/teams">

@@ -1,5 +1,14 @@
 angular.module('audienceClient')
-        .controller('manageRoundsController', function ($scope) {
+        .controller('manageRoundsController', function ($scope, $rootScope) {
+            
+            
+            $rootScope.$on("CompetitionInfoReplyMessage", function (event, data) {
+          
+
+
+            }
+            );
+            
             
             
             // MOCK DATA!!! ----------------------------------------------------

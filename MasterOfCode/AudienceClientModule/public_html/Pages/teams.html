@@ -3,9 +3,9 @@
 <div class="widgetleft">
     <h2>Teams</h2>
 
-    <select ng-model="filterCondition.operator" size="18">
-        <option ng-selected="{{operator.value === filterCondition.operator}}"
-                ng-repeat="operator in operators"
+    <select size="18">
+        <option
+                ng-repeat="operator in operators" ng-click="init(operator.name)"
                 value="{{operator.value}}">
             {{operator.name}}
         </option>
@@ -28,9 +28,6 @@
             <td>{{time}}</td>
         </tr>
     </table>
-    <div class="footerlink">
-        <a href="#/newsfeed">View more news from {{name}}</a>
-    </div>
 </div>
 
 <div class="widgetright" style="height: 17%">

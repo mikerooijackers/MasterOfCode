@@ -1,14 +1,14 @@
 angular.module('audienceClient')
         .controller('manageTeamsController', function ($scope) {
-              
+             
+            var teamName = null;        
+                    
             $scope.name = null;
             $scope.members = null;
             $scope.message = null;
             $scope.time = null;
             $scope.score = null;
             $scope.rank = null;
-            
-            
                         
             // MOCK DATA!! -----------------------------------------------------
             
@@ -53,12 +53,15 @@ angular.module('audienceClient')
             
             // -----------------------------------------------------------------
 
-
             $scope.init = function (teamName) {
+                if (teamName === null || typeof(teamName) === 'undefined')
+                {
+                    teamName = $scope.operators[0].name;
+                }              
                 for (var i = 0; i < $scope.operators.length; i++) {
                     if ($scope.operators[i].name === teamName) {
 
-                        $scope.name = $scope.operators[i].name;
+                        $scope.name = $scope.operators[i].name;                                      
                         $scope.members = $scope.operators[i].members;
                         $scope.message = $scope.operators[i].message;
                         $scope.time = $scope.operators[i].time;
@@ -66,9 +69,8 @@ angular.module('audienceClient')
                         $scope.rank = $scope.operators[i].rank;
                     }
                 }
-            }
-            
-            $scope.init("Team A");            
+            };         
+            $scope.init(teamName);
         });
 
 

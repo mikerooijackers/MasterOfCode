@@ -21,12 +21,22 @@ angular.module('audienceClient', ['ngRoute', 'ngWebsocket'])
                         templateUrl: 'Pages/newsfeed.html',
                         controller: 'manageNewsfeedController'
                     })
-                    .when('/about', {
-                        templateUrl: 'Pages/about.html',
-                         controller: 'manageAboutController'
+                    .when('/assignment', {
+                        templateUrl: 'Pages/assignment.html',
+                        controller: 'manageAssignmentController'
+                    })
+                    .when('/competition', {
+                        templateUrl: 'Pages/competition.html',
+                         controller: 'manageCompetitionController'
                     });
         })
 
-        .controller('indexController', function ($scope) {
+        .controller('indexController', function ($scope, websocketService) {
+            $scope.msg = "...";
 
+            websocketService.start("ws://localhost:8080/ServicesModule/spectatorSocket");
+            var NewSessionConnectionMessage = {
+                MessageType: "NewSessionConnectionMessage",
+            };
+            websocketService.sendMessage(NewSessionConnectionMessage);
         });

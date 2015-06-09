@@ -3,9 +3,9 @@
 <div class="widgetleft">
     <h2>Rounds</h2>
 
-    <select ng-model="filterCondition.operator" size="18">
-        <option ng-selected="{{operator.value === filterCondition.operator}}"
-                ng-repeat="operator in operators"
+    <select size="18">
+        <option
+                ng-repeat="operator in operators" ng-click="init(operator.name)" ng-if="operator.completed === 'true'"
                 value="{{operator.value}}">
             {{operator.name}}
         </option>
@@ -21,9 +21,9 @@
             <th>Team</th>
             <th>Score</th>
         </tr>
-        <tr ng-repeat="s in Scores">
+        <tr ng-repeat="s in scores">
             <td>{{s.rank}}</td>
-            <td><a href="#/teams">{{s.team}}</a></td>
+            <td>{{s.team}}</td>
             <td>{{s.score}}</td>
         </tr>
     </table> 

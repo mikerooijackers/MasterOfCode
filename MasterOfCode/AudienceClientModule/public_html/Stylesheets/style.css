@@ -80,10 +80,11 @@ th {
 
 #nav a {
     display: inline-block;
-    width: 15%;;
-    margin: 0px 8px;
+    width: auto;
+    margin: 0px 3px;
     border-radius: 10px;
     font: 16pt Garamond;
+    text-align: center;
     -webkit-transition: background-color 0.7s, color 0.5s;
     -moz-transition: background-color 0.7s, color 0.5s;
     -o-transition: background-color 0.7s, color 0.5s;
@@ -157,10 +158,6 @@ th {
    width: 63%;
    height: 84%;
    margin-right: 3%;
-}
-
-.footerlink {
-    text-align: right;
 }
 
 /* Other elements */

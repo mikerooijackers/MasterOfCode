@@ -1,21 +1,11 @@
 <h1>Newsfeed</h1>
 
-<div class="widgetleft">
-    <h2>Filter</h2>
-    <div id="filter">
-        <div class="item" ng-repeat="item in items">
-            <input type="checkbox" ng-model="item.Selected"> {{item.name}} <br>
-        </div>
-    </div>
-    <button type="button" class="btnbig" ng-model="selectedAll" ng-click="checkAll()">Check/uncheck all</button> 
-</div>
-
-<div class="widgetright">
+<div class="widgetbig">
     <h2>News</h2>
     <table>
         <tr ng-repeat="n in news">
-            <td style="text-align: left">{{n.team}} {{n.message}} </td>
+            <td style="text-align: left">{{n.message}} </td>
             <td style="text-align: right">{{n.time}}</td>
         </tr>
-    </table> 
+    </table>
 </div>

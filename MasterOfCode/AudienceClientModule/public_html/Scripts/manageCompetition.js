@@ -1,5 +1,5 @@
 angular.module('audienceClient')
-        .controller('manageAboutController', function ($scope) {
+        .controller('manageCompetitionController', function ($scope) {
             
             
             $scope.info = {
