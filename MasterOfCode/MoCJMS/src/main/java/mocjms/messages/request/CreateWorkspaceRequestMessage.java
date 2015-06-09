@@ -5,16 +5,16 @@
  */
 package mocjms.messages.request;
 
-import com.mycompany.jmslayermodule.ReplyBean;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
 import mocjms.messages.reply.CreateWorkspaceReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
+public class CreateWorkspaceRequestMessage extends OperationDrivenRequestMessage {
     private Long teamId;
     private Long competitionId;
 
@@ -43,10 +43,10 @@ public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
     }
 
     @Override
-    public void doWork(ReplyBean replyBean) {
+    public OperationDrivenReplyMessage generateReplyMessage() {
         String workspacePath = WorkspaceService.getInstance().createWorkspace(competitionId, teamId);
         
-        OperationDrivenMessage message = new CreateWorkspaceReplyMessage(workspacePath, teamId, competitionId);
-        replyBean.send(message);
+        OperationDrivenReplyMessage message = new CreateWorkspaceReplyMessage(workspacePath, teamId, competitionId);
+        return message;
     }
 }

@@ -16,7 +16,7 @@ import mocjms.messages.main.OperationDrivenMessage;
  */
 @Singleton
 public class JMSManager {
-    private Map<String, BaseMessage> requestSend;
+    private Map<String, OperationDrivenMessage> requestSend;
     
     /**
      * add request send

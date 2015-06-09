@@ -9,21 +9,19 @@ import Domein.AnnotationData;
 import Domein.SourceCode;
 import com.mycompany.annotations.Editable;
 import com.mycompany.annotations.ReadOnly;
-import com.mycompany.jmslayermodule.ReplyBean;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import static com.mycompany.workspacemanagementmoduleb.WorkspaceService.ASSIGNMENTS_PATH;
 import com.mycompany.workspacemanagementmoduleb.utils.ReflectionUtils;
 import java.io.File;
 import java.util.List;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
 import mocjms.messages.reply.GetSourceCodeFilesReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class GetSourceCodeFilesRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class GetSourceCodeFilesRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
 
     private List<AnnotationData> annotationData;
     
@@ -36,16 +34,16 @@ public class GetSourceCodeFilesRequestMessage extends CompetitionBaseMessage imp
     }
     
     private void prepareAnnotationData(Long assignmentId) {
-        String path = ASSIGNMENTS_PATH + File.separator + assignmentId;
+        String path = WorkspaceService.ASSIGNMENTS_PATH + File.separator + assignmentId;
         this.annotationData = ReflectionUtils.readAnnotationData(path, ReadOnly.class, Editable.class);
     }
     
     @Override
-    public void doWork(ReplyBean replyBean) {
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
         List<SourceCode> sourceCodeList = WorkspaceService.getInstance().readSourceCode(super.getTeamId(), super.getCompetitionId(), super.getRoundId(), this.annotationData);
         
         GetSourceCodeFilesReplyMessage message = new GetSourceCodeFilesReplyMessage(sourceCodeList, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
-        replyBean.send(message);
+        return message;
     }
     
 }

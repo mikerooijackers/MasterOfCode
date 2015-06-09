@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -135,7 +136,7 @@ public class WorkspaceService {
     }
 
     public List<AnnotationData> readAssignmentMetaData(String assignmentPath, Long assignmentId) {
-        String path = assignmentPath + File.separator + assignmentId;
+        String path = ASSIGNMENTS_PATH + File.separator + assignmentId;
 
         List<AnnotationData> annotationData = ReflectionUtils.readTestAnnotationData(path, org.testng.annotations.Test.class);
         annotationData.addAll(ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class));
@@ -146,6 +147,13 @@ public class WorkspaceService {
     public boolean extractAssignmentToWorkspaces(Long competitionId, Long roundId, byte[] blob) {
         String destination = WORKSPACES_PATH + File.separator + competitionId;
         File zipFile = new File(WORKSPACES_PATH + File.separator + "temp.zip");
+        if (Files.exists(zipFile.toPath())) {
+            try {
+                Files.delete(zipFile.toPath());
+            } catch (IOException ex) {
+                Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         ZipUtils.writeByteArrayToFile(blob, zipFile);
         
         File competitionFolder = new File(destination);
@@ -154,18 +162,9 @@ public class WorkspaceService {
         for (File teamWorkspace : teamWorkspaces) {
             String teamWorkspaceDestination = destination + File.separator + teamWorkspace.getName() + File.separator + roundId;
             
-            new File(teamWorkspaceDestination).mkdir();
-        
-            
-            
-            File assignmentFolder = new File(ASSIGNMENTS_PATH);
-            File[] files = assignmentFolder.listFiles();
-            for (File file : files) {
-                if (FileUtils.checkFileExtension(file, ".zip")) {
-                    FileUtils.extractZIPFile(file, teamWorkspaceDestination);
-                    break;
-                }
-            }
+            new File(teamWorkspaceDestination).mkdirs();
+
+            FileUtils.extractZIPFile(zipFile, teamWorkspaceDestination);
         }
         
         return true;

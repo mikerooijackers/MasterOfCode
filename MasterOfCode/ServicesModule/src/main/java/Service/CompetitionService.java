@@ -18,8 +18,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CompetitionService {
     
-    @PersistenceContext(unitName = "masterofcodedb")
-    private EntityManager em;
+    //@PersistenceContext(unitName = "masterofcodedb")
+    //private EntityManager em;
     
     /**
      * Create a competition
