@@ -78,7 +78,10 @@ public class CompetitionService {
      * @param roundID
      */
     public void RemoveRound(long roundID) {
-        
+        Round round = em.find(Round.class, roundID);
+        em.getTransaction().begin();
+        em.remove(round);
+        em.getTransaction().commit();
     }
     
     /**
@@ -87,7 +90,8 @@ public class CompetitionService {
      * @return
      */
     public Competition FindCompetition(long competitionID) {
-        return null;
+        Competition competition = em.find(Competition.class, competitionID);
+        return competition;
         
     }
     
@@ -97,8 +101,8 @@ public class CompetitionService {
      * @return
      */
     public Round FindRound(long roundID) {
-        return null;
-        
+        Round round = em.find(Round.class, roundID);
+        return round;
     }
 
     /**
