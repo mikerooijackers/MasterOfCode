@@ -54,7 +54,6 @@ public class RestResource {
         String email = message.getEmail();
         String password = message.getPassword();
         return userService.Login(email, password);
-        
     }
     
     /**
@@ -71,19 +70,18 @@ public class RestResource {
         Role privilege = message.getPrivilege();
         String activationCode = message.getActivationCode();
         return userService.Register(email, fullname, password, privilege, activationCode);
-        
     }
     
     /**
      *
      * @param code
+     * @param userId
      * @return
      */
     @POST
     @Path("activationcode")
-    public Response SetActivationCode(String code) {
-        return null;
-        
+    public String SetActivationCode(String code, long userId) {
+        return userService.SetActivationCode(code, userId);
     }
     
     /**
@@ -97,7 +95,6 @@ public class RestResource {
         long userId = message.getUserId();
         long teamId = message.getTeamId();
         return userService.AddToTeam(userId, teamId);
-        
     }
     
     /**
@@ -149,7 +146,6 @@ public class RestResource {
     @GET
     @Path("test")
     public String test() {
-        //userService.test();
         return "hello";
     }
     
