@@ -57,9 +57,20 @@ public class CompetitionService {
      * @return
      */
     public List<Team> GetTeamFromCompetition(long competitionID) {
-        
-        return null;
-        
+        List<Team> ListTeamFromCompetition;
+        ListTeamFromCompetition = em.createNamedQuery("GetTeamFromCompetition").setParameter("competitionID", competitionID).getResultList();
+        if (ListTeamFromCompetition.isEmpty()) {
+            System.out.println("No Teams from competition found.");
+        }
+        else {
+            for (Team team : ListTeamFromCompetition) {
+                System.out.print("TeamID= " + team.getId()
+                    + ", teamname=" + team.getTeamName()
+                    + ", numbersofMembers= " + team.getNumberofMembers()
+                    + ", Score" + team.getScore());
+            }
+        }
+        return ListTeamFromCompetition;
     }
     
     /**

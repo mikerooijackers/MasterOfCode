@@ -18,7 +18,8 @@ import javax.persistence.Transient;
  */
 @Entity
 @NamedQueries ({
-    @NamedQuery(name = "AllTeams", query = "select t FROM Team t")
+    @NamedQuery(name = "AllTeams", query = "select t FROM Team t"),
+    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")    
 })
 public class Team implements Serializable {
 
