@@ -10,5 +10,23 @@ package REST;
  * @author mikerooijackers
  */
 class TeamMessage {
+    private long userId;
+    private long teamId;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(long teamId) {
+        this.teamId = teamId;
+    }
     
 }

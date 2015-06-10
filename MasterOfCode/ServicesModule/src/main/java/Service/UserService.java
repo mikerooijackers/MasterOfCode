@@ -12,7 +12,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -110,5 +109,15 @@ public class UserService {
             }
         }
         return listTeams;
+    }
+
+    public MOCUser AddToTeam(long userId, long teamId) {
+        MOCUser user = em.find(MOCUser.class, userId);
+        Team team = em.find(Team.class, teamId);
+        user.setTeam(team);
+        team.addMember(user);
+        em.persist(user);
+        em.flush();
+        return user;
     }
 }

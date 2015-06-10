@@ -43,6 +43,11 @@ public class RestResource {
     @Inject
     private JMS.WorkspaceServiceRequestBean bean;
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
@@ -76,7 +81,7 @@ public class RestResource {
      */
     @POST
     @Path("activationcode")
-    public Response ActivationCode(String code) {
+    public Response SetActivationCode(String code) {
         return null;
         
     }
@@ -89,7 +94,9 @@ public class RestResource {
     @POST
     @Path("addtoteam")
     public MOCUser AddToTeam(TeamMessage message) {
-        return null;
+        long userId = message.getUserId();
+        long teamId = message.getTeamId();
+        return userService.AddToTeam(userId, teamId);
         
     }
     
