@@ -27,7 +27,12 @@ public class CompetitionService {
      * @param startTime
      */
     public void CreateCompetition(String name, Calendar startTime) {
-        
+        Competition competition = new Competition();
+        competition.setName(name);
+        competition.setStartTime(startTime);
+        competition.setStatus(Status.waiting);
+        em.persist(competition);
+        em.flush();
     }
     
     /**
