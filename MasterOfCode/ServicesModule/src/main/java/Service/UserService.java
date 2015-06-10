@@ -12,7 +12,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -44,23 +43,10 @@ public class UserService {
 
     /**
      *
-     */
-    public void test() {
-        MOCUser user = new MOCUser();
-        user.setId(1);
-        em.persist(user);
-        em.flush();
-        MOCUser find = em.find(MOCUser.class, 1);
-        System.out.println(find.getId());
-    }
-
-    /**
-     *
      * @param email
      * @param fullname
      * @param activationCode
      * @param privilege
-     * @param teamID
      * @param password
      * @return
      */
@@ -70,9 +56,11 @@ public class UserService {
         user.setEmail(email);
         user.setFullName(fullname);
         user.setName(password);
-        user.setPrivilege(Role.initiator);
+        user.setPrivilege(Role.spectator);
         user.setActivationCode(activationCode);
+        em.persist(user);
         em.getTransaction().commit();
+        em.close();
         return user;
     }
 
@@ -110,5 +98,33 @@ public class UserService {
             }
         }
         return listTeams;
+    }
+
+    public MOCUser AddToTeam(long userId, long teamId) {
+        MOCUser user = em.find(MOCUser.class, userId);
+        Team team = em.find(Team.class, teamId);
+        user.setTeam(team);
+        team.addMember(user);
+        em.persist(user);
+        em.flush();
+        em.close();
+        return user;
+    }
+    
+    public String SetActivationCode(String activationCode, long userId) {
+        MOCUser user = em.find(MOCUser.class, userId);
+        if (user.getActivationCode() == null) {
+            System.out.println("account already activated");
+            return "account already activated";
+        }
+        else if (user.getActivationCode().equals(activationCode)) {
+            user.setActivationCode(null);
+            System.out.println("account activated");
+            return "account activated";
+        }
+        else {
+            System.out.println("incorrect activation code");
+            return "incorrect activation code";
+        }
     }
 }

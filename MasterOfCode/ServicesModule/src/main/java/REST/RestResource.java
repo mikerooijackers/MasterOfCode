@@ -5,6 +5,7 @@
  */
 package REST;
 
+import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
 import Domein.Role;
@@ -16,7 +17,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -42,13 +42,17 @@ public class RestResource {
     @Inject
     private JMS.WorkspaceServiceRequestBean bean;
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
         String email = message.getEmail();
         String password = message.getPassword();
         return userService.Login(email, password);
-        
     }
     
     /**
@@ -65,19 +69,18 @@ public class RestResource {
         Role privilege = message.getPrivilege();
         String activationCode = message.getActivationCode();
         return userService.Register(email, fullname, password, privilege, activationCode);
-        
     }
     
     /**
      *
      * @param code
+     * @param userId
      * @return
      */
     @POST
     @Path("activationcode")
-    public Response ActivationCode(String code) {
-        return null;
-        
+    public String SetActivationCode(String code, long userId) {
+        return userService.SetActivationCode(code, userId);
     }
     
     /**
@@ -88,8 +91,9 @@ public class RestResource {
     @POST
     @Path("addtoteam")
     public MOCUser AddToTeam(TeamMessage message) {
-        return null;
-        
+        long userId = message.getUserId();
+        long teamId = message.getTeamId();
+        return userService.AddToTeam(userId, teamId);
     }
     
     /**
@@ -99,8 +103,7 @@ public class RestResource {
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
-        //return userService.GetAllUsers();
-        return null;
+        return userService.GetAllUsers();
     }
     
     /**
@@ -111,7 +114,6 @@ public class RestResource {
     @Path("getallteams")
     public List<Team> GetAllTeams() {
         return userService.GetAllTeams();
-        
     }
     
     /**
@@ -120,8 +122,8 @@ public class RestResource {
      */
     @GET
     @Path("getcompetitionsdata")
-    public CompetitionData GetCompetitionsData() {
-        return null; //competitionService.GetCompetitionsData();
+    public List<Competition> GetCompetitionsData() {
+        return competitionService.GetCompetitionsData();
         
     }
     
@@ -143,7 +145,6 @@ public class RestResource {
     @GET
     @Path("test")
     public String test() {
-        //userService.test();
         return "hello";
     }
     

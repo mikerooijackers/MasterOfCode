@@ -6,6 +6,7 @@
 package REST;
 
 import Domein.Role;
+import java.util.UUID;
 
 /**
  *
@@ -36,6 +37,7 @@ class RegisterMessage {
     }
 
     public String getActivationCode() {
+        activationCode = UUID.randomUUID().toString();
         return activationCode;
     }
     
