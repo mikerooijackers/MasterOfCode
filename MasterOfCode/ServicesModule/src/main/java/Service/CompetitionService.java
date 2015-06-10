@@ -38,6 +38,7 @@ public class CompetitionService {
      * @param status
      */
     public void UpdateCompetition(long competitionID, String name, Calendar startTime, Status status) {
+        Competition competition = em.find(Competition.class, competitionID);
         
     }
     
@@ -47,6 +48,7 @@ public class CompetitionService {
      * @return
      */
     public List<Team> GetTeamFromCompetition(long competitionID) {
+        
         return null;
         
     }
@@ -58,8 +60,18 @@ public class CompetitionService {
      * @param duration
      * @param roundNr
      */
-    public void AddRoundToCompetition(long competitionID, String assignmentPath, int duration, int roundNr) {
-        
+    public void AddRoundToCompetition(long competitionID, String assignmentPath, Calendar duration, int roundNr) {
+        Round round = new Round();
+        Assignment assignment = new Assignment();
+        Competition competition = em.find(Competition.class, competitionID);
+        competition.setStartTime(duration);
+        assignment.setPath(assignmentPath);
+        round.setRoundNr(roundNr);
+        round.setAssignment(assignment);
+        em.persist(competition);
+        em.persist(round);
+        em.persist(assignment);
+        em.flush();        
     }
     
     /**
