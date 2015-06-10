@@ -58,7 +58,9 @@ public class UserService {
         user.setName(password);
         user.setPrivilege(Role.spectator);
         user.setActivationCode(activationCode);
+        em.persist(user);
         em.getTransaction().commit();
+        em.close();
         return user;
     }
 
@@ -105,6 +107,7 @@ public class UserService {
         team.addMember(user);
         em.persist(user);
         em.flush();
+        em.close();
         return user;
     }
     

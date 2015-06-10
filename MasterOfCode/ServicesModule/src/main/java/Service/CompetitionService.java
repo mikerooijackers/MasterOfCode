@@ -70,7 +70,17 @@ public class CompetitionService {
      * @param assignmentPath
      */
     public void EditRound(long roundID, int roundNr, int duration, String assignmentPath) {
-        
+        em.getTransaction().begin();
+        Round round = em.find(Round.class, roundID);
+        round.setRoundNr(roundNr);
+        round.setDurationInSeconds(duration);
+        Assignment assignment = new Assignment();
+        assignment.setPath(assignmentPath);
+        round.setAssignment(assignment);
+        em.persist(round);
+        em.persist(assignment);
+        em.getTransaction().commit();
+        em.close();
     }
     
     /**
@@ -82,6 +92,7 @@ public class CompetitionService {
         em.getTransaction().begin();
         em.remove(round);
         em.getTransaction().commit();
+        em.close();
     }
     
     /**
