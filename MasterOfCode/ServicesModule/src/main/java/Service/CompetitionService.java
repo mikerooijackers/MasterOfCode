@@ -39,7 +39,11 @@ public class CompetitionService {
      */
     public void UpdateCompetition(long competitionID, String name, Calendar startTime, Status status) {
         Competition competition = em.find(Competition.class, competitionID);
-        
+        competition.setName(name);
+        competition.setStartTime(startTime);
+        competition.setStatus(status);
+        em.persist(competition);
+        em.flush();
     }
     
     /**
