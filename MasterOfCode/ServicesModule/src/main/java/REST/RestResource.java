@@ -17,7 +17,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service

@@ -12,7 +12,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -48,7 +47,6 @@ public class UserService {
      * @param fullname
      * @param activationCode
      * @param privilege
-     * @param teamID
      * @param password
      * @return
      */
