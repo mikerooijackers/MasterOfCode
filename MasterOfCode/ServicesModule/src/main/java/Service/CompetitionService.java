@@ -18,8 +18,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CompetitionService {
     
-    //@PersistenceContext(unitName = "masterofcodedb")
-    //private EntityManager em;
+    @PersistenceContext(unitName = "masterofcodedb")
+    private EntityManager em;
     
     /**
      * Create a competition
@@ -101,20 +101,24 @@ public class CompetitionService {
         
     }
 
-//    public CompetitionData GetCompetitionsData() {
-//        List<Competition> ListCompetitionData;
-//        ListCompetitionData = em.createNamedQuery("GetCompetitionsData").getResultList();
-//        if (ListCompetitionData.isEmpty()) {
-//            System.out.println("No competitions found.");
-//        }
-//        else {
-//            for (Competition competition : ListCompetitionData) {
-//                System.out.print("CompetitionID= " + competition.getId()
-//                    + ", name=" + competition.getName()
-//                    + ", starttime= " + competition.getStartTime()
-//                    + ", Status" + competition.getStatus());
-//            }
-//        }
-//        return ListCompetitionData;
-//    }
+    /**
+     *
+     * @return
+     */
+    public List<Competition> GetCompetitionsData() {
+        List<Competition> ListCompetitionData;
+        ListCompetitionData = em.createNamedQuery("GetCompetitionsData").getResultList();
+        if (ListCompetitionData.isEmpty()) {
+            System.out.println("No competitions found.");
+        }
+        else {
+            for (Competition competition : ListCompetitionData) {
+                System.out.print("CompetitionID= " + competition.getId()
+                    + ", name=" + competition.getName()
+                    + ", starttime= " + competition.getStartTime()
+                    + ", Status" + competition.getStatus());
+            }
+        }
+        return ListCompetitionData;
+    }
 }

@@ -5,6 +5,7 @@
  */
 package REST;
 
+import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
 import Domein.Role;
@@ -99,8 +100,7 @@ public class RestResource {
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
-        //return userService.GetAllUsers();
-        return null;
+        return userService.GetAllUsers();
     }
     
     /**
@@ -111,7 +111,6 @@ public class RestResource {
     @Path("getallteams")
     public List<Team> GetAllTeams() {
         return userService.GetAllTeams();
-        
     }
     
     /**
@@ -120,8 +119,8 @@ public class RestResource {
      */
     @GET
     @Path("getcompetitionsdata")
-    public CompetitionData GetCompetitionsData() {
-        return null; //competitionService.GetCompetitionsData();
+    public List<Competition> GetCompetitionsData() {
+        return competitionService.GetCompetitionsData();
         
     }
     
