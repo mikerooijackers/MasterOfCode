@@ -2,15 +2,25 @@ package Domein;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Column;
+import java.util.Iterator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 @Entity
+@NamedQueries ({
+    @NamedQuery(name = "AllTeams", query = "select t FROM Team t"),
+    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")    
+})
 public class Team implements Serializable {
 
     @Transient
@@ -44,6 +54,73 @@ public class Team implements Serializable {
      * Constructor
      */
     public Team() {
+        members = new Collection<MOCUser>() {
+
+            @Override
+            public int size() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEmpty() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Iterator<MOCUser> iterator() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object[] toArray() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean add(MOCUser e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends MOCUser> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void clear() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
     }
 
     /**
@@ -94,23 +171,47 @@ public class Team implements Serializable {
         this.competition = competition;
     }
 
+    /**
+     * get serverName
+     * @return
+     */
     public String getServerName() {
         return serverName;
     }
 
+    /**
+     * set ServerName
+     * @param serverName
+     */
     public void setServerName(String serverName) {
         this.serverName = serverName;
     }
 
+    /**
+     * get number of Members
+     * @return
+     */
     public int getNumberofMembers() {
         return this.members.size();
     };
 
+    /**
+     * get TeamName
+     * @return
+     */
     public String getTeamName() {
         return teamName;
     }
 
+    /**
+     * Set Name
+     * @param teamName
+     */
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public void addMember(MOCUser user) {
+        members.add(user);
     }
 }

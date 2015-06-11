@@ -11,6 +11,7 @@ import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
+import Sockets.Messages.Reply.StartRoundReplyMessage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -69,6 +70,7 @@ public class CompetitorEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
+            this.sendMessage("Noor", new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", 4, 4444));
         } else {
             message.doAction(communicationBean);
         }

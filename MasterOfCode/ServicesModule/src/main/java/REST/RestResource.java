@@ -5,8 +5,10 @@
  */
 package REST;
 
+import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
+import Domein.Role;
 import Domein.Team;
 import Service.CompetitionService;
 import Service.UserService;
@@ -15,7 +17,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -33,59 +34,103 @@ public class RestResource {
     //@Inject
     private CompetitorEndPoint endPoint;
 
+    /**
+     *
+     * @param message
+     * @return
+     */
     @Inject
     private JMS.WorkspaceServiceRequestBean bean;
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("login")
     public MOCUser Login(LoginMessage message) {
-        return null;
-        
+        String email = message.getEmail();
+        String password = message.getPassword();
+        return userService.Login(email, password);
     }
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("register")
     public MOCUser Register(RegisterMessage message) {
-        
-        return null;
-        
+        String email = message.getEmail();
+        String fullname = message.getFullname();
+        String password = message.getPassword();
+        Role privilege = message.getPrivilege();
+        String activationCode = message.getActivationCode();
+        return userService.Register(email, fullname, password, privilege, activationCode);
     }
     
+    /**
+     *
+     * @param code
+     * @param userId
+     * @return
+     */
     @POST
     @Path("activationcode")
-    public Response ActivationCode(String code) {
-        return null;
-        
+    public String SetActivationCode(String code, long userId) {
+        return userService.SetActivationCode(code, userId);
     }
     
+    /**
+     *
+     * @param message
+     * @return
+     */
     @POST
     @Path("addtoteam")
     public MOCUser AddToTeam(TeamMessage message) {
-        return null;
-        
+        long userId = message.getUserId();
+        long teamId = message.getTeamId();
+        return userService.AddToTeam(userId, teamId);
     }
     
+    /**
+     * get all users
+     * @return
+     */
     @GET
     @Path("getallusers")
     public List<MOCUser> GetAllUsers() {
-        //return userService.GetAllUsers();
-        return null;
+        return userService.GetAllUsers();
     }
     
+    /**
+     * get all teams 
+     * @return
+     */
     @GET
     @Path("getallteams")
     public List<Team> GetAllTeams() {
-        return null;
-        
+        return userService.GetAllTeams();
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
-    @Path("getcompetitiondata")
-    public CompetitionData GetCompetitionData() {
-        return null;
+    @Path("getcompetitionsdata")
+    public List<Competition> GetCompetitionsData() {
+        return competitionService.GetCompetitionsData();
         
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("gethintsofcurrentround")
     public List<Hint> GetHintsOfCurrentRound() {
@@ -93,10 +138,13 @@ public class RestResource {
         
     }
     
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("test")
     public String test() {
-        //userService.test();
         return "hello";
     }
     

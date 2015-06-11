@@ -30,6 +30,9 @@ public class StartRoundReplyMessage extends BaseMessage {
     private String assignDescriptionCompetitors;
     private String assignDescriptionSpectators;
     
+    private int assignDifficulty;
+    private int duration;
+    
     /**
      * Constructor
      */
@@ -44,13 +47,15 @@ public class StartRoundReplyMessage extends BaseMessage {
      * @param assignDescriptionCompetitors
      * @param assignDescriptionSpectators
      */
-    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators) {
+    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators, int assignDifficulty, int duration) {
         this.assignCreatorName = assignCreatorName;
         this.assignCreatorCompany = assignCreatorCompany;
         this.assignCreatorWeb = assignCreatorWeb;
         this.assignName = assignName;
         this.assignDescriptionCompetitors = assignDescriptionCompetitors;
         this.assignDescriptionSpectators = assignDescriptionSpectators;
+        this.assignDifficulty = assignDifficulty;
+        this.duration = duration;
     }
 
     /**
@@ -150,8 +155,10 @@ public class StartRoundReplyMessage extends BaseMessage {
         String jsonAssignName = obj.get("AssignName").toString();
         String jsonAssignDescriptionCompetitors = obj.get("AssignDescriptionCompetitors").toString();
         String jsonAssignDescriptionSpectators = obj.get("AssignDescriptionSpectators").toString();
+        int jsonAssignDifficulty = (int) obj.get("AssignDifficulty");
+        int jsonDuration = (int) obj.get("Duration");
         
-        return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators);
+        return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators, jsonAssignDifficulty, jsonDuration);
     }
 
     @Override
@@ -169,6 +176,36 @@ public class StartRoundReplyMessage extends BaseMessage {
         obj.put("AssignName", this.assignName);
         obj.put("AssignDescriptionCompetitors", this.assignDescriptionCompetitors);
         obj.put("AssignDescriptionSpectators", this.assignDescriptionSpectators);
+        obj.put("AssignDifficulty", this.assignDifficulty);
+        obj.put("Duration", this.duration);
         return obj.toString();
+    }
+
+    /**
+     * @return the assignDifficulty
+     */
+    public int getAssignDifficulty() {
+        return assignDifficulty;
+    }
+
+    /**
+     * @param assignDifficulty the assignDifficulty to set
+     */
+    public void setAssignDifficulty(int assignDifficulty) {
+        this.assignDifficulty = assignDifficulty;
+    }
+
+    /**
+     * @return the duration
+     */
+    public int getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }
