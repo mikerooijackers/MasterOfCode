@@ -12,8 +12,9 @@
         <module>ServicesModule</module>
         <module>UtilitiesModule</module>
         <module>Annotations</module>
-    <module>JMSLayerModuleEE</module>
-  </modules>
+        <module>WorkspaceManagementModuleB</module>
+        <module>JMSLayerModuleEE</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>

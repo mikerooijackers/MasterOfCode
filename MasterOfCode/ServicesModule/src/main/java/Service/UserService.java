@@ -6,6 +6,8 @@
 package Service;
 
 import Domein.MOCUser;
+import Domein.Role;
+import Domein.Team;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,11 +19,8 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UserService {
-    
-    //@PersistenceContext(unitName = "masterofcodedb")
-    //private EntityManager em;
-    
-    
+    @PersistenceContext(unitName = "masterofcodedb")
+    private EntityManager em;
     /**
      * login of a user
      * @param username
@@ -29,39 +28,103 @@ public class UserService {
      * @return
      */
     public MOCUser Login(String username, String password) {
-        return null;
-    }
-
-    /*public void test() {
         MOCUser user = new MOCUser();
-        user.setId(1);
-        em.persist(user);
-        em.flush();
-        MOCUser find = em.find(MOCUser.class, 1);
-        System.out.println(find.getId());
+        user = (MOCUser) em.createNamedQuery("LoginUser").setParameter("user", username).setParameter("password", password).getSingleResult();
+        if (user == null) {
+            System.out.println("No person found.");
+        }
+        else {
+            System.out.print("UserID= " + user.getId()
+                + ", Email=" + user.getEmail()
+                + ", Fullname= " + user.getFullName());
+        }
+        return user;
     }
 
-    public MOCUser Register() {
-        return null;
+    /**
+     *
+     * @param email
+     * @param fullname
+     * @param activationCode
+     * @param privilege
+     * @param password
+     * @return
+     */
+    public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode) {
+        em.getTransaction().begin();
+        MOCUser user = new MOCUser();
+        user.setEmail(email);
+        user.setFullName(fullname);
+        user.setName(password);
+        user.setPrivilege(Role.spectator);
+        user.setActivationCode(activationCode);
+        em.persist(user);
+        em.getTransaction().commit();
+        em.close();
+        return user;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public List<MOCUser> GetAllUsers() {
-        List<MOCUser> listUsers = em.createQuery("SELECT m.* FROM MOCUSER m").getResultList();
+        List<MOCUser> listUsers;
+        listUsers = em.createNamedQuery("AllUsers").getResultList();
         if (listUsers.isEmpty()) {
             System.out.println("No persons found.");
         }
         else {
             for (MOCUser user : listUsers) {
                 System.out.print("UserID= " + user.getId()
-                    //+ ", Username" + user.getUsername() 
-                    + ", Email=" + user.getEmail() 
-                    + ", Password=" + user.getPassword()
-                    + ", Fullname= " + user.getFullName()
-                    + ", Privilege= " + user.getPrivilege()
-                    + ", TeamID= " + user.getTeam());
+                    + ", Email=" + user.getEmail()
+                    + ", Fullname= " + user.getFullName());
             }
         }
         return listUsers;
-        
-    }*/
+    }
+
+    public List<Team> GetAllTeams() {
+        List<Team> listTeams;
+        listTeams = em.createNamedQuery("AllTeams").getResultList();
+        if (listTeams.isEmpty()) {
+            System.out.println("No persons found.");
+        }
+        else {
+            for (Team team : listTeams) {
+                System.out.print("UserID= " + team.getId()
+                    + ", Email=" + team.getTeamName()
+                    + ", Fullname= " + team.getServerName());
+            }
+        }
+        return listTeams;
+    }
+
+    public MOCUser AddToTeam(long userId, long teamId) {
+        MOCUser user = em.find(MOCUser.class, userId);
+        Team team = em.find(Team.class, teamId);
+        user.setTeam(team);
+        team.addMember(user);
+        em.persist(user);
+        em.flush();
+        em.close();
+        return user;
+    }
+    
+    public String SetActivationCode(String activationCode, long userId) {
+        MOCUser user = em.find(MOCUser.class, userId);
+        if (user.getActivationCode() == null) {
+            System.out.println("account already activated");
+            return "account already activated";
+        }
+        else if (user.getActivationCode().equals(activationCode)) {
+            user.setActivationCode(null);
+            System.out.println("account activated");
+            return "account activated";
+        }
+        else {
+            System.out.println("incorrect activation code");
+            return "incorrect activation code";
+        }
+    }
 }
