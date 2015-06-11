@@ -33,7 +33,7 @@ angular.module('competitorClientApp').controller('editorController', function ($
             var row = sourceFileTable.insertRow();
             row.className = "javaclass";
             var cell = row.insertCell();
-            cell.innerHTML = "<a ng-click=\"changeCode('" + file + "')\">" + file + "</a>";
+            cell.innerHTML = "<a ng-click=\"changeCode('" + file.replace(/\\/g, '\\\\') + "')\">" + file.substring(file.lastIndexOf('\\') + 1) + "</a>";
             $compile(cell)($scope);
         }
     });
@@ -43,6 +43,7 @@ angular.module('competitorClientApp').controller('editorController', function ($
     });
 
     $scope.changeCode = function (fileName) {
+        console.log(fileName);
         $scope.fileName = fileName;
         javaEditor.getDoc().setValue(InformationService.sourceFiles[fileName]);
     };

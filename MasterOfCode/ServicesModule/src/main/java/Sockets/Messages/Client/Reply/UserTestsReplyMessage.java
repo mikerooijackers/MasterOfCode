@@ -23,7 +23,7 @@ public class UserTestsReplyMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.UserTestsReplyMessage.toString();
     
-    private List<String> results;
+    private String result;
     
     /**
      * Constructor
@@ -34,22 +34,8 @@ public class UserTestsReplyMessage extends BaseMessage {
      *
      * @param results
      */
-    public UserTestsReplyMessage(List<String> results) {
-        this.results = results;
-    }
-
-    /**
-     * @return the results
-     */
-    public List<String> getResults() {
-        return results;
-    }
-
-    /**
-     * @param results the results to set
-     */
-    public void setResults(List<String> results) {
-        this.results = results;
+    public UserTestsReplyMessage(String result) {
+        this.result = result;
     }
     
     /**
@@ -59,8 +45,8 @@ public class UserTestsReplyMessage extends BaseMessage {
      */
     public static UserTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        List<String> jsonResults = (List<String>) obj.get("results");
-        return new UserTestsReplyMessage(jsonResults);
+        String jsonResult = obj.get("results").toString();
+        return new UserTestsReplyMessage(jsonResult);
     }
 
     @Override
@@ -72,7 +58,7 @@ public class UserTestsReplyMessage extends BaseMessage {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
-        obj.put("Results", this.results);
+        obj.put("Result", this.result);
         return obj.toString();
     }
 } 

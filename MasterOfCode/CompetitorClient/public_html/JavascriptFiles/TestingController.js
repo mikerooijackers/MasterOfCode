@@ -19,6 +19,10 @@ angular.module('competitorClientApp').controller('testingController', function (
         $scope.showTests();
     });
     
+    $scope.userTestsResultListener = $rootScope.$on("UserTestsReplyMessage", function (event, data) {
+        document.getElementById('testsResult').innerHTML = data.Result.replace(/\n/g,'<br>');
+    });
+    
     $scope.$on("$destroy", function() {
         $scope.userTestReplyListener();
     });

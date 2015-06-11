@@ -17,7 +17,7 @@ import org.json.simple.JSONValue;
  * @author JordiK
  */
 public class UserTestsRequestMessage extends BaseMessage {
-    
+
     /**
      *
      */
@@ -25,14 +25,16 @@ public class UserTestsRequestMessage extends BaseMessage {
     
     private Long teamId;
     private List<String> testNames;
-    
+
     /**
      * Constructor
      */
-    public UserTestsRequestMessage(){}
-    
+    public UserTestsRequestMessage() {
+    }
+
     /**
      * Constructor
+     *
      * @param teamId
      * @param testNames
      */
@@ -68,7 +70,7 @@ public class UserTestsRequestMessage extends BaseMessage {
     public void setTestNames(List<String> testNames) {
         this.testNames = testNames;
     }
-    
+
     /**
      *
      * @param s
@@ -80,14 +82,21 @@ public class UserTestsRequestMessage extends BaseMessage {
         List<String> jsonTestNames = (List<String>) obj.get("TestNames");
         return new UserTestsRequestMessage(jsonTeamId, jsonTestNames);
     }
-
+    
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        /*
-        TODO: SEND TESTS TO MODULE B FOR TESTING
-        */
+        String tests = "";
+        for(String test : this.testNames) {
+            tests += test;
+            
+            if (!this.testNames.get(this.testNames.size() - 1).equals(test)) {
+                tests += ",";
+            }
+        }
+        mocjms.messages.request.UserTestRequestMessage mess = new mocjms.messages.request.UserTestRequestMessage(tests, teamId, 1L, 1L);
+        communicationBean.sendMessageToWorkspaceManegementBean(mess);
     }
-
+    
     @Override
     public String toJSONString() {
         JSONObject obj = new JSONObject();
