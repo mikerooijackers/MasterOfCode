@@ -33,6 +33,15 @@ public class RequestBean implements MessageListener {
             try {
                 System.out.println("[[INFO]] JMS message received!");
                 ObjectMessage objectMessage = (ObjectMessage) message;
+//                long teamId = -1L; 
+//                
+//                try {
+//                    teamId = objectMessage.getLongProperty("teamId");
+//                } catch (JMSException ex) {
+//                    System.out.println("throwing teamId exception");
+//                    Logger.getLogger(RequestBean.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                
                 Serializable object = objectMessage.getObject();
                 
                 Serializable reply = null;
@@ -43,7 +52,8 @@ public class RequestBean implements MessageListener {
                 }
                 
                 if (reply != null) {
-                    replyBean.send(reply);
+                    replyBean.send(reply, objectMessage.getJMSMessageID()/*, teamId*/);
+                    System.out.println("message sent");
                 }
             } catch (JMSException ex) {
                 Logger.getLogger(RequestBean.class.getName()).log(Level.SEVERE, null, ex);
