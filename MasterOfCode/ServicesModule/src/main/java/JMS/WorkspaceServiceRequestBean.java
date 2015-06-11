@@ -6,10 +6,15 @@
 package JMS;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.QueueConnectionFactory;
 import mocjms.messages.main.OperationDrivenMessage;
@@ -33,14 +38,21 @@ public class WorkspaceServiceRequestBean {
     @Resource(mappedName = "jms/MasterOfCodeConnectionFactory")
     private ConnectionFactory factory;
     
+    @Inject
+    private JMSManager manager;
+    
     /**
      * send message
      * @param message
      */
     public void Send(Serializable message) {
         try (JMSContext context = factory.createContext()) {
-            context.createProducer().send(queue, message);
-        }
+            ObjectMessage msg = context.createObjectMessage(message);
+            //manager.AddRequestSend(msg.getJMSMessageID(), message);
+            context.createProducer().send(queue, msg);
+        } //catch (JMSException ex) {
+            //Logger.getLogger(WorkspaceServiceRequestBean.class.getName()).log(Level.SEVERE, null, ex);
+        //}
     }
     
     /**
@@ -48,7 +60,14 @@ public class WorkspaceServiceRequestBean {
      * @param message
      * @param teamID
      */
-    public void Send(OperationDrivenMessage message, long teamID) {
-        
+    public void Send(Serializable message, long teamID) {
+        try (JMSContext context = factory.createContext()) {
+            ObjectMessage msg = context.createObjectMessage(message);
+            //manager.AddRequestSend(msg.getJMSMessageID(), message);
+            msg.setLongProperty("teamId", teamID);
+            context.createProducer().send(queue, msg);
+        } catch (JMSException ex) {
+            Logger.getLogger(WorkspaceServiceRequestBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

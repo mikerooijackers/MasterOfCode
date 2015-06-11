@@ -151,7 +151,7 @@ public class RestResource {
     @GET
     @Path("testjms")
     public String testjms() {
-        mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
+        mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.CreateWorkspaceRequestMessage(0L, 0L); //new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
         bean.Send(mes);
         return "ok";
     }
