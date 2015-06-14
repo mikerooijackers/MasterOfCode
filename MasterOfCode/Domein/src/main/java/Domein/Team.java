@@ -1,6 +1,7 @@
 package Domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
+import org.json.simple.JSONAware;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -21,21 +24,30 @@ import javax.persistence.Transient;
     @NamedQuery(name = "AllTeams", query = "select t FROM Team t"),
     @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")    
 })
-public class Team implements Serializable {
-
+public class Team implements JSONAware,Serializable {
     @Transient
-    private Collection<MOCUser> members;
+    private Collection<MOCUser> members = new ArrayList();
     private int score;
+    private String workspacePath;
     private String teamName;
     private String serverName;
-    
+    private boolean approved;
+
     @ManyToOne
     private Competition competition;
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    
+    public Team(String workspacePath, String teamName, String serverName, boolean approved) {
+        this.workspacePath = workspacePath;
+        this.teamName = teamName;
+        this.serverName = serverName;
+        this.approved = approved;
+    }
     /**
      * get Team ID
+     *
      * @return long
      */
     public long getId() {
@@ -44,6 +56,7 @@ public class Team implements Serializable {
 
     /**
      * set Team ID
+     *
      * @param id
      */
     public void setId(long id) {
@@ -125,22 +138,25 @@ public class Team implements Serializable {
 
     /**
      * get Members
+     *
      * @return collection
      */
     public Collection<MOCUser> getMembers() {
-            return this.members;
+        return this.members;
     }
 
     /**
      * Set Members
+     *
      * @param members
      */
     public void setMembers(Collection<MOCUser> members) {
-            this.members = members;
+        this.members = members;
     }
 
     /**
      * Get Score
+     *
      * @return int
      */
     public int getScore() {
@@ -149,6 +165,7 @@ public class Team implements Serializable {
 
     /**
      * Set Score
+     *
      * @param score
      */
     public void setScore(int score) {
@@ -156,7 +173,26 @@ public class Team implements Serializable {
     }
 
     /**
+     * Get WorkspacePath
+     *
+     * @return string
+     */
+    public String getWorkspacePath() {
+        return workspacePath;
+    }
+
+    /**
+     * Set WorkspacePath
+     *
+     * @param workspacePath
+     */
+    public void setWorkspacePath(String workspacePath) {
+        this.workspacePath = workspacePath;
+    }
+
+    /**
      * Get Competition
+     *
      * @return Competition
      */
     public Competition getCompetition() {
@@ -165,10 +201,25 @@ public class Team implements Serializable {
 
     /**
      * Set Competition
-     * @param competition 
+     *
+     * @param competition
      */
     public void setCompetition(Competition competition) {
         this.competition = competition;
+    }
+
+    /**
+     * @return the teamName
+     */
+    public String getTeamName() {
+        return teamName;
+    }
+
+    /**
+     * @param teamName the teamName to set
+     */
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     /**
@@ -193,25 +244,32 @@ public class Team implements Serializable {
      */
     public int getNumberofMembers() {
         return this.members.size();
-    };
-
-    /**
-     * get TeamName
-     * @return
-     */
-    public String getTeamName() {
-        return teamName;
     }
 
     /**
-     * Set Name
-     * @param teamName
+     * @return the approved
      */
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public boolean isApproved() {
+        return approved;
     }
 
-    public void addMember(MOCUser user) {
-        members.add(user);
+    /**
+     * @param approved the approved to set
+     */
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("Members", this.members);
+        obj.put("Score", this.score);
+        obj.put("Workspacepath", this.workspacePath);
+        obj.put("Competition", this.competition);
+        obj.put("Id", this.id);
+        obj.put("TeamName", this.teamName);
+        obj.put("Approved", this.isApproved());
+        return obj.toJSONString();
     }
 }

@@ -54,7 +54,7 @@ public class HintReplyMessage extends BaseMessage implements Serializable {
      */
     public static HintReplyMessage decodeJSON(String JSON) {
         JSONObject obj = (JSONObject) JSONValue.parse(JSON);
-        String jsonHintMessage = obj.get("hintMessage").toString();
+        String jsonHintMessage = obj.get("HintMessage").toString();
         
         return new HintReplyMessage(jsonHintMessage);
     }

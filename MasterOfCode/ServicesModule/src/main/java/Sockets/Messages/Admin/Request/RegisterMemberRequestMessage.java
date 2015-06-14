@@ -5,6 +5,7 @@
  */
 package Sockets.Messages.Admin.Request;
 
+import Domein.MOCUser;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
@@ -27,7 +28,15 @@ public class RegisterMemberRequestMessage extends BaseMessage {
     
     public RegisterMemberRequestMessage(){}
     
-    public RegisterMemberRequestMessage(String username, String name, String password, String phone, String organization){
+    public RegisterMemberRequestMessage(String username, String name, String phone, String organization){
+        this.username = username;
+        this.name = name;
+        this.password = "password";
+        this.phone = phone;
+        this.organization = organization;
+    }
+    
+        public RegisterMemberRequestMessage(String username, String name, String password, String phone, String organization){
         this.username = username;
         this.name = name;
         this.password = password;
@@ -39,15 +48,15 @@ public class RegisterMemberRequestMessage extends BaseMessage {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonUsername = obj.get("Username").toString();
         String jsonName = obj.get("Name").toString();
-        String jsonPassword = obj.get("Password").toString();
         String jsonPhone = obj.get("Phone").toString();
         String jsonOrganization = obj.get("Organization").toString();
-        return new RegisterMemberRequestMessage(jsonUsername, jsonName, jsonPassword, jsonPhone, jsonOrganization);
+        return new RegisterMemberRequestMessage(jsonUsername, jsonName, jsonPhone, jsonOrganization);
     }
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        MOCUser user = new MOCUser();
+        System.out.println("In the do action of RegisterMemberRequestMessage");
     }
 
     @Override

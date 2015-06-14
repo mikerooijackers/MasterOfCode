@@ -49,4 +49,11 @@ public class CommunicationBean {
     public void sendMessageToWorkspaceManegementBean(Serializable message) {
         workspaceServiceRequestBean.Send(message);
     }
+    public void sendMessageToAdmin(String username, BaseMessage message) {
+        adminEndpoint.sendMessage(username, message);
+    }
+    
+    public void sendMessageToAllAdmins(BaseMessage message) {
+        adminEndpoint.sendToAll(message);
+    }
 }

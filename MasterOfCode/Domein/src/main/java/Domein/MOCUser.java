@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import org.json.simple.JSONAware;
+import org.json.simple.JSONObject;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -14,13 +16,11 @@ import javax.persistence.NamedQuery;
  * @author mikerooijackers
  */
 @Entity
-@NamedQueries ({
+@NamedQueries({
     @NamedQuery(name = "AllUsers", query = "SELECT m FROM MOCUser m"),
     @NamedQuery(name = "LoginUser", query = "SELECT m FROM MOCUser m WHERE m.email LIKE :email AND m.password LIKE :password")
 })
-public class MOCUser implements Serializable {
-
-    private String activationCode;
+public class MOCUser implements Serializable, JSONAware {
 
     /**
      * password of a user
@@ -39,6 +39,12 @@ public class MOCUser implements Serializable {
      */
     private Role privilege;
 
+    private String company;
+
+    private String telephoneNumber;
+
+    private String activationCode;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -52,132 +58,151 @@ public class MOCUser implements Serializable {
     public MOCUser() {
     }
 
-    /**
-     * get team
-     * @return
-     */
-    public Team getTeam() {
-        return team;
-    }
-
-    /**
-     * set team
-     * @param team
-     */
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    /**
-     * get full name
-     * @return
-     */
-    public String getFullName() {
-        return fullName;
-    }
-
-    /**
-     * set full name
-     * @param fullName
-     */
-    public void setFullName(String fullName) {
+    public MOCUser(String username, String password, String email, String fullName, Role privilege, Team team, String company, String telephoneNumber) {
+        this.password = password;
+        this.email = email;
         this.fullName = fullName;
+        this.privilege = privilege;
+        this.team = team;
+        this.company = company;
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("Fullname", this.fullName);
+//        obj.put("Id", this.id);
+        obj.put("Email", this.email);
+        obj.put("Password", this.password);
+        obj.put("Company", this.company);
+        obj.put("TelephoneNumber", this.telephoneNumber);
+        return obj.toJSONString();
     }
 
     /**
-     * get mocuser id
-     * @return
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * set mocuser id
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * get password
-     * @return
+     * @return the password
      */
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     /**
-     * set password
-     * @param password
+     * @param password the password to set
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * get email
-     * @return
+     * @return the email
      */
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     /**
-     * set email
-     * @param email
+     * @param email the email to set
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * get name
-     * @return
+     * @return the fullName
      */
-    public String getName() {
-        return this.fullName;
+    public String getFullName() {
+        return fullName;
     }
 
     /**
-     * set name
-     * @param name
+     * @param fullName the fullName to set
      */
-    public void setName(String name) {
-        this.fullName = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     /**
-     * get pprivilege
-     * @return
+     * @return the privilege
      */
     public Role getPrivilege() {
-        return this.privilege;
+        return privilege;
     }
 
     /**
-     * set privilege
-     * @param privilege
+     * @param privilege the privilege to set
      */
     public void setPrivilege(Role privilege) {
         this.privilege = privilege;
     }
 
     /**
-     * get activationCode
-     * @return
+     * @return the company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    /**
+     * @return the telephoneNumber
+     */
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    /**
+     * @param telephoneNumber the telephoneNumber to set
+     */
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    /**
+     * @return the activationCode
      */
     public String getActivationCode() {
         return activationCode;
     }
 
     /**
-     * set activationCode
-     * @param activationCode
+     * @param activationCode the activationCode to set
      */
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
 
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the team
+     */
+    public Team getTeam() {
+        return team;
+    }
+
+    /**
+     * @param team the team to set
+     */
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }

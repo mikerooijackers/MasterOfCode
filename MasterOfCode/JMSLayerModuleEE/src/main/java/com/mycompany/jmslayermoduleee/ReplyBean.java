@@ -62,15 +62,20 @@ public class ReplyBean {
         }
     }
     
-    public void send(Serializable message) {
+    public void send(Serializable message, String requestMessageID/*, Long teamId*/) {
         try (JMSContext context = factory.createContext()) {
-            context.createProducer().send(queue, message);
+            ObjectMessage om = session.createObjectMessage(message);
+            om.setJMSCorrelationID(requestMessageID);
+            
+//            if (teamId != -1L) {
+//                om.setLongProperty("teamId", teamId);
+//            }
+            
+            context.createProducer().send(queue, om);
+            
+            System.out.println("message really sent");
+        } catch (JMSException ex) {
+            Logger.getLogger(ReplyBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-//            ObjectMessage om = session.createObjectMessage(message);
-//            producer.send(om);
-//        } catch (JMSException ex) {
-//            Logger.getLogger(ReplyBean.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 }
