@@ -65,7 +65,10 @@ public enum MessageTypes {
     DebugMessage("DebugMessage"),
     NewSessionConnectionMessage("NewSessionConnectionMessage"),
     NewParticipantReplyMessage("NewParticipantReplyMessage"),
-    GetParticipantsReplyMessage("GetParticipantsReplyMessage");
+    GetParticipantsReplyMessage("GetParticipantsReplyMessage"),
+    GetAllTeamsReplyMessage("GetAllTeamsReplyMessage"), 
+    GetParticipantsRequestMessage("GetParticipantsRequestMessage"),
+    GetTeamsRequestMessage("GetTeamsRequestMessage");
     
     private String name;
     

@@ -22,6 +22,7 @@ import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
+import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
@@ -34,7 +35,7 @@ import javax.websocket.server.ServerEndpoint;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @Singleton
 public class AdminEndPoint {
-    
+
     @Inject
     private CommunicationBean communicationBean;
 
@@ -60,6 +61,7 @@ public class AdminEndPoint {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
         } else {
+            System.out.println("Message received: " + message.getClass() + "!!!");
             message.doAction(communicationBean);
         }
     }
@@ -76,9 +78,21 @@ public class AdminEndPoint {
      */
     public void sendMessage(String username, Object message) {
         try {
-            sessions.get(username).getBasicRemote().sendObject(message);
+            System.out.println("Username to be found: " + username);
+            System.out.println("All usernames in the sessions:");
+            for (Map.Entry<String, Session> entry : sessions.entrySet()) {
+                System.out.println("* Username: " + entry.getKey());
+            }
+            
+            Session ses = sessions.get(username);
+//            Basic basicObj = ses.getBasicRemote();
+//            System.out.println("Is basic obj null: " + (basicObj == null));
+            System.out.println("Is session null: " + (ses == null));
+            System.out.println("Is message null: " + (message == null));
+            ses.getBasicRemote().sendObject(message);
             System.out.println("Message send!!!");
-        } catch (IOException | EncodeException ex) {
+        } catch (IOException | EncodeException | NullPointerException ex) {
+            System.out.println("Exception: " + ex.getMessage());
             Logger.getLogger(AdminEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -92,7 +106,7 @@ public class AdminEndPoint {
             }
         }
     }
-    
+
     /**
      *
      * @param session
@@ -115,7 +129,7 @@ public class AdminEndPoint {
         for (Map.Entry<String, Session> entry : sessions.entrySet()) {
             String username = entry.getKey();
             Session sess = entry.getValue();
-            
+
             if (sess == session) {
                 usernameToRemove = username;
                 break;

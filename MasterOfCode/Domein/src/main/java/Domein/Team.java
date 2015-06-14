@@ -1,8 +1,8 @@
 package Domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +16,12 @@ import org.json.simple.JSONObject;
 public class Team implements JSONAware, Serializable {
 
     @Transient
-    private Collection<MOCUser> members;
+    private Collection<MOCUser> members = new ArrayList();
     private int score;
     private String workspacePath;
     private String teamName;
     private String serverName;
+    private boolean approved;
 
     @ManyToOne
     private Competition competition;
@@ -28,6 +29,14 @@ public class Team implements JSONAware, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public Team() {}
+    
+    public Team(String workspacePath, String teamName, String serverName, boolean approved) {
+        this.workspacePath = workspacePath;
+        this.teamName = teamName;
+        this.serverName = serverName;
+        this.approved = approved;
+    }
     /**
      * get Team ID
      *
@@ -44,12 +53,6 @@ public class Team implements JSONAware, Serializable {
      */
     public void setId(long id) {
         this.id = id;
-    }
-
-    /**
-     * Constructor
-     */
-    public Team() {
     }
 
     /**
@@ -123,8 +126,8 @@ public class Team implements JSONAware, Serializable {
     public void setCompetition(Competition competition) {
         this.competition = competition;
     }
-    
-        /**
+
+    /**
      * @return the teamName
      */
     public String getTeamName() {
@@ -138,18 +141,6 @@ public class Team implements JSONAware, Serializable {
         this.teamName = teamName;
     }
 
-    @Override
-    public String toJSONString() {
-        JSONObject obj = new JSONObject();
-        obj.put("Members", this.members);
-        obj.put("Score", this.score);
-        obj.put("Workspacepath", this.workspacePath);
-        obj.put("Competition", this.competition);
-        obj.put("Id", this.id);
-        obj.put("TeamName", this.teamName);
-        return obj.toJSONString();
-    }
-
     public String getServerName() {
         return serverName;
     }
@@ -160,5 +151,34 @@ public class Team implements JSONAware, Serializable {
 
     public int getNumberofMembers() {
         return this.members.size();
-    };
+    }
+
+    ;
+
+    /**
+     * @return the approved
+     */
+    public boolean isApproved() {
+        return approved;
+    }
+
+    /**
+     * @param approved the approved to set
+     */
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("Members", this.members);
+        obj.put("Score", this.score);
+        obj.put("Workspacepath", this.workspacePath);
+        obj.put("Competition", this.competition);
+        obj.put("Id", this.id);
+        obj.put("TeamName", this.teamName);
+        obj.put("Approved", this.isApproved());
+        return obj.toJSONString();
+    }
 }

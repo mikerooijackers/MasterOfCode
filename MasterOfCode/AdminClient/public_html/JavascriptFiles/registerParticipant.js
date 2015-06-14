@@ -1,10 +1,28 @@
 angular.module('adminClient')
-        .controller('registerParticipantController', function ($scope) {
+        .controller('registerParticipantController', function ($scope, websocketService) {
             
-            $scope.teamName = "";
-            
+            // Variables
+    
+            $scope.fullName = "";
+            $scope.email = "";
+            $scope.company = "";
+            $scope.telephoneNumber = "";
+
+            var RegisterMemberRequestMessage = {
+                MessageType: "RegisterMemberRequestMessage"
+            };
+
+            // Scope methods
             
             $scope.registerParticipant = function () {
-                
+                if ($scope.fullName !== null && $scope.email !== null && $scope.company !== null && $scope.telephoneNumber !== null) {
+                    RegisterMemberRequestMessage.Name = $scope.fullName;
+                    RegisterMemberRequestMessage.Username = $scope.email;
+                    RegisterMemberRequestMessage.Email = $scope.email;
+                    RegisterMemberRequestMessage.Organization = $scope.company;
+                    RegisterMemberRequestMessage.Phone = $scope.telephoneNumber;
+                    
+                    websocketService.sendMessage(RegisterMemberRequestMessage);
+                }
             };
         });

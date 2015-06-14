@@ -1,34 +1,43 @@
 angular.module('adminClient')
         .controller('manageParticipantsController', function ($scope, $rootScope, $compile, websocketService, InformationService) {
-            var DebugMessage = {
-                MessageType: "DebugMessage"
+            console.log("Hello world");
+            // Variables
+
+            var GetParticipantsRequestMessage = {
+                MessageType: "GetParticipantsRequestMessage"
             };
 
-            $rootScope.$on("HintReplyMessage", function (event, data) {
-                console.log("Received message: " + data.HintMessage);
-            });
+            // On initialization
 
-            $rootScope.$on("GetParticipantsReplyMessage", function (event, data) {
+            websocketService.sendMessage(GetParticipantsRequestMessage);
+
+            // On receiving messages
+
+            $scope.getParticipantsReplyListener = $rootScope.$on("GetParticipantsReplyMessage", function (event, data) {
+                console.log("Received GetParticipantsReplyMessage in the manageParticipantsController");
                 $scope.fillParticipantsTable();
-                console.log("Hey Ho Lets Go " + InformationService.participants["Jordi"].Username );
             });
 
-            websocketService.sendMessage(DebugMessage);
+            $scope.$on("$destroy", function () {
+                $scope.getParticipantsReplyListener();
+            });
+
+            // Scope methods
 
             $scope.fillParticipantsTable = function () {
                 var participantTable = document.getElementById("participantTable");
                 participantTable.innerHTML = "";
 
-// Test
                 for (var participant in InformationService.participants) {
-                    participantTable.innerHTML += "<tr><td><a ng-click=\"fillParticipantInfoTable('" + participant + "')\">" + participant + "</a></td></tr>";
+                    var row = participantTable.insertRow();
+                    var content = row.insertCell();
+                    content.innerHTML = "<a ng-click=\"fillParticipantInfoTable('" + participant + "')\">" + participant + "</a>";
                 }
+                participantTable.className = "borderedTable";
                 $compile(participantTable)($scope);
             };
 
-            $scope.fillParticipantsTable();
-            $scope.fillParticipantInfoTable = function(username) {
-                console.log("HE HO LETS GO");
+            $scope.fillParticipantInfoTable = function (username) {
                 var participantInfoTable = document.getElementById("participantInfoTable");
                 participantInfoTable.innerHTML = "";
                 participantInfoTable.innerHTML += "<b>Username:</b> " + InformationService.participants[username].Username + "<br>";
@@ -37,9 +46,9 @@ angular.module('adminClient')
                 participantInfoTable.innerHTML += "<b>Company:</b> " + InformationService.participants[username].Company + "<br>";
                 participantInfoTable.innerHTML += "<b>Telephone:</b> " + InformationService.participants[username].TelephoneNumber + "<br>";
                 participantInfoTable.innerHTML += "<b>Team:</b> " + InformationService.participants[username].Team + "<br>";
-                
-                // TODO
-                // Missing: company, telephone number, team name
-                
             };
+
+            // On initialization
+
+            $scope.fillParticipantsTable();
         });
