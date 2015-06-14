@@ -48,9 +48,8 @@ public class GetParticipantsReplyMessage extends BaseMessage {
         json += "\"Users\" : {";
         
         for (MOCUser user : users) {
-            json += "\"" + user.getUsername() + "\" :";
+            json += "\"" + user.getFullName() + "\" :";
             json += "{";
-            json += "\"Username\": \"" + user.getUsername() + "\", ";
             json += "\"FullName\": \"" + user.getFullName() + "\", ";
             json += "\"Email\": \"" + user.getEmail() + "\", ";
             json += "\"Company\": \"" + user.getCompany() + "\", ";

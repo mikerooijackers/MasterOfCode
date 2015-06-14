@@ -28,10 +28,19 @@ public class CommunicationBean {
     @EJB
     private WorkspaceServiceRequestBean workspaceServiceRequestBean;
     
+    /**
+     * send Message To Competitor
+     * @param username
+     * @param message
+     */
     public void sendMessageToCompetitor(String username, BaseMessage message) {
         competitorEndpoint.sendMessage(username, message);
     }
     
+    /**
+     * send Message To All Competitors
+     * @param message
+     */
     public void sendMessageToAllCompetitors(BaseMessage message) {
         competitorEndpoint.sendToAll(message);
     }

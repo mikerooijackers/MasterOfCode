@@ -6,6 +6,7 @@
 package JMS;
 
 import Sockets.Messages.BaseMessage;
+import java.io.Serializable;
 import java.util.Map;
 import javax.ejb.Singleton;
 import mocjms.messages.main.OperationDrivenMessage;
@@ -16,15 +17,15 @@ import mocjms.messages.main.OperationDrivenMessage;
  */
 @Singleton
 public class JMSManager {
-    private Map<String, BaseMessage> requestSend;
+    private Map<String, Serializable> requestSend;
     
     /**
      * add request send
      * @param messageID
      * @param message
      */
-    public void AddRequestSend(long messageID, OperationDrivenMessage message) {
-        
+    public void AddRequestSend(String messageID, Serializable message) {
+        requestSend.put(messageID, message);
     }
     
     /**
@@ -32,9 +33,8 @@ public class JMSManager {
      * @param messageID
      * @return
      */
-    public OperationDrivenMessage GetRequestSend(String messageID) {
-        return null;
-        
+    public Serializable GetRequestSend(String messageID) {
+        return requestSend.get(messageID);
     }
     
 }

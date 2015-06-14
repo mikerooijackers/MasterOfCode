@@ -5,15 +5,12 @@
  */
 package mocjms.messages.reply;
 
-import com.mycompany.jmslayermodule.ReplyBean;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
-
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 /**
  *
  * @author Gebruiker
  */
-public class EditSourceCodeReplyMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class EditSourceCodeReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
 
     private boolean isSuccessful;
 
@@ -40,10 +37,4 @@ public class EditSourceCodeReplyMessage extends CompetitionBaseMessage implement
     public void setIsSuccessful(boolean isSuccessful) {
         this.isSuccessful = isSuccessful;
     }
-    
-    @Override
-    public void doWork(ReplyBean replyBean) {
-        //replyBean.send(this);
-    }
-    
 }

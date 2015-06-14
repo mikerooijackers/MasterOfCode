@@ -35,7 +35,6 @@ public class NewParticipantReplyMessage extends BaseMessage {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
 //        obj.put("User", this.user.toJSONString());
-        obj.put("Username", this.user.getUsername());
         obj.put("Fullname", this.user.getFullName());
 //        obj.put("Id", this.user.getId());
         obj.put("Email", this.user.getEmail());

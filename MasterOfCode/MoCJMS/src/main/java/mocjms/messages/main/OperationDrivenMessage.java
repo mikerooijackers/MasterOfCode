@@ -5,12 +5,12 @@
  */
 package mocjms.messages.main;
 
-import com.mycompany.jmslayermodule.ReplyBean;
+import java.io.Serializable;
 
 /**
  *
  * @author Gebruiker
  */
 public interface OperationDrivenMessage {
-    public void doWork(ReplyBean replyBean);
+    public Serializable generateReplyMessage();
 }

@@ -5,20 +5,19 @@
  */
 package mocjms.messages.request;
 
-import com.mycompany.jmslayermodule.ReplyBean;
 import com.mycompany.utilitiesmodule.ZipUtils;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import static com.mycompany.workspacemanagementmoduleb.WorkspaceService.ASSIGNMENTS_PATH;
 import com.mycompany.workspacemanagementmoduleb.utils.FileUtils;
 import java.io.File;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
+import mocjms.messages.reply.ExtractAssignmentToWorkspacesReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class ExtractAssignmentToWorkspacesRequestMessage implements OperationDrivenMessage {
+public class ExtractAssignmentToWorkspacesRequestMessage extends OperationDrivenRequestMessage {
 
     private byte[] blob;
     private Long roundId;
@@ -35,7 +34,7 @@ public class ExtractAssignmentToWorkspacesRequestMessage implements OperationDri
     }
     
     private void prepareBlob(Long assignmentId) {
-        File assignmentFolder = new File(ASSIGNMENTS_PATH + File.separator + assignmentId);
+        File assignmentFolder = new File(WorkspaceService.ASSIGNMENTS_PATH + File.separator + assignmentId);
         File[] files = assignmentFolder.listFiles();
         
         for (File file : files) {
@@ -67,8 +66,11 @@ public class ExtractAssignmentToWorkspacesRequestMessage implements OperationDri
     }
     
     @Override
-    public void doWork(ReplyBean replyBean) {
-        WorkspaceService.getInstance().extractAssignmentToWorkspaces(competitionId, roundId, blob);
+    public OperationDrivenReplyMessage generateReplyMessage() {
+        boolean succes = WorkspaceService.getInstance().extractAssignmentToWorkspaces(competitionId, roundId, blob);
+        OperationDrivenReplyMessage message = new ExtractAssignmentToWorkspacesReplyMessage(succes);
+        
+        return message;
     }
     
 }

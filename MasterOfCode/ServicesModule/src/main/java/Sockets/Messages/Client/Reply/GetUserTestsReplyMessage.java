@@ -8,6 +8,8 @@ package Sockets.Messages.Client.Reply;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import java.util.List;
+import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -19,12 +21,18 @@ public class GetUserTestsReplyMessage extends BaseMessage {
     
     public static final String messageType = MessageTypes.GetUserTestsReplyMessage.toString();
     
+    private Map<String, String> testDescriptions;
+    
     public GetUserTestsReplyMessage(){}
+    
+    public GetUserTestsReplyMessage(Map<String, String> testDescriptions) {
+        this.testDescriptions = testDescriptions;
+    }
     
     public static GetUserTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        
-        return new GetUserTestsReplyMessage();
+        Map<String, String> jsonTestDescriptions = (Map<String, String>) obj.get("TestDescriptions");
+        return new GetUserTestsReplyMessage(jsonTestDescriptions);
     }
 
     @Override
@@ -36,6 +44,7 @@ public class GetUserTestsReplyMessage extends BaseMessage {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
+        obj.put("TestDescriptions", this.testDescriptions);
         return obj.toJSONString();
     }
     

@@ -46,6 +46,12 @@ public class NewEmptyJUnitTest {
         List<AnnotationData> readAssignmentMetaData = service.readAssignmentMetaData(path, 1L);
         Assert.assertTrue(true);
     }
+    
+    //@org.testng.annotations.Test
+    public void testTest() {
+        WorkspaceService service = new WorkspaceService();
+        String runSingleTest = service.runSingleTest("UserTest,AmbivilantTest", 0L, 0L, 0L);
+    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

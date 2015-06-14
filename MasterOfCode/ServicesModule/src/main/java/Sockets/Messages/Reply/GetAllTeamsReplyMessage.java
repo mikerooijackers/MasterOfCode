@@ -68,7 +68,7 @@ public class GetAllTeamsReplyMessage extends BaseMessage {
             memberAmount = team.getNumberofMembers();
             
             for (MOCUser member : team.getMembers()){
-                json += "\"" + member.getUsername() + "\"";
+                json += "\"" + member.getFullName() + "\"";
                 
                 if (indexMembers != memberAmount -1) {
                     json += ", ";

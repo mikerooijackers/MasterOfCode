@@ -8,15 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "AllUsers", query = "SELECT m FROM MOCUser m"),
+    @NamedQuery(name = "LoginUser", query = "SELECT m FROM MOCUser m WHERE m.email LIKE :email AND m.password LIKE :password")
+})
+public class MOCUser implements Serializable, JSONAware {
 
-public class MOCUser implements JSONAware, Serializable {
-
-    /**
-     * username of a user
-     */
-    private String username;
     /**
      * password of a user
      */
@@ -37,7 +42,7 @@ public class MOCUser implements JSONAware, Serializable {
     private String company;
 
     private String telephoneNumber;
-    
+
     private String activationCode;
 
     @Id
@@ -47,11 +52,13 @@ public class MOCUser implements JSONAware, Serializable {
     @ManyToOne
     private Team team;
 
+    /**
+     * constructor
+     */
     public MOCUser() {
     }
 
     public MOCUser(String username, String password, String email, String fullName, Role privilege, Team team, String company, String telephoneNumber) {
-        this.username = username;
         this.password = password;
         this.email = email;
         this.fullName = fullName;
@@ -61,66 +68,70 @@ public class MOCUser implements JSONAware, Serializable {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public Team getTeam() {
-        return team;
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("Fullname", this.fullName);
+//        obj.put("Id", this.id);
+        obj.put("Email", this.email);
+        obj.put("Password", this.password);
+        obj.put("Company", this.company);
+        obj.put("TelephoneNumber", this.telephoneNumber);
+        return obj.toJSONString();
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    /**
+     * @return the password
+     */
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
+    /**
+     * @param password the password to set
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * @return the email
+     */
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
+    /**
+     * @param email the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getName() {
-        return this.fullName;
+    /**
+     * @return the fullName
+     */
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.fullName = name;
+    /**
+     * @param fullName the fullName to set
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
+    /**
+     * @return the privilege
+     */
     public Role getPrivilege() {
-        return this.privilege;
+        return privilege;
     }
 
+    /**
+     * @param privilege the privilege to set
+     */
     public void setPrivilege(Role privilege) {
         this.privilege = privilege;
     }
@@ -153,25 +164,45 @@ public class MOCUser implements JSONAware, Serializable {
         this.telephoneNumber = telephoneNumber;
     }
 
-    @Override
-    public String toJSONString() {
-        JSONObject obj = new JSONObject();
-        obj.put("Username", this.username);
-        obj.put("Fullname", this.fullName);
-//        obj.put("Id", this.id);
-        obj.put("Email", this.email);
-        obj.put("Password", this.password);
-        obj.put("Company", this.company);
-        obj.put("TelephoneNumber", this.telephoneNumber);
-        return obj.toJSONString();
-    }
-
+    /**
+     * @return the activationCode
+     */
     public String getActivationCode() {
         return activationCode;
     }
 
+    /**
+     * @param activationCode the activationCode to set
+     */
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
 
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the team
+     */
+    public Team getTeam() {
+        return team;
+    }
+
+    /**
+     * @param team the team to set
+     */
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }

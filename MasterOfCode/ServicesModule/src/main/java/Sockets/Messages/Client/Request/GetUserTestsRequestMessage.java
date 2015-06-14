@@ -8,8 +8,9 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.Reply.TeamActionReplyMessage;
-import java.util.List;
+import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
+import java.util.HashMap;
+import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -24,43 +25,31 @@ public class GetUserTestsRequestMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.GetUserTestsRequestMessage.toString();
 
-    private long teamId;
-    private List<String> testNames;
-
     /**
      * Constructor
      */
      public GetUserTestsRequestMessage() {
     }
 
-    /**
-     * Constructor
-     * @param teamId
-     * @param testNames
-     */
-    public GetUserTestsRequestMessage(long teamId, List<String> testNames) {
-        this.teamId = teamId;
-        this.testNames = testNames;
-    }
-
     public static GetUserTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        long jsonTeamId = (long)obj.get("TeamId");
-        List<String> jsonTestNames = (List<String>)obj.get("TestNames");
-        return new GetUserTestsRequestMessage(jsonTeamId, jsonTestNames);
+        return new GetUserTestsRequestMessage();
     }
     
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String, String> descriptions = new HashMap<>();
+        descriptions.put("Test1", "This is the first test.");
+        descriptions.put("Test2", "This is the seconds test.");
+        descriptions.put("Test3", "This is the third test.");
+        GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
+        communicationBean.sendMessageToCompetitor("Noor", mess);
     }
 
     @Override
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
-        obj.put("TeamId", this.teamId);
-        obj.put("TestNames", this.testNames);
         return obj.toString();
     }
 

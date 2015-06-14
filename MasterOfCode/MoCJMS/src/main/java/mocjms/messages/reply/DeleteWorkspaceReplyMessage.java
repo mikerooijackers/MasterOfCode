@@ -5,14 +5,13 @@
  */
 package mocjms.messages.reply;
 
-import com.mycompany.jmslayermodule.ReplyBean;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class DeleteWorkspaceReplyMessage implements OperationDrivenMessage {
+public class DeleteWorkspaceReplyMessage extends OperationDrivenReplyMessage {
 
     private String workspacePath;
     private Long teamId;
@@ -50,10 +49,4 @@ public class DeleteWorkspaceReplyMessage implements OperationDrivenMessage {
     public void setWorkspacePath(String workspacePath) {
         this.workspacePath = workspacePath;
     }
-    
-    @Override
-    public void doWork(ReplyBean replyBean) {
-        //replyBean.send(this);
-    }
-    
 }
