@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-5 text-center">
-                    <p>Current game</p>
+                    <p>Current round</p>
                 </div>
                 <div class="col-md-2"></div>
             </div>
@@ -60,17 +60,17 @@
                 <!--Game buttons-->
                 <div class="col-md-2"></div>
                 <div class="col-md-2" id="bordered">
-                    <div class="col-md-6 text-center"><button class="btn btn-default">Start</button></div>
-                    <div class="col-md-6 text-center"><button class="btn btn-default">Stop</button></div>
+                    <div class="col-md-6 text-center"><button class="btn btn-default" ng-click="startCompetition()"id="startCompBtn">Start</button></div>
+                    <div class="col-md-6 text-center"><button class="btn btn-default" ng-click="stopCompetition()" id="stopCompBtn">Stop</button></div>
                 </div>
 
                 <!--Round buttons-->
                 <div class="col-md-1"></div>
                 <div class="col-md-5" id="bordered">
-                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Start</button></div>
-                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Pause</button></div>
-                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Freeze</button></div>
-                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered">Stop</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered" ng-click="startRound()">Start</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered" ng-click="pauseRound()">Pause</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered" ng-click="freezeRound()">Freeze</button></div>
+                    <div class="col-md-3 text-center"><button class="btn btn-default" id="centered" ng-click="stopRound()">Stop</button></div>
                 </div>
                 <div class="col-md-2"></div>
             </div>

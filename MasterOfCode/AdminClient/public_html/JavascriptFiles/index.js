@@ -43,7 +43,7 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                 MessageType: "NewSessionConnectionMessage",
                 Username: "Jordi"
             };
-            
+
             // On initialization
 
             websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
@@ -102,6 +102,54 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
             $scope.showCategoryServers = function () {
                 $scope.MenuUserVisibility = {'display': 'none'};
                 $scope.MenuGameVisibility = {'display': 'none'};
+            };
+
+            $scope.startCompetition = function () {
+                var StartCompetitionRequestMessage = {
+                    MessageType: "StartCompetitionRequestMessage"
+                };
+
+                websocketService.sendMessage(StartCompetitionRequestMessage);
+            };
+
+            $scope.stopCompetition = function () {
+                var StopCompetitionRequestMessage = {
+                    MessageType: "StopCompetitionRequestMessage"
+                };
+
+                websocketService.sendMessage(StopCompetitionRequestMessage);
+            };
+
+            $scope.startRound = function () {
+                var StartRoundRequestMessage = {
+                    MessageType: "StartRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(StartRoundRequestMessage);
+            };
+
+            $scope.stopRound = function () {
+                var StopRoundRequestMessage = {
+                    MessageType: "StopRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(StopRoundRequestMessage);
+            };
+
+            $scope.pauseUnpauseRound = function () {
+                var PauseRoundRequestMessage = {
+                    MessageType: "PauseRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(PauseRoundRequestMessage);
+            };
+
+            $scope.freezeUnfreezeRound = function () {
+                var FreezeRoundRequestMessage = {
+                    MessageType: "FreezeRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(FreezeRoundRequestMessage);
             };
         });
 

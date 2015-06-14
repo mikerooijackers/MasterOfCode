@@ -148,6 +148,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return GetParticipantsRequestMessage.decodeJSON(s);
             case GetTeamsRequestMessage:
                 return GetTeamsRequestMessage.decodeJSON(s);
+            case StopRoundRequestMessage:
+                return StopRoundRequestMessage.decodeJSON(s);
         }
         return null;
     }
