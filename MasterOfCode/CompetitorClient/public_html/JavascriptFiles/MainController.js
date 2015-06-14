@@ -1,4 +1,4 @@
-angular.module('competitorLoginApp', ['ngRoute'])
+angular.module('competitorLoginApp', ['ngRoute', 'ngResource'])
 
         .config(function ($routeProvider) {
             $routeProvider

@@ -18,4 +18,6 @@ angular.module('competitorClientApp').service('InformationService', function() {
     this.teamActions = [];
     
     this.testDescriptions = [];
+    
+    this.user = null;
 });
