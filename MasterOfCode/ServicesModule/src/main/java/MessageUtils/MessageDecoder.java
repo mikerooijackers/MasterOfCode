@@ -11,6 +11,8 @@ import Sockets.Messages.Admin.Request.*;
 import Sockets.Messages.Client.Reply.*;
 import Sockets.Messages.Client.Request.*;
 import Sockets.Messages.Reply.*;
+import Sockets.Messages.Request.GetParticipantsRequestMessage;
+import Sockets.Messages.Request.GetTeamsRequestMessage;
 import Sockets.Messages.Spectator.*;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
@@ -139,6 +141,16 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return CompetitionInfoReplyMessage.decodeJSON(s);
             case CompetitionNotStartetReplyMessage:
                 return CompetitionNotStartetReplyMessage.decodeJSON(s);
+            case GetParticipantsReplyMessage:
+                return GetParticipantsReplyMessage.decodeJSON(s);
+            case GetAllTeamsReplyMessage:
+                return GetAllTeamsReplyMessage.decodeJSON(s);
+            case GetParticipantsRequestMessage:
+                return GetParticipantsRequestMessage.decodeJSON(s);
+            case GetTeamsRequestMessage:
+                return GetTeamsRequestMessage.decodeJSON(s);
+            case StopRoundRequestMessage:
+                return StopRoundRequestMessage.decodeJSON(s);
         }
         return null;
     }

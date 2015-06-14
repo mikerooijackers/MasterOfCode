@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Sockets.Messages.Admin.Request;
 
 import Enumerations.MessageTypes;
@@ -13,29 +8,28 @@ import org.json.simple.JSONValue;
 
 /**
  *
- * @author mikerooijackers
+ * @author Jay
  */
-public class StartCompetitionRequestMessage extends BaseMessage {
-    
-    public static final String messageType = MessageTypes.StartCompetitionReplyMessage.toString();
+public class StopRoundRequestMessage extends BaseMessage {
+    public static final String messageType = MessageTypes.StopRoundRequestMessage.toString();
     
     private Long competitionId;
     
-    public StartCompetitionRequestMessage(){};
+    public StopRoundRequestMessage(){}
     
-    public StartCompetitionRequestMessage(Long competitionId) {
+    public StopRoundRequestMessage(Long competitionId) {
         this.competitionId = competitionId;
     }
     
-    public static StartCompetitionRequestMessage decodeJSON(String s) {
+    public static StopRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");
-        return new StartCompetitionRequestMessage(jsonCompetitionId);
+        return new StopRoundRequestMessage(jsonCompetitionId);
     }
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        System.out.println("In the doAction of the StartCompetitionRequestMessage");
+        System.out.println("In the doAction of the StopRoundRequestMessage");
     }
 
     @Override
@@ -45,5 +39,18 @@ public class StartCompetitionRequestMessage extends BaseMessage {
         obj.put("CompetitionId", this.competitionId);
         return obj.toJSONString();
     }
-    
+
+    /**
+     * @return the competitionId
+     */
+    public Long getCompetitionId() {
+        return competitionId;
+    }
+
+    /**
+     * @param competitionId the competitionId to set
+     */
+    public void setCompetitionId(Long competitionId) {
+        this.competitionId = competitionId;
+    }
 }

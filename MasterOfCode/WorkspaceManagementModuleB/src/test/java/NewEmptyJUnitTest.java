@@ -39,7 +39,7 @@ public class NewEmptyJUnitTest {
     public void tearDown() {
     }
     
-    @org.testng.annotations.Test
+    //@org.testng.annotations.Test
     public void testReadAnnotationData() {
         WorkspaceService service = new WorkspaceService();
         String path = "C:\\assignments";
@@ -47,7 +47,7 @@ public class NewEmptyJUnitTest {
         Assert.assertTrue(true);
     }
     
-    @org.testng.annotations.Test
+    //@org.testng.annotations.Test
     public void testTest() {
         WorkspaceService service = new WorkspaceService();
         String runSingleTest = service.runSingleTest("UserTest,AmbivilantTest", 0L, 0L, 0L);

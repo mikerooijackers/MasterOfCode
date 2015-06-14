@@ -11,7 +11,6 @@ import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 /**
  *
@@ -44,5 +43,13 @@ public class CommunicationBean {
      */
     public void sendMessageToAllCompetitors(BaseMessage message) {
         competitorEndpoint.sendToAll(message);
+    }
+    
+    public void sendMessageToAdmin(String username, BaseMessage message) {
+        adminEndpoint.sendMessage(username, message);
+    }
+    
+    public void sendMessageToAllAdmins(BaseMessage message) {
+        adminEndpoint.sendToAll(message);
     }
 }

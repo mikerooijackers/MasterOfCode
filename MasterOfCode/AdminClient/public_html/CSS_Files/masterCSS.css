@@ -10,6 +10,11 @@
     padding: 7px;
 }
 
+.bordered {
+    border: 1px solid black;
+    padding: 7px;
+}
+
 .content {
     margin-bottom: 30px;
 }
@@ -74,17 +79,31 @@
     background-color: darkgrey;
 }
 
-.borderedTable a:link a:visited a:hover a:active {
+.borderedTable tr td a {
     color: black;
 }
 
-.borderedTable a:hover a:active {
+.borderedTable tr td a:visited {
+    color: black;
+}
+
+.borderedTable tr td a:hover {
+    color: black;
+    font-weight: bold;
+}
+
+.borderedTable tr td a:active {
+    color: white;
     font-weight: bold;
 }
 
 textarea {
     width: 100%;
     resize: none;
+}
+
+#participantInfoTable {
+    height: 200px;
 }
 
 #marginBtn {

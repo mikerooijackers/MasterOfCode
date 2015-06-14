@@ -55,7 +55,7 @@ public class UserService {
         MOCUser user = new MOCUser();
         user.setEmail(email);
         user.setFullName(fullname);
-        user.setName(password);
+        //user.setName(password);
         user.setPrivilege(Role.spectator);
         user.setActivationCode(activationCode);
         em.persist(user);
@@ -104,7 +104,7 @@ public class UserService {
         MOCUser user = em.find(MOCUser.class, userId);
         Team team = em.find(Team.class, teamId);
         user.setTeam(team);
-        team.addMember(user);
+        //team.addMember(user);
         em.persist(user);
         em.flush();
         em.close();

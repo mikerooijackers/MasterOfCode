@@ -63,7 +63,13 @@ public enum MessageTypes {
     CompetitionInfoReplyMessage("CompetitionInfoReplyMessage"),
     CompetitionNotStartetReplyMessage("CompetitionNotStartetReplyMessage"),
     DebugMessage("DebugMessage"),
-    NewSessionConnectionMessage("NewSessionConnectionMessage");
+    NewSessionConnectionMessage("NewSessionConnectionMessage"),
+    NewParticipantReplyMessage("NewParticipantReplyMessage"),
+    GetParticipantsReplyMessage("GetParticipantsReplyMessage"),
+    GetAllTeamsReplyMessage("GetAllTeamsReplyMessage"), 
+    GetParticipantsRequestMessage("GetParticipantsRequestMessage"),
+    GetTeamsRequestMessage("GetTeamsRequestMessage"),
+    StopRoundRequestMessage("StopRoundRequestMessage");
     
     private String name;
     
