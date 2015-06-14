@@ -44,7 +44,7 @@ public class GetSourceFilesRequestMessage extends BaseMessage {
     @Override
     public void doAction(CommunicationBean communicationBean) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("SourceFile1", "package REST;\n"
+        map.put("C:\\Users\\JordiK\\Documents\\School\\PTS6\\MasterOfCode\\SourceFile1", "package REST;\n"
                 + "\n"
                 + "import javax.ws.rs.core.*;\n"
                 + "import javax.ws.rs.*;\n"

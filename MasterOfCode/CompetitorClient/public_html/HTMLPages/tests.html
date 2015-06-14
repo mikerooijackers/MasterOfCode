@@ -10,16 +10,28 @@
 </div>
 
 <div id="testsContainer">
-    
+
 </div>
 
 <div class="row">
     <div class="col-md-4"></div>
-    <div class="col-md-2"><p id="legendUnknow">Not yet tested</p></div>
-    <div class="col-md-2"><p id="legendFailed">Test failed</p></div>
-    <div class="col-md-2"><p id="legendSuccess">Test passed</p></div>
+    <div class="col-md-7">
+        <p id="resultLabel">Result:</p>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-7" id="testsResult">
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-10"></div>
     <div class="col-md-1">
-        <button class="btn btn-default" ng-click="requestTests()">Run tests</button>
+        <button class="btn btn-default" id="runTests" ng-click="requestTests()">Run tests</button>
     </div>
     <div class="col-md-1"></div>
 </div>

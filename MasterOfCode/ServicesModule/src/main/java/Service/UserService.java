@@ -11,6 +11,7 @@ import Domein.Team;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -19,24 +20,30 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UserService {
+
     @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
+
     /**
      * login of a user
+     *
      * @param username
      * @param password
      * @return
      */
     public MOCUser Login(String username, String password) {
         MOCUser user = new MOCUser();
-        user = (MOCUser) em.createNamedQuery("LoginUser").setParameter("user", username).setParameter("password", password).getSingleResult();
+        try {
+            user = (MOCUser) em.createNamedQuery("LoginUser").setParameter("email", username).setParameter("password", password).getSingleResult();
+        } catch (NoResultException ex) {
+            user = new MOCUser();
+        }
         if (user == null) {
             System.out.println("No person found.");
-        }
-        else {
+        } else {
             System.out.print("UserID= " + user.getId()
-                + ", Email=" + user.getEmail()
-                + ", Fullname= " + user.getFullName());
+                    + ", Email=" + user.getEmail()
+                    + ", Fullname= " + user.getFullName());
         }
         return user;
     }
@@ -51,16 +58,16 @@ public class UserService {
      * @return
      */
     public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode) {
-        em.getTransaction().begin();
+//        em.getTransaction().begin();
         MOCUser user = new MOCUser();
         user.setEmail(email);
         user.setFullName(fullname);
-        //user.setName(password);
+        user.setPrivilege(privilege);
         user.setPrivilege(Role.spectator);
         user.setActivationCode(activationCode);
         em.persist(user);
-        em.getTransaction().commit();
-        em.close();
+//        em.getTransaction().commit();
+//        em.close();
         return user;
     }
 
@@ -73,12 +80,11 @@ public class UserService {
         listUsers = em.createNamedQuery("AllUsers").getResultList();
         if (listUsers.isEmpty()) {
             System.out.println("No persons found.");
-        }
-        else {
+        } else {
             for (MOCUser user : listUsers) {
                 System.out.print("UserID= " + user.getId()
-                    + ", Email=" + user.getEmail()
-                    + ", Fullname= " + user.getFullName());
+                        + ", Email=" + user.getEmail()
+                        + ", Fullname= " + user.getFullName());
             }
         }
         return listUsers;
@@ -89,12 +95,11 @@ public class UserService {
         listTeams = em.createNamedQuery("AllTeams").getResultList();
         if (listTeams.isEmpty()) {
             System.out.println("No persons found.");
-        }
-        else {
+        } else {
             for (Team team : listTeams) {
                 System.out.print("UserID= " + team.getId()
-                    + ", Email=" + team.getTeamName()
-                    + ", Fullname= " + team.getServerName());
+                        + ", Email=" + team.getTeamName()
+                        + ", Fullname= " + team.getServerName());
             }
         }
         return listTeams;
@@ -110,19 +115,17 @@ public class UserService {
         em.close();
         return user;
     }
-    
+
     public String SetActivationCode(String activationCode, long userId) {
         MOCUser user = em.find(MOCUser.class, userId);
         if (user.getActivationCode() == null) {
             System.out.println("account already activated");
             return "account already activated";
-        }
-        else if (user.getActivationCode().equals(activationCode)) {
+        } else if (user.getActivationCode().equals(activationCode)) {
             user.setActivationCode(null);
             System.out.println("account activated");
             return "account activated";
-        }
-        else {
+        } else {
             System.out.println("incorrect activation code");
             return "incorrect activation code";
         }

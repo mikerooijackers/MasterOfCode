@@ -14,6 +14,13 @@ import Domein.Role;
 class LoginMessage {
     private String email;
     private String password;
+    
+    public LoginMessage(){}
+    
+    public LoginMessage(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;
@@ -21,6 +28,20 @@ class LoginMessage {
 
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     

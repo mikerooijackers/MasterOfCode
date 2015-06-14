@@ -17,6 +17,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.inject.Inject;
+import javax.ws.rs.core.MediaType;
 
 /**
  * REST Web Service
@@ -27,11 +28,11 @@ import javax.inject.Inject;
 @Stateless
 public class RestResource {
     
-    //@Inject
+    @Inject
     UserService userService;
-    //@Inject
+    @Inject
     CompetitionService competitionService;
-    //@Inject
+    @Inject
     private CompetitorEndPoint endPoint;
 
     /**
@@ -49,6 +50,8 @@ public class RestResource {
      */
     @POST
     @Path("login")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public MOCUser Login(LoginMessage message) {
         String email = message.getEmail();
         String password = message.getPassword();
@@ -77,11 +80,11 @@ public class RestResource {
      * @param userId
      * @return
      */
-    @POST
-    @Path("activationcode")
-    public String SetActivationCode(String code, long userId) {
-        return userService.SetActivationCode(code, userId);
-    }
+//    @POST
+//    @Path("activationcode")
+//    public String SetActivationCode(String code, long userId) {
+//        return userService.SetActivationCode(code, userId);
+//    }
     
     /**
      *
