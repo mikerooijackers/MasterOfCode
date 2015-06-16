@@ -1,9 +1,13 @@
 angular.module('audienceClient')
-        .controller('manageScoresController', function ($scope) {
+        .controller('manageScoresController', function ($scope, $rootScope) {
 
             var round = null;
     
             $scope.scores = null;
+            
+            $rootScope.$on("CompetitionInfoReplyMessage", function (event, data) {
+
+            });
 
             // MOCK DATA!!! ----------------------------------------------------   
 

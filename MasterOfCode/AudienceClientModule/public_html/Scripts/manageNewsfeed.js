@@ -1,5 +1,9 @@
 angular.module('audienceClient')
-        .controller('manageNewsfeedController', function ($scope) {
+        .controller('manageNewsfeedController', function ($scope, $rootScope) {
+
+            $rootScope.$on("CompetitionInfoReplyMessage", function (event, data) {
+
+            });
 
 
             // MOCK DATA!!! ----------------------------------------------------

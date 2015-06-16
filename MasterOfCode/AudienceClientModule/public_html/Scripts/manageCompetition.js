@@ -3,7 +3,6 @@ angular.module('audienceClient')
             
             
             $scope.info = {
-                authorName: "Jan Klaassen",
                 orgaName: "Company BV",
                 date: "24-05-2015",
                 time: "14:00",

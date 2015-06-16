@@ -83,10 +83,9 @@ public class SpectatorEndpoint {
 
     public void sendMessage(Object message) {
         try {
-            for (Session sess : sessions)
-            {
-               sess.getBasicRemote().sendObject(message); 
-            }            
+            for (Session sess : sessions) {
+                sess.getBasicRemote().sendObject(message);
+            }
         } catch (IOException | EncodeException ex) {
             Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }

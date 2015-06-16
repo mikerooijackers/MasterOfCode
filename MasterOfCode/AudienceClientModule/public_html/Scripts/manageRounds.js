@@ -3,11 +3,8 @@ angular.module('audienceClient')
             
             
             $rootScope.$on("CompetitionInfoReplyMessage", function (event, data) {
-          
 
-
-            }
-            );
+            });
             
             
             
