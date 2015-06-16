@@ -40,15 +40,19 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                     .when('/newsfeedOverview', {
                         templateUrl: 'HTMLPages/newsFeedOverview.html',
                         controller: 'newsFeedController'
+                    })
+
+                    .when('/account', {
+                        templateUrl: 'HTMLPages/account.html',
+                        controller: 'accountController'
                     });
         })
 
-        .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval) {
+        .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval, $location) {
             $scope.currentScore = 0;
             $scope.difficulty = 1;
-            $scope.user = JSON.parse(localStorage.getItem('userInformation'));
-            localStorage.removeItem('userInformation');
-            console.log($scope.user);
+            InformationService.user = JSON.parse(localStorage.getItem('userInformation'));
+            console.log(InformationService.user);
             SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
             var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
             SocketService.sendMessage(NewSessionConnectionMessage);
@@ -60,13 +64,13 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
             $rootScope.$on("HintReplyMessage", function (event, data) {
                 InformationService.hints.push(data.HintMessage);
             });
-            
-            $rootScope.$on("OtherTeamScoreReplyMessage", function(event, data) {
+
+            $rootScope.$on("OtherTeamScoreReplyMessage", function (event, data) {
                 var teamScores = document.getElementById("otherTeamScores");
                 var row = teamScores.insertRow();
                 var cellTeam = row.insertCell();
                 var cellScore = row.insertCell();
-                
+
                 cellTeam.innerHTML = data.TeamName;
                 cellScore.innerHTML = data.TeamScore;
             });
@@ -139,7 +143,7 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                     document.getElementById("newsFeedContent").style.opacity = opacity;
                 }, 10);
             });
-            
+
             $rootScope.$on("GetUserTestsReplyMessage", function (event, data) {
                 for (var test in data.TestDescriptions) {
                     InformationService.testDescriptions[test] = data.TestDescriptions[test];
@@ -166,5 +170,9 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                     return "0" + number;
                 }
                 return number;
+            }
+
+            $scope.showAccountPage = function () {
+                $location.path('/account');
             }
         });

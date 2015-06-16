@@ -58,7 +58,7 @@ public class SpectatorEndpoint {
      */
     @OnOpen
     public void onOpen(EndpointConfig endpointConfig, Session session) {
-        System.out.println("Session opened");
+        sessions.add(session);
     }
 
     /**
@@ -68,17 +68,8 @@ public class SpectatorEndpoint {
      */
     @OnMessage
     public void onMessage(final Session session, final BaseMessage message) {
-        if (message instanceof NewSessionConnectionMessage) {
-            this.addSession(session);
-        } else if (message instanceof DebugMessage) {
-        } else {
-            message.doAction(communicationBean);
-        }
+        message.doAction(communicationBean);
         System.out.println("Sessions size: " + sessions.size());
-    }
-
-    private void addSession(Session session) {
-        this.sessions.add(session);
     }
 
     public void sendMessage(Object message) {
@@ -109,11 +100,7 @@ public class SpectatorEndpoint {
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         System.out.println("Closing session");
-        for (Session sess : sessions) {
-            if (sess == session) {
-                sessions.remove(sess);
-            }
-        }
+        sessions.remove(session);
         System.out.println("Sessions size: " + sessions.size());
     }
 }
