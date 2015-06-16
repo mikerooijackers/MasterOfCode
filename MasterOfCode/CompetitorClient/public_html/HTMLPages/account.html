@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-8">
+        <div class="menuBar">
+            <table>
+                <tr>
+                    <td><a ng-click="selectedPage='myInformation'">My information</a></td>
+                    <td><a ng-click="selectedPage='myTeam'">My team</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div id="accountPageContent" class="col-md-8" ng-switch on="selectedPage">
+        <div ng-switch-when="myInformation">
+            <p id="myInformationTitle">Your account information</p>
+            <div id="accountInformationContainer">
+                <p>Email: {{user.email}}</p>
+                <p>Fullname: {{user.fullName}}</p>
+                <p>Company: {{user.company}}</p>
+                <p>Telephone: {{user.telephoneNumber}}</p>
+            </div>
+        </div>
+        <div ng-switch-when="myTeam">
+            Hello world 2
+        </div>
+    </div>
+</div>
