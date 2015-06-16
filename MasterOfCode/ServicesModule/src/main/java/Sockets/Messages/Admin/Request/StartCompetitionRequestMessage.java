@@ -8,6 +8,7 @@ package Sockets.Messages.Admin.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.StartCompetitionReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -35,6 +36,11 @@ public class StartCompetitionRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
+        // Send reply message to clients
+        StartCompetitionReplyMessage mes = new StartCompetitionReplyMessage();
+        
+        
+        
         System.out.println("In the doAction of the StartCompetitionRequestMessage");
     }
 

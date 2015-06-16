@@ -8,6 +8,7 @@ package Sockets.Messages.Admin.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.UnFreezeRoundReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -38,6 +39,8 @@ public class UnFreezeRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
+        UnFreezeRoundReplyMessage mes = new UnFreezeRoundReplyMessage();
+        
         System.out.println("In the doAction of the UnfreezeRoundRequestMessage");
     }
 

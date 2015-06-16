@@ -3,6 +3,7 @@ package Sockets.Messages.Admin.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.StopRoundReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -29,6 +30,8 @@ public class StopRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
+        StopRoundReplyMessage mes = new StopRoundReplyMessage();
+        
         System.out.println("In the doAction of the StopRoundRequestMessage");
     }
 

@@ -8,6 +8,7 @@ package Sockets.Messages.Admin.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.ResumeRoundReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -38,6 +39,8 @@ public class ResumeRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
+        ResumeRoundReplyMessage mes = new ResumeRoundReplyMessage();
+        
         System.out.println("In the doAction of the ResumeRoundRequestMessage");
     }
 
