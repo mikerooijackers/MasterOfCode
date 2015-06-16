@@ -5,20 +5,15 @@
  */
 package mocjms.messages.reply;
 
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class CompileReplyMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class CompileReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
 
     private String result;
-
-    public CompileReplyMessage(String result) {
-        this.result = result;
-    }
 
     public CompileReplyMessage(String result, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
@@ -26,10 +21,7 @@ public class CompileReplyMessage extends CompetitionBaseMessage implements Opera
     }
 
     public CompileReplyMessage() {
-    }
-
-    public CompileReplyMessage(Long teamId, Long roundId, Long competitionId) {
-        super(teamId, roundId, competitionId);
+        
     }
 
     public String getResult() {
@@ -38,11 +30,5 @@ public class CompileReplyMessage extends CompetitionBaseMessage implements Opera
 
     public void setResult(String result) {
         this.result = result;
-    }
-    
-    @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

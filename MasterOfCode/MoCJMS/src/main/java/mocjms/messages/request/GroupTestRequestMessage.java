@@ -5,14 +5,16 @@
  */
 package mocjms.messages.request;
 
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
+import mocjms.messages.reply.GroupTestReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class GroupTestRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class GroupTestRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
 
     private String groupName;
 
@@ -41,8 +43,11 @@ public class GroupTestRequestMessage extends CompetitionBaseMessage implements O
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
+        String result = WorkspaceService.getInstance().runTestGroup(this.groupName, super.getCompetitionId(), super.getTeamId(), super.getRoundId());
+        CompetitionBasedOperationDrivenReplyMessage reply = new GroupTestReplyMessage(super.getTeamId(), super.getRoundId(), super.getCompetitionId(), result);
+        
+        return reply;
     }
     
 }

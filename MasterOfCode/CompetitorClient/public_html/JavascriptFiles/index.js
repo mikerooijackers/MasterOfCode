@@ -35,86 +35,133 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                     .when('/testing', {
                         templateUrl: 'HTMLPages/tests.html',
                         controller: 'testingController'
+                    })
+
+                    .when('/newsfeedOverview', {
+                        templateUrl: 'HTMLPages/newsFeedOverview.html',
+                        controller: 'newsFeedController'
                     });
         })
 
-        .controller('mainController', function ($scope, SocketService) {
-            $scope.message = 'This is the main controller';
+        .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval) {
+            $scope.currentScore = 0;
+            $scope.difficulty = 1;
             SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
-            var NewSessionConnectionMessage = {MessageType : "NewSessionConnectionMessage", Username : "Noor"};
+            var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
             SocketService.sendMessage(NewSessionConnectionMessage);
-        })
 
-        .controller('homeController', function ($scope, $rootScope, SocketService) {
-            $scope.message = 'Home controller';
-            
-            $rootScope.$on('StartRoundMessage', function(event, data) {
-                var informationString = "Assignment creator: \n";
-                informationString += data.AssignCreatorName;
-                informationString += "\n\n Hello world";
-                document.getElementById('assignmentTextArea').innerHTML = informationString;
+            $scope.hoursRemaining = 0;
+            $scope.minutesRemaining = 0;
+            $scope.secondsRemaining = 0;
+
+            $rootScope.$on("HintReplyMessage", function (event, data) {
+                InformationService.hints.push(data.HintMessage);
             });
-    
-            SocketService.sendMessage({MessageType: "DebugMessage"});
-        })
+            
+            $rootScope.$on("OtherTeamScoreReplyMessage", function(event, data) {
+                var teamScores = document.getElementById("otherTeamScores");
+                var row = teamScores.insertRow();
+                var cellTeam = row.insertCell();
+                var cellScore = row.insertCell();
+                
+                cellTeam.innerHTML = data.TeamName;
+                cellScore.innerHTML = data.TeamScore;
+            });
 
-        .controller('editorController', function ($scope) {
-            $scope.editorOption = {
-                lineNumbers: true
-            };
-            var javaEditor = CodeMirror.fromTextArea(document.getElementById("myTextArea"), {
-                lineNumbers: true,
-                theme: "neat",
-                matchBrackets: true,
-                mode: "text/x-java",
-                foldGutter: {
-                    rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)
-                },
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                extraKeys: {"F11": function (cm) {
-                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            $rootScope.$on("StartRoundReplyMessage", function (event, data) {
+                InformationService.assignCreatorName = data.AssignCreatorName;
+                InformationService.assignCreatorCompany = data.AssignCreatorCompany;
+                InformationService.assignCreatorWeb = data.AssignCreatorWeb;
+
+                InformationService.assignName = data.AssignName;
+                InformationService.assignDescriptionCompetitors = data.AssignDescriptionCompetitors;
+                InformationService.assignDescriptionSpectators = data.AssignDescriptionSpectators;
+
+                $scope.difficulty = data.AssignDifficulty;
+
+                $scope.hoursRemaining = Math.floor(data.Duration / 3600);
+                var remaining = data.Duration % 3600;
+                $scope.minutesRemaining = Math.floor(remaining / 60);
+                $scope.secondsRemaining = remaining % 60;
+                $scope.currentScore = data.Duration - $scope.difficulty;
+
+                $scope.timer = $interval(function () {
+                    $scope.secondsRemaining--;
+                    if ($scope.secondsRemaining < 0) {
+                        $scope.minutesRemaining--;
+                        $scope.secondsRemaining = 59;
                     }
+                    if ($scope.minutesRemaining < 0) {
+                        $scope.hoursRemaining--;
+                        $scope.minutesRemaining = 59;
+                    }
+
+                    $scope.currentScore = (($scope.hoursRemaining * 3600) + ($scope.minutesRemaining * 60) + ($scope.secondsRemaining)) * $scope.difficulty;
+
+                    if ($scope.secondsRemaining === 0 && $scope.minutesRemaining === 0 && $scope.hoursRemaining === 0) {
+                        $interval.cancel($scope.timer);
+                    }
+                }, 1000);
+            });
+
+            $rootScope.$on("GetSourceFilesReplyMessage", function (event, data) {
+                InformationService.sourceFiles = [];
+                for (var file in data.SourceFiles) {
+                    InformationService.sourceFiles[file] = data.SourceFiles[file];
                 }
             });
-            javaEditor.setSize(null, 495);
-        })
 
-        .controller('compileController', function ($scope) {
-            $scope.message = "Controller succesfully linked";
-        })
-
-        .controller('javadocController', function ($scope) {
-            $scope.message = "Javadoc controller";
-            $scope.pdfLink = "https://portal.fhict.nl/IS/S6/Lesmateriaal/PTSE6-Master%20of%20Code-Studiewijzer.pdf";
-        })
-
-        .controller('hintsController', function ($scope, $rootScope, SocketService) {
-            $scope.message = "Hints controller";
-            $scope.hints = [];
-            $scope.hintNumber = 1;
-            
-            $scope.debug = function() {
-//                SocketService.sendMessage({MessageType : "DebugMessage"});
-            };
-            
-            $rootScope.$on("hintMessage", function(event, data) {
-                var hintsContainer = document.getElementById('hintsContainer');
-                hintsContainer.innerHTML += "<div class='col-md-3'><table class='hintTable'><tr><th>Hint " + $scope.hintNumber + "</th></tr><tr><td>" + data.HintMessage + "</td></tr></table></div>";
-                $scope.hintNumber++;
+            $rootScope.$on("CompileReplyMessage", function (event, data) {
+                InformationService.lastCompileResult = data.Result;
             });
-        })
 
-        .controller('turninController', function ($scope) {
-            $scope.message = "Turn in conroller";
-        })
+            var fadeIn;
+            var fadeOut;
 
-        .controller('testingController', function ($scope) {
-            $scope.message = "Testing controller";
-            $scope.showOutput = function (test, output) {
-                var testOutputTable = document.getElementById('testOutput' + test);
-                testOutputTable.style.marginTop = 0;
-                var testOutputField = document.getElementById('outputField' + test);
-                testOutputField.innerHTML = output;
-                testOutputField.style.height = "50px";
+            $rootScope.$on("TeamActionReplyMessage", function (event, data) {
+                InformationService.teamActions.push(data.Action);
+                if (angular.isDefined(fadeOut)) {
+                    $interval.cancel(fadeOut);
+                }
+
+                document.getElementById("newsFeedContent").style.opacity = 1;
+
+                fadeOut = $interval(function () {
+                    var opacity = document.getElementById("newsFeedContent").style.opacity;
+                    if (opacity <= 0) {
+                        $interval.cancel(fadeOut);
+                        $scope.startFadeIn(data);
+                    }
+                    opacity -= 0.05;
+                    document.getElementById("newsFeedContent").style.opacity = opacity;
+                }, 10);
+            });
+            
+            $rootScope.$on("GetUserTestsReplyMessage", function (event, data) {
+                for (var test in data.TestDescriptions) {
+                    InformationService.testDescriptions[test] = data.TestDescriptions[test];
+                }
+            });
+
+            $scope.startFadeIn = function (data) {
+                if (angular.isDefined(fadeIn)) {
+                    $interval.cancel(fadeIn);
+                }
+                document.getElementById("newsFeedContent").innerHTML = data.Action;
+                fadeIn = $interval(function () {
+                    var opacity = Number(document.getElementById("newsFeedContent").style.opacity);
+                    if (opacity === 1) {
+                        $interval.cancel(fadeIn);
+                    }
+                    opacity += 0.05;
+                    document.getElementById("newsFeedContent").style.opacity = opacity;
+                }, 10);
+            }
+
+            $scope.displayWithLeadingZero = function (number) {
+                if (number < 10) {
+                    return "0" + number;
+                }
+                return number;
             }
         });

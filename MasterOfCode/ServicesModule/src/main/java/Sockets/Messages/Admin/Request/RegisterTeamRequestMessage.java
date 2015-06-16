@@ -16,24 +16,42 @@ import org.json.simple.JSONValue;
  * @author mikerooijackers
  */
 public class RegisterTeamRequestMessage extends BaseMessage {
-    
+
     public static final String messageType = MessageTypes.RegisterTeamRequestMessage.toString();
-    
+
     private Long teamId;
     private Long competitionId;
-    
-    public RegisterTeamRequestMessage(){}
-    
-    public RegisterTeamRequestMessage(Long teamId, Long competitionId) {
+    private String teamName;
+
+    public RegisterTeamRequestMessage() {
+    }
+
+    public RegisterTeamRequestMessage(Long teamId, Long competitionId, String teamName) {
         this.teamId = teamId;
         this.competitionId = competitionId;
+        this.teamName = teamName;
     }
-    
+
+    /**
+     * @return the teamName
+     */
+    public String getTeamName() {
+        return teamName;
+    }
+
+    /**
+     * @param teamName the teamName to set
+     */
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
     public static RegisterTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("TeamId");
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");
-        return new RegisterTeamRequestMessage(jsonTeamId, jsonCompetitionId);
+        String jsonTeamName = obj.get("TeamName").toString();
+        return new RegisterTeamRequestMessage(jsonTeamId, jsonCompetitionId, jsonTeamName);
     }
 
     @Override
@@ -49,5 +67,4 @@ public class RegisterTeamRequestMessage extends BaseMessage {
         obj.put("CompetitionId", this.competitionId);
         return obj.toJSONString();
     }
-    
 }

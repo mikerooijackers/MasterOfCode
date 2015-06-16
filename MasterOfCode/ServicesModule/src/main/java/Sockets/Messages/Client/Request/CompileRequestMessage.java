@@ -8,6 +8,7 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Client.Reply.CompileReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -16,21 +17,23 @@ import org.json.simple.JSONValue;
  * @author JordiK
  */
 public class CompileRequestMessage extends BaseMessage {
-    
+
     /**
      *
      */
     public static final String messageType = MessageTypes.CompileRequestMessage.toString();
-    
+
     private Long teamId;
-    
+
     /**
      * Constructor
      */
-    public CompileRequestMessage(){}
-    
+    public CompileRequestMessage() {
+    }
+
     /**
      * Constructor
+     *
      * @param teamId
      */
     public CompileRequestMessage(Long teamId) {
@@ -50,7 +53,7 @@ public class CompileRequestMessage extends BaseMessage {
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
     }
-    
+
     /**
      *
      * @param s
@@ -64,7 +67,8 @@ public class CompileRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mocjms.messages.request.CompileRequestMessage mess = new mocjms.messages.request.CompileRequestMessage(this.teamId, 2L, 2L);
+        communicationBean.sendMessageToWorkspaceManegementBean(mess);
     }
 
     @Override

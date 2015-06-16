@@ -5,10 +5,12 @@
  */
 package mocjms.messages.main;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Gebruiker
  */
 public interface OperationDrivenMessage {
-    public void doWork();
+    public Serializable generateReplyMessage();
 }

@@ -6,25 +6,54 @@
 package Service;
 
 import JMS.WorkspaceServiceRequestBean;
+import Sockets.Messages.BaseMessage;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
-import javax.ejb.Singleton;
-import javax.inject.Inject;
+import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author JordiK
  */
-@Singleton
+@Stateless
 public class CommunicationBean {
     
-    @Inject
+    @EJB
     private AdminEndPoint adminEndpoint;
     
-    @Inject
+    @EJB
     private CompetitorEndPoint competitorEndpoint;
     
-    @Inject
+    @EJB
     private WorkspaceServiceRequestBean workspaceServiceRequestBean;
     
+    /**
+     * send Message To Competitor
+     * @param username
+     * @param message
+     */
+    public void sendMessageToCompetitor(String username, BaseMessage message) {
+        competitorEndpoint.sendMessage(username, message);
+    }
+    
+    /**
+     * send Message To All Competitors
+     * @param message
+     */
+    public void sendMessageToAllCompetitors(BaseMessage message) {
+        competitorEndpoint.sendToAll(message);
+    }
+    
+    public void sendMessageToWorkspaceManegementBean(Serializable message) {
+        workspaceServiceRequestBean.Send(message);
+    }
+    public void sendMessageToAdmin(String username, BaseMessage message) {
+        adminEndpoint.sendMessage(username, message);
+    }
+    
+    public void sendMessageToAllAdmins(BaseMessage message) {
+        adminEndpoint.sendToAll(message);
+    }
 }

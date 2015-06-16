@@ -5,14 +5,16 @@
  */
 package mocjms.messages.request;
 
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
+import mocjms.messages.reply.EditSourceCodeReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class EditSourceCodeRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class EditSourceCodeRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
     private String classPath;
     private String newCode;
 
@@ -51,7 +53,10 @@ public class EditSourceCodeRequestMessage extends CompetitionBaseMessage impleme
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
+        boolean success = WorkspaceService.getInstance().editSourceCode(classPath, newCode);
+        
+        CompetitionBasedOperationDrivenReplyMessage message = new EditSourceCodeReplyMessage(success, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        return message;
     }
 }

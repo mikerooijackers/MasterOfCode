@@ -8,14 +8,13 @@ package mocjms.messages.reply;
 import Domein.SourceCode;
 import java.util.ArrayList;
 import java.util.List;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class GetSourceCodeFilesReplyMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class GetSourceCodeFilesReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
 
     private List<SourceCode> listSourceCode;
 
@@ -44,10 +43,4 @@ public class GetSourceCodeFilesReplyMessage extends CompetitionBaseMessage imple
     public void setListSourceCode(List<SourceCode> listSourceCode) {
         this.listSourceCode = listSourceCode;
     }
-    
-    @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

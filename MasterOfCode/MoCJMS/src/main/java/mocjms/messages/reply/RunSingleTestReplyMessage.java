@@ -5,13 +5,13 @@
  */
 package mocjms.messages.reply;
 
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
- *
+ * @deprecated Use UserTestReplyMessage instead.
  * @author JordiK
  */
-public class RunSingleTestReplyMessage implements OperationDrivenMessage {
+public class RunSingleTestReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
     
     private String output;
     
@@ -36,10 +36,4 @@ public class RunSingleTestReplyMessage implements OperationDrivenMessage {
     public void setOutput(String output) {
         this.output = output;
     }
-
-    @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

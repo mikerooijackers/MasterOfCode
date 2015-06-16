@@ -5,14 +5,12 @@
  */
 package mocjms.messages.reply;
 
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
-
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 /**
  *
  * @author Gebruiker
  */
-public class EditSourceCodeReplyMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class EditSourceCodeReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
 
     private boolean isSuccessful;
 
@@ -39,10 +37,4 @@ public class EditSourceCodeReplyMessage extends CompetitionBaseMessage implement
     public void setIsSuccessful(boolean isSuccessful) {
         this.isSuccessful = isSuccessful;
     }
-    
-    @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

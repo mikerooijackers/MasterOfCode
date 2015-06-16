@@ -5,15 +5,17 @@
  */
 package mocjms.messages.request;
 
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
+import mocjms.messages.reply.CompileReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class CompileRequestMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
-
+public class CompileRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
+    
     public CompileRequestMessage() {
     }
 
@@ -22,8 +24,11 @@ public class CompileRequestMessage extends CompetitionBaseMessage implements Ope
     }
     
     @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
+        String result = WorkspaceService.getInstance().requestCompile(super.getTeamId(), super.getCompetitionId(), super.getRoundId());
+        
+        CompetitionBasedOperationDrivenReplyMessage message = new CompileReplyMessage(result, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
+        return message;
     }
     
 }

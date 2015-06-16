@@ -6,23 +6,24 @@ angular.module('adminClient')
                     websocket = new WebSocket(url);
 
                     websocket.onopen = function () {
-                        
+                        console.log("Connection opened!!!");
                     };
 
                     websocket.onclose = function () {
                     };
 
                     websocket.onmessage = function (evt) {
-                        console.log("Message received!!!");
-                        var mes = JSON.parse(evt.data);
-                        console.log("Received message: " + mes);
-                        $rootScope.$broadcast(mes.MessageType, mes);
+                        console.log(evt.data);
+                        var message = JSON.parse(evt.data);
+                        $rootScope.$broadcast(message.MessageType, message);
+                        console.log("Message received: " + message.MessageType + "!!!");
                     };
                 },
                 sendMessage: function (message) {
-//                    waitForSocketConnection(websocket, function () {
-//                        websocket.send(JSON.stringify(message));
-//                    });
+                    waitForSocketConnection(websocket, function () {
+                        websocket.send(JSON.stringify(message));
+                        console.log("Message send: " + message.MessageType + "!!!");
+                    });
                 }
 
             };

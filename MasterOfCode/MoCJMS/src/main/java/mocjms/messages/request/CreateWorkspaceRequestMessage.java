@@ -6,13 +6,15 @@
 package mocjms.messages.request;
 
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
+import mocjms.messages.main.OperationDrivenRequestMessage;
+import mocjms.messages.reply.CreateWorkspaceReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
+public class CreateWorkspaceRequestMessage extends OperationDrivenRequestMessage {
     private Long teamId;
     private Long competitionId;
 
@@ -41,7 +43,10 @@ public class CreateWorkspaceRequestMessage implements OperationDrivenMessage {
     }
 
     @Override
-    public void doWork() {
-        WorkspaceService.getInstance().createWorkspace(competitionId, teamId, WorkspaceService.ASSIGNMENTS_PATH);
+    public OperationDrivenReplyMessage generateReplyMessage() {
+        String workspacePath = WorkspaceService.getInstance().createWorkspace(competitionId, teamId);
+        
+        OperationDrivenReplyMessage message = new CreateWorkspaceReplyMessage(workspacePath, teamId, competitionId);
+        return message;
     }
 }

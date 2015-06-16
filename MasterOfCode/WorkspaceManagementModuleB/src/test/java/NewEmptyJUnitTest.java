@@ -39,12 +39,18 @@ public class NewEmptyJUnitTest {
     public void tearDown() {
     }
     
-    @org.testng.annotations.Test
+    //@org.testng.annotations.Test
     public void testReadAnnotationData() {
         WorkspaceService service = new WorkspaceService();
         String path = "C:\\assignments";
         List<AnnotationData> readAssignmentMetaData = service.readAssignmentMetaData(path, 1L);
         Assert.assertTrue(true);
+    }
+    
+    //@org.testng.annotations.Test
+    public void testTest() {
+        WorkspaceService service = new WorkspaceService();
+        String runSingleTest = service.runSingleTest("UserTest,AmbivilantTest", 0L, 0L, 0L);
     }
 
     // TODO add test methods here.

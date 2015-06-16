@@ -10,14 +10,13 @@ public class DebugMessage extends BaseMessage {
      *
      */
     public static final String messageType = MessageTypes.DebugMessage.toString();
-    
-        public static DebugMessage decodeJSON(String s) {
+
+    public static DebugMessage decodeJSON(String s) {
         return new DebugMessage();
     }
-    
+
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -26,5 +25,5 @@ public class DebugMessage extends BaseMessage {
         obj.put("MessageType", this.messageType);
         return obj.toJSONString();
     }
-    
 }
+

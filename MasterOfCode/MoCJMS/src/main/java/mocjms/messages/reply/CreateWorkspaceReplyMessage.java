@@ -5,21 +5,41 @@
  */
 package mocjms.messages.reply;
 
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.OperationDrivenReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class CreateWorkspaceReplyMessage implements OperationDrivenMessage {
+public class CreateWorkspaceReplyMessage extends OperationDrivenReplyMessage {
 
     private String workspacePath;
+    private Long teamId;
+    private Long competitionId;
 
-    public CreateWorkspaceReplyMessage(String workspacePath) {
+    public CreateWorkspaceReplyMessage(String workspacePath, Long teamId, Long competitionId) {
         this.workspacePath = workspacePath;
+        this.teamId = teamId;
+        this.competitionId = competitionId;
     }
 
     public CreateWorkspaceReplyMessage() {
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    public Long getCompetitionId() {
+        return competitionId;
+    }
+
+    public void setCompetitionId(Long competitionId) {
+        this.competitionId = competitionId;
     }
 
     public String getWorkspacePath() {
@@ -29,10 +49,4 @@ public class CreateWorkspaceReplyMessage implements OperationDrivenMessage {
     public void setWorkspacePath(String workspacePath) {
         this.workspacePath = workspacePath;
     }
-    
-    @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

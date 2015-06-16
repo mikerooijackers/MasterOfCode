@@ -7,42 +7,89 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
                     })
                     .when('/registerParticipant', {
                         templateUrl: 'HTMLPages/registerParticipant.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'registerParticipantController'
                     })
                     .when('/manageTeam', {
                         templateUrl: 'HTMLPages/manageTeam.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'manageTeamController'
                     })
                     .when('/registerTeam', {
                         templateUrl: 'HTMLPages/registerTeam.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'registerTeamController'
                     })
                     .when('/currentGame', {
                         templateUrl: 'HTMLPages/manageGameCurrent.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'manageGameCurrentController'
                     })
                     .when('/currentRound', {
                         templateUrl: 'HTMLPages/manageActiveRound.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'manageActiveRoundController'
                     })
                     .when('/servers', {
                         templateUrl: 'HTMLPages/servers.html',
-                        controller: 'manageParticipantsController'
+                        controller: 'serverController'
                     });
         })
-        .controller('indexController', function ($scope, websocketService) {
-            $scope.msg = "...";
-            $scope.hints = [];
+        .controller('indexController', function ($scope, $rootScope, websocketService, InformationService) {
 
-            websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
+            // Variables
+
+            $scope.msg = "Index message";
+            $scope.hints = [];
+            $scope.MenuUserVisibility = {'display': 'block'};
+            $scope.MenuGameVisibility = {'display': 'none'};
+
             var NewSessionConnectionMessage = {
                 MessageType: "NewSessionConnectionMessage",
                 Username: "Jordi"
             };
+
+            // On initialization
+
+            websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
             websocketService.sendMessage(NewSessionConnectionMessage);
 
-            $scope.MenuUserVisibility = {'display': 'block'};
-            $scope.MenuGameVisibility = {'display': 'none'};
+            // On receiving messages
+
+            $rootScope.$on("GetParticipantsReplyMessage", function (event, data) {
+                console.log("InformationService: trying to update the participants");
+                for (var u in data.Users) {
+                    var user = {};
+                    user.Username = data.Users[u].Username;
+                    user.Email = data.Users[u].Email;
+                    user.FullName = data.Users[u].FullName;
+                    user.Company = data.Users[u].Company;
+                    user.TelephoneNumber = data.Users[u].TelephoneNumber;
+                    user.Team = data.Users[u].Team;
+                    InformationService.participants[user.Username] = user;
+                }
+
+                console.log("InformationService: participants updated");
+            });
+
+            $rootScope.$on("GetTeamsRequestMessage", function (event, data) {
+                console.log("InformationService: trying to update the teams")
+                for (var t in data.Teams) {
+                    var team = {};
+                    team.Score = data.Teams[t].Score;
+                    team.Workspacepath = data.Teams[t].Workspacepath;
+                    team.Competition = data.Teams[t].Competition;
+                    team.Id = data.Teams[t].Id;
+                    team.TeamName = data.Teams[t].TeamName;
+                    team.Approved = data.Teams[t].Approved;
+
+                    if (team.Approved) {
+                        InformationService.approvedTeams[team.TeamName] = team;
+                    }
+                    else {
+                        InformationService.unapprovedTeams[team.TeamName] = team;
+                    }
+                }
+
+                console.log("InformationService: teams updated");
+            });
+
+            // Scope methods
 
             $scope.showCategoryUsers = function () {
                 $scope.MenuUserVisibility = {'display': 'block'};
@@ -55,6 +102,54 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
             $scope.showCategoryServers = function () {
                 $scope.MenuUserVisibility = {'display': 'none'};
                 $scope.MenuGameVisibility = {'display': 'none'};
+            };
+
+            $scope.startCompetition = function () {
+                var StartCompetitionRequestMessage = {
+                    MessageType: "StartCompetitionRequestMessage"
+                };
+
+                websocketService.sendMessage(StartCompetitionRequestMessage);
+            };
+
+            $scope.stopCompetition = function () {
+                var StopCompetitionRequestMessage = {
+                    MessageType: "StopCompetitionRequestMessage"
+                };
+
+                websocketService.sendMessage(StopCompetitionRequestMessage);
+            };
+
+            $scope.startRound = function () {
+                var StartRoundRequestMessage = {
+                    MessageType: "StartRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(StartRoundRequestMessage);
+            };
+
+            $scope.stopRound = function () {
+                var StopRoundRequestMessage = {
+                    MessageType: "StopRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(StopRoundRequestMessage);
+            };
+
+            $scope.pauseUnpauseRound = function () {
+                var PauseRoundRequestMessage = {
+                    MessageType: "PauseRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(PauseRoundRequestMessage);
+            };
+
+            $scope.freezeUnfreezeRound = function () {
+                var FreezeRoundRequestMessage = {
+                    MessageType: "FreezeRoundRequestMessage"
+                };
+
+                websocketService.sendMessage(FreezeRoundRequestMessage);
             };
         });
 

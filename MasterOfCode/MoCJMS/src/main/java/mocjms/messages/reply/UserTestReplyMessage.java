@@ -5,48 +5,29 @@
  */
 package mocjms.messages.reply;
 
-import java.util.ArrayList;
-import java.util.List;
-import mocjms.messages.main.CompetitionBaseMessage;
-import mocjms.messages.main.OperationDrivenMessage;
+import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**
  *
  * @author Gebruiker
  */
-public class UserTestReplyMessage extends CompetitionBaseMessage implements OperationDrivenMessage {
+public class UserTestReplyMessage extends CompetitionBasedOperationDrivenReplyMessage {
 
-    private List<String> results;
-
-    public UserTestReplyMessage(List<String> results) {
-        this.results = results;
-    }
-
-    public UserTestReplyMessage(List<String> results, Long teamId, Long roundId, Long competitionId) {
-        super(teamId, roundId, competitionId);
-        this.results = results;
-    }
+    private String result;
 
     public UserTestReplyMessage() {
-        this.results = new ArrayList<>();
     }
 
-    public UserTestReplyMessage(Long teamId, Long roundId, Long competitionId) {
+    public UserTestReplyMessage(String result, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
-        this.results = new ArrayList<>();
+        this.result = result;
     }
 
-    public List<String> getResults() {
-        return results;
+    public String getResult() {
+        return result;
     }
 
-    public void setResults(List<String> results) {
-        this.results = results;
+    public void setResult(String result) {
+        this.result = result;
     }
-    
-    @Override
-    public void doWork() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

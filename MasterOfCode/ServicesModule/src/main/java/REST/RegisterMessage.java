@@ -5,11 +5,85 @@
  */
 package REST;
 
+import Domein.Role;
+import java.util.UUID;
+
 /**
  *
  * @author mikerooijackers
  */
 
 class RegisterMessage {
+    private String email;
+    private String fullname;
+    private String password;
+    private Role privilege;
+    private String activationCode;
+    
+    public RegisterMessage(){}
+    
+    public RegisterMessage(String email, String fullname, String password, Role privilege) {
+        this.email = email;
+        this.fullname = fullname;
+        this.password = password;
+        this.privilege = privilege;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getPrivilege() {
+        return privilege;
+    }
+
+    public String getActivationCode() {
+        activationCode = UUID.randomUUID().toString();
+        return activationCode;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @param fullname the fullname to set
+     */
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @param privilege the privilege to set
+     */
+    public void setPrivilege(Role privilege) {
+        this.privilege = privilege;
+    }
+
+    /**
+     * @param activationCode the activationCode to set
+     */
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+    
     
 }
