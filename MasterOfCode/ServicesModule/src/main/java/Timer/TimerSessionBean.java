@@ -15,7 +15,7 @@ import javax.ejb.TimerService;
  *
  * @author mikerooijackers
  */
-//@Singleton
+@Singleton
 public class TimerSessionBean {
     @Resource
     TimerService timerService;

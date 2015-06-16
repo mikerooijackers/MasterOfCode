@@ -17,16 +17,20 @@ class RegisterMessage {
     private String email;
     private String fullname;
     private String password;
+    private String company;
+    private String telephone;
     private Role privilege;
     private String activationCode;
     
     public RegisterMessage(){}
     
-    public RegisterMessage(String email, String fullname, String password, Role privilege) {
+    public RegisterMessage(String email, String fullname, String password, Role privilege, String company, String telephone) {
         this.email = email;
         this.fullname = fullname;
         this.password = password;
         this.privilege = privilege;
+        this.company = company;
+        this.telephone = telephone;
     }
 
     public String getEmail() {
@@ -83,6 +87,34 @@ class RegisterMessage {
      */
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
+    }
+
+    /**
+     * @return the company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    /**
+     * @return the telephone
+     */
+    public String getTelephone() {
+        return telephone;
+    }
+
+    /**
+     * @param telephone the telephone to set
+     */
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
     
     

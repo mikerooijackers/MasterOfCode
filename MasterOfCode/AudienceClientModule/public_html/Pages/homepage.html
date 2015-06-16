@@ -1,0 +1,54 @@
+<h1>Game 1</h1>
+
+<div class="widgetsmall">
+    <h2>Scores</h2>
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Score</th>
+        </tr>
+        <tr ng-repeat="t in teams | orderBy:'rank' | limitTo:4">
+            <td>{{t.rank}}</td>
+            <td>{{t.name}}</td>
+            <td>{{t.score}}</td>
+        </tr>
+    </table> 
+    <form action="#/scores">
+        <input type="submit" class="btnsmall" value="View scores">
+    </form>
+</div>
+
+<div class="widgetsmall">
+    <h2>Newsfeed</h2>
+    <table>
+        <tr ng-repeat="n in news | limitTo:3">
+            <td style="text-align: left">{{n.team}} {{n.message}} </td>
+            <td style="text-align: right">{{n.time}}</td>
+        </tr>
+    </table> 
+    <form action="#/newsfeed">
+        <input type="submit" class="btnsmall" value="View news">
+    </form> 
+</div>
+
+<div class="widgetsmall">
+    <h2>Round {{round.number}}</h2>
+    <h3>{{round.state}}</h3>
+    <h3>{{round.timeLeft}} minutes left</h3>
+    <form action="#/rounds">
+        <input type="submit" class="btnsmall" value="View rounds">
+    </form> 
+</div>
+
+<div class="widgetsmall">
+    <h2>Teams</h2>
+    <table>
+        <tr>
+            <td ng-repeat="t in teams | orderBy:'name' | limitTo: 6">{{t.name}}</td>
+        </tr>
+    </table>
+    <form action="#/teams">
+        <input type="submit" class="btnsmall" value="View teams">
+    </form> 
+</div>

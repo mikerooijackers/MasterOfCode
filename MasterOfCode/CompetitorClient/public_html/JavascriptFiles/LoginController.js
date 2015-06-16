@@ -10,10 +10,10 @@ angular.module('competitorLoginApp').controller('loginController', function ($sc
         loginRequest.$save(function(responseObject) {
             console.log(responseObject);
             if (!responseObject.email && !responseObject.password) {
-                alert("Invalid username or password!");
+                document.getElementById('loginError').style.display = 'block';
                 return;
             }
-            localStorage.setItem("user", JSON.stringify(responseObject));
+            localStorage.setItem("userInformation", JSON.stringify(responseObject));
             window.location.href = "index.html";
         });
     };
