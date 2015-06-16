@@ -46,6 +46,9 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
         .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval) {
             $scope.currentScore = 0;
             $scope.difficulty = 1;
+            $scope.user = JSON.parse(localStorage.getItem('userInformation'));
+            localStorage.removeItem('userInformation');
+            console.log($scope.user);
             SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
             var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
             SocketService.sendMessage(NewSessionConnectionMessage);

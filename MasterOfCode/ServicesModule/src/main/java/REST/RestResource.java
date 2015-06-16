@@ -71,7 +71,9 @@ public class RestResource {
         String password = message.getPassword();
         Role privilege = message.getPrivilege();
         String activationCode = message.getActivationCode();
-        return userService.Register(email, fullname, password, privilege, activationCode);
+        String company = message.getCompany();
+        String telephone = message.getTelephone();
+        return userService.Register(email, fullname, password, privilege, activationCode, company, telephone);
     }
     
     /**
