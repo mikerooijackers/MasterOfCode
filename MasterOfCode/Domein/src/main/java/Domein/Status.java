@@ -5,7 +5,7 @@ package Domein;
  * @author mikerooijackers
  */
 public enum Status {
-	waiting(0), playing(1), pause(2);
+	WAITING(0), PLAYING(1), PAUSE(2);
         
         private long id;
         
