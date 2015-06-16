@@ -69,7 +69,8 @@ public enum MessageTypes {
     GetAllTeamsReplyMessage("GetAllTeamsReplyMessage"), 
     GetParticipantsRequestMessage("GetParticipantsRequestMessage"),
     GetTeamsRequestMessage("GetTeamsRequestMessage"),
-    StopRoundRequestMessage("StopRoundRequestMessage");
+    StopRoundRequestMessage("StopRoundRequestMessage"),
+    ChangePasswordRequestMessage("ChangePasswordRequestMessage");
     
     private String name;
     
