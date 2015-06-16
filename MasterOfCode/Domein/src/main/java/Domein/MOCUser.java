@@ -10,6 +10,7 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
 /**
  *
@@ -38,9 +39,7 @@ public class MOCUser implements Serializable, JSONAware {
      * privileges of a user
      */
     private Role privilege;
-
     private String company;
-
     private String telephoneNumber;
 
     private String activationCode;

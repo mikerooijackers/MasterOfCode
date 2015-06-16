@@ -57,14 +57,16 @@ public class UserService {
      * @param password
      * @return
      */
-    public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode) {
+    public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode, String company, String telephone) {
 //        em.getTransaction().begin();
         MOCUser user = new MOCUser();
         user.setEmail(email);
         user.setFullName(fullname);
         user.setPrivilege(privilege);
-        user.setPrivilege(Role.spectator);
+        user.setPassword(password);
         user.setActivationCode(activationCode);
+        user.setCompany(company);
+        user.setTelephoneNumber(telephone);
         em.persist(user);
 //        em.getTransaction().commit();
 //        em.close();

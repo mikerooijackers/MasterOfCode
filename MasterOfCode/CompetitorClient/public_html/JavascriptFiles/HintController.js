@@ -28,7 +28,6 @@ angular.module('competitorClientApp').controller('hintsController', function ($s
 
     $scope.$on('$destroy', function () {
         $scope.hintReplyOnFunction();
-        console.log($rootScope.$$listeners.HintReplyMessage);
     });
 
     $scope.fillHintsContainer();
