@@ -103,6 +103,15 @@ public class RestResource {
         return userService.AddToTeam(userId, teamId);
     }
     
+    @POST
+    @Path("createteam")
+    public Team CreateTeam(CreateTeamMessage message) {
+        String teamName = message.getTeamName();
+        String initiator = message.getInitiator();
+        List<String> members = message.getMembers();
+        return userService.createTeam(teamName, initiator, members);
+    }
+    
     /**
      * get all users
      * @return

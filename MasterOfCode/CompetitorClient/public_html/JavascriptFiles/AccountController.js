@@ -1,4 +1,4 @@
-angular.module('competitorClientApp').controller('accountController', function ($scope, InformationService, SocketService) {
+angular.module('competitorClientApp').controller('accountController', function ($scope, InformationService, SocketService, RestResources) {
     $scope.selectedPage = "myInformation";
     $scope.user = InformationService.user;
     
@@ -20,4 +20,25 @@ angular.module('competitorClientApp').controller('accountController', function (
         
         SocketService.sendMessage(changePasswordMessage);
     };
+    
+    $scope.sendCreateTeamRequest = function() {
+        var initiator = InformationService.user.email;
+        var teamName = document.getElementById("teamName").value;
+        var members = [];
+        var memberInputs = document.getElementsByClassName("memberMail");
+        for (var i = 0; i < memberInputs.length; i++) {
+            members.push(memberInputs[i].value);
+        }
+        
+        var createTeamMessage = {
+            teamName: teamName,
+            initiator: initiator,
+            members: members
+        };
+        
+        var createTeamRequest = new RestResources.createTeamResource(createTeamMessage);
+        createTeamRequest.$save(function(responseObject) {
+            console.log(responseObject);
+        });
+    }
 });

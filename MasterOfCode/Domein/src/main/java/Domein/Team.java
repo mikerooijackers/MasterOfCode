@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
@@ -32,6 +33,9 @@ public class Team implements JSONAware,Serializable {
     private String teamName;
     private String serverName;
     private boolean approved;
+    
+    @OneToOne
+    private MOCUser initiator;
 
     @ManyToOne
     private Competition competition;
@@ -44,6 +48,10 @@ public class Team implements JSONAware,Serializable {
         this.teamName = teamName;
         this.serverName = serverName;
         this.approved = approved;
+    }
+    
+    public Team(String teamName) {
+        this.teamName = teamName;
     }
     /**
      * get Team ID
@@ -204,5 +212,19 @@ public class Team implements JSONAware,Serializable {
         obj.put("TeamName", this.teamName);
         obj.put("Approved", this.isApproved());
         return obj.toJSONString();
+    }
+
+    /**
+     * @return the initiator
+     */
+    public MOCUser getInitiator() {
+        return initiator;
+    }
+
+    /**
+     * @param initiator the initiator to set
+     */
+    public void setInitiator(MOCUser initiator) {
+        this.initiator = initiator;
     }
 }
