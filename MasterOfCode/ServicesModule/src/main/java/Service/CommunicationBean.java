@@ -5,6 +5,11 @@
  */
 package Service;
 
+import Competition.CompetitionDataService;
+import Domein.AnnotationData;
+import Domein.Competition;
+import Domein.Round;
+import Domein.Status;
 import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
 import Timer.TimerData;
@@ -12,10 +17,14 @@ import Timer.TimerSessionBean;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
 import WebSocket.SpectatorEndpoint;
+import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage;
 
 /**
  *
@@ -39,6 +48,9 @@ public class CommunicationBean {
     @EJB
     private TimerSessionBean timerSessionBean;
 
+    @EJB
+    private CompetitionDataService competitionDataService;
+    
     @Inject
     private CompetitionService competitionService;
     
@@ -97,5 +109,32 @@ public class CommunicationBean {
         competitorEndpoint.sendToAll(message);
         adminEndpoint.sendToAll(message);
         spectatorEndpoint.sendMessage(message);
+    }
+    
+    public void setCurrentCompetition(Long competitionId) {
+        Competition competition = competitionService.FindCompetition(competitionId);
+        competitionDataService.setCurrentCompetition(competition);
+    }
+    
+    public void startNextRoundOfCompetition() {
+        long competitionId = competitionDataService.getCurrentCompetition().getId();
+        Round nextRound = competitionService.getNextRound(competitionId);
+        competitionDataService.setCurrentRound(nextRound);
+        competitionService.editRound(Status.PLAYING, nextRound.getId());
+        workspaceServiceRequestBean.Send(new ExtractAssignmentToWorkspacesRequestMessage(nextRound.getAssignment().getId(), nextRound.getId(), competitionId));
+    }
+    
+    public void sendRoundMetaData() {
+        long assignmentId = competitionDataService.getCurrentRound().getAssignment().getId();
+        List<AnnotationData> annotationData = WorkspaceService.getInstance().readAssignmentMetaData(assignmentId);
+        
+    }
+    
+    @PostConstruct
+    public void init() {
+        this.setCurrentCompetition(1L);
+        
+        Round nextRound = competitionService.getNextRound(1L);
+        competitionDataService.setCurrentRound(nextRound);
     }
 }

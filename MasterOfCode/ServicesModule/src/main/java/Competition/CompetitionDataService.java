@@ -17,7 +17,26 @@ import javax.ejb.Singleton;
 public class CompetitionDataService {
     private List<Team> teams;
     private RoundMetaData roundMetaData;
+    private Competition currentCompetition;
+    private Round currentRound;
+    
     private long BackupRemainingRoundTime;
+
+    public Round getCurrentRound() {
+        return currentRound;
+    }
+
+    public void setCurrentRound(Round currentRound) {
+        this.currentRound = currentRound;
+    }
+
+    public Competition getCurrentCompetition() {
+        return currentCompetition;
+    }
+
+    public void setCurrentCompetition(Competition currentCompetition) {
+        this.currentCompetition = currentCompetition;
+    }
     
     /**
      * start coundown of timer Competition
@@ -65,8 +84,12 @@ public class CompetitionDataService {
      * set metadata of a round
      * @param roundMetaData
      */
-    public void SetRoundMetaData(RoundMetaData roundMetaData) {
-        
+    public void setRoundMetaData(RoundMetaData roundMetaData) {
+        this.roundMetaData = roundMetaData;
+    }
+
+    public RoundMetaData getRoundMetaData() {
+        return roundMetaData;
     }
     
     /**
