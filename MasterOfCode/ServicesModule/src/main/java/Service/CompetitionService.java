@@ -5,7 +5,11 @@
  */
 package Service;
 
-import Domein.*;
+import Domein.Round;
+import Domein.Team;
+import Domein.Status;
+import Domein.Assignment;
+import Domein.Competition;
 import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
