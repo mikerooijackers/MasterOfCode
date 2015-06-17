@@ -9,6 +9,7 @@ import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
 import Domein.Role;
+import Domein.Round;
 import Domein.Team;
 import Service.CompetitionService;
 import Service.UserService;
@@ -156,8 +157,10 @@ public class RestResource {
     @GET
     @Path("testjms")
     public String testjms() {
-        mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.CreateWorkspaceRequestMessage(0L, 0L); //new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
-        bean.Send(mes);
+        //mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.CreateWorkspaceRequestMessage(0L, 0L); //new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
+        //bean.Send(mes);
+        Round nextRound = competitionService.getNextRound();
+        
         return "ok";
     }
 }

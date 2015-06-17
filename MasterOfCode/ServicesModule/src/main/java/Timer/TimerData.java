@@ -6,6 +6,7 @@
 package Timer;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -13,16 +14,23 @@ import java.io.Serializable;
  */
 public class TimerData implements Serializable {
 
-    private String data;
+    private Long hintId;
+    private String hint;
     private TimerType timerType;
 
     /**
      * Constructor
-     * @param data
+     * @param hintId
+     * @param hint
      * @param timerType
      */
-    public TimerData(String data, TimerType timerType) {
-        this.data = data;
+    public TimerData(Long hintId, String hint, TimerType timerType) {
+        this(timerType);
+        this.hint = hint;
+        this.hintId = hintId;
+    }
+    
+    public TimerData(TimerType timerType) {
         this.timerType = timerType;
     }
 
@@ -30,8 +38,8 @@ public class TimerData implements Serializable {
      *
      * @return
      */
-    public String getData() {
-        return data;
+    public String getHint() {
+        return hint;
     }
 
     /**
@@ -40,5 +48,31 @@ public class TimerData implements Serializable {
      */
     public TimerType getTimerType() {
         return timerType;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.hintId);
+        hash = 83 * hash + Objects.hashCode(this.timerType);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TimerData other = (TimerData) obj;
+        if (!Objects.equals(this.hintId, other.hintId)) {
+            return false;
+        }
+        if (this.timerType != other.timerType) {
+            return false;
+        }
+        return true;
     }
 }

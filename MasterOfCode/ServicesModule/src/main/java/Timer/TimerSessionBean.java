@@ -5,7 +5,11 @@
  */
 package Timer;
 
+import Service.CommunicationBean;
+import Sockets.Messages.Client.Reply.HintReplyMessage;
+import java.util.Collection;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
@@ -18,7 +22,13 @@ import javax.ejb.TimerService;
 @Singleton
 public class TimerSessionBean {
     @Resource
-    TimerService timerService;
+    private TimerService timerService;
+    
+    @EJB
+    private CommunicationBean communicationBean;
+    
+    private TimerData pausedOrFreezedTimer;
+    private long leftDurationOfTimer;
     
     /**
      *
@@ -36,14 +46,18 @@ public class TimerSessionBean {
     @Timeout
     public void TimerExpired(Timer timer) {
         TimerData timerData = (TimerData) timer.getInfo();
+        this.handleTimerExpired(timerData);
+    }
+    
+    private void handleTimerExpired(TimerData timerData) {
         TimerType timerType = timerData.getTimerType();
         switch (timerType) {
             case CompetitionCountDownTimer:
-                //TO DO
+                
                 break;
             case HintTimer:
-                //TO DO
-                String Hint = timerData.getData();
+                String hint = timerData.getHint();
+                communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
                 break;
             case RoundTimer:
                 //TO DO
@@ -51,4 +65,45 @@ public class TimerSessionBean {
         }
     }
     
+    private Timer getTimer(TimerData timerData) {
+        Collection<Timer> timers = timerService.getTimers();
+        Timer retValue = null;
+        
+        for (Timer timer : timers) {
+            TimerData timerDataOfTimer = (TimerData) timer.getInfo();
+            
+            if (timerDataOfTimer.equals(timerData)) {
+                retValue = timer;
+            }
+        }
+        
+        return retValue;
+    }
+    
+    public void pauseOrFreezeTimer(TimerData timerData) {
+        Timer timer = this.getTimer(timerData);
+        this.leftDurationOfTimer = timer.getTimeRemaining();
+        this.pausedOrFreezedTimer = timerData;
+        timer.cancel();
+    }
+    
+    public void resumeTimer() {
+        if (this.leftDurationOfTimer > -1L && this.pausedOrFreezedTimer != null) {
+            this.CreateTimer(this.leftDurationOfTimer, this.pausedOrFreezedTimer);
+            this.leftDurationOfTimer = -1L;
+            this.pausedOrFreezedTimer = null;
+        }
+    }
+    
+    public void modifyTimerDuration(long newDuration, TimerData timerData) {
+        Timer timer = this.getTimer(timerData);
+        timer.cancel();
+        this.CreateTimer(newDuration, timerData);
+    }
+    
+    public void stopTimer(TimerData timerData) {
+        Timer timer = this.getTimer(timerData);
+        timer.cancel();
+        this.handleTimerExpired(timerData);
+    }
 }
