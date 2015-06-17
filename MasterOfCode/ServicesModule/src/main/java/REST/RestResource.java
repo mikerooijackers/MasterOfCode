@@ -10,11 +10,14 @@ import Domein.Hint;
 import Domein.MOCUser;
 import Domein.Role;
 import Domein.Team;
+import Service.CommunicationBean;
 import Service.CompetitionService;
 import Service.UserService;
 import WebSocket.CompetitorEndPoint;
 import Domein.Round;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.inject.Inject;
@@ -35,6 +38,9 @@ public class RestResource {
     CompetitionService competitionService;
     @Inject
     private CompetitorEndPoint endPoint;
+    
+    @EJB
+    private CommunicationBean communicationBean;
 
     /**
      *
@@ -169,8 +175,8 @@ public class RestResource {
     public String testjms() {
         //mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.CreateWorkspaceRequestMessage(0L, 0L); //new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
         //bean.Send(mes);
-        Round nextRound = competitionService.getNextRound();
-        
+        //Round nextRound = competitionService.getNextRound();
+        communicationBean.sendRoundMetaData();
         return "ok";
     }
 }

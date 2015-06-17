@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries ({
-    @NamedQuery(name = "GetNextRound", query = "select r FROM Round r WHERE r.status = :status ORDER BY r.roundNr ASC")   
+    @NamedQuery(name = "GetNextRound", query = "select r FROM Round r WHERE r.status = :status AND r.competition.id = :competitionId ORDER BY r.roundNr ASC")   
 })
 public class Round implements Serializable {
 
