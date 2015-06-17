@@ -56,7 +56,7 @@ public class MOCUser implements Serializable, JSONAware {
     public MOCUser() {
     }
 
-    public MOCUser(String password, String email, String fullName, Role privilege, Team team, String company, String telephoneNumber) {
+    public MOCUser(String username, String password, String email, String fullName, Role privilege, Team team, String company, String telephoneNumber) {
         this.password = password;
         this.email = email;
         this.fullName = fullName;
