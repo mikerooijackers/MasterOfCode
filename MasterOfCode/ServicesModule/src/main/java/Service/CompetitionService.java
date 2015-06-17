@@ -9,7 +9,9 @@ import Domein.*;
 import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -18,7 +20,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CompetitionService {
     
-//    @PersistenceContext(unitName = "masterofcodedb")
+    @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
     
     /**
@@ -80,14 +82,14 @@ public class CompetitionService {
      * @param duration
      * @param roundNr
      */
-    public void AddRoundToCompetition(long competitionID, String assignmentPath, Calendar duration, int roundNr) {
+    public void AddRoundToCompetition(long competitionID, String assignmentPath, int duration, int roundNr) {
         Round round = new Round();
         Assignment assignment = new Assignment();
         Competition competition = em.find(Competition.class, competitionID);
-        competition.setStartTime(duration);
         assignment.setPath(assignmentPath);
         round.setRoundNr(roundNr);
         round.setAssignment(assignment);
+        round.setDurationInSeconds(duration);
         em.persist(competition);
         em.persist(round);
         em.persist(assignment);
@@ -106,11 +108,12 @@ public class CompetitionService {
         Round round = em.find(Round.class, roundID);
         round.setRoundNr(roundNr);
         round.setDurationInSeconds(duration);
-        Assignment assignment = new Assignment();
-        assignment.setPath(assignmentPath);
-        round.setAssignment(assignment);
+        round.getAssignment().setPath(assignmentPath);
+//        Assignment assignment = new Assignment();
+//        assignment.setPath(assignmentPath);
+//        round.setAssignment(assignment);
         em.persist(round);
-        em.persist(assignment);
+//        em.persist(assignment);
         em.getTransaction().commit();
         em.close();
     }
@@ -145,6 +148,18 @@ public class CompetitionService {
      */
     public Round FindRound(long roundID) {
         Round round = em.find(Round.class, roundID);
+        return round;
+    }
+    
+    public Round getNextRound() {
+        Round round = null;
+        List<Round> resultList = em.createNamedQuery("GetNextRound", Round.class).setParameter("status", Status.waiting).getResultList();
+        
+        if (resultList.size() > 0)
+        {
+            round = resultList.get(0);
+        }
+        
         return round;
     }
 
