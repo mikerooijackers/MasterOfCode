@@ -10,7 +10,6 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Transient;
 
 /**
  *
@@ -71,7 +70,6 @@ public class MOCUser implements Serializable, JSONAware {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("Fullname", this.fullName);
-//        obj.put("Id", this.id);
         obj.put("Email", this.email);
         obj.put("Password", this.password);
         obj.put("Company", this.company);

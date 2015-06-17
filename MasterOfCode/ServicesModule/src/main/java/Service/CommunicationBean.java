@@ -7,6 +7,8 @@ package Service;
 
 import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
+import Timer.TimerData;
+import Timer.TimerSessionBean;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
 import WebSocket.SpectatorEndpoint;
@@ -34,6 +36,9 @@ public class CommunicationBean {
     @EJB
     private WorkspaceServiceRequestBean workspaceServiceRequestBean;
     
+    @EJB
+    private TimerSessionBean timerSessionBean;
+
     @Inject
     private CompetitionService competitionService;
     
@@ -66,6 +71,26 @@ public class CommunicationBean {
     
     public void sendMessageToAllAdmins(BaseMessage message) {
         adminEndpoint.sendToAll(message);
+    }
+    
+    public void startTimer(TimerData timerData, long duration) {
+        timerSessionBean.CreateTimer(duration, timerData);
+    }
+    
+    public void stopTimer(TimerData timerData) {
+        timerSessionBean.stopTimer(timerData);
+    }
+    
+    public void pauseOrFreezeTimer(TimerData timerData) {
+        timerSessionBean.pauseOrFreezeTimer(timerData);
+    }
+    
+    public void resumeTimer() {
+        timerSessionBean.resumeTimer();
+    }
+    
+    public void modifyTimerDuration(long newDuration, TimerData timerData) {
+        timerSessionBean.modifyTimerDuration(newDuration, timerData);
     }
     
     public void sendMessageToEveryone(BaseMessage message) {

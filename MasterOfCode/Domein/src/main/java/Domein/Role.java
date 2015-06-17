@@ -5,7 +5,7 @@ package Domein;
  * @author mikerooijackers
  */
 public enum Role {
-    admin(0), teamMember(1), initiator(2), spectator(3);
+    ADMIN(0), TEAMMEMBER(1), INITIATOR(2), SPECTATOR(3);
     
     private long id;
     
