@@ -73,4 +73,8 @@ public class CommunicationBean {
         adminEndpoint.sendToAll(message);
         spectatorEndpoint.sendMessage(message);
     }
+    
+    public String changePassword(int userId, String oldPassword, String newPassword) {
+        return userService.changePassword(userId, oldPassword, newPassword);
+    }
 }

@@ -132,4 +132,14 @@ public class UserService {
             return "incorrect activation code";
         }
     }
+    
+    public String changePassword(int id, String oldPassword, String newPassword) {
+        MOCUser user = em.find(MOCUser.class, id);
+        if (!user.getPassword().equals(oldPassword)) {
+            return "Old password incorrect.";
+        }
+        user.setPassword(newPassword);
+        em.merge(user);
+        return "Password changed successfully.";
+    }
 }

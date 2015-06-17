@@ -55,7 +55,8 @@ public class RestResource {
     public MOCUser Login(LoginMessage message) {
         String email = message.getEmail();
         String password = message.getPassword();
-        return userService.Login(email, password);
+        MOCUser user = userService.Login(email, password);
+        return user;
     }
     
     /**
