@@ -1,4 +1,4 @@
-package Domein;
+package domein;
 
 /**
  *

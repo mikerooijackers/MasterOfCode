@@ -5,8 +5,8 @@
  */
 package com.mycompany.workspacemanagementmoduleb;
 
-import Domein.AnnotationData;
-import Domein.SourceCode;
+import domein.AnnotationData;
+import domein.SourceCode;
 import com.mycompany.annotations.AssignCreator;
 import com.mycompany.annotations.AssignInformation;
 import com.mycompany.annotations.Editable;

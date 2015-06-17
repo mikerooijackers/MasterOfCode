@@ -6,7 +6,7 @@
         <artifactId>MasterOfCode</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Domein</artifactId>
+    <artifactId>domein</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -42,4 +42,5 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+    <name>domein</name>
 </project>

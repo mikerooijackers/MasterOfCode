@@ -5,7 +5,7 @@
  */
 package Sockets.Messages.Admin.Request;
 
-import Domein.MOCUser;
+import domein.MOCUser;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
