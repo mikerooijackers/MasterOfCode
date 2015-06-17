@@ -1,4 +1,4 @@
-angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
+angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
 
         .config(function ($routeProvider) {
             $routeProvider
@@ -49,6 +49,9 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
         })
 
         .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval, $location) {
+            if (localStorage.getItem('userInformation') === null) {
+                window.location.href = "http://localhost:8383/CompetitorClient/LoginPage.html";
+            }
             $scope.currentScore = 0;
             $scope.difficulty = 1;
             InformationService.user = JSON.parse(localStorage.getItem('userInformation'));
@@ -174,5 +177,10 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
 
             $scope.showAccountPage = function () {
                 $location.path('/account');
+            }
+            
+            $scope.logout = function() {
+                localStorage.removeItem("userInformation");
+                window.location.href = "LoginPage.html";
             }
         });

@@ -62,7 +62,8 @@ public class RestResource {
     public MOCUser Login(LoginMessage message) {
         String email = message.getEmail();
         String password = message.getPassword();
-        return userService.Login(email, password);
+        MOCUser user = userService.Login(email, password);
+        return user;
     }
     
     /**
@@ -106,6 +107,15 @@ public class RestResource {
         long userId = message.getUserId();
         long teamId = message.getTeamId();
         return userService.AddToTeam(userId, teamId);
+    }
+    
+    @POST
+    @Path("createteam")
+    public Team CreateTeam(CreateTeamMessage message) {
+        String teamName = message.getTeamName();
+        String initiator = message.getInitiator();
+        List<String> members = message.getMembers();
+        return userService.createTeam(teamName, initiator, members);
     }
     
     /**

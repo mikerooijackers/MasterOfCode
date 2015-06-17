@@ -110,6 +110,9 @@ public class CommunicationBean {
         adminEndpoint.sendToAll(message);
         spectatorEndpoint.sendMessage(message);
     }
+    public String changePassword(int userId, String oldPassword, String newPassword) {
+        return userService.changePassword(userId, oldPassword, newPassword);
+    }
     
     public void setCurrentCompetition(Long competitionId) {
         Competition competition = competitionService.FindCompetition(competitionId);

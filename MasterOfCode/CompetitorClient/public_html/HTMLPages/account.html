@@ -4,8 +4,8 @@
         <div class="menuBar">
             <table>
                 <tr>
-                    <td><a ng-click="selectedPage='myInformation'">My information</a></td>
-                    <td><a ng-click="selectedPage='myTeam'">My team</a></td>
+                    <td><a ng-click="selectedPage = 'myInformation'">My information</a></td>
+                    <td><a ng-click="selectedPage = 'myTeam'">My team</a></td>
                 </tr>
             </table>
         </div>
@@ -14,17 +14,71 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div id="accountPageContent" class="col-md-8" ng-switch on="selectedPage">
-        <div ng-switch-when="myInformation">
+        <div ng-switch-when="myInformation" id="accountInformationContainer">
             <p id="myInformationTitle">Your account information</p>
-            <div id="accountInformationContainer">
+            <div>
                 <p>Email: {{user.email}}</p>
                 <p>Fullname: {{user.fullName}}</p>
                 <p>Company: {{user.company}}</p>
                 <p>Telephone: {{user.telephoneNumber}}</p>
             </div>
+            <div id="changePasswordContainer">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="oldPassword">Old password:</label>
+                        <div class="col-md-7">
+                            <input type="password" class="form-control" id="oldPassword" ng-model="oldPassword" placeholder="Old password" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="newPassword">New password:</label>
+                        <div class="col-md-7">
+                            <input type="password" class="form-control" id="newPassword" ng-model="newPassword" placeholder="New password" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="newPasswordAgain">New password again:</label>
+                        <div class="col-md-7">
+                            <input type="password" class="form-control" id="newPasswordAgain" ng-model="newPasswordAgain" placeholder="New password again" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
+                            <button class="btn btn-default pull-right" type="button" ng-click="sendChangePasswordRequest()">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div ng-switch-when="myTeam">
-            Hello world 2
+        <div ng-switch-when="myTeam" id="accountInformationContainer">
+            <p id="myInformationTitle">Create a team</p>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="teamName">Team name:</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="teamName" ng-model="teamName" placeholder="Team name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="memberEmail">Member email:</label>
+                    <div class="col-md-7">
+                        <input type="email" class="form-control memberMail" id="memberEmail" ng-model="memberEmail" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="memberEmail">Member email:</label>
+                    <div class="col-md-7">
+                        <input type="email" class="form-control memberMail" id="memberEmail" ng-model="memberEmail1" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <button class="btn btn-default pull-right" type="button" ng-click="sendCreateTeamRequest()">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -8,6 +8,7 @@ package Service;
 import Domein.MOCUser;
 import Domein.Role;
 import Domein.Team;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -62,7 +63,7 @@ public class UserService {
         MOCUser user = new MOCUser();
         user.setEmail(email);
         user.setFullName(fullname);
-        user.setPrivilege(privilege);
+        user.setPrivilege(Role.TEAMMEMBER);
         user.setPassword(password);
         user.setActivationCode(activationCode);
         user.setCompany(company);
@@ -131,5 +132,39 @@ public class UserService {
             System.out.println("incorrect activation code");
             return "incorrect activation code";
         }
+    }
+
+    public String changePassword(int id, String oldPassword, String newPassword) {
+        MOCUser user = em.find(MOCUser.class, id);
+        if (!user.getPassword().equals(oldPassword)) {
+            return "Old password incorrect.";
+        }
+        user.setPassword(newPassword);
+        em.merge(user);
+        return "Password changed successfully.";
+    }
+
+    public Team createTeam(String teamName, String initiator, List<String> members) {
+        Team team = new Team(teamName);
+        List<MOCUser> MOCMembers = new ArrayList<>();
+        
+        MOCUser mocInitiator = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", initiator).getSingleResult();
+        
+        team.setInitiator(mocInitiator);
+        
+        for (String username : members) {
+            MOCUser user = null;
+            try {
+                user = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", username).getSingleResult();
+                if (!team.getMembers().contains(user)) {
+                    MOCMembers.add(user);
+                }
+            } catch (NoResultException ex) {
+                System.out.println("TeamMember " + username + " ");
+            }
+        }
+        team.setMembers(MOCMembers);
+        em.persist(team);
+        return team;
     }
 }

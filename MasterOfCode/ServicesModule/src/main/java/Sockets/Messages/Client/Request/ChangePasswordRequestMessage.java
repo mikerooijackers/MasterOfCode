@@ -19,13 +19,13 @@ public class ChangePasswordRequestMessage extends BaseMessage {
     
     public static final String MessageType = MessageTypes.ChangePasswordRequestMessage.toString();
     
-    private Long userId;
+    private int userId;
     private String oldPassword;
     private String newPassword;
     
     public ChangePasswordRequestMessage(){}
     
-    public ChangePasswordRequestMessage(Long userId, String oldPassword, String newPassword) {
+    public ChangePasswordRequestMessage(int userId, String oldPassword, String newPassword) {
         this.userId = userId;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
@@ -33,7 +33,8 @@ public class ChangePasswordRequestMessage extends BaseMessage {
     
     public static ChangePasswordRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Long jsonUserId = (Long) obj.get("UserId");
+        long jsonUserIdLong = (Long) obj.get("UserId");
+        int jsonUserId = (int) jsonUserIdLong;
         String jsonOldPassword = obj.get("OldPassword").toString();
         String jsonNewPassword = obj.get("NewPassword").toString();
         return new ChangePasswordRequestMessage(jsonUserId, jsonOldPassword, jsonNewPassword);
@@ -41,7 +42,8 @@ public class ChangePasswordRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output = communicationBean.changePassword(userId, oldPassword, newPassword);
+        System.out.println(output);
     }
 
     @Override
@@ -85,14 +87,14 @@ public class ChangePasswordRequestMessage extends BaseMessage {
     /**
      * @return the userId
      */
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
     /**
      * @param userId the userId to set
      */
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
     
