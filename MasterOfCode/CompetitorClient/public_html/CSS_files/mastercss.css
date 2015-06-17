@@ -246,6 +246,34 @@
     font-weight: bold;
 }
 
+#loginError {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
+#registerOutput {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+#accountPageContent {
+    text-align: center;
+}
+
+#myInformationTitle {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#accountInformationContainer {
+    border: 1px solid black;
+    text-align: left;
+    padding: 5px;
+}
+
 .testOutputTable {
     z-index: 0;
     margin-top: -85px;
@@ -295,6 +323,7 @@
 .menuBar table tr td a {
     display:block;
     width:100%;
+    color: black;
 }
 
 .menuBar table tr td a:link {

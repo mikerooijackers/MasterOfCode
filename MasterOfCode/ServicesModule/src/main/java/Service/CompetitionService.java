@@ -9,9 +9,7 @@ import Domein.*;
 import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -32,7 +30,7 @@ public class CompetitionService {
         Competition competition = new Competition();
         competition.setName(name);
         competition.setStartTime(startTime);
-        competition.setStatus(Status.waiting);
+        competition.setStatus(Status.WAITING);
         em.persist(competition);
         em.flush();
     }
@@ -59,20 +57,20 @@ public class CompetitionService {
      * @return
      */
     public List<Team> GetTeamFromCompetition(long competitionID) {
-        List<Team> ListTeamFromCompetition;
-        ListTeamFromCompetition = em.createNamedQuery("GetTeamFromCompetition").setParameter("competitionID", competitionID).getResultList();
-        if (ListTeamFromCompetition.isEmpty()) {
+        List<Team> listTeamFromCompetition;
+        listTeamFromCompetition = em.createNamedQuery("GetTeamFromCompetition").setParameter("competitionID", competitionID).getResultList();
+        if (listTeamFromCompetition.isEmpty()) {
             System.out.println("No Teams from competition found.");
         }
         else {
-            for (Team team : ListTeamFromCompetition) {
+            for (Team team : listTeamFromCompetition) {
                 System.out.print("TeamID= " + team.getId()
                     + ", teamname=" + team.getTeamName()
                     + ", numbersofMembers= " + team.getNumberofMembers()
                     + ", Score" + team.getScore());
             }
         }
-        return ListTeamFromCompetition;
+        return listTeamFromCompetition;
     }
     
     /**
@@ -153,7 +151,7 @@ public class CompetitionService {
     
     public Round getNextRound() {
         Round round = null;
-        List<Round> resultList = em.createNamedQuery("GetNextRound", Round.class).setParameter("status", Status.waiting).getResultList();
+        List<Round> resultList = em.createNamedQuery("GetNextRound", Round.class).setParameter("status", Status.WAITING).getResultList();
         
         if (resultList.size() > 0)
         {
@@ -168,19 +166,19 @@ public class CompetitionService {
      * @return
      */
     public List<Competition> GetCompetitionsData() {
-        List<Competition> ListCompetitionData;
-        ListCompetitionData = em.createNamedQuery("GetCompetitionsData").getResultList();
-        if (ListCompetitionData.isEmpty()) {
+        List<Competition> listCompetitionData;
+        listCompetitionData = em.createNamedQuery("GetCompetitionsData").getResultList();
+        if (listCompetitionData.isEmpty()) {
             System.out.println("No competitions found.");
         }
         else {
-            for (Competition competition : ListCompetitionData) {
+            for (Competition competition : listCompetitionData) {
                 System.out.print("CompetitionID= " + competition.getId()
                     + ", name=" + competition.getName()
                     + ", starttime= " + competition.getStartTime()
                     + ", Status" + competition.getStatus());
             }
         }
-        return ListCompetitionData;
+        return listCompetitionData;
     }
 }

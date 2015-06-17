@@ -11,9 +11,11 @@ import Timer.TimerData;
 import Timer.TimerSessionBean;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
+import WebSocket.SpectatorEndpoint;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -29,10 +31,19 @@ public class CommunicationBean {
     private CompetitorEndPoint competitorEndpoint;
     
     @EJB
+    private SpectatorEndpoint spectatorEndpoint;
+    
+    @EJB
     private WorkspaceServiceRequestBean workspaceServiceRequestBean;
     
     @EJB
     private TimerSessionBean timerSessionBean;
+
+    @Inject
+    private CompetitionService competitionService;
+    
+    @Inject
+    private UserService userService;
     
     /**
      * send Message To Competitor
@@ -80,5 +91,11 @@ public class CommunicationBean {
     
     public void modifyTimerDuration(long newDuration, TimerData timerData) {
         timerSessionBean.modifyTimerDuration(newDuration, timerData);
+    }
+    
+    public void sendMessageToEveryone(BaseMessage message) {
+        competitorEndpoint.sendToAll(message);
+        adminEndpoint.sendToAll(message);
+        spectatorEndpoint.sendMessage(message);
     }
 }

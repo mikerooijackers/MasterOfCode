@@ -38,9 +38,7 @@ public class MOCUser implements Serializable, JSONAware {
      * privileges of a user
      */
     private Role privilege;
-
     private String company;
-
     private String telephoneNumber;
 
     private String activationCode;
@@ -72,7 +70,6 @@ public class MOCUser implements Serializable, JSONAware {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("Fullname", this.fullName);
-//        obj.put("Id", this.id);
         obj.put("Email", this.email);
         obj.put("Password", this.password);
         obj.put("Company", this.company);
