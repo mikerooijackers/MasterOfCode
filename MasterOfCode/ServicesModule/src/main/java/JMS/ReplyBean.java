@@ -73,6 +73,8 @@ public class ReplyBean implements MessageListener {
                     // do nothing...
                 } else if (object instanceof ExtractAssignmentToWorkspacesReplyMessage) {
                     System.out.println("[[INFO]] Extract assignment to workspaces reply message received");
+                    ExtractAssignmentToWorkspacesReplyMessage jmsMessage = (ExtractAssignmentToWorkspacesReplyMessage) object;
+                    
                     // do nothing...
                 } else if (object instanceof GetSourceCodeFilesReplyMessage) {
                     System.out.println("[[INFO]] Get source code files reply message received");

@@ -135,7 +135,7 @@ public class WorkspaceService {
         return sourceCodeFiles;
     }
 
-    public List<AnnotationData> readAssignmentMetaData(String assignmentPath, Long assignmentId) {
+    public List<AnnotationData> readAssignmentMetaData(Long assignmentId) {
         String path = ASSIGNMENTS_PATH + File.separator + assignmentId;
 
         List<AnnotationData> annotationData = ReflectionUtils.readTestAnnotationData(path, org.testng.annotations.Test.class);

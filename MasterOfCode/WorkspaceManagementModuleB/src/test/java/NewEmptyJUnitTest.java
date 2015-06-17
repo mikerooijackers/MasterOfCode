@@ -42,8 +42,7 @@ public class NewEmptyJUnitTest {
     //@org.testng.annotations.Test
     public void testReadAnnotationData() {
         WorkspaceService service = new WorkspaceService();
-        String path = "C:\\assignments";
-        List<AnnotationData> readAssignmentMetaData = service.readAssignmentMetaData(path, 1L);
+        List<AnnotationData> readAssignmentMetaData = service.readAssignmentMetaData(1L);
         Assert.assertTrue(true);
     }
     
