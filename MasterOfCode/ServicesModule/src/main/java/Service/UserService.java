@@ -5,9 +5,9 @@
  */
 package Service;
 
-import domein.MOCUser;
-import domein.Role;
-import domein.Team;
+import Domein.MOCUser;
+import Domein.Role;
+import Domein.Team;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

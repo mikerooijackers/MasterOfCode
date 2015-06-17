@@ -5,15 +5,15 @@
  */
 package REST;
 
-import domein.Competition;
-import domein.Hint;
-import domein.MOCUser;
-import domein.Role;
-import domein.Team;
+import Domein.Competition;
+import Domein.Hint;
+import Domein.MOCUser;
+import Domein.Role;
+import Domein.Team;
 import Service.CompetitionService;
 import Service.UserService;
 import WebSocket.CompetitorEndPoint;
-import domein.Round;
+import Domein.Round;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;

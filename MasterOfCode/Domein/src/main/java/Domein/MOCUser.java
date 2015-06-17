@@ -1,4 +1,4 @@
-package domein;
+package Domein;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

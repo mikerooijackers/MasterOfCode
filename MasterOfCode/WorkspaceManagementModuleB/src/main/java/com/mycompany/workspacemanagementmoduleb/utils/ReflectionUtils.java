@@ -5,8 +5,8 @@
  */
 package com.mycompany.workspacemanagementmoduleb.utils;
 
-import domein.AnnotationData;
-import domein.AnnotationMethod;
+import Domein.AnnotationData;
+import Domein.AnnotationMethod;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

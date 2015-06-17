@@ -7,7 +7,7 @@ package mocjms.messages.reply;
 
 import java.util.ArrayList;
 import java.util.List;
-import domein.AnnotationData;
+import Domein.AnnotationData;
 import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 
 /**

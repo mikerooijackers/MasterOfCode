@@ -5,7 +5,7 @@
  */
 package Competition;
 
-import domein.Team;
+import Domein.Team;
 import java.util.List;
 import javax.ejb.Singleton;
 

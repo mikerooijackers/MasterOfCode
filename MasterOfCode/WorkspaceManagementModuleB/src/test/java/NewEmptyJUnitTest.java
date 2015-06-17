@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import domein.AnnotationData;
+import Domein.AnnotationData;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import java.util.List;
 import org.junit.After;

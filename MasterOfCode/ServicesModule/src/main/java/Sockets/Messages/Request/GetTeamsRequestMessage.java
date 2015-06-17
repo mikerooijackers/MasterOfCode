@@ -5,7 +5,7 @@
  */
 package Sockets.Messages.Request;
 
-import domein.Team;
+import Domein.Team;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;

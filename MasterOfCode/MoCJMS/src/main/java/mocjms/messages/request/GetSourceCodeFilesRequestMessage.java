@@ -5,8 +5,8 @@
  */
 package mocjms.messages.request;
 
-import domein.AnnotationData;
-import domein.SourceCode;
+import Domein.AnnotationData;
+import Domein.SourceCode;
 import com.mycompany.annotations.Editable;
 import com.mycompany.annotations.ReadOnly;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
