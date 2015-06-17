@@ -37,6 +37,7 @@ public class StopCompetitionRequestMessage extends BaseMessage {
     @Override
     public void doAction(CommunicationBean communicationBean) {
         StopCompetitionReplyMessage mes = new StopCompetitionReplyMessage();
+        communicationBean.sendMessageToEveryone(mes);
         
         System.out.println("In the doAction of the StopCompetitionRequestMessage");
     }

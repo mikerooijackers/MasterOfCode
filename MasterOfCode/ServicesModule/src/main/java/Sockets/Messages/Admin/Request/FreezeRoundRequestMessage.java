@@ -38,6 +38,7 @@ public class FreezeRoundRequestMessage extends BaseMessage {
     @Override
     public void doAction(CommunicationBean communicationBean) {
         FreezeRoundReplyMessage mes = new FreezeRoundReplyMessage();
+        communicationBean.sendMessageToEveryone(mes);
         
         System.out.println("In the doAction of the FreezeRoundRequestMessage");
     }

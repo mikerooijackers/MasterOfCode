@@ -38,8 +38,7 @@ public class StartCompetitionRequestMessage extends BaseMessage {
     public void doAction(CommunicationBean communicationBean) {
         // Send reply message to clients
         StartCompetitionReplyMessage mes = new StartCompetitionReplyMessage();
-        
-        
+        communicationBean.sendMessageToEveryone(mes);
         
         System.out.println("In the doAction of the StartCompetitionRequestMessage");
     }

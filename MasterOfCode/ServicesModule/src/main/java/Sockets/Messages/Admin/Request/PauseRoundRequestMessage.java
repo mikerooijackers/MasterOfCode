@@ -40,6 +40,7 @@ public class PauseRoundRequestMessage extends BaseMessage {
     @Override
     public void doAction(CommunicationBean communicationBean) {
         PauzeRoundReplyMessage mes = new PauzeRoundReplyMessage();
+        communicationBean.sendMessageToEveryone(mes);
         
         System.out.println("In the doAction of the PauseRoundRequestMessage");
     }
