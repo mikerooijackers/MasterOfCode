@@ -14,6 +14,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
+import mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage;
 
 /**
  *
@@ -53,7 +54,8 @@ public class TimerSessionBean {
         TimerType timerType = timerData.getTimerType();
         switch (timerType) {
             case CompetitionCountDownTimer:
-                
+                communicationBean.startNextRoundOfCompetition();
+                //communicationBean.sendMessageToWorkspaceManegementBean(new ExtractAssignmentToWorkspacesRequestMessage());
                 break;
             case HintTimer:
                 String hint = timerData.getHint();

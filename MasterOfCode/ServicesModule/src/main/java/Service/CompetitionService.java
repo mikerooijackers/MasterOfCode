@@ -113,7 +113,14 @@ public class CompetitionService {
         em.persist(round);
 //        em.persist(assignment);
         em.getTransaction().commit();
-        em.close();
+    }
+    
+    public void editRound(Status status, Long roundID) {
+        em.getTransaction().begin();
+        Round round = em.find(Round.class, roundID);
+        round.setStatus(status);
+        em.persist(round);
+        em.getTransaction().commit();
     }
     
     /**
@@ -125,7 +132,6 @@ public class CompetitionService {
         em.getTransaction().begin();
         em.remove(round);
         em.getTransaction().commit();
-        em.close();
     }
     
     /**
@@ -133,7 +139,7 @@ public class CompetitionService {
      * @param competitionID
      * @return
      */
-    public Competition FindCompetition(long competitionID) {
+    public Competition FindCompetition(Long competitionID) {
         Competition competition = em.find(Competition.class, competitionID);
         return competition;
         
@@ -149,9 +155,9 @@ public class CompetitionService {
         return round;
     }
     
-    public Round getNextRound() {
+    public Round getNextRound(Long competitionId) {
         Round round = null;
-        List<Round> resultList = em.createNamedQuery("GetNextRound", Round.class).setParameter("status", Status.WAITING).getResultList();
+        List<Round> resultList = em.createNamedQuery("GetNextRound", Round.class).setParameter("status", Status.WAITING).setParameter("competitionId", competitionId).getResultList();
         
         if (resultList.size() > 0)
         {
