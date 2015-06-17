@@ -5,7 +5,7 @@
  */
 package REST;
 
-import Domein.Role;
+import domein.Role;
 import java.util.UUID;
 
 /**

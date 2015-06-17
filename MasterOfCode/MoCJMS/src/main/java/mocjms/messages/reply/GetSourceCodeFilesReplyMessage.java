@@ -5,7 +5,7 @@
  */
 package mocjms.messages.reply;
 
-import Domein.SourceCode;
+import domein.SourceCode;
 import java.util.ArrayList;
 import java.util.List;
 import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;

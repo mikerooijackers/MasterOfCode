@@ -5,7 +5,7 @@
  */
 package Competition;
 
-import Domein.Hint;
+import domein.Hint;
 import java.util.List;
 
 /**

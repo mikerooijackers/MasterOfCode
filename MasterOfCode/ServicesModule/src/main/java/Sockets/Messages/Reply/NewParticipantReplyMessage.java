@@ -1,6 +1,6 @@
 package Sockets.Messages.Reply;
 
-import Domein.MOCUser;
+import domein.MOCUser;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
