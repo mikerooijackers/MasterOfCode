@@ -1,4 +1,8 @@
 angular.module('competitorLoginApp').controller('loginController', function ($scope, LoginResources) {
+    
+    if (localStorage.getItem("userInformation") !== null) {
+        window.location.href = "index.html";
+    }
 
     $scope.login = function () {
         var LoginMessage = {

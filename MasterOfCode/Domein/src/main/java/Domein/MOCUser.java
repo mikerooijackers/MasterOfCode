@@ -18,7 +18,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "AllUsers", query = "SELECT m FROM MOCUser m"),
-    @NamedQuery(name = "LoginUser", query = "SELECT m FROM MOCUser m WHERE m.email LIKE :email AND m.password LIKE :password")
+    @NamedQuery(name = "LoginUser", query = "SELECT m FROM MOCUser m WHERE m.email LIKE :email AND m.password LIKE :password"),
+    @NamedQuery(name = "FindUserByEmail", query = "SELECT m FROM MOCUser m WHERE m.email = :email")
 })
 public class MOCUser implements Serializable, JSONAware {
 
