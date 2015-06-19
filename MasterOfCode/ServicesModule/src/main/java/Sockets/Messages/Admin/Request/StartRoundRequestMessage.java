@@ -38,9 +38,8 @@ public class StartRoundRequestMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction(CommunicationBean communicationBean) {
-        StartRoundReplyMessage mes = new StartRoundReplyMessage();
-        communicationBean.sendMessageToEveryone(mes);
+    public void doAction(CommunicationBean communicationBean) {       
+        communicationBean.startNextRoundOfCompetition();
         
         System.out.println("In the doAction of the StartRoundRequestMessage");
     }

@@ -163,7 +163,7 @@ public class StartRoundReplyMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
