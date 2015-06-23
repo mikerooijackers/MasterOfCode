@@ -1,5 +1,7 @@
-angular.module('competitorClientApp').controller('hintsController', function ($scope, $rootScope, SocketService, InformationService) {
-
+angular.module('competitorClientApp').controller('hintsController', function ($scope, $rootScope, SocketService, InformationService, $location) {
+    if (!InformationService.user.team || InformationService.roundBusy === false) {
+        $location.path('/account');
+    }
     console.log("Hints size: " + InformationService.hints.length);
 
     $scope.debug = function () {

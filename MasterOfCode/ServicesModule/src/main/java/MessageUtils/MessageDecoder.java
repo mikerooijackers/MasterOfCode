@@ -155,6 +155,8 @@ public class MessageDecoder implements Decoder.Text<BaseMessage> {
                 return ChangePasswordRequestMessage.decodeJSON(s);
             case ChangePasswordReplyMessage:
                 return ChangePasswordReplyMessage.DecodeJSON(s);
+            case NewUserSessionConnectionMessage:
+                return NewUserSessionConnectionMessage.decodeJSON(s);
         }
         return null;
     }

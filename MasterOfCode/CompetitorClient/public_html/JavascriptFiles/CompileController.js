@@ -1,4 +1,8 @@
-angular.module('competitorClientApp').controller('compileController', function ($scope, SocketService, $rootScope, InformationService) {
+angular.module('competitorClientApp').controller('compileController', function ($scope, SocketService, $rootScope, InformationService, $location) {
+    if (!InformationService.user.team || InformationService.roundBusy === false) {
+        $location.path('/account');
+    }
+    
     $scope.message = "Controller succesfully linked";
     $scope.lastCompileMessage = InformationService.lastCompileResult;
     

@@ -162,6 +162,7 @@ public class UserService {
         em.persist(team);
         
         mocInitiator.setTeam(team);
+        mocInitiator.setPrivilege(Role.INITIATOR);
         em.merge(mocInitiator);
         
         for (String username : members) {
@@ -176,6 +177,16 @@ public class UserService {
                 System.out.println("TeamMember " + username + " ");
             }
         }
+        return team;
+    }
+    
+    public List<MOCUser> getTeamMembers(Team team) {
+        List<MOCUser> members = em.createNamedQuery("GetTeamMembers").setParameter("team", team).getResultList();
+        return members;
+    }
+    
+    public Team getTeam(Long teamId) {
+        Team team = em.find(Team.class, teamId);
         return team;
     }
 }

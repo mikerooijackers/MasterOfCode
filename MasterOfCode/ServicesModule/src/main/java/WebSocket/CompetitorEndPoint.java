@@ -11,6 +11,7 @@ import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.NewSessionConnectionMessage;
+import Sockets.Messages.NewUserSessionConnectionMessage;
 import Sockets.Messages.Reply.StartRoundReplyMessage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class CompetitorEndPoint {
     @Inject
     private CommunicationBean communicationBean;
 
-    private final HashMap<String, Session> sessions = new HashMap<>();
+    private final HashMap<Long, Session> sessions = new HashMap<>();
     private Session testSession;
 
     /**
@@ -68,17 +69,17 @@ public class CompetitorEndPoint {
      */
     @OnMessage
     public void onMessage(final Session session, final BaseMessage message) {
-        if (message instanceof NewSessionConnectionMessage) {
-            this.addSession(session, (NewSessionConnectionMessage) message);
-            this.sendMessage("Noor", new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", 4, 4444));
+        if (message instanceof NewUserSessionConnectionMessage) {
+            this.addSession(session, (NewUserSessionConnectionMessage) message);
+            this.sendMessage(((NewUserSessionConnectionMessage)message).getTeamId(), new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", 4, 4444));
         } else {
             message.doAction(communicationBean);
         }
         System.out.println("Sessions size: " + sessions.size());
     }
 
-    private void addSession(Session session, NewSessionConnectionMessage mess) {
-        this.sessions.put(mess.getUsername(), session);
+    private void addSession(Session session, NewUserSessionConnectionMessage mess) {
+        this.sessions.put(mess.getTeamId(), session);
     }
 
     /**
@@ -86,18 +87,18 @@ public class CompetitorEndPoint {
      * @param username
      * @param message
      */
-    public void sendMessage(String username, BaseMessage message) {
+    public void sendMessage(Long teamId, BaseMessage message) {
         try {
-            sessions.get(username).getBasicRemote().sendObject(message);
+            sessions.get(teamId).getBasicRemote().sendObject(message);
         } catch (IOException | EncodeException ex) {
             Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void sendToAll(BaseMessage message) {
-        for (String username : sessions.keySet()) {
+        for (Long teamId : sessions.keySet()) {
             try {
-                sessions.get(username).getBasicRemote().sendObject(message);
+                sessions.get(teamId).getBasicRemote().sendObject(message);
             } catch (IOException | EncodeException ex) {
                 Logger.getLogger(CompetitorEndPoint.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -122,18 +123,18 @@ public class CompetitorEndPoint {
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         System.out.println("Closing session");
-        String usernameToRemove = "";
-        for (Entry<String, Session> entry : sessions.entrySet()) {
-            String username = entry.getKey();
+        Long teamIdToRemove = -1L;
+        for (Entry<Long, Session> entry : sessions.entrySet()) {
+            Long teamId = entry.getKey();
             Session sess = entry.getValue();
             
             if (sess == session) {
-                usernameToRemove = username;
+                teamIdToRemove = teamId;
                 break;
             }
         }
-        if (!usernameToRemove.equals("")) {
-            sessions.remove(usernameToRemove);
+        if (teamIdToRemove != -1L) {
+            sessions.remove(teamIdToRemove);
         }
         System.out.println("Sessions size: " + sessions.size());
     }

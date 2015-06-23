@@ -62,8 +62,8 @@ public class CommunicationBean {
      * @param username
      * @param message
      */
-    public void sendMessageToCompetitor(String username, BaseMessage message) {
-        competitorEndpoint.sendMessage(username, message);
+    public void sendMessageToCompetitor(Long teamId, BaseMessage message) {
+        competitorEndpoint.sendMessage(teamId, message);
     }
     
     /**

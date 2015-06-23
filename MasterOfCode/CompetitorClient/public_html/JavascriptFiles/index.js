@@ -56,9 +56,13 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
             $scope.difficulty = 1;
             InformationService.user = JSON.parse(localStorage.getItem('userInformation'));
             console.log(InformationService.user);
-            SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
-            var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
-            SocketService.sendMessage(NewSessionConnectionMessage);
+            if (InformationService.user.team) {
+                SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
+                var NewSessionConnectionMessage = {MessageType: "NewUserSessionConnectionMessage", TeamId: InformationService.user.team.id};
+                SocketService.sendMessage(NewSessionConnectionMessage);
+            } else {
+                $location.path('/account');
+            }
 
             $scope.hoursRemaining = 0;
             $scope.minutesRemaining = 0;
@@ -86,6 +90,8 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
                 InformationService.assignName = data.AssignName;
                 InformationService.assignDescriptionCompetitors = data.AssignDescriptionCompetitors;
                 InformationService.assignDescriptionSpectators = data.AssignDescriptionSpectators;
+                
+                InformationService.roundBusy = true;
 
                 $scope.difficulty = data.AssignDifficulty;
 
@@ -178,8 +184,8 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
             $scope.showAccountPage = function () {
                 $location.path('/account');
             }
-            
-            $scope.logout = function() {
+
+            $scope.logout = function () {
                 localStorage.removeItem("userInformation");
                 window.location.href = "LoginPage.html";
             }

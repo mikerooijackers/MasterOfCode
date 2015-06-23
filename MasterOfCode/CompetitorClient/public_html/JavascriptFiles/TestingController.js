@@ -1,4 +1,7 @@
-angular.module('competitorClientApp').controller('testingController', function ($scope, $rootScope, InformationService, SocketService) {
+angular.module('competitorClientApp').controller('testingController', function ($scope, $rootScope, InformationService, SocketService, $location) {
+    if (!InformationService.user.team || InformationService.roundBusy === false) {
+        $location.path('/account');
+    }
     $scope.message = "Testing controller";
     $scope.showOutput = function (test, output) {
         var testOutputTable = document.getElementById('testOutput' + test);
