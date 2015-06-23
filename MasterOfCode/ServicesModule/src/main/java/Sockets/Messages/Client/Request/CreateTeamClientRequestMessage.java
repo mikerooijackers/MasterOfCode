@@ -8,7 +8,6 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.Reply.TeamActionReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -18,13 +17,22 @@ import org.json.simple.JSONValue;
  */
 public class CreateTeamClientRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CreateTeamClientRequestMessage.toString();
     
     /**
      * Constructor
      */
-    public CreateTeamClientRequestMessage() {}
+    public CreateTeamClientRequestMessage() {
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CreateTeamClientRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new CreateTeamClientRequestMessage();

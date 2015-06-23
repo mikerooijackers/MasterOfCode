@@ -22,8 +22,14 @@ public class InviteMemberToTeamRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public InviteMemberToTeamRequestMessage() {}
+    public InviteMemberToTeamRequestMessage() {
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static InviteMemberToTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new InviteMemberToTeamRequestMessage();

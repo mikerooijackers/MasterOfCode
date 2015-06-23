@@ -23,15 +23,30 @@ public class UserTestRequestMessage extends CompetitionBasedOperationDrivenReque
     public UserTestRequestMessage() {
     }
 
+    /**
+     *
+     * @param tests
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public UserTestRequestMessage(String tests, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.tests = tests;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTests() {
         return this.tests;
     }
 
+    /**
+     *
+     * @param tests
+     */
     public void setListTests(String tests) {
         this.tests = tests;
     }

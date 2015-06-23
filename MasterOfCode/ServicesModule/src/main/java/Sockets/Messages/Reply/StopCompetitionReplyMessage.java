@@ -17,12 +17,16 @@ import org.json.simple.JSONValue;
  */
 public class StopCompetitionReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StopCompetitionReplyMessage.toString();
     
     /**
      * Constructor
      */
-    public StopCompetitionReplyMessage() {}
+    public StopCompetitionReplyMessage() {
+    }
     
     /**
      *

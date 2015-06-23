@@ -25,10 +25,14 @@ public class RemoveMemberFromTeamRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-        
     public RemoveMemberFromTeamRequestMessage() {
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static RemoveMemberFromTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new RemoveMemberFromTeamRequestMessage();

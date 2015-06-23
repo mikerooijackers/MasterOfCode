@@ -21,6 +21,11 @@ public class GetParticipantsRequestMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.GetParticipantsRequestMessage.toString();
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetParticipantsRequestMessage decodeJSON(String s) {
         return new GetParticipantsRequestMessage();
     }

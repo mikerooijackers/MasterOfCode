@@ -94,6 +94,10 @@ public class CompetitorEndPoint {
         }
     }
     
+    /**
+     *
+     * @param message
+     */
     public void sendToAll(BaseMessage message) {
         for (String username : sessions.keySet()) {
             try {

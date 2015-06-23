@@ -8,7 +8,6 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.Client.Reply.CompileReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 

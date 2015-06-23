@@ -25,8 +25,14 @@ public class PauzeRoundReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public PauzeRoundReplyMessage() {}
+    public PauzeRoundReplyMessage() {
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static PauzeRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new PauzeRoundReplyMessage();

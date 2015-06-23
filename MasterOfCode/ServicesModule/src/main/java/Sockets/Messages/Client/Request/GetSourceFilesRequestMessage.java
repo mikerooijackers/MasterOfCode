@@ -29,12 +29,22 @@ public class GetSourceFilesRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public GetSourceFilesRequestMessage() {}
+    public GetSourceFilesRequestMessage() {
+    }
     
+    /**
+     *
+     * @param teamId
+     */
     public GetSourceFilesRequestMessage(Long teamId) {
         this.teamId = teamId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetSourceFilesRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("TeamId");

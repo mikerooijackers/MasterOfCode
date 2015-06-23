@@ -17,16 +17,32 @@ import org.json.simple.JSONValue;
  */
 public class PublishHintRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.PublishHintRequestMessage.toString();
     
     private Long hintId;
     
-    public PublishHintRequestMessage(){}
+    /**
+     *
+     */
+    public PublishHintRequestMessage(){
+    }
     
+    /**
+     *
+     * @param hintId
+     */
     public PublishHintRequestMessage(Long hintId){
         this.hintId = hintId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static PublishHintRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonHintId = (Long) obj.get("HintId");

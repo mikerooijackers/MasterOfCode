@@ -23,13 +23,25 @@ public class GetAllTeamsReplyMessage extends BaseMessage {
 
     private List<Team> teamList = new ArrayList();
 
+    /**
+     *
+     */
     public GetAllTeamsReplyMessage() {
     }
 
+    /**
+     *
+     * @param teamList
+     */
     public GetAllTeamsReplyMessage(List<Team> teamList) {
         this.teamList = teamList;
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetAllTeamsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<Team> jsonTeamList = (List<Team>) obj.get("teamList");

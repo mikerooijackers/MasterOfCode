@@ -25,6 +25,11 @@ public class GetTeamsRequestMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.GetParticipantsRequestMessage.toString();
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetTeamsRequestMessage decodeJSON(String s) {
         return new GetTeamsRequestMessage();
     }

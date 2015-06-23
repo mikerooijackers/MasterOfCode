@@ -18,6 +18,9 @@ import org.json.simple.JSONValue;
  */
 public class RegisterMemberRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.RegisterMemberRequestMessage.toString();
     
     private String username;
@@ -26,8 +29,19 @@ public class RegisterMemberRequestMessage extends BaseMessage {
     private String phone;
     private String organization;
     
-    public RegisterMemberRequestMessage(){}
+    /**
+     *
+     */
+    public RegisterMemberRequestMessage(){
+    }
     
+    /**
+     *
+     * @param username
+     * @param name
+     * @param phone
+     * @param organization
+     */
     public RegisterMemberRequestMessage(String username, String name, String phone, String organization){
         this.username = username;
         this.name = name;
@@ -36,7 +50,15 @@ public class RegisterMemberRequestMessage extends BaseMessage {
         this.organization = organization;
     }
     
-        public RegisterMemberRequestMessage(String username, String name, String password, String phone, String organization){
+    /**
+     *
+     * @param username
+     * @param name
+     * @param password
+     * @param phone
+     * @param organization
+     */
+    public RegisterMemberRequestMessage(String username, String name, String password, String phone, String organization){
         this.username = username;
         this.name = name;
         this.password = password;
@@ -44,6 +66,11 @@ public class RegisterMemberRequestMessage extends BaseMessage {
         this.organization = organization;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static RegisterMemberRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonUsername = obj.get("Username").toString();

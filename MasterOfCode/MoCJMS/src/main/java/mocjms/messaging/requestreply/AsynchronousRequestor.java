@@ -2,11 +2,9 @@ package mocjms.messaging.requestreply;
 
 import java.io.Serializable;
 import javax.jms.Message;
-import javax.jms.TextMessage;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
@@ -16,8 +14,6 @@ import mocjms.messaging.MessagingGateway;
  * This class is used for sending requests and receiving replies
  * in asynchronous communication.This class inherits ythe MessagingGateway,
  * i.e., it has access to a MessageSender and MessageReceiver.
- * @param <REQUEST> is the domain class for requests
- * @param <REPLY> is the domain class for replies
  * @author Maja Pesic
  */
 public class AsynchronousRequestor {
@@ -50,9 +46,9 @@ public class AsynchronousRequestor {
      * The only constructor. This constructor does the following:
      * 1. creates the serializer and listener.
      * 2. registeres itself as the listener on the MessageReceiver (method onReply)
-     * @param connectionName
-     * @param receiverQueue
-     * @param senderQueue
+     * @param requestSenderQueue
+     * @param replyReceiverQueue
+     * @throws java.lang.Exception
      */
     public AsynchronousRequestor(String requestSenderQueue, String replyReceiverQueue) throws Exception {
         super();
@@ -61,6 +57,7 @@ public class AsynchronousRequestor {
         gateway = new MessagingGateway(requestSenderQueue, replyReceiverQueue);
         gateway.setListener(new MessageListener() {
 
+            @Override
             public void onMessage(Message message) {
                 onReply((ObjectMessage) message);
             }

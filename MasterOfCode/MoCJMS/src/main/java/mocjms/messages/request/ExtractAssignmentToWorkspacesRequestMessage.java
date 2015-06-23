@@ -23,12 +23,22 @@ public class ExtractAssignmentToWorkspacesRequestMessage extends OperationDriven
     private Long roundId;
     private Long competitionId;
     
+    /**
+     *
+     * @param assignmentId
+     * @param roundId
+     * @param competitionId
+     */
     public ExtractAssignmentToWorkspacesRequestMessage(Long assignmentId, Long roundId, Long competitionId) {
         this.roundId = roundId;
         this.competitionId = competitionId;
         this.prepareBlob(assignmentId);
     }
 
+    /**
+     *
+     * @return
+     */
     public byte[] getBlob() {
         return blob;
     }
@@ -45,22 +55,42 @@ public class ExtractAssignmentToWorkspacesRequestMessage extends OperationDriven
         }
     }
 
+    /**
+     *
+     * @param blob
+     */
     public void setBlob(byte[] blob) {
         this.blob = blob;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getRoundId() {
         return roundId;
     }
 
+    /**
+     *
+     * @param roundId
+     */
     public void setRoundId(Long roundId) {
         this.roundId = roundId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCompetitionId() {
         return competitionId;
     }
 
+    /**
+     *
+     * @param competitionId
+     */
     public void setCompetitionId(Long competitionId) {
         this.competitionId = competitionId;
     }

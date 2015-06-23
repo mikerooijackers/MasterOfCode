@@ -28,7 +28,8 @@ public class GroupTestsRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public GroupTestsRequestMessage(){}
+    public GroupTestsRequestMessage(){
+    }
     
     /**
      * Constructor

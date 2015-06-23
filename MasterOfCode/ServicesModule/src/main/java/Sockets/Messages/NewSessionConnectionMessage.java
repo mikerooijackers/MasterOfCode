@@ -59,6 +59,11 @@ public class NewSessionConnectionMessage extends BaseMessage {
         this.username = username;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static NewSessionConnectionMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonUsername;

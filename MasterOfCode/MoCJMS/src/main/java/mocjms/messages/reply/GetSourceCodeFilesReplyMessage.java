@@ -18,6 +18,9 @@ public class GetSourceCodeFilesReplyMessage extends CompetitionBasedOperationDri
 
     private List<SourceCode> listSourceCode;
 
+    /**
+     *
+     */
     public GetSourceCodeFilesReplyMessage() {
         this.listSourceCode = new ArrayList<>();
     }
@@ -27,19 +30,38 @@ public class GetSourceCodeFilesReplyMessage extends CompetitionBasedOperationDri
         this.listSourceCode = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param listSourceCode
+     */
     public GetSourceCodeFilesReplyMessage(List<SourceCode> listSourceCode) {
         this.listSourceCode = listSourceCode;
     }
 
+    /**
+     *
+     * @param listSourceCode
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public GetSourceCodeFilesReplyMessage(List<SourceCode> listSourceCode, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.listSourceCode = listSourceCode;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<SourceCode> getListSourceCode() {
         return listSourceCode;
     }
 
+    /**
+     *
+     * @param listSourceCode
+     */
     public void setListSourceCode(List<SourceCode> listSourceCode) {
         this.listSourceCode = listSourceCode;
     }

@@ -22,10 +22,13 @@ import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
-import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+/**
+ *
+ * @author mikerooijackers
+ */
 @ServerEndpoint(
         value = "/adminSocket",
         encoders = {MessageEncoder.class},
@@ -97,6 +100,10 @@ public class AdminEndPoint {
         }
     }
 
+    /**
+     *
+     * @param message
+     */
     public void sendToAll(Object message) {
         for (String username : sessions.keySet()) {
             try {

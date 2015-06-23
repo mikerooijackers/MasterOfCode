@@ -28,18 +28,29 @@ public class AsynchronousRequestorFAF {
      */
     private IReplyListenerFAF replyListener = null;
     
+    /**
+     *
+     * @param requestSenderQueue
+     * @param replyReceiverQueue
+     * @throws Exception
+     */
     public AsynchronousRequestorFAF(String requestSenderQueue, String replyReceiverQueue) throws Exception {
         super();
 
         gateway = new MessagingGateway(requestSenderQueue, replyReceiverQueue);
         gateway.setListener(new MessageListener() {
 
+            @Override
             public void onMessage(Message message) {
                 onReply((ObjectMessage) message);
             }
         });
     }
     
+    /**
+     *
+     * @param replyListener
+     */
     public void setReplyListener(IReplyListenerFAF replyListener) {
         this.replyListener = replyListener;
     }
@@ -63,7 +74,6 @@ public class AsynchronousRequestorFAF {
      * 4. register the listener to belong to the JMSMessageID of the request Message
      * 
      * @param request is the request object (a domain class) to be sent
-     * @param listener is the listener that will be notified when the reply arrives for this request
      */
     public synchronized void sendRequest(Serializable request) {
         Message requestMessage = gateway.createMsg(request);

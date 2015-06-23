@@ -18,26 +18,50 @@ public class CreateWorkspaceRequestMessage extends OperationDrivenRequestMessage
     private Long teamId;
     private Long competitionId;
 
+    /**
+     *
+     */
     public CreateWorkspaceRequestMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param competitionId
+     */
     public CreateWorkspaceRequestMessage(Long teamId, Long competitionId) {
         this.teamId = teamId;
         this.competitionId = competitionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getTeamId() {
         return teamId;
     }
 
+    /**
+     *
+     * @param teamId
+     */
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCompetitionId() {
         return competitionId;
     }
 
+    /**
+     *
+     * @param competitionId
+     */
     public void setCompetitionId(Long competitionId) {
         this.competitionId = competitionId;
     }

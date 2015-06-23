@@ -5,11 +5,9 @@
  */
 package JMS;
 
-import Sockets.Messages.BaseMessage;
 import java.io.Serializable;
 import java.util.Map;
 import javax.ejb.Singleton;
-import mocjms.messages.main.OperationDrivenMessage;
 
 /**
  *

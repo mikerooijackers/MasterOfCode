@@ -25,8 +25,14 @@ public class ScoreReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public ScoreReplyMessage() {}
+    public ScoreReplyMessage() {
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static ScoreReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new ScoreReplyMessage();

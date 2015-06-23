@@ -17,16 +17,32 @@ import org.json.simple.JSONValue;
  */
 public class RemoveMemberOfTeamRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.RemoveMemberOfTeamRequestMessage.toString();
     
     private Long userId;
     
-    public RemoveMemberOfTeamRequestMessage(){}
+    /**
+     *
+     */
+    public RemoveMemberOfTeamRequestMessage(){
+    }
     
+    /**
+     *
+     * @param userId
+     */
     public RemoveMemberOfTeamRequestMessage(Long userId) {
         this.userId = userId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static RemoveMemberOfTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonUserId = (Long) obj.get("UserId");

@@ -32,93 +32,149 @@ import mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage;
  */
 @Stateless
 public class CommunicationBean {
-    
+
     @EJB
     private AdminEndPoint adminEndpoint;
-    
+
     @EJB
     private CompetitorEndPoint competitorEndpoint;
-    
+
     @EJB
     private SpectatorEndpoint spectatorEndpoint;
-    
+
     @EJB
     private WorkspaceServiceRequestBean workspaceServiceRequestBean;
-    
+
     @EJB
     private TimerSessionBean timerSessionBean;
 
     @EJB
     private CompetitionDataService competitionDataService;
-    
+
     @Inject
     private CompetitionService competitionService;
-    
+
     @Inject
     private UserService userService;
-    
+
     /**
      * send Message To Competitor
+     *
      * @param username
      * @param message
      */
     public void sendMessageToCompetitor(String username, BaseMessage message) {
         competitorEndpoint.sendMessage(username, message);
     }
-    
+
     /**
      * send Message To All Competitors
+     *
      * @param message
      */
     public void sendMessageToAllCompetitors(BaseMessage message) {
         competitorEndpoint.sendToAll(message);
     }
-    
+
+    /**
+     *
+     * @param message
+     */
     public void sendMessageToWorkspaceManegementBean(Serializable message) {
         workspaceServiceRequestBean.Send(message);
     }
+
+    /**
+     *
+     * @param username
+     * @param message
+     */
     public void sendMessageToAdmin(String username, BaseMessage message) {
         adminEndpoint.sendMessage(username, message);
     }
-    
+
+    /**
+     *
+     * @param message
+     */
     public void sendMessageToAllAdmins(BaseMessage message) {
         adminEndpoint.sendToAll(message);
     }
-    
+
+    /**
+     *
+     * @param timerData
+     * @param duration
+     */
     public void startTimer(TimerData timerData, long duration) {
         timerSessionBean.CreateTimer(duration, timerData);
     }
-    
+
+    /**
+     *
+     * @param timerData
+     */
     public void stopTimer(TimerData timerData) {
         timerSessionBean.stopTimer(timerData);
     }
-    
+
+    /**
+     *
+     * @param timerData
+     */
     public void pauseOrFreezeTimer(TimerData timerData) {
         timerSessionBean.pauseOrFreezeTimer(timerData);
     }
-    
+
+    /**
+     *
+     */
     public void resumeTimer() {
         timerSessionBean.resumeTimer();
     }
-    
+
+    /**
+     *
+     * @param newDuration
+     * @param timerData
+     */
     public void modifyTimerDuration(long newDuration, TimerData timerData) {
         timerSessionBean.modifyTimerDuration(newDuration, timerData);
     }
-    
+
+    /**
+     *
+     * @param message
+     */
     public void sendMessageToEveryone(BaseMessage message) {
         competitorEndpoint.sendToAll(message);
         adminEndpoint.sendToAll(message);
         spectatorEndpoint.sendMessage(message);
     }
+
+    /**
+     *
+     * @param userId
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     public String changePassword(int userId, String oldPassword, String newPassword) {
         return userService.changePassword(userId, oldPassword, newPassword);
     }
-    
+
+    /**
+     *
+     * @param competitionId
+     */
     public void setCurrentCompetition(Long competitionId) {
         Competition competition = competitionService.FindCompetition(competitionId);
         competitionDataService.setCurrentCompetition(competition);
     }
-    
+
+    /**
+     *
+     */
     public void startNextRoundOfCompetition() {
         long competitionId = competitionDataService.getCurrentCompetition().getId();
         Round nextRound = competitionService.getNextRound(competitionId);
@@ -126,17 +182,20 @@ public class CommunicationBean {
         competitionService.editRound(Status.PLAYING, nextRound.getId());
         workspaceServiceRequestBean.Send(new ExtractAssignmentToWorkspacesRequestMessage(nextRound.getAssignment().getId(), nextRound.getId(), competitionId));
     }
-    
+
+    /**
+     *
+     */
     public void sendRoundMetaData() {
         long assignmentId = competitionDataService.getCurrentRound().getAssignment().getId();
         List<AnnotationData> annotationData = WorkspaceService.getInstance().readAssignmentMetaData(assignmentId);
-        
+
     }
-    
+
     @PostConstruct
     public void init() {
         this.setCurrentCompetition(1L);
-        
+
         Round nextRound = competitionService.getNextRound(1L);
         competitionDataService.setCurrentRound(nextRound);
     }

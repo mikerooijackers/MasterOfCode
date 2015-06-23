@@ -12,9 +12,7 @@ import javax.jms.ObjectMessage;
 import mocjms.messaging.MessagingGateway;
 
 /**
- *
- * @param <REQUEST> 
- * @param <REPLY>
+ * 
  * @author Maja Pesic
  */
 public class AsynchronousReplier {
@@ -41,13 +39,14 @@ public class AsynchronousReplier {
      * 2. registeres a message listener for the MessagingGateway (method onMessage)
      * @param requestReceiverQueue is the name of teh JMS queue from which the requests
      *        will be received.
-     * @param serializer  used to de-serialize REQUESTs and serialize REPLIES.
+     * @throws java.lang.Exception
      */
     public AsynchronousReplier(String requestReceiverQueue) throws Exception {
         super();
         gateway = new MessagingGateway(requestReceiverQueue);
         gateway.setListener(new MessageListener() {
 
+            @Override
             public void onMessage(Message message) {
                 onRequest((ObjectMessage) message);
             }
