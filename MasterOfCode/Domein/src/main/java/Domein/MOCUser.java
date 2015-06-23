@@ -19,7 +19,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "AllUsers", query = "SELECT m FROM MOCUser m"),
     @NamedQuery(name = "LoginUser", query = "SELECT m FROM MOCUser m WHERE m.email LIKE :email AND m.password LIKE :password"),
-    @NamedQuery(name = "FindUserByEmail", query = "SELECT m FROM MOCUser m WHERE m.email = :email")
+    @NamedQuery(name = "FindUserByEmail", query = "SELECT m FROM MOCUser m WHERE m.email = :email"),
+    @NamedQuery(name = "GetTeamMembers", query = "SELECT m FROM MOCUser m WHERE m.team = :team")
 })
 public class MOCUser implements Serializable, JSONAware {
 

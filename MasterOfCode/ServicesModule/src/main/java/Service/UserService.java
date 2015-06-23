@@ -5,12 +5,15 @@
  */
 package Service;
 
+import Competition.CompetitionDataService;
+import Domein.Competition;
 import Domein.MOCUser;
 import Domein.Role;
 import Domein.Team;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -24,6 +27,9 @@ public class UserService {
 
     @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
+    
+    @Inject
+    private CompetitionDataService competitionDataService;
 
     /**
      * login of a user
@@ -151,20 +157,36 @@ public class UserService {
         MOCUser mocInitiator = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", initiator).getSingleResult();
         
         team.setInitiator(mocInitiator);
+//        team.setCompetition(em.find(Competition.class, competitionDataService.getCurrentCompetition().getCompetitionId()));
+        
+        em.persist(team);
+        
+        mocInitiator.setTeam(team);
+        mocInitiator.setPrivilege(Role.INITIATOR);
+        em.merge(mocInitiator);
         
         for (String username : members) {
             MOCUser user = null;
             try {
                 user = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", username).getSingleResult();
-                if (!team.getMembers().contains(user)) {
-                    MOCMembers.add(user);
+                if (user.getTeam() == null) {
+                    user.setTeam(team);
+                    em.merge(user);
                 }
             } catch (NoResultException ex) {
                 System.out.println("TeamMember " + username + " ");
             }
         }
-        team.setMembers(MOCMembers);
-        em.persist(team);
+        return team;
+    }
+    
+    public List<MOCUser> getTeamMembers(Team team) {
+        List<MOCUser> members = em.createNamedQuery("GetTeamMembers").setParameter("team", team).getResultList();
+        return members;
+    }
+    
+    public Team getTeam(Long teamId) {
+        Team team = em.find(Team.class, teamId);
         return team;
     }
 }

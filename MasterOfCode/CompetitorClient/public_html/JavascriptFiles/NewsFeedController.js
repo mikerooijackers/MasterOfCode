@@ -1,5 +1,7 @@
-angular.module('competitorClientApp').controller('newsFeedController', function ($scope, $rootScope, InformationService) {
-    
+angular.module('competitorClientApp').controller('newsFeedController', function ($scope, $rootScope, InformationService, $location) {
+    if (!InformationService.user.team || InformationService.roundBusy === false) {
+        $location.path('/account');
+    }
     $scope.fillTable = function() {
         var newsFeedTable = document.getElementById("newsFeedTable");
         newsFeedTable.innerHTML = "";

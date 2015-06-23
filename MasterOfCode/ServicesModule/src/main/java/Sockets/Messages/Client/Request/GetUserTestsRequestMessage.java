@@ -43,7 +43,7 @@ public class GetUserTestsRequestMessage extends BaseMessage {
         descriptions.put("Test2", "This is the seconds test.");
         descriptions.put("Test3", "This is the third test.");
         GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
-        communicationBean.sendMessageToCompetitor("Noor", mess);
+        communicationBean.sendMessageToCompetitor(19L, mess);
     }
 
     @Override
