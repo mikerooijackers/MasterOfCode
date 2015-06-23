@@ -11,7 +11,6 @@ import com.mycompany.annotations.AssignCreator;
 import com.mycompany.annotations.AssignInformation;
 import com.mycompany.annotations.Editable;
 import com.mycompany.annotations.Hints;
-import com.mycompany.annotations.ReadOnly;
 import com.mycompany.utilitiesmodule.ZipUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.FileUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.ReflectionUtils;
@@ -31,7 +30,6 @@ import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
-import org.testng.annotations.Test;
 
 /**
  *
@@ -41,6 +39,10 @@ public class WorkspaceService {
     
     private static WorkspaceService instance;
     
+    /**
+     *
+     * @return
+     */
     public static WorkspaceService getInstance() {
         if (instance == null) {
             instance = new WorkspaceService();
@@ -49,10 +51,27 @@ public class WorkspaceService {
         return instance;
     }
     
+    /**
+     *
+     */
     public static final String WORKSPACES_PATH = "C:\\workspaces";
+
+    /**
+     *
+     */
     public static final String ASSIGNMENTS_PATH = "C:\\assignments";
+
+    /**
+     *
+     */
     public static final String DEFAULT_JAVA_SOURCECODE_PATH = "src\\main\\java";
     
+    /**
+     *
+     * @param competitionId
+     * @param teamId
+     * @return
+     */
     public String createWorkspace(Long competitionId, Long teamId) {
         String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId;
         new File(path).mkdirs();
@@ -60,6 +79,12 @@ public class WorkspaceService {
         return path;
     }
     
+    /**
+     *
+     * @param competitionId
+     * @param teamId
+     * @return
+     */
     public String deleteWorkspace(Long competitionId, Long teamId) {
         String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId ;
         this.deleteFolder(new File(path));
@@ -81,6 +106,12 @@ public class WorkspaceService {
         folder.delete();
     }
 
+    /**
+     *
+     * @param sourceCodePath
+     * @param sourceCode
+     * @return
+     */
     public boolean editSourceCode(String sourceCodePath, String sourceCode) {
         FileWriter writer = null;
         boolean succesful = false;
@@ -111,6 +142,14 @@ public class WorkspaceService {
         return succesful;
     }
 
+    /**
+     *
+     * @param teamId
+     * @param competitionId
+     * @param roundId
+     * @param annotationData
+     * @return
+     */
     public List<SourceCode> readSourceCode(Long teamId, Long competitionId, Long roundId, List<AnnotationData> annotationData) {
         List<SourceCode> sourceCodeFiles = new ArrayList<>();      
 
@@ -135,6 +174,11 @@ public class WorkspaceService {
         return sourceCodeFiles;
     }
 
+    /**
+     *
+     * @param assignmentId
+     * @return
+     */
     public List<AnnotationData> readAssignmentMetaData(Long assignmentId) {
         String path = ASSIGNMENTS_PATH + File.separator + assignmentId;
 
@@ -144,6 +188,13 @@ public class WorkspaceService {
         return annotationData;
     }
 
+    /**
+     *
+     * @param competitionId
+     * @param roundId
+     * @param blob
+     * @return
+     */
     public boolean extractAssignmentToWorkspaces(Long competitionId, Long roundId, byte[] blob) {
         String destination = WORKSPACES_PATH + File.separator + competitionId;
         File zipFile = new File(WORKSPACES_PATH + File.separator + "temp.zip");
@@ -172,6 +223,13 @@ public class WorkspaceService {
         
     }
     
+    /**
+     *
+     * @param teamId
+     * @param competitionId
+     * @param roundId
+     * @return
+     */
     public String requestCompile(Long teamId, Long competitionId, Long roundId) {
         String pomPath = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId;
         File folder = new File(pomPath);
@@ -198,6 +256,14 @@ public class WorkspaceService {
         return result;
     }
     
+    /**
+     *
+     * @param group
+     * @param competitionId
+     * @param teamId
+     * @param roundId
+     * @return
+     */
     public String runTestGroup(String group, Long competitionId, Long teamId, Long roundId) {
         String pomPath = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId;
         File folder = new File(pomPath);
@@ -208,6 +274,14 @@ public class WorkspaceService {
         return runCommand(command, pomPath);
     }
     
+    /**
+     *
+     * @param test
+     * @param competitionId
+     * @param teamId
+     * @param roundId
+     * @return
+     */
     public String runSingleTest(String test, Long competitionId, Long teamId, Long roundId) {
         String pomPath = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId;
         File folder = new File(pomPath);
@@ -218,6 +292,12 @@ public class WorkspaceService {
         return runCommand(command, pomPath);
     }
     
+    /**
+     *
+     * @param command
+     * @param directory
+     * @return
+     */
     public String runCommand(String command, String directory) {
         String output = "";
         Process p;

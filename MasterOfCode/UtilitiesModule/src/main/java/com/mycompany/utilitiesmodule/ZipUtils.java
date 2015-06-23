@@ -18,6 +18,12 @@ import java.util.logging.Logger;
  * @author Gebruiker
  */
 public class ZipUtils {
+
+    /**
+     *
+     * @param file
+     * @return
+     */
     public static byte[] convertFileToByteArray(File file) {
         FileInputStream is = null;
         byte[] blob = null;
@@ -48,6 +54,11 @@ public class ZipUtils {
         return blob;
     }
     
+    /**
+     *
+     * @param blob
+     * @param destination
+     */
     public static void writeByteArrayToFile(byte[] blob, File destination) {
         FileOutputStream os = null;
         try {
