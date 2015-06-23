@@ -27,7 +27,8 @@ public class GroupTestsReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public GroupTestsReplyMessage(){}
+    public GroupTestsReplyMessage(){
+    }
     
     /**
      * Constructor

@@ -17,16 +17,31 @@ import org.json.simple.JSONValue;
  */
 public class ChangePasswordReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String MessageType = MessageTypes.ChangePasswordReplyMessage.toString();
     
     private String output;
     
+    /**
+     *
+     */
     public ChangePasswordReplyMessage(){}
     
+    /**
+     *
+     * @param output
+     */
     public ChangePasswordReplyMessage(String output) {
         this.output = output;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static ChangePasswordReplyMessage DecodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonOutput = obj.get("Output").toString();

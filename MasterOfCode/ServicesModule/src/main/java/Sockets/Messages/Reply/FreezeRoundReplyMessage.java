@@ -25,7 +25,8 @@ public class FreezeRoundReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public FreezeRoundReplyMessage(){}
+    public FreezeRoundReplyMessage(){
+    }
     
     /**
      *

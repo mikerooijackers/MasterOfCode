@@ -16,8 +16,6 @@ import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
-import javax.jms.QueueConnectionFactory;
-import mocjms.messages.main.OperationDrivenMessage;
 
 /**
  *

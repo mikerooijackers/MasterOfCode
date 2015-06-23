@@ -17,15 +17,27 @@ import org.json.simple.JSONValue;
  */
 public class RegisterTeamRequestMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.RegisterTeamRequestMessage.toString();
 
     private Long teamId;
     private Long competitionId;
     private String teamName;
 
+    /**
+     *
+     */
     public RegisterTeamRequestMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param competitionId
+     * @param teamName
+     */
     public RegisterTeamRequestMessage(Long teamId, Long competitionId, String teamName) {
         this.teamId = teamId;
         this.competitionId = competitionId;
@@ -46,6 +58,11 @@ public class RegisterTeamRequestMessage extends BaseMessage {
         this.teamName = teamName;
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static RegisterTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("TeamId");

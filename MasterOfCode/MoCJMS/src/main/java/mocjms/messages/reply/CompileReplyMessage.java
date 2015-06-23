@@ -15,19 +15,37 @@ public class CompileReplyMessage extends CompetitionBasedOperationDrivenReplyMes
 
     private String result;
 
+    /**
+     *
+     * @param result
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public CompileReplyMessage(String result, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.result = result;
     }
 
+    /**
+     *
+     */
     public CompileReplyMessage() {
         
     }
 
+    /**
+     *
+     * @return
+     */
     public String getResult() {
         return result;
     }
 
+    /**
+     *
+     * @param result
+     */
     public void setResult(String result) {
         this.result = result;
     }    

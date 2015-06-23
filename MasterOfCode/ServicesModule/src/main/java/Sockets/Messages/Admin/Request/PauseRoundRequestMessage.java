@@ -17,18 +17,35 @@ import org.json.simple.JSONValue;
  */
 public class PauseRoundRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.PauseRoundRequestMessage.toString();
     
     private Long competitionId;
     private Long roundId;
     
-    public PauseRoundRequestMessage(){}
+    /**
+     *
+     */
+    public PauseRoundRequestMessage(){
+    }
     
+    /**
+     *
+     * @param competitionId
+     * @param roundId
+     */
     public PauseRoundRequestMessage(Long competitionId, Long roundId) {
         this.competitionId = competitionId;
         this.roundId = roundId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static PauseRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");

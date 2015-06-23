@@ -95,6 +95,10 @@ public class CompetitorEndPoint {
         }
     }
     
+    /**
+     *
+     * @param message
+     */
     public void sendToAll(BaseMessage message) {
         for (Long teamId : sessions.keySet()) {
             try {

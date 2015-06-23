@@ -17,6 +17,9 @@ import org.json.simple.JSONValue;
  */
 public class EditRoundRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.EditRoundRequestMessage.toString();
     
     private Long competitionId;
@@ -27,8 +30,22 @@ public class EditRoundRequestMessage extends BaseMessage {
     private String spectatorDescription;
     private String participantDescription;
     
-    public EditRoundRequestMessage(){}
+    /**
+     *
+     */
+    public EditRoundRequestMessage(){
+    }
     
+    /**
+     *
+     * @param competitionId
+     * @param roundId
+     * @param assignmentPath
+     * @param roundTimeInSeconds
+     * @param difficulty
+     * @param spectatorDescription
+     * @param participantDescription
+     */
     public EditRoundRequestMessage(Long competitionId, Long roundId, String assignmentPath, Long roundTimeInSeconds, int difficulty, String spectatorDescription, String participantDescription) {
         this.competitionId = competitionId;
         this.roundId = roundId;
@@ -39,6 +56,11 @@ public class EditRoundRequestMessage extends BaseMessage {
         this.participantDescription = participantDescription;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static EditRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");

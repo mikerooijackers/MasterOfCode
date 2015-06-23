@@ -18,20 +18,38 @@ import org.json.simple.JSONValue;
  */
 public class CreateTeamRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CreateTeamRequestMessage.toString();
     
     private String name;
     private String initiator;
     private List<String> usernameMembers;
     
-    public CreateTeamRequestMessage(){};
+    /**
+     *
+     */
+    public CreateTeamRequestMessage(){
+    }
     
+    /**
+     *
+     * @param name
+     * @param initiator
+     * @param usernameMembers
+     */
     public CreateTeamRequestMessage(String name, String initiator, List<String> usernameMembers) {
         this.name = name;
         this.initiator = initiator;
         this.usernameMembers = usernameMembers;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CreateTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonName = obj.get("Name").toString();

@@ -18,20 +18,38 @@ import org.json.simple.JSONValue;
  */
 public class CreateCompetitionRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.CreateCompetitionRequestMessage.toString();
     
     private String name;
     private String description;
     private Calendar startTime = Calendar.getInstance();
     
-    public CreateCompetitionRequestMessage(){};
+    /**
+     *
+     */
+    public CreateCompetitionRequestMessage(){
+    }
     
+    /**
+     *
+     * @param name
+     * @param description
+     * @param startTime
+     */
     public CreateCompetitionRequestMessage(String name, String description, Long startTime) {
         this.name = name;
         this.description = description;
         this.startTime.setTimeInMillis(startTime);
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CreateCompetitionRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         String jsonName = obj.get("Name").toString();

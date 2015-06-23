@@ -25,8 +25,14 @@ public class CompetitionEndedReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public CompetitionEndedReplyMessage(){}
+    public CompetitionEndedReplyMessage(){
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CompetitionEndedReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new CompetitionEndedReplyMessage();

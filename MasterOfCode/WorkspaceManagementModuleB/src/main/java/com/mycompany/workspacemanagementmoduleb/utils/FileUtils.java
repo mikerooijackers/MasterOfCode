@@ -26,6 +26,12 @@ import net.lingala.zip4j.exception.ZipException;
  */
 public class FileUtils {
 
+    /**
+     *
+     * @param file
+     * @param extension
+     * @return
+     */
     public static boolean checkFileExtension(File file, String extension) {
         String fileName = file.getName();
         int index = fileName.lastIndexOf('.');
@@ -38,6 +44,11 @@ public class FileUtils {
         return extension.equals(foundExtension);
     }
 
+    /**
+     *
+     * @param file
+     * @param destination
+     */
     public static void extractJARFile(File file, String destination) {
         InputStream is = null;
         FileOutputStream fos = null;
@@ -78,6 +89,11 @@ public class FileUtils {
         }
     }
 
+    /**
+     *
+     * @param file
+     * @param destination
+     */
     public static void extractZIPFile(File file, String destination) {
         try {
             ZipFile zipFile = new ZipFile(file);
@@ -87,6 +103,11 @@ public class FileUtils {
         }
     }
     
+    /**
+     *
+     * @param sourceFile
+     * @return
+     */
     public static String readContentOfSourceCode(File sourceFile) {
         String output = "";
         FileReader reader = null;

@@ -36,6 +36,11 @@ public class MessagingGateway {
     
     private Destination consumerDestination;
     
+    /**
+     *
+     * @param requestQueue
+     * @param replyQueue
+     */
     public MessagingGateway(String requestQueue, String replyQueue)
     {
         try {
@@ -55,17 +60,23 @@ public class MessagingGateway {
             // connect to the receiver channel
             consumerDestination = (Destination) jndiContext.lookup(replyQueue);
             consumer = ses.createConsumer(consumerDestination);
-        } catch (NamingException ex) {
-            Logger.getLogger(MessagingGateway.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JMSException ex) {
+        } catch (NamingException | JMSException ex) {
             Logger.getLogger(MessagingGateway.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public Destination getConsumerDestination() {
         return consumerDestination;
     }
     
+    /**
+     *
+     * @param requestQueue
+     */
     public MessagingGateway(String requestQueue)
     {
         try {
@@ -80,13 +91,16 @@ public class MessagingGateway {
             ses = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             // connect to the receiver channel
             consumer = ses.createConsumer((Destination) jndiContext.lookup(requestQueue));
-        } catch (NamingException ex) {
-            Logger.getLogger(MessagingGateway.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JMSException ex) {
+        } catch (NamingException | JMSException ex) {
             Logger.getLogger(MessagingGateway.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    /**
+     *
+     * @param object
+     * @return
+     */
     public Message createMsg(Serializable object)
     {
         ObjectMessage message = null;
@@ -99,6 +113,11 @@ public class MessagingGateway {
         return message;
     }
     
+    /**
+     *
+     * @param msg
+     * @return
+     */
     public boolean send(Message msg)
     {
         try {
@@ -110,6 +129,12 @@ public class MessagingGateway {
         }
     }
     
+    /**
+     *
+     * @param msg
+     * @param dest
+     * @return
+     */
     public boolean send(Message msg, Destination dest)
     {
         try {
@@ -121,6 +146,10 @@ public class MessagingGateway {
         }
     }
     
+    /**
+     *
+     * @param l
+     */
     public void setListener(MessageListener l)
     {
         try {
@@ -130,6 +159,9 @@ public class MessagingGateway {
         }
     }
     
+    /**
+     *
+     */
     public void openConnection()
     {
         try {

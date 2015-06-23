@@ -35,7 +35,8 @@ public class AsynchronousReplierFAF {
      * 2. registeres a message listener for the MessagingGateway (method onMessage)
      * @param requestReceiverQueue is the name of teh JMS queue from which the requests
      *        will be received.
-     * @param serializer  used to de-serialize REQUESTs and serialize REPLIES.
+     * @param replySenderQueue
+     * @throws java.lang.Exception
      */
     public AsynchronousReplierFAF(String requestReceiverQueue, String replySenderQueue) throws Exception {
         super();
@@ -43,6 +44,7 @@ public class AsynchronousReplierFAF {
         gateway = new MessagingGateway(replySenderQueue, requestReceiverQueue); // other way around
         gateway.setListener(new MessageListener() {
 
+            @Override
             public void onMessage(Message message) {
                 onRequest((ObjectMessage) message);
             }
@@ -90,8 +92,6 @@ public class AsynchronousReplierFAF {
      * 3. set the JMSCorrelationID of the replyMessage to be equal to the JMSMessageID of the requestMessage
      * 4. get the getJMSReplyTo destination of the requestMessage
      * 5. send the replyMessage to this Destination; use method send(Message m, Destination d) in MessagingGateway
-     *
-     * @param request to which this reply belongs
      * @param reply to the request
      * @return  true if the reply is sent succefully; false if sending reply fails
      */

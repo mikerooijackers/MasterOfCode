@@ -10,8 +10,6 @@ import MessageUtils.MessageEncoder;
 import Service.CommunicationBean;
 import Sockets.Configurator;
 import Sockets.Messages.BaseMessage;
-import Sockets.Messages.DebugMessage;
-import Sockets.Messages.NewSessionConnectionMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +70,10 @@ public class SpectatorEndpoint {
         System.out.println("Sessions size: " + sessions.size());
     }
 
+    /**
+     *
+     * @param message
+     */
     public void sendMessage(Object message) {
         try {
             for (Session sess : sessions) {

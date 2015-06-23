@@ -17,20 +17,38 @@ import org.json.simple.JSONValue;
  */
 public class ChangePasswordRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String MessageType = MessageTypes.ChangePasswordRequestMessage.toString();
     
     private int userId;
     private String oldPassword;
     private String newPassword;
     
-    public ChangePasswordRequestMessage(){}
+    /**
+     *
+     */
+    public ChangePasswordRequestMessage(){
+    }
     
+    /**
+     *
+     * @param userId
+     * @param oldPassword
+     * @param newPassword
+     */
     public ChangePasswordRequestMessage(int userId, String oldPassword, String newPassword) {
         this.userId = userId;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static ChangePasswordRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         long jsonUserIdLong = (Long) obj.get("UserId");

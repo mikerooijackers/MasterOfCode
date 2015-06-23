@@ -16,17 +16,32 @@ import mocjms.messages.main.OperationDrivenRequestMessage;
 public class ReadMetaDataRequestMessage extends OperationDrivenRequestMessage {
     private Long assignmentId;
 
+    /**
+     *
+     * @param assignmentId
+     */
     public ReadMetaDataRequestMessage(Long assignmentId) {
         this.assignmentId = assignmentId;
     }
 
+    /**
+     *
+     */
     public ReadMetaDataRequestMessage() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getAssignmentId() {
         return assignmentId;
     }
 
+    /**
+     *
+     * @param assignmentId
+     */
     public void setAssignmentId(Long assignmentId) {
         this.assignmentId = assignmentId;
     }

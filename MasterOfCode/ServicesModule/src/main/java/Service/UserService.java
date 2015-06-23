@@ -62,6 +62,8 @@ public class UserService {
      * @param activationCode
      * @param privilege
      * @param password
+     * @param company
+     * @param telephone
      * @return
      */
     public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode, String company, String telephone) {
@@ -99,6 +101,10 @@ public class UserService {
         return listUsers;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Team> GetAllTeams() {
         List<Team> listTeams;
         listTeams = em.createNamedQuery("AllTeams").getResultList();
@@ -114,6 +120,12 @@ public class UserService {
         return listTeams;
     }
 
+    /**
+     *
+     * @param userId
+     * @param teamId
+     * @return
+     */
     public MOCUser AddToTeam(long userId, long teamId) {
         MOCUser user = em.find(MOCUser.class, userId);
         Team team = em.find(Team.class, teamId);
@@ -125,6 +137,12 @@ public class UserService {
         return user;
     }
 
+    /**
+     *
+     * @param activationCode
+     * @param userId
+     * @return
+     */
     public String SetActivationCode(String activationCode, long userId) {
         MOCUser user = em.find(MOCUser.class, userId);
         if (user.getActivationCode() == null) {
@@ -140,6 +158,13 @@ public class UserService {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     public String changePassword(int id, String oldPassword, String newPassword) {
         MOCUser user = em.find(MOCUser.class, id);
         if (!user.getPassword().equals(oldPassword)) {
@@ -150,6 +175,13 @@ public class UserService {
         return "Password changed successfully.";
     }
 
+    /**
+     *
+     * @param teamName
+     * @param initiator
+     * @param members
+     * @return
+     */
     public Team createTeam(String teamName, String initiator, List<String> members) {
         Team team = new Team(teamName);
         List<MOCUser> MOCMembers = new ArrayList<>();

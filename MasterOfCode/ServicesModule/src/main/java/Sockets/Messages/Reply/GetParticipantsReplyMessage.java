@@ -14,17 +14,32 @@ import org.json.simple.JSONValue;
  */
 public class GetParticipantsReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetParticipantsReplyMessage.toString();
     
     private List<MOCUser> users;
     
+    /**
+     *
+     */
     public GetParticipantsReplyMessage() {
     }
     
+    /**
+     *
+     * @param users
+     */
     public GetParticipantsReplyMessage(List<MOCUser> users) {
         this.users = users;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetParticipantsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<MOCUser> jsonUsers = (List<MOCUser>)obj.get("Users");

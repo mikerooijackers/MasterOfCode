@@ -25,8 +25,14 @@ public class ResumeRoundReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public ResumeRoundReplyMessage() {}
+    public ResumeRoundReplyMessage() {
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static ResumeRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new ResumeRoundReplyMessage();

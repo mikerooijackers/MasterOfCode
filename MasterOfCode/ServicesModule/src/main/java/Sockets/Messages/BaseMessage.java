@@ -13,5 +13,10 @@ import org.json.simple.JSONAware;
  * @author JordiK
  */
 public abstract class BaseMessage implements JSONAware {
+
+    /**
+     *
+     * @param communicationBean
+     */
     public abstract void doAction(CommunicationBean communicationBean);
 }
