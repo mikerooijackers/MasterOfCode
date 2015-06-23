@@ -176,7 +176,7 @@ public class GetSourceFilesRequestMessage extends BaseMessage {
                 + "    \n"
                 + "}");
         GetSourceFilesReplyMessage mess = new GetSourceFilesReplyMessage(map);
-        communicationBean.sendMessageToCompetitor("Noor", mess);
+        communicationBean.sendMessageToCompetitor(this.teamId, mess);
     }
 
     @Override

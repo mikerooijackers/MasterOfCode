@@ -1,4 +1,7 @@
-angular.module('competitorClientApp').controller('editorController', function ($scope, SocketService, $rootScope, InformationService, $compile) {
+angular.module('competitorClientApp').controller('editorController', function ($scope, SocketService, $rootScope, InformationService, $compile, $location) {
+    if (!InformationService.user.team || InformationService.roundBusy === false) {
+        $location.path('/account');
+    }
     $scope.fileName = "";
 
     $scope.editorOption = {
@@ -20,7 +23,7 @@ angular.module('competitorClientApp').controller('editorController', function ($
     });
     javaEditor.setSize(null, 495);
 
-    SocketService.sendMessage({MessageType: "GetSourceFilesRequestMessage", TeamId: 1});
+    SocketService.sendMessage({MessageType: "GetSourceFilesRequestMessage", TeamId: InformationService.user.team.id});
 
     $scope.sourceReplyOnFunction = $rootScope.$on('GetSourceFilesReplyMessage', function (event, data) {
         var sourceFileTable = document.getElementById('sourceFileTable');
