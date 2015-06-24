@@ -8,6 +8,7 @@ package Sockets.Messages.Admin.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.FreezeRoundReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -53,6 +54,9 @@ public class FreezeRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
+        FreezeRoundReplyMessage mes = new FreezeRoundReplyMessage();
+        communicationBean.sendMessageToEveryone(mes);
+        
         System.out.println("In the doAction of the FreezeRoundRequestMessage");
     }
 

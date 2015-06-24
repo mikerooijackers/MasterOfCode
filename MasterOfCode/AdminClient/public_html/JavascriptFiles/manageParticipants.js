@@ -33,19 +33,19 @@ angular.module('adminClient')
                     var content = row.insertCell();
                     content.innerHTML = "<a ng-click=\"fillParticipantInfoTable('" + participant + "')\">" + participant + "</a>";
                 }
+                
                 participantTable.className = "borderedTable";
                 $compile(participantTable)($scope);
             };
 
-            $scope.fillParticipantInfoTable = function (username) {
+            $scope.fillParticipantInfoTable = function (fullName) {
                 var participantInfoTable = document.getElementById("participantInfoTable");
                 participantInfoTable.innerHTML = "";
-                participantInfoTable.innerHTML += "<b>Username:</b> " + InformationService.participants[username].Username + "<br>";
-                participantInfoTable.innerHTML += "<b>Full name:</b> " + InformationService.participants[username].FullName + "<br>";
-                participantInfoTable.innerHTML += "<b>E-mail:</b> " + InformationService.participants[username].Email + "<br>";
-                participantInfoTable.innerHTML += "<b>Company:</b> " + InformationService.participants[username].Company + "<br>";
-                participantInfoTable.innerHTML += "<b>Telephone:</b> " + InformationService.participants[username].TelephoneNumber + "<br>";
-                participantInfoTable.innerHTML += "<b>Team:</b> " + InformationService.participants[username].Team + "<br>";
+                participantInfoTable.innerHTML += "<b>Full name:</b> " + InformationService.participants[fullName].FullName + "<br>";
+                participantInfoTable.innerHTML += "<b>E-mail:</b> " + InformationService.participants[fullName].Email + "<br>";
+                participantInfoTable.innerHTML += "<b>Company:</b> " + InformationService.participants[fullName].Company + "<br>";
+                participantInfoTable.innerHTML += "<b>Telephone:</b> " + InformationService.participants[fullName].TelephoneNumber + "<br>";
+                participantInfoTable.innerHTML += "<b>Team:</b> " + InformationService.participants[fullName].Team + "<br>";
             };
 
             // On initialization
