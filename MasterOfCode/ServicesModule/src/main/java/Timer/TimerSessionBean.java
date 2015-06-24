@@ -5,9 +5,12 @@
  */
 package Timer;
 
+import Domein.Team;
 import Service.CommunicationBean;
+import Service.UserService;
 import Sockets.Messages.Client.Reply.HintReplyMessage;
 import java.util.Collection;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -65,7 +68,7 @@ public class TimerSessionBean {
                 //communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
                 break;
             case RoundTimer:
-                //TO DO
+                communicationBean.setRoundScoreOfUnsubmittedTeams();
                 break;
         }
     }

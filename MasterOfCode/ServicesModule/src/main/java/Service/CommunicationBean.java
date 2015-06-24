@@ -12,8 +12,11 @@ import Domein.AnnotationMethod;
 import Domein.Assignment;
 import Domein.Competition;
 import Domein.Hint;
+import Domein.Role;
 import Domein.Round;
+import Domein.RoundScore;
 import Domein.Status;
+import Domein.Team;
 import Domein.UnitTestFile;
 import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
@@ -33,10 +36,12 @@ import java.io.File;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -73,10 +78,37 @@ public class CommunicationBean {
 
     @Inject
     private UserService userService;
- 
+    
+    public UserService getUserService() {
+        return this.userService;
+    }
+    
     public CompetitionDataService getCompetitionDataService() {
         return this.competitionDataService;
     }
+    
+    public void setRoundScoreOfUnsubmittedTeams() {
+        
+        userService.Register("blaat", "blaat", "blaat", Role.ADMIN, "blaat", "blaat", "blaat");
+        
+//        List<Team> teams = competitionDataService.GetTeams();
+//        Long roundId = competitionDataService.getCurrentRound().getId();
+//        List<RoundScore> roundScoresOfRound = competitionService.getRoundScoresOfRound(roundId);
+//        
+//        Set<Long> teamIdsNotToAdd = new HashSet<Long>();
+//        
+//        for (RoundScore rs : roundScoresOfRound) {
+//            teamIdsNotToAdd.add(rs.getTeam().getId());
+//        }
+//        
+//        for (Team team : teams) {
+//            Long teamId = team.getId();
+//            if (!teamIdsNotToAdd.contains(teamId)) { // if the team hasn't submitted a result
+//                competitionService.setTeamRoundScore(teamId, roundId, 0);
+//            }
+//        }
+    }
+    
     /**
      * send Message To Competitor
      *
@@ -331,13 +363,17 @@ public class CommunicationBean {
 
     @PostConstruct
     public void init() {
-        this.setCurrentCompetition(1L);
+        Long competitionId = 1L;
+        this.setCurrentCompetition(competitionId);
         
         //Round nextRound = competitionService.getNextRound(1L);
         
         //competitionDataService.setCurrentRound(nextRound);
 
-        Round nextRound = competitionService.getNextRound(1L);
+        Round nextRound = competitionService.getNextRound(competitionId);
         competitionDataService.setCurrentRound(nextRound);
+        
+        List<Team> teams = competitionService.GetTeamFromCompetition(competitionId);
+        competitionDataService.setTeams(teams);
     }
 }

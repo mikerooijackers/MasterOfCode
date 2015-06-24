@@ -11,12 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author mikerooijackers
  */
 @Entity
+@NamedQueries ({
+    @NamedQuery(name = "GetRoundScore", query = "select r FROM RoundScore r WHERE r.round.id = :roundId")   
+})
 public class RoundScore implements Serializable {
     
     @Id

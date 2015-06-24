@@ -191,11 +191,11 @@ public class RestResource {
         //bean.Send(mes);
         //Round nextRound = competitionService.getNextRound();
         //communicationBean.sendRoundMetaData();
-        communicationBean.startNextRoundOfCompetition();
+        //communicationBean.startNextRoundOfCompetition();
         //Competition currentCompetition = communicationBean.getCompetitionDataService().getCurrentCompetition();
         
         //new Sockets.Messages.Client.Request.GetSourceFilesRequestMessage(1L).doAction(communicationBean);
-        
+        communicationBean.setRoundScoreOfUnsubmittedTeams();
         return "ok";
     }
 }
