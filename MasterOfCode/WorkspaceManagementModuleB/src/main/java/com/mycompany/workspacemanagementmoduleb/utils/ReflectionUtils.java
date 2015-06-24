@@ -21,6 +21,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.testng.annotations.Test;
@@ -68,7 +70,7 @@ public class ReflectionUtils {
         try {
             URLClassLoader loader = new URLClassLoader(new java.net.URL[]{file.toURI().toURL()});
 
-            r = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forClassLoader(loader)).addClassLoader(loader));
+            r = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forClassLoader(loader)).addClassLoader(loader).setScanners(new SubTypesScanner(), new TypeAnnotationsScanner()));
             
             for (Class<? extends Annotation> an : annotations) {
                 Set<Class<?>> annotated = r.getTypesAnnotatedWith(an);
@@ -77,14 +79,17 @@ public class ReflectionUtils {
                 while (iterator.hasNext()) {
 
                     Class<?> foundClass = iterator.next();
+                    
+                    AnnotationData data = new AnnotationData();
+                    data.setName(foundClass.getName());
+                    data.setAnnotationName(an.getSimpleName());
 
-                    for (Annotation annotation : foundClass.getAnnotationsByType(an)) {
+                    Annotation[] annotationArray = foundClass.getAnnotationsByType(an);
+                    
+                    for (Annotation annotation : annotationArray) {
                         
-                        Class<Annotation> type = (Class<Annotation>) annotation.annotationType();
-                        AnnotationData data = new AnnotationData();
-                        data.setName(foundClass.getName());
+                        Class<Annotation> type = (Class<Annotation>) annotation.annotationType();                        
                         
-                        data.setAnnotationName(type.getSimpleName());
                         for (Method method : type.getDeclaredMethods()) {
                             if (type.getSimpleName().equals("Test")) {
                                 if (testMethodNames.contains(method.getName())) {
@@ -95,8 +100,9 @@ public class ReflectionUtils {
                                 data.addMethod(new AnnotationMethod(method.getName(), method.invoke(annotation, null)));
                             }
                         }
-                        annotationData.add(data);
                     }
+                    
+                    annotationData.add(data);
                 }
             }
         } catch (MalformedURLException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {

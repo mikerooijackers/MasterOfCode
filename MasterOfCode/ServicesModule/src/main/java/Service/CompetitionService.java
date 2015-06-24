@@ -120,11 +120,9 @@ public class CompetitionService {
     }
     
     public void editRound(Status status, Long roundID) {
-        em.getTransaction().begin();
         Round round = em.find(Round.class, roundID);
         round.setStatus(status);
         em.persist(round);
-        em.getTransaction().commit();
     }
     
     /**

@@ -6,6 +6,7 @@
 package JMS;
 
 import Service.CommunicationBean;
+import Sockets.Messages.Client.Reply.GetSourceFilesReplyMessage;
 import Sockets.Messages.Client.Reply.GroupTestsReplyMessage;
 import Sockets.Messages.Client.Reply.UserTestsReplyMessage;
 import java.io.Serializable;
@@ -75,11 +76,14 @@ public class ReplyBean implements MessageListener {
                     System.out.println("[[INFO]] Extract assignment to workspaces reply message received");
                     ExtractAssignmentToWorkspacesReplyMessage jmsMessage = (ExtractAssignmentToWorkspacesReplyMessage) object;
                     
+                    communicationBean.sendRoundMetaData();
                     // do nothing...
                 } else if (object instanceof GetSourceCodeFilesReplyMessage) {
                     System.out.println("[[INFO]] Get source code files reply message received");
                     GetSourceCodeFilesReplyMessage jmsMessage = (GetSourceCodeFilesReplyMessage) object;
                     
+                    Sockets.Messages.Client.Reply.GetSourceFilesReplyMessage replyMessage = new Sockets.Messages.Client.Reply.GetSourceFilesReplyMessage(jmsMessage.getListSourceCode());
+                    //communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
                     // TODO
                 } else if (object instanceof GroupTestReplyMessage) {
                     System.out.println("[[INFO]] Group test reply message received");

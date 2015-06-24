@@ -5,9 +5,12 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Domein.SourceCode;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -20,17 +23,19 @@ public class GetSourceFilesReplyMessage extends BaseMessage {
     
     public static final String messageType = MessageTypes.GetSourceFilesReplyMessage.toString();
     
-    private Map<String, String> sourceFiles;
+    private List<SourceCode> sourceFiles;
     
-    public GetSourceFilesReplyMessage(){}
+    public GetSourceFilesReplyMessage(){
+        this.sourceFiles = new ArrayList<SourceCode>();
+    }
     
-    public GetSourceFilesReplyMessage(Map<String, String> sourceFiles) {
+    public GetSourceFilesReplyMessage(List<SourceCode> sourceFiles) {
         this.sourceFiles = sourceFiles;
     }
     
     public static GetSourceFilesReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Map<String, String> jsonSourceFiles = (Map<String, String>) obj.get("SourceFiles");
+        List<SourceCode> jsonSourceFiles = (List<SourceCode>) obj.get("SourceFiles");
         return new GetSourceFilesReplyMessage(jsonSourceFiles);
     } 
 

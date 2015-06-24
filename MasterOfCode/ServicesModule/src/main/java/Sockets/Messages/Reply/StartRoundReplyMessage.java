@@ -25,12 +25,13 @@ public class StartRoundReplyMessage extends BaseMessage {
     private String assignCreatorName;
     private String assignCreatorCompany;
     private String assignCreatorWeb;
+    private String assignCreatorLogo;
     
     private String assignName;
     private String assignDescriptionCompetitors;
     private String assignDescriptionSpectators;
     
-    private int assignDifficulty;
+    private String assignDifficulty;
     private int duration;
     
     /**
@@ -47,10 +48,11 @@ public class StartRoundReplyMessage extends BaseMessage {
      * @param assignDescriptionCompetitors
      * @param assignDescriptionSpectators
      */
-    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators, int assignDifficulty, int duration) {
+    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignCreatorLogo, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators, String assignDifficulty, int duration) {
         this.assignCreatorName = assignCreatorName;
         this.assignCreatorCompany = assignCreatorCompany;
         this.assignCreatorWeb = assignCreatorWeb;
+        this.assignCreatorLogo = assignCreatorLogo;
         this.assignName = assignName;
         this.assignDescriptionCompetitors = assignDescriptionCompetitors;
         this.assignDescriptionSpectators = assignDescriptionSpectators;
@@ -152,13 +154,14 @@ public class StartRoundReplyMessage extends BaseMessage {
         String jsonAssignCreatorName = obj.get("AssignCreatorName").toString();
         String jsonAssignCreatorCompany = obj.get("AssignCreatorCompany").toString();
         String jsonAssignCreatorWeb = obj.get("AssignCreatorWeb").toString();
+        String jsonAssignCreatorLogo = obj.get("AssignCreatorLogo").toString();
         String jsonAssignName = obj.get("AssignName").toString();
         String jsonAssignDescriptionCompetitors = obj.get("AssignDescriptionCompetitors").toString();
         String jsonAssignDescriptionSpectators = obj.get("AssignDescriptionSpectators").toString();
-        int jsonAssignDifficulty = (int) obj.get("AssignDifficulty");
+        String jsonAssignDifficulty = obj.get("AssignDifficulty").toString();
         int jsonDuration = (int) obj.get("Duration");
         
-        return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators, jsonAssignDifficulty, jsonDuration);
+        return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignCreatorLogo, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators, jsonAssignDifficulty, jsonDuration);
     }
 
     @Override
@@ -184,14 +187,14 @@ public class StartRoundReplyMessage extends BaseMessage {
     /**
      * @return the assignDifficulty
      */
-    public int getAssignDifficulty() {
+    public String getAssignDifficulty() {
         return assignDifficulty;
     }
 
     /**
      * @param assignDifficulty the assignDifficulty to set
      */
-    public void setAssignDifficulty(int assignDifficulty) {
+    public void setAssignDifficulty(String assignDifficulty) {
         this.assignDifficulty = assignDifficulty;
     }
 
@@ -207,5 +210,13 @@ public class StartRoundReplyMessage extends BaseMessage {
      */
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public void setAssignCreatorLogo(String logo) {
+        this.assignCreatorLogo = logo;
+    }
+    
+    public String getAssignCreatorLogo() {
+        return assignCreatorLogo;
     }
 }

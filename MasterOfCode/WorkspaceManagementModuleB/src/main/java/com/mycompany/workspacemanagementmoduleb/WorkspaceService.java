@@ -17,9 +17,14 @@ import com.mycompany.workspacemanagementmoduleb.utils.FileUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.ReflectionUtils;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,11 +140,44 @@ public class WorkspaceService {
         return sourceCodeFiles;
     }
 
-    public List<AnnotationData> readAssignmentMetaData(Long assignmentId) {
+    public List<AnnotationData> readAssignmentMetaData(Long assignmentId, boolean writeDataToFile, boolean readDataFromFile) {
         String path = ASSIGNMENTS_PATH + File.separator + assignmentId;
+        
+        List<AnnotationData> annotationData = null;
 
-        List<AnnotationData> annotationData = ReflectionUtils.readTestAnnotationData(path, org.testng.annotations.Test.class);
-        annotationData.addAll(ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class));
+        if (writeDataToFile || (!writeDataToFile && !readDataFromFile)) {
+            annotationData = ReflectionUtils.readTestAnnotationData(path, org.testng.annotations.Test.class);
+            annotationData.addAll(ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class));
+        }
+        
+        if (writeDataToFile) {
+            try {
+                FileOutputStream fos = new FileOutputStream(path + File.separator + "assignment.tmp");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(annotationData);
+                oos.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if (readDataFromFile) {
+            try {
+                FileInputStream fis = new FileInputStream(path + File.separator + "assignment.tmp");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                annotationData = (List<AnnotationData>) ois.readObject();
+                ois.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         
         return annotationData;
     }

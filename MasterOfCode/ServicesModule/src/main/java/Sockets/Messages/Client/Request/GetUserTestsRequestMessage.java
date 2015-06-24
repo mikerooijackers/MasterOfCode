@@ -18,6 +18,7 @@ import org.json.simple.JSONValue;
  *
  * @author mikerooijackers
  */
+@Deprecated
 public class GetUserTestsRequestMessage extends BaseMessage {
 
     /**
@@ -38,12 +39,12 @@ public class GetUserTestsRequestMessage extends BaseMessage {
     
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        Map<String, String> descriptions = new HashMap<>();
-        descriptions.put("Test1", "This is the first test.");
-        descriptions.put("Test2", "This is the seconds test.");
-        descriptions.put("Test3", "This is the third test.");
-        GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
-        communicationBean.sendMessageToCompetitor("Noor", mess);
+//        Map<String, String> descriptions = new HashMap<>();
+//        descriptions.put("Test1", "This is the first test.");
+//        descriptions.put("Test2", "This is the seconds test.");
+//        descriptions.put("Test3", "This is the third test.");
+//        GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
+//        communicationBean.sendMessageToCompetitor("Noor", mess);
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package Domein;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Gebruiker
  */
-public class AnnotationData {
+public class AnnotationData implements Serializable {
     private String name;
     private String annotationName;
     private List<AnnotationMethod> methods;

@@ -5,11 +5,13 @@
  */
 package Domein;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Gebruiker
  */
-public class AnnotationMethod {
+public class AnnotationMethod implements Serializable {
     private String name;
     private Object value;
 

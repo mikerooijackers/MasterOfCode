@@ -5,6 +5,9 @@
  */
 package Competition;
 
+import Domein.Competition;
+import Domein.Hint;
+import Domein.Round;
 import Domein.Team;
 import java.util.List;
 import javax.ejb.Singleton;
@@ -19,8 +22,17 @@ public class CompetitionDataService {
     private RoundMetaData roundMetaData;
     private Competition currentCompetition;
     private Round currentRound;
+    private List<Hint> hintsOfThisRound;
     
     private long BackupRemainingRoundTime;
+
+    public List<Hint> getHintsOfThisRound() {
+        return hintsOfThisRound;
+    }
+
+    public void setHintsOfThisRound(List<Hint> hintsOfThisRound) {
+        this.hintsOfThisRound = hintsOfThisRound;
+    }
 
     public Round getCurrentRound() {
         return currentRound;

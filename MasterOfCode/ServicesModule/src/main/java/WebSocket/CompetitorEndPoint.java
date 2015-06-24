@@ -70,7 +70,7 @@ public class CompetitorEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewSessionConnectionMessage) {
             this.addSession(session, (NewSessionConnectionMessage) message);
-            this.sendMessage("Noor", new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", 4, 4444));
+            this.sendMessage("Noor", new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", "Herp", "Easy", 4444));
         } else {
             message.doAction(communicationBean);
         }
