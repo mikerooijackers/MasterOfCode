@@ -47,8 +47,7 @@ public class StopRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        StopRoundReplyMessage mes = new StopRoundReplyMessage();
-        communicationBean.sendMessageToEveryone(mes);
+        communicationBean.startNextRoundOfCompetition();
         
         System.out.println("In the doAction of the StopRoundRequestMessage");
     }

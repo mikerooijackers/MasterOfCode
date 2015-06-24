@@ -1,6 +1,6 @@
 angular.module('adminClient')
         .controller('manageParticipantsController', function ($scope, $rootScope, $compile, websocketService, InformationService) {
-            console.log("Hello world");
+
             // Variables
 
             var GetParticipantsRequestMessage = {

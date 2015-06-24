@@ -60,12 +60,12 @@ public class TimerSessionBean {
         switch (timerType) {
             case CompetitionCountDownTimer:
                 communicationBean.startNextRoundOfCompetition();
-                //communicationBean.sendMessageToWorkspaceManegementBean(new ExtractAssignmentToWorkspacesRequestMessage());
+//                communicationBean.sendMessageToWorkspaceManegementBean(new ExtractAssignmentToWorkspacesRequestMessage());
                 break;
             case HintTimer:
                 String hint = timerData.getHint();
                 System.out.println("[[INFO]] A hint timer stopped with hint: " + hint);
-                //communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
+                communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
                 break;
             case RoundTimer:
                 communicationBean.setRoundScoreOfUnsubmittedTeams();
