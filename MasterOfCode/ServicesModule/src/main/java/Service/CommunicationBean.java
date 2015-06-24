@@ -260,7 +260,7 @@ public class CommunicationBean {
                     } else if (methodName.equals("spectatorDescription")) {
                         message.setAssignDescriptionSpectators((String) methodValue);
                     } else if (methodName.equals("difficulty")) {
-                        message.setAssignDifficulty((String) methodValue);
+                        message.setAssignDifficulty((int) methodValue);
                     }
                 }
             }
