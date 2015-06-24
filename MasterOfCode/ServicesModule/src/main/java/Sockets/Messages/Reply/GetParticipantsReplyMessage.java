@@ -5,6 +5,7 @@ import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
 import java.util.List;
+import java.util.Objects;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -63,13 +64,22 @@ public class GetParticipantsReplyMessage extends BaseMessage {
         json += "\"Users\" : {";
         
         for (MOCUser user : users) {
+            String team;
+            
+            if (user.getTeam() == null) {
+                team = "(nog geen team)";
+            }
+            else {
+                team = user.getTeam().getTeamName();
+            }
+            
             json += "\"" + user.getFullName() + "\" :";
             json += "{";
             json += "\"FullName\": \"" + user.getFullName() + "\", ";
             json += "\"Email\": \"" + user.getEmail() + "\", ";
             json += "\"Company\": \"" + user.getCompany() + "\", ";
             json += "\"TelephoneNumber\": \"" + user.getTelephoneNumber()+ "\", ";
-            json += "\"Team\": \"" + user.getTeam().getId() + "\"";
+            json += "\"Team\": \"" + team + "\"";
             json += "}";
             
             if (index != userAmount - 1) {

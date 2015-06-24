@@ -54,8 +54,11 @@ angular.module('adminClient', ['ngRoute', 'ngWebsocket'])
 
             // On initialization
 
-            websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
+//            websocketService.start("ws://localhost:8080/ServicesModule/adminSocket");
+            websocketService.start("ws://145.144.248.235:35785/ServicesModule/adminSocket");
             websocketService.sendMessage(NewSessionConnectionMessage);
+//            disableAllPlayButtons();
+//            $scope.startCompBtn.disabled = false;
 
             // On receiving messages
 
