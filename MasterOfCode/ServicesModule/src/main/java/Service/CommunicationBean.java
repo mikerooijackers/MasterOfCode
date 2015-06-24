@@ -13,6 +13,7 @@ import Domein.Assignment;
 import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
+import Domein.Role;
 import Domein.Round;
 import Domein.Status;
 import Domein.UnitTestFile;
@@ -35,7 +36,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -75,7 +75,33 @@ public class CommunicationBean {
     public CompetitionDataService getCompetitionDataService() {
         return this.competitionDataService;
     }
-
+    
+    public UserService getUserService() {
+        return this.userService;
+    }
+    
+    public void setRoundScoreOfUnsubmittedTeams() {
+        
+        userService.Register("blaat", "blaat", "blaat", Role.ADMIN, "blaat", "blaat", "blaat");
+        
+//        List<Team> teams = competitionDataService.GetTeams();
+//        Long roundId = competitionDataService.getCurrentRound().getId();
+//        List<RoundScore> roundScoresOfRound = competitionService.getRoundScoresOfRound(roundId);
+//        
+//        Set<Long> teamIdsNotToAdd = new HashSet<Long>();
+//        
+//        for (RoundScore rs : roundScoresOfRound) {
+//            teamIdsNotToAdd.add(rs.getTeam().getId());
+//        }
+//        
+//        for (Team team : teams) {
+//            Long teamId = team.getId();
+//            if (!teamIdsNotToAdd.contains(teamId)) { // if the team hasn't submitted a result
+//                competitionService.setTeamRoundScore(teamId, roundId, 0);
+//            }
+//        }
+//    }
+    }
     /**
      * send Message To Competitor
      *
@@ -372,15 +398,5 @@ public class CommunicationBean {
 
         StopCompetitionReplyMessage mes = new StopCompetitionReplyMessage();
         sendMessageToEveryone(mes);
-    }
-
-    @PostConstruct
-    public void init() {
-        this.setCurrentCompetition(1L);
-
-        //Round nextRound = competitionService.getNextRound(1L);
-        //competitionDataService.setCurrentRound(nextRound);
-        Round nextRound = competitionService.getNextRound(1L);
-        competitionDataService.setCurrentRound(nextRound);
     }
 }

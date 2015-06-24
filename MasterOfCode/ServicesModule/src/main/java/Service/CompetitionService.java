@@ -10,6 +10,7 @@ import Domein.Team;
 import Domein.Status;
 import Domein.Assignment;
 import Domein.Competition;
+import Domein.RoundScore;
 import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -192,5 +193,18 @@ public class CompetitionService {
             }
         }
         return listCompetitionData;
+    }
+    
+    public List<RoundScore> getRoundScoresOfRound(Long roundId) {
+        List<RoundScore> roundScores = em.createNamedQuery("GetRoundScore").setParameter("roundId", roundId).getResultList();
+        return roundScores;
+    }
+    
+    public void setTeamRoundScore(Long teamId, Long roundId, int score) {
+        RoundScore rs = new RoundScore();
+        rs.setRound(em.find(Round.class, roundId));
+        rs.setTeam(em.find(Team.class, teamId));
+        rs.setScore(score);
+        em.persist(rs);
     }
 }

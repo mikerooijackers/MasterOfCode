@@ -9,6 +9,8 @@ import Competition.CompetitionDataService;
 import Domein.Competition;
 import Domein.MOCUser;
 import Domein.Role;
+import Domein.Round;
+import Domein.RoundScore;
 import Domein.Team;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +29,6 @@ public class UserService {
 
     @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
-    
-    @Inject
-    private CompetitionDataService competitionDataService;
 
     /**
      * login of a user
@@ -191,14 +190,14 @@ public class UserService {
      * @param members
      * @return
      */
-    public Team createTeam(String teamName, String initiator, List<String> members) {
+    public Team createTeam(String teamName, String initiator, List<String> members, Long competitionId) {
         Team team = new Team(teamName);
         List<MOCUser> MOCMembers = new ArrayList<>();
         
         MOCUser mocInitiator = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", initiator).getSingleResult();
         
         team.setInitiator(mocInitiator);
-        team.setCompetition(em.find(Competition.class, competitionDataService.getCurrentCompetition().getCompetitionId()));
+        team.setCompetition(em.find(Competition.class, competitionId));
         
         em.persist(team);
         
