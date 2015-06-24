@@ -125,6 +125,10 @@ public class CompetitionService {
         em.persist(round);
     }
     
+    public int getNumberOfRounds(long competitionID){
+       return (int) em.createNamedQuery("GetNumberOfRounds").setParameter("competitionID", competitionID).getSingleResult();
+    }
+    
     /**
      * remove a round
      * @param roundID

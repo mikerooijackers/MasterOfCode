@@ -13,7 +13,6 @@ import Domein.Assignment;
 import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
-import Domein.Role;
 import Domein.Round;
 import Domein.Status;
 import Domein.UnitTestFile;
@@ -22,24 +21,18 @@ import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
 import Sockets.Messages.Reply.GetParticipantsReplyMessage;
 import Sockets.Messages.Reply.StartRoundReplyMessage;
+import Sockets.Messages.Reply.StopCompetitionReplyMessage;
 import Timer.TimerData;
 import Timer.TimerSessionBean;
 import Timer.TimerType;
 import WebSocket.AdminEndPoint;
 import WebSocket.CompetitorEndPoint;
 import WebSocket.SpectatorEndpoint;
-import com.mycompany.annotations.AssignCreator;
-import com.mycompany.annotations.AssignInformation;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
-import static com.mycompany.workspacemanagementmoduleb.WorkspaceService.ASSIGNMENTS_PATH;
-import java.io.File;
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -339,6 +332,17 @@ public class CommunicationBean {
     public void sendParticipantListToAdmins(){
         GetParticipantsReplyMessage message = new GetParticipantsReplyMessage(userService.GetAllUsers());
         adminEndpoint.sendToAll(message);
+    }
+    
+    public void sendStartCompetitionReplyMessage() {
+        Competition comp = competitionDataService.getCurrentCompetition();
+        String description = comp.getDescription();
+        int numberOfRounds = competitionService.getNumberOfRounds(comp.getId());
+        String name = comp.getName();
+        Calendar startTime = comp.getStartTime();
+        
+        StopCompetitionReplyMessage mes = new StopCompetitionReplyMessage();
+        sendMessageToEveryone(mes);
     }
 
     @PostConstruct
