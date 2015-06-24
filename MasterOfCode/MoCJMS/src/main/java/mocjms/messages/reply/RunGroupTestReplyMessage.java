@@ -17,10 +17,17 @@ public class RunGroupTestReplyMessage extends CompetitionBasedOperationDrivenRep
     
     private List<String> commandOutput;
     
+    /**
+     *
+     */
     public RunGroupTestReplyMessage() {
         this.commandOutput = new ArrayList<>();
     }
     
+    /**
+     *
+     * @param output
+     */
     public RunGroupTestReplyMessage(List<String> output) {
         this.commandOutput = output;
     }

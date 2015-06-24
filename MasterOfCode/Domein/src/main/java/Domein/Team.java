@@ -3,7 +3,6 @@ package Domein;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
 @Entity
 @NamedQueries ({
     @NamedQuery(name = "AllTeams", query = "select t FROM Team t"),
-    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")    
+    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")
 })
 public class Team implements JSONAware,Serializable {
     @Transient
@@ -32,6 +32,9 @@ public class Team implements JSONAware,Serializable {
     private String teamName;
     private String serverName;
     private boolean approved;
+    
+    @OneToOne
+    private MOCUser initiator;
 
     @ManyToOne
     private Competition competition;
@@ -39,11 +42,26 @@ public class Team implements JSONAware,Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    /**
+     *
+     * @param workspacePath
+     * @param teamName
+     * @param serverName
+     * @param approved
+     */
     public Team(String workspacePath, String teamName, String serverName, boolean approved) {
         this.workspacePath = workspacePath;
         this.teamName = teamName;
         this.serverName = serverName;
         this.approved = approved;
+    }
+    
+    /**
+     *
+     * @param teamName
+     */
+    public Team(String teamName) {
+        this.teamName = teamName;
     }
     /**
      * get Team ID
@@ -67,73 +85,6 @@ public class Team implements JSONAware,Serializable {
      * Constructor
      */
     public Team() {
-        members = new Collection<MOCUser>() {
-
-            @Override
-            public int size() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean isEmpty() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public Iterator<MOCUser> iterator() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public Object[] toArray() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean add(MOCUser e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends MOCUser> c) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void clear() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
     }
 
     /**
@@ -271,5 +222,19 @@ public class Team implements JSONAware,Serializable {
         obj.put("TeamName", this.teamName);
         obj.put("Approved", this.isApproved());
         return obj.toJSONString();
+    }
+
+    /**
+     * @return the initiator
+     */
+    public MOCUser getInitiator() {
+        return initiator;
+    }
+
+    /**
+     * @param initiator the initiator to set
+     */
+    public void setInitiator(MOCUser initiator) {
+        this.initiator = initiator;
     }
 }

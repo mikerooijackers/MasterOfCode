@@ -18,26 +18,54 @@ public class GroupTestRequestMessage extends CompetitionBasedOperationDrivenRequ
 
     private String groupName;
 
+    /**
+     *
+     */
     public GroupTestRequestMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public GroupTestRequestMessage(Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
     }
 
+    /**
+     *
+     * @param groupName
+     */
     public GroupTestRequestMessage(String groupName) {
         this.groupName = groupName;
     }
 
+    /**
+     *
+     * @param groupName
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public GroupTestRequestMessage(String groupName, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.groupName = groupName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGroupName() {
         return groupName;
     }
 
+    /**
+     *
+     * @param groupName
+     */
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }

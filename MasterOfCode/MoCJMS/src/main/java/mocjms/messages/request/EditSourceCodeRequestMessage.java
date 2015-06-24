@@ -18,36 +18,74 @@ public class EditSourceCodeRequestMessage extends CompetitionBasedOperationDrive
     private String classPath;
     private String newCode;
 
+    /**
+     *
+     */
     public EditSourceCodeRequestMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public EditSourceCodeRequestMessage(Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
     }
 
+    /**
+     *
+     * @param classPath
+     * @param newCode
+     */
     public EditSourceCodeRequestMessage(String classPath, String newCode) {
         this.classPath = classPath;
         this.newCode = newCode;
     }
 
+    /**
+     *
+     * @param classPath
+     * @param newCode
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public EditSourceCodeRequestMessage(String classPath, String newCode, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.classPath = classPath;
         this.newCode = newCode;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getClassPath() {
         return classPath;
     }
 
+    /**
+     *
+     * @param classPath
+     */
     public void setClassPath(String classPath) {
         this.classPath = classPath;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNewCode() {
         return newCode;
     }
 
+    /**
+     *
+     * @param newCode
+     */
     public void setNewCode(String newCode) {
         this.newCode = newCode;
     }

@@ -34,18 +34,34 @@ public class CompetitionDataService {
         this.hintsOfThisRound = hintsOfThisRound;
     }
 
+    /**
+     *
+     * @return
+     */
     public Round getCurrentRound() {
         return currentRound;
     }
 
+    /**
+     *
+     * @param currentRound
+     */
     public void setCurrentRound(Round currentRound) {
         this.currentRound = currentRound;
     }
 
+    /**
+     *
+     * @return
+     */
     public Competition getCurrentCompetition() {
         return currentCompetition;
     }
 
+    /**
+     *
+     * @param currentCompetition
+     */
     public void setCurrentCompetition(Competition currentCompetition) {
         this.currentCompetition = currentCompetition;
     }
@@ -100,6 +116,10 @@ public class CompetitionDataService {
         this.roundMetaData = roundMetaData;
     }
 
+    /**
+     *
+     * @return
+     */
     public RoundMetaData getRoundMetaData() {
         return roundMetaData;
     }

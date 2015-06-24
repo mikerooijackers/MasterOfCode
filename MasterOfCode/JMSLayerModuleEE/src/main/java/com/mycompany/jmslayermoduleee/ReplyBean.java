@@ -16,7 +16,6 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -40,6 +39,9 @@ public class ReplyBean {
     
     private MessageProducer producer;
     
+    /**
+     *
+     */
     @PostConstruct
     public void openSession() {
         try {
@@ -51,6 +53,9 @@ public class ReplyBean {
         }
     }
     
+    /**
+     *
+     */
     @PreDestroy
     public void closeSession() {
         try {
@@ -62,6 +67,11 @@ public class ReplyBean {
         }
     }
     
+    /**
+     *
+     * @param message
+     * @param requestMessageID
+     */
     public void send(Serializable message, String requestMessageID/*, Long teamId*/) {
         try (JMSContext context = factory.createContext()) {
             ObjectMessage om = session.createObjectMessage(message);

@@ -20,6 +20,12 @@ public final class CommandUtils {
         
     }
     
+    /**
+     *
+     * @param directory
+     * @param command
+     * @return
+     */
     public static String runCommand(String directory, String command) {
         Process p;
         String output = "";
@@ -42,6 +48,12 @@ public final class CommandUtils {
         return output;
     }
     
+    /**
+     *
+     * @param directory
+     * @param command
+     * @return
+     */
     public static String runCommand(File directory, String command) {
         Process p;
         String output = "";

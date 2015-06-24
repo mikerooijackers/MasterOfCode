@@ -17,16 +17,33 @@ import org.json.simple.JSONValue;
  */
 public class StartCompetitionRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StartCompetitionReplyMessage.toString();
     
     private Long competitionId;
     
-    public StartCompetitionRequestMessage(){};
+    /**
+     *
+     */
+    public StartCompetitionRequestMessage(){
+        
+    }
     
+    /**
+     *
+     * @param competitionId
+     */
     public StartCompetitionRequestMessage(Long competitionId) {
         this.competitionId = competitionId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StartCompetitionRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");

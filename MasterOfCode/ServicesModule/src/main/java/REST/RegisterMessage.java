@@ -22,7 +22,8 @@ class RegisterMessage {
     private Role privilege;
     private String activationCode;
     
-    public RegisterMessage(){}
+    public RegisterMessage(){
+    }
     
     public RegisterMessage(String email, String fullname, String password, Role privilege, String company, String telephone) {
         this.email = email;

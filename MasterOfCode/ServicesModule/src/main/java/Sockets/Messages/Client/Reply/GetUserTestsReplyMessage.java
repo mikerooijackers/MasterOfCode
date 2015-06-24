@@ -21,6 +21,9 @@ import org.json.simple.JSONValue;
  */
 public class GetUserTestsReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetUserTestsReplyMessage.toString();
     
     private List<UnitTestFile> userTests;
@@ -33,6 +36,11 @@ public class GetUserTestsReplyMessage extends BaseMessage {
         this.userTests = userTests;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetUserTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<UnitTestFile> jsonUserTests = (List<UnitTestFile>) obj.get("UserTests");

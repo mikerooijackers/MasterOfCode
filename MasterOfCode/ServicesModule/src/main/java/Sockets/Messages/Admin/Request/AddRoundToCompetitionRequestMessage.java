@@ -16,18 +16,34 @@ import org.json.simple.JSONValue;
  * @author mikerooijackers
  */
 public class AddRoundToCompetitionRequestMessage extends BaseMessage {
-    
+
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.AddRoundToCompetitionRequestMessage.toString();
-    
+
     private Long competitionId;
     private String assignmentPath;
     private Long roundTimeInSeconds;
     private int difficulty;
     private String spectatorDescription;
     private String competitorDescription;
+
+    /**
+     *
+     */
+    public AddRoundToCompetitionRequestMessage() {
+    }
     
-    public AddRoundToCompetitionRequestMessage(){};
-    
+    /**
+     *
+     * @param competitionId
+     * @param assignmentPath
+     * @param roundTimeInSeconds
+     * @param difficulty
+     * @param spectatorDescription
+     * @param competitorDescription
+     */
     public AddRoundToCompetitionRequestMessage(Long competitionId, String assignmentPath, Long roundTimeInSeconds, int difficulty, String spectatorDescription, String competitorDescription) {
         this.competitionId = competitionId;
         this.assignmentPath = assignmentPath;
@@ -36,7 +52,12 @@ public class AddRoundToCompetitionRequestMessage extends BaseMessage {
         this.spectatorDescription = spectatorDescription;
         this.competitorDescription = competitorDescription;
     }
-    
+
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static AddRoundToCompetitionRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");
@@ -65,5 +86,5 @@ public class AddRoundToCompetitionRequestMessage extends BaseMessage {
         obj.put("CompetitorDescription", this.competitorDescription);
         return obj.toJSONString();
     }
-    
+
 }

@@ -13,14 +13,27 @@ import java.io.Serializable;
  */
 public abstract class CompetitionBasedOperationDrivenRequestMessage extends CompetitionBaseMessage implements Serializable, OperationDrivenMessage {
 
+    /**
+     *
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public CompetitionBasedOperationDrivenRequestMessage(Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
     }
 
+    /**
+     *
+     */
     public CompetitionBasedOperationDrivenRequestMessage() {
         super();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public abstract CompetitionBasedOperationDrivenReplyMessage generateReplyMessage();
 }

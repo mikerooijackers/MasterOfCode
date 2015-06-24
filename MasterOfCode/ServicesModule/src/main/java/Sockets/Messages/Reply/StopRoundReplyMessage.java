@@ -25,7 +25,8 @@ public class StopRoundReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public StopRoundReplyMessage(){}
+    public StopRoundReplyMessage(){
+    }
     
     /**
      *

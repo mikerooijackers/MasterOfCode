@@ -18,6 +18,9 @@ import org.json.simple.JSONValue;
  */
 public class EditCompetitionRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.EditCompetitionRequestMessage.toString();
     
     private Long competitionId;
@@ -25,8 +28,19 @@ public class EditCompetitionRequestMessage extends BaseMessage {
     private String description;
     private Calendar startTime = Calendar.getInstance();
     
-    public EditCompetitionRequestMessage(){}
+    /**
+     *
+     */
+    public EditCompetitionRequestMessage(){
+    }
     
+    /**
+     *
+     * @param competitionId
+     * @param name
+     * @param description
+     * @param startTime
+     */
     public EditCompetitionRequestMessage(Long competitionId, String name, String description, Long startTime) {
         this.competitionId = competitionId;
         this.name = name;
@@ -34,6 +48,11 @@ public class EditCompetitionRequestMessage extends BaseMessage {
         this.startTime.setTimeInMillis(startTime);
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static EditCompetitionRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");

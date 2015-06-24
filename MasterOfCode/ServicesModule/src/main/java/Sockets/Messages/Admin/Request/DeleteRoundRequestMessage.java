@@ -17,10 +17,22 @@ import org.json.simple.JSONValue;
  */
 public class DeleteRoundRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.DeleteRoundRequestMessage.toString();
     
-    public DeleteRoundRequestMessage(){}
+    /**
+     *
+     */
+    public DeleteRoundRequestMessage(){
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static DeleteRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         

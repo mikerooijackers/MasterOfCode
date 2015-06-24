@@ -32,6 +32,11 @@ public class GetUserTestsRequestMessage extends BaseMessage {
      public GetUserTestsRequestMessage() {
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetUserTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new GetUserTestsRequestMessage();

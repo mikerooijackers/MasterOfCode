@@ -1,4 +1,4 @@
-angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
+angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
 
         .config(function ($routeProvider) {
             $routeProvider
@@ -49,13 +49,20 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
         })
 
         .controller('mainController', function ($scope, SocketService, $rootScope, InformationService, $interval, $location) {
+            if (localStorage.getItem('userInformation') === null) {
+                window.location.href = "http://localhost:8383/CompetitorClient/LoginPage.html";
+            }
             $scope.currentScore = 0;
             $scope.difficulty = 1;
             InformationService.user = JSON.parse(localStorage.getItem('userInformation'));
             console.log(InformationService.user);
-            SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
-            var NewSessionConnectionMessage = {MessageType: "NewSessionConnectionMessage", Username: "Noor"};
-            SocketService.sendMessage(NewSessionConnectionMessage);
+            if (InformationService.user.team) {
+                SocketService.start("ws://localhost:35785/ServicesModule/contestantSocket");
+                var NewSessionConnectionMessage = {MessageType: "NewUserSessionConnectionMessage", TeamId: InformationService.user.team.id};
+                SocketService.sendMessage(NewSessionConnectionMessage);
+            } else {
+                $location.path('/account');
+            }
 
             $scope.hoursRemaining = 0;
             $scope.minutesRemaining = 0;
@@ -83,6 +90,8 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
                 InformationService.assignName = data.AssignName;
                 InformationService.assignDescriptionCompetitors = data.AssignDescriptionCompetitors;
                 InformationService.assignDescriptionSpectators = data.AssignDescriptionSpectators;
+                
+                InformationService.roundBusy = true;
 
                 $scope.difficulty = data.AssignDifficulty;
 
@@ -174,5 +183,10 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket'])
 
             $scope.showAccountPage = function () {
                 $location.path('/account');
+            }
+
+            $scope.logout = function () {
+                localStorage.removeItem("userInformation");
+                window.location.href = "LoginPage.html";
             }
         });

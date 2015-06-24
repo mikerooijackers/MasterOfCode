@@ -14,35 +14,68 @@ public class CompetitionBaseMessage {
     private Long roundId;
     private Long competitionId;
 
+    /**
+     *
+     */
     public CompetitionBaseMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public CompetitionBaseMessage(Long teamId, Long roundId, Long competitionId) {
         this.teamId = teamId;
         this.roundId = roundId;
         this.competitionId = competitionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getTeamId() {
         return teamId;
     }
 
+    /**
+     *
+     * @param teamId
+     */
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getRoundId() {
         return roundId;
     }
 
+    /**
+     *
+     * @param roundId
+     */
     public void setRoundId(Long roundId) {
         this.roundId = roundId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCompetitionId() {
         return competitionId;
     }
 
+    /**
+     *
+     * @param competitionId
+     */
     public void setCompetitionId(Long competitionId) {
         this.competitionId = competitionId;
     }

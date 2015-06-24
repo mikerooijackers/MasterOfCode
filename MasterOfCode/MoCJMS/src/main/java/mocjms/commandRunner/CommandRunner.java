@@ -22,6 +22,12 @@ public final class CommandRunner {
         
     }
     
+    /**
+     *
+     * @param command
+     * @param directory
+     * @return
+     */
     public static String runCommand(String command, String directory) {
         String output = "";
         Process p;

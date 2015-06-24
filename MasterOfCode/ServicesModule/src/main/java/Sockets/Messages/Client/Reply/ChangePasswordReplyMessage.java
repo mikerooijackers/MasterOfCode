@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sockets.Messages.Client.Request;
+package Sockets.Messages.Client.Reply;
 
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
@@ -13,19 +13,28 @@ import org.json.simple.JSONValue;
 
 /**
  *
- * @author mikerooijackers
+ * @author JordiK
  */
-public class CreateTeamClientRequestMessage extends BaseMessage {
-
+public class ChangePasswordReplyMessage extends BaseMessage {
+    
     /**
      *
      */
-    public static final String messageType = MessageTypes.CreateTeamClientRequestMessage.toString();
+    public static final String MessageType = MessageTypes.ChangePasswordReplyMessage.toString();
+    
+    private String output;
     
     /**
-     * Constructor
+     *
      */
-    public CreateTeamClientRequestMessage() {
+    public ChangePasswordReplyMessage(){}
+    
+    /**
+     *
+     * @param output
+     */
+    public ChangePasswordReplyMessage(String output) {
+        this.output = output;
     }
     
     /**
@@ -33,11 +42,12 @@ public class CreateTeamClientRequestMessage extends BaseMessage {
      * @param s
      * @return
      */
-    public static CreateTeamClientRequestMessage decodeJSON(String s) {
+    public static ChangePasswordReplyMessage DecodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        return new CreateTeamClientRequestMessage();
+        String jsonOutput = obj.get("Output").toString();
+        return new ChangePasswordReplyMessage(jsonOutput);
     }
-    
+
     @Override
     public void doAction(CommunicationBean communicationBean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -46,8 +56,9 @@ public class CreateTeamClientRequestMessage extends BaseMessage {
     @Override
     public String toJSONString() {
         JSONObject obj = new JSONObject();
-        obj.put("MessageType", this.messageType);
-        return obj.toString();
+        obj.put("MessageType", this.MessageType);
+        obj.put("Output", this.output);
+        return obj.toJSONString();
     }
     
 }

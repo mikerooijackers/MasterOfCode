@@ -8,7 +8,6 @@ package Sockets.Messages.Client.Reply;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
-import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -28,11 +27,12 @@ public class UserTestsReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public UserTestsReplyMessage() {}
+    public UserTestsReplyMessage() {
+    }
     
     /**
      *
-     * @param results
+     * @param result
      */
     public UserTestsReplyMessage(String result) {
         this.result = result;

@@ -1,4 +1,6 @@
 angular.module('competitorClientApp').service('InformationService', function() {
+    this.roundBusy = false;
+    
     this.hints = [];
     
     this.assignCreatorName = "";

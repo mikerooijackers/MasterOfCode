@@ -28,6 +28,11 @@ public class CompetitionNotStartetReplyMessage extends BaseMessage {
     public CompetitionNotStartetReplyMessage() {
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CompetitionNotStartetReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new CompetitionNotStartetReplyMessage();

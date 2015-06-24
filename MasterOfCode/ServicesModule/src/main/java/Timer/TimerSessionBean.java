@@ -14,7 +14,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
-import mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage;
 
 /**
  *
@@ -86,6 +85,10 @@ public class TimerSessionBean {
         return retValue;
     }
     
+    /**
+     *
+     * @param timerData
+     */
     public void pauseOrFreezeTimer(TimerData timerData) {
         Timer timer = this.getTimer(timerData);
         this.leftDurationOfTimer = timer.getTimeRemaining();
@@ -93,6 +96,9 @@ public class TimerSessionBean {
         timer.cancel();
     }
     
+    /**
+     *
+     */
     public void resumeTimer() {
         if (this.leftDurationOfTimer > -1L && this.pausedOrFreezedTimer != null) {
             this.CreateTimer(this.leftDurationOfTimer, this.pausedOrFreezedTimer);
@@ -101,12 +107,21 @@ public class TimerSessionBean {
         }
     }
     
+    /**
+     *
+     * @param newDuration
+     * @param timerData
+     */
     public void modifyTimerDuration(long newDuration, TimerData timerData) {
         Timer timer = this.getTimer(timerData);
         timer.cancel();
         this.CreateTimer(newDuration, timerData);
     }
     
+    /**
+     *
+     * @param timerData
+     */
     public void stopTimer(TimerData timerData) {
         Timer timer = this.getTimer(timerData);
         timer.cancel();

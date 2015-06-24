@@ -266,12 +266,18 @@
 #myInformationTitle {
     font-size: 14pt;
     font-weight: bold;
+    text-align: center;
 }
 
 #accountInformationContainer {
     border: 1px solid black;
     text-align: left;
     padding: 5px;
+}
+
+#errorField {
+    color: red;
+    font-weight: bold;
 }
 
 .testOutputTable {
@@ -402,4 +408,8 @@
 .testTitle {
     font-size: 18px;
     font-weight: bold;
+}
+
+.teamMemberLabel {
+    margin: 6px 0 0 12px;
 }

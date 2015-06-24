@@ -21,6 +21,9 @@ import org.json.simple.JSONValue;
  */
 public class GetSourceFilesReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetSourceFilesReplyMessage.toString();
     
     private List<SourceCode> sourceFiles;
@@ -33,6 +36,11 @@ public class GetSourceFilesReplyMessage extends BaseMessage {
         this.sourceFiles = sourceFiles;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetSourceFilesReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         List<SourceCode> jsonSourceFiles = (List<SourceCode>) obj.get("SourceFiles");
