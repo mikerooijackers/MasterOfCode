@@ -20,8 +20,10 @@ import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
 import Sockets.Messages.Reply.GetParticipantsReplyMessage;
+import Sockets.Messages.Reply.PauzeRoundReplyMessage;
 import Sockets.Messages.Reply.StartRoundReplyMessage;
 import Sockets.Messages.Reply.StopCompetitionReplyMessage;
+import Sockets.Messages.Reply.StopRoundReplyMessage;
 import Timer.TimerData;
 import Timer.TimerSessionBean;
 import Timer.TimerType;
@@ -69,14 +71,15 @@ public class CommunicationBean {
 
     @Inject
     private UserService userService;
- 
+
     public CompetitionDataService getCompetitionDataService() {
         return this.competitionDataService;
     }
+
     /**
      * send Message To Competitor
      *
-     * @param username
+     * @param teamId
      * @param message
      */
     public void sendMessageToCompetitor(Long teamId, BaseMessage message) {
@@ -197,11 +200,14 @@ public class CommunicationBean {
         if (currentRound != null) {
             competitionService.editRound(Status.STOP, currentRound.getId());
         }
-        
+        StopRoundReplyMessage stopRoundReplyMessage = new StopRoundReplyMessage();
+        sendMessageToEveryone(stopRoundReplyMessage);
+
         Round nextRound = competitionService.getNextRound(competitionId);
-        
+
         if (nextRound == null) {
-            // TODOD: end competition
+            StopCompetitionReplyMessage stopCompetitionReplyMessage = new StopCompetitionReplyMessage();
+            sendMessageToEveryone(stopCompetitionReplyMessage);
         } else {
             competitionDataService.setCurrentRound(nextRound);
             competitionService.editRound(Status.PLAYING, nextRound.getId());
@@ -212,21 +218,50 @@ public class CommunicationBean {
     /**
      *
      */
+    public void PauseTheRound() {
+        Round currentRound = competitionDataService.getCurrentRound();
+        competitionService.editRound(Status.PAUSE, currentRound.getId());
+        TimerData timerData = new TimerData(TimerType.RoundTimer);
+        pauseOrFreezeTimer(timerData);
+        PauzeRoundReplyMessage mes = new PauzeRoundReplyMessage();
+        sendMessageToEveryone(mes);
+    }
+
+    /**
+     *
+     */
+    public void FreezeTheRound() {
+        Round currentRound = competitionDataService.getCurrentRound();
+        competitionService.editRound(Status.FREEZE, currentRound.getId());
+    }
+
+    /**
+     *
+     */
+    public void ResumeTheRound() {
+        Round currentRound = competitionDataService.getCurrentRound();
+        competitionService.editRound(Status.PLAYING, currentRound.getId());
+        this.resumeTimer();
+    }
+
+    /**
+     *
+     */
     public void sendRoundMetaData() {
         Round currentRound = competitionDataService.getCurrentRound();
-        
+
         Assignment assignment = currentRound.getAssignment();
-               
+
         Long assignmentId = assignment.getId();
         List<AnnotationData> annotationData = WorkspaceService.getInstance().readAssignmentMetaData(assignmentId, false, true);
-        
+
         StartRoundReplyMessage message = new StartRoundReplyMessage();
         List<Hint> hints = new ArrayList<Hint>();
         List<UnitTestFile> unitTestFiles = new ArrayList<UnitTestFile>();
-        
+
         for (AnnotationData data : annotationData) {
             String annotationName = data.getAnnotationName();
-            
+
             if (annotationName.equals("AssignCreator")) {
                 List<AnnotationMethod> methods = data.getMethods();
                 for (AnnotationMethod method : methods) {
@@ -242,9 +277,7 @@ public class CommunicationBean {
                         message.setAssignCreatorLogo((String) methodValue);
                     }
                 }
-            }
-            
-            else if (annotationName.equals("AssignInformation")) {
+            } else if (annotationName.equals("AssignInformation")) {
                 List<AnnotationMethod> methods = data.getMethods();
                 for (AnnotationMethod method : methods) {
                     String methodName = method.getName();
@@ -259,15 +292,13 @@ public class CommunicationBean {
                         message.setAssignDifficulty((int) methodValue);
                     }
                 }
-            }
-            
-            else if (annotationName.equals("Hints")) {
+            } else if (annotationName.equals("Hints")) {
                 List<AnnotationMethod> methods = data.getMethods();
                 for (AnnotationMethod method : methods) {
                     com.mycompany.annotations.Hint[] methodValue = (com.mycompany.annotations.Hint[]) method.getValue();
 
                     for (com.mycompany.annotations.Hint aHint : methodValue) {
-                        
+
                         Hint hint = new Hint();
                         hint.setName("Hint");
 
@@ -277,16 +308,14 @@ public class CommunicationBean {
                         hints.add(hint);
                     }
                 }
-            }
-            
-            else if (annotationName.equals("Test")) {
+            } else if (annotationName.equals("Test")) {
                 List<AnnotationMethod> methods = data.getMethods();
                 boolean isUserTest = false;
                 UnitTestFile utf = new UnitTestFile();
                 for (AnnotationMethod method : methods) {
                     String methodName = method.getName();
                     Object methodValue = method.getValue();
-                    
+
                     if (methodName.equals("testName")) {
                         utf.setName((String) methodValue);
                     } else if (methodName.equals("description")) {
@@ -301,46 +330,46 @@ public class CommunicationBean {
                         }
                     }
                 }
-                
+
                 if (isUserTest) {
                     unitTestFiles.add(utf);
                 }
             }
         }
-            
+
         competitionDataService.setRoundMetaData(new RoundMetaData(message.getAssignCreatorName(), message.getAssignCreatorCompany(), message.getAssignCreatorLogo(), message.getAssignCreatorWeb(), message.getAssignName(), message.getAssignDescriptionSpectators(), message.getAssignDescriptionCompetitors(), message.getAssignDifficulty(), hints));
-        
+
         int roundDurationInSeconds = competitionDataService.getCurrentRound().getDurationInSeconds();
-        
+
         message.setDuration(roundDurationInSeconds);
-        
+
         this.sendMessageToAllCompetitors(new GetUserTestsReplyMessage(unitTestFiles)); // send all unit test files
         this.sendMessageToAllCompetitors(message); // send the start round message
-        
+
         competitionDataService.setHintsOfThisRound(hints);
         this.startTimer(new TimerData(TimerType.RoundTimer), (long) roundDurationInSeconds);
-        
+
         for (int i = 0; i < hints.size(); i++) {
-            this.startTimer(new TimerData((long) i+1, hints.get(i).getDescription(), TimerType.HintTimer), (long) hints.get(i).getDelayInSeconds());
+            this.startTimer(new TimerData((long) i + 1, hints.get(i).getDescription(), TimerType.HintTimer), (long) hints.get(i).getDelayInSeconds());
         }
     }
-    
-    public void registerUser(MOCUser user){
+
+    public void registerUser(MOCUser user) {
         userService.Register(user);
     }
-    
-    public void sendParticipantListToAdmins(){
+
+    public void sendParticipantListToAdmins() {
         GetParticipantsReplyMessage message = new GetParticipantsReplyMessage(userService.GetAllUsers());
         adminEndpoint.sendToAll(message);
     }
-    
+
     public void sendStartCompetitionReplyMessage() {
         Competition comp = competitionDataService.getCurrentCompetition();
         String description = comp.getDescription();
         int numberOfRounds = competitionService.getNumberOfRounds(comp.getId());
         String name = comp.getName();
         Calendar startTime = comp.getStartTime();
-        
+
         StopCompetitionReplyMessage mes = new StopCompetitionReplyMessage();
         sendMessageToEveryone(mes);
     }
@@ -348,11 +377,9 @@ public class CommunicationBean {
     @PostConstruct
     public void init() {
         this.setCurrentCompetition(1L);
-        
-        //Round nextRound = competitionService.getNextRound(1L);
-        
-        //competitionDataService.setCurrentRound(nextRound);
 
+        //Round nextRound = competitionService.getNextRound(1L);
+        //competitionDataService.setCurrentRound(nextRound);
         Round nextRound = competitionService.getNextRound(1L);
         competitionDataService.setCurrentRound(nextRound);
     }
