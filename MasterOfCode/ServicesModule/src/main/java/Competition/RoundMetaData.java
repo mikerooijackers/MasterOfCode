@@ -20,10 +20,10 @@ public class RoundMetaData {
     private String assignmentName;
     private String assignmentSpectatorDescription;
     private String assignmentContestantDescription;
-    private String assignmentDifficulty;
+    private int assignmentDifficulty;
     private List<Hint> hints;
 
-    public RoundMetaData(String assignmentCreatorName, String assignmentCreatorOrganisation, String assignmentCreatorLogo, String assignmentCreatorWebsite, String assignmentName, String assignmentSpectatorDescription, String assignmentContestantDescription, String assignmentDifficulty, List<Hint> hints) {
+    public RoundMetaData(String assignmentCreatorName, String assignmentCreatorOrganisation, String assignmentCreatorLogo, String assignmentCreatorWebsite, String assignmentName, String assignmentSpectatorDescription, String assignmentContestantDescription, int assignmentDifficulty, List<Hint> hints) {
         this.assignmentCreatorName = assignmentCreatorName;
         this.assignmentCreatorOrganisation = assignmentCreatorOrganisation;
         this.assignmentCreatorLogo = assignmentCreatorLogo;
@@ -95,7 +95,7 @@ public class RoundMetaData {
      * get Assignment Difficulty
      * @return Assignment Difficulty
      */
-    public String getAssignmentDifficulty() {
+    public int getAssignmentDifficulty() {
         return assignmentDifficulty;
     }
 
@@ -127,7 +127,7 @@ public class RoundMetaData {
      * set Assignment Difficulty
      * @param assignmentDifficulty 
      */
-    public void setAssignmentDifficulty(String assignmentDifficulty) {
+    public void setAssignmentDifficulty(int assignmentDifficulty) {
         this.assignmentDifficulty = assignmentDifficulty;
     }
 }

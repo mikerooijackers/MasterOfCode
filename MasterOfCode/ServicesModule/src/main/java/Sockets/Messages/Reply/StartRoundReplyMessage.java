@@ -31,7 +31,7 @@ public class StartRoundReplyMessage extends BaseMessage {
     private String assignDescriptionCompetitors;
     private String assignDescriptionSpectators;
     
-    private String assignDifficulty;
+    private int assignDifficulty;
     private int duration;
     
     /**
@@ -48,7 +48,7 @@ public class StartRoundReplyMessage extends BaseMessage {
      * @param assignDescriptionCompetitors
      * @param assignDescriptionSpectators
      */
-    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignCreatorLogo, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators, String assignDifficulty, int duration) {
+    public StartRoundReplyMessage(String assignCreatorName, String assignCreatorCompany, String assignCreatorWeb, String assignCreatorLogo, String assignName, String assignDescriptionCompetitors, String assignDescriptionSpectators, int assignDifficulty, int duration) {
         this.assignCreatorName = assignCreatorName;
         this.assignCreatorCompany = assignCreatorCompany;
         this.assignCreatorWeb = assignCreatorWeb;
@@ -158,7 +158,7 @@ public class StartRoundReplyMessage extends BaseMessage {
         String jsonAssignName = obj.get("AssignName").toString();
         String jsonAssignDescriptionCompetitors = obj.get("AssignDescriptionCompetitors").toString();
         String jsonAssignDescriptionSpectators = obj.get("AssignDescriptionSpectators").toString();
-        String jsonAssignDifficulty = obj.get("AssignDifficulty").toString();
+        int jsonAssignDifficulty = (int) obj.get("AssignDifficulty");
         int jsonDuration = (int) obj.get("Duration");
         
         return new StartRoundReplyMessage(jsonAssignCreatorName, jsonAssignCreatorCompany, jsonAssignCreatorWeb, jsonAssignCreatorLogo, jsonAssignName, jsonAssignDescriptionCompetitors, jsonAssignDescriptionSpectators, jsonAssignDifficulty, jsonDuration);
@@ -185,20 +185,6 @@ public class StartRoundReplyMessage extends BaseMessage {
     }
 
     /**
-     * @return the assignDifficulty
-     */
-    public String getAssignDifficulty() {
-        return assignDifficulty;
-    }
-
-    /**
-     * @param assignDifficulty the assignDifficulty to set
-     */
-    public void setAssignDifficulty(String assignDifficulty) {
-        this.assignDifficulty = assignDifficulty;
-    }
-
-    /**
      * @return the duration
      */
     public int getDuration() {
@@ -218,5 +204,19 @@ public class StartRoundReplyMessage extends BaseMessage {
     
     public String getAssignCreatorLogo() {
         return assignCreatorLogo;
+    }
+
+    /**
+     * @return the assignDifficulty
+     */
+    public int getAssignDifficulty() {
+        return assignDifficulty;
+    }
+
+    /**
+     * @param assignDifficulty the assignDifficulty to set
+     */
+    public void setAssignDifficulty(int assignDifficulty) {
+        this.assignDifficulty = assignDifficulty;
     }
 }
