@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
 @Entity
 @NamedQueries ({
     @NamedQuery(name = "AllTeams", query = "select t FROM Team t"),
-    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")
+    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition.id = :competitionID")
 })
 public class Team implements JSONAware,Serializable {
     @Transient

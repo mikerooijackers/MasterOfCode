@@ -152,19 +152,11 @@ public class CompetitionDataService {
      * @return
      */
     public List<Team> GetTeams() {
-        return null;
+        return this.teams;
         
     }
-    
-    @PostConstruct
-    public void init() {
-        this.setCurrentCompetition(competitionService.FindCompetition(1L));
-        
-        //Round nextRound = competitionService.getNextRound(1L);
-        
-        //competitionDataService.setCurrentRound(nextRound);
 
-        Round nextRound = competitionService.getNextRound(1L);
-        this.setCurrentRound(nextRound);
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }
