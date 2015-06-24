@@ -32,11 +32,12 @@ public class TimerSessionBean {
     
     /**
      *
-     * @param duration
+     * @param durationInSeconds
      * @param timerData
      */
-    public void CreateTimer(long duration, TimerData timerData) {
-        timerService.createTimer(duration, timerData);
+    public void CreateTimer(long durationInSeconds, TimerData timerData) {
+        System.out.println("[[INFO]] Started a timer: " + timerData.getTimerType() + " with duration: " + durationInSeconds);
+        timerService.createTimer(durationInSeconds * 1000L, timerData);
     }
     
     /**
@@ -51,6 +52,8 @@ public class TimerSessionBean {
     
     private void handleTimerExpired(TimerData timerData) {
         TimerType timerType = timerData.getTimerType();
+        
+        System.out.println("[[INFO]] A timer stopped: " + timerType);
         switch (timerType) {
             case CompetitionCountDownTimer:
                 communicationBean.startNextRoundOfCompetition();
@@ -58,7 +61,8 @@ public class TimerSessionBean {
                 break;
             case HintTimer:
                 String hint = timerData.getHint();
-                communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
+                System.out.println("[[INFO]] A hint timer stopped with hint: " + hint);
+                //communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
                 break;
             case RoundTimer:
                 //TO DO

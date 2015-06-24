@@ -5,9 +5,12 @@
  */
 package Sockets.Messages.Client.Reply;
 
+import Domein.UnitTestFile;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -23,20 +26,14 @@ public class GetUserTestsReplyMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.GetUserTestsReplyMessage.toString();
     
-    private Map<String, String> testDescriptions;
+    private List<UnitTestFile> userTests;
     
-    /**
-     *
-     */
     public GetUserTestsReplyMessage(){
+        this.userTests = new ArrayList<UnitTestFile>();
     }
     
-    /**
-     *
-     * @param testDescriptions
-     */
-    public GetUserTestsReplyMessage(Map<String, String> testDescriptions) {
-        this.testDescriptions = testDescriptions;
+    public GetUserTestsReplyMessage(List<UnitTestFile> userTests) {
+        this.userTests = userTests;
     }
     
     /**
@@ -46,8 +43,8 @@ public class GetUserTestsReplyMessage extends BaseMessage {
      */
     public static GetUserTestsReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
-        Map<String, String> jsonTestDescriptions = (Map<String, String>) obj.get("TestDescriptions");
-        return new GetUserTestsReplyMessage(jsonTestDescriptions);
+        List<UnitTestFile> jsonUserTests = (List<UnitTestFile>) obj.get("UserTests");
+        return new GetUserTestsReplyMessage(jsonUserTests);
     }
 
     @Override
@@ -59,7 +56,7 @@ public class GetUserTestsReplyMessage extends BaseMessage {
     public String toJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("MessageType", this.messageType);
-        obj.put("TestDescriptions", this.testDescriptions);
+        obj.put("UserTests", this.userTests);
         return obj.toJSONString();
     }
     

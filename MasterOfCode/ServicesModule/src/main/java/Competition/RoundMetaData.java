@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author mikerooijackers
  */
-class RoundMetaData {
+public class RoundMetaData {
     private String assignmentCreatorName;
     private String assignmentCreatorOrganisation;
     private String assignmentCreatorLogo;

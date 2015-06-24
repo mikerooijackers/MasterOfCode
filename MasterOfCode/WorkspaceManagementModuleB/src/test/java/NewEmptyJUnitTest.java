@@ -39,10 +39,10 @@ public class NewEmptyJUnitTest {
     public void tearDown() {
     }
     
-    //@org.testng.annotations.Test
+    @org.testng.annotations.Test
     public void testReadAnnotationData() {
         WorkspaceService service = new WorkspaceService();
-        List<AnnotationData> readAssignmentMetaData = service.readAssignmentMetaData(1L);
+        List<AnnotationData> readAssignmentMetaData = service.readAssignmentMetaData(1L, false, true);
         Assert.assertTrue(true);
     }
     

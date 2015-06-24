@@ -190,7 +190,12 @@ public class RestResource {
         //mocjms.messages.main.OperationDrivenRequestMessage mes = new mocjms.messages.request.CreateWorkspaceRequestMessage(0L, 0L); //new mocjms.messages.request.ExtractAssignmentToWorkspacesRequestMessage(0L, 1L, 0L); //new mocjms.messages.request.CreateWorkspaceRequestMessage(5L, 0L);
         //bean.Send(mes);
         //Round nextRound = competitionService.getNextRound();
-        communicationBean.sendRoundMetaData();
+        //communicationBean.sendRoundMetaData();
+        communicationBean.startNextRoundOfCompetition();
+        //Competition currentCompetition = communicationBean.getCompetitionDataService().getCurrentCompetition();
+        
+        //new Sockets.Messages.Client.Request.GetSourceFilesRequestMessage(1L).doAction(communicationBean);
+        
         return "ok";
     }
 }
