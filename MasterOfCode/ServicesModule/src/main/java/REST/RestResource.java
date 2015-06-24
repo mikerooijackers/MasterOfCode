@@ -5,6 +5,7 @@
  */
 package REST;
 
+import Competition.CompetitionDataService;
 import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
