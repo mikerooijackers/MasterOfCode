@@ -33,10 +33,12 @@ angular.module('competitorClientApp').controller('editorController', function ($
         headerRow.innerHTML = "<b>Source files:<b>";
 
         for (var file in InformationService.sourceFiles) {
+            console.log(file);
             var row = sourceFileTable.insertRow();
             row.className = "javaclass";
             var cell = row.insertCell();
-            cell.innerHTML = "<a ng-click=\"changeCode('" + file.replace(/\\/g, '\\\\') + "')\">" + file.substring(file.lastIndexOf('\\') + 1) + "</a>";
+            console.log("Splitted:" + InformationService.sourceFiles[file].Path.substring(file.lastIndexOf("\\")));
+            cell.innerHTML = "<a ng-click=\"changeCode(" + file + ")\">" + InformationService.sourceFiles[file].Path.substring(file.lastIndexOf("\\") + 1) + "</a>";
             $compile(cell)($scope);
         }
     });

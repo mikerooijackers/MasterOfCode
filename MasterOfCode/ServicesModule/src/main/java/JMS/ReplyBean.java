@@ -83,7 +83,7 @@ public class ReplyBean implements MessageListener {
                     GetSourceCodeFilesReplyMessage jmsMessage = (GetSourceCodeFilesReplyMessage) object;
                     
                     Sockets.Messages.Client.Reply.GetSourceFilesReplyMessage replyMessage = new Sockets.Messages.Client.Reply.GetSourceFilesReplyMessage(jmsMessage.getListSourceCode());
-                    //communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
+                    communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
                     // TODO
                 } else if (object instanceof GroupTestReplyMessage) {
                     System.out.println("[[INFO]] Group test reply message received");

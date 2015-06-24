@@ -2,7 +2,10 @@ package Domein;
 
 //@fileName
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.json.simple.JSONAware;
+import org.json.simple.JSONObject;
 
 //@content
 //@isReadOnly
@@ -12,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author mikerooijackers
  */
 @XmlRootElement
-public class SourceCode {
+public class SourceCode implements Serializable, JSONAware {
     private String fileName;
     private String path;
     private String content;
@@ -86,5 +89,15 @@ public class SourceCode {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("FileName", this.fileName);
+        obj.put("Path", path);
+        obj.put("Content", this.content);
+        obj.put("Editable", this.isEditable);
+        return obj.toJSONString();
     }
 }
