@@ -146,7 +146,11 @@ public class CompetitionDataService {
      * @return
      */
     public List<Team> GetTeams() {
-        return null;
+        return this.teams;
         
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }
