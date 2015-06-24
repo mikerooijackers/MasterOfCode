@@ -120,7 +120,8 @@ public class RestResource {
         String teamName = message.getTeamName();
         String initiator = message.getInitiator();
         List<String> members = message.getMembers();
-        Team team = userService.createTeam(teamName, initiator, members);
+        long competitionId = communicationBean.getCompetitionDataService().getCurrentCompetition().getId();
+        Team team = userService.createTeam(teamName, initiator, members, competitionId);
         for (String address : members) {
             if (!address.equals("")) {
                 mailMessenger.sendAddedToTeamMessage(address, members, team.getTeamName(), initiator);
@@ -200,10 +201,11 @@ public class RestResource {
         //bean.Send(mes);
         //Round nextRound = competitionService.getNextRound();
         //communicationBean.sendRoundMetaData();
-        communicationBean.startNextRoundOfCompetition();
+        //communicationBean.startNextRoundOfCompetition();
         //Competition currentCompetition = communicationBean.getCompetitionDataService().getCurrentCompetition();
 
         //new Sockets.Messages.Client.Request.GetSourceFilesRequestMessage(1L).doAction(communicationBean);
+        communicationBean.setRoundScoreOfUnsubmittedTeams();
         return "ok";
     }
 }
