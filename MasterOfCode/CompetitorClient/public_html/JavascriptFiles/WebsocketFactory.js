@@ -10,6 +10,7 @@ angular.module('competitorClientApp')
                     ws.onclose = function (event) {
                     };
                     ws.onmessage = function (event) {
+                        console.log(event.data);
                         var Message = JSON.parse(event.data);
                         console.log("Message received: " + Message.MessageType);
                         $rootScope.$broadcast(Message.MessageType, Message);
