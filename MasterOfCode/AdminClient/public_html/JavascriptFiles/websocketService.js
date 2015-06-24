@@ -25,7 +25,6 @@ angular.module('adminClient')
                         console.log("Message send: " + message.MessageType + "!!!");
                     });
                 }
-
             };
 
             function waitForSocketConnection(socket, callback) {

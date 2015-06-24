@@ -8,6 +8,7 @@ package Sockets.Messages.Admin.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.StartRoundReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -54,7 +55,9 @@ public class StartRoundRequestMessage extends BaseMessage {
     }
 
     @Override
-    public void doAction(CommunicationBean communicationBean) {
+    public void doAction(CommunicationBean communicationBean) {       
+        communicationBean.startNextRoundOfCompetition();
+        
         System.out.println("In the doAction of the StartRoundRequestMessage");
     }
 
