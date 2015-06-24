@@ -189,7 +189,7 @@ public class UserService {
         MOCUser mocInitiator = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", initiator).getSingleResult();
         
         team.setInitiator(mocInitiator);
-//        team.setCompetition(em.find(Competition.class, competitionDataService.getCurrentCompetition().getCompetitionId()));
+        team.setCompetition(em.find(Competition.class, competitionDataService.getCurrentCompetition().getCompetitionId()));
         
         em.persist(team);
         

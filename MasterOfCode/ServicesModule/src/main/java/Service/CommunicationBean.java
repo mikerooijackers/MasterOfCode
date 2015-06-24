@@ -328,16 +328,4 @@ public class CommunicationBean {
             this.startTimer(new TimerData((long) i+1, hints.get(i).getDescription(), TimerType.HintTimer), (long) hints.get(i).getDelayInSeconds());
         }
     }
-
-    @PostConstruct
-    public void init() {
-        this.setCurrentCompetition(1L);
-        
-        //Round nextRound = competitionService.getNextRound(1L);
-        
-        //competitionDataService.setCurrentRound(nextRound);
-
-        Round nextRound = competitionService.getNextRound(1L);
-        competitionDataService.setCurrentRound(nextRound);
-    }
 }

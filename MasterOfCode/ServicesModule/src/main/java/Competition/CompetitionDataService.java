@@ -9,8 +9,11 @@ import Domein.Competition;
 import Domein.Hint;
 import Domein.Round;
 import Domein.Team;
+import Service.CompetitionService;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,6 +28,9 @@ public class CompetitionDataService {
     private List<Hint> hintsOfThisRound;
     
     private long BackupRemainingRoundTime;
+    
+    @Inject
+    private CompetitionService competitionService;
 
     public List<Hint> getHintsOfThisRound() {
         return hintsOfThisRound;
@@ -148,5 +154,17 @@ public class CompetitionDataService {
     public List<Team> GetTeams() {
         return null;
         
+    }
+    
+    @PostConstruct
+    public void init() {
+        this.setCurrentCompetition(competitionService.FindCompetition(1L));
+        
+        //Round nextRound = competitionService.getNextRound(1L);
+        
+        //competitionDataService.setCurrentRound(nextRound);
+
+        Round nextRound = competitionService.getNextRound(1L);
+        this.setCurrentRound(nextRound);
     }
 }
