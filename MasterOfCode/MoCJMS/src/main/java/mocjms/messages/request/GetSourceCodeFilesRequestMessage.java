@@ -25,9 +25,19 @@ public class GetSourceCodeFilesRequestMessage extends CompetitionBasedOperationD
 
     private List<AnnotationData> annotationData;
     
+    /**
+     *
+     */
     public GetSourceCodeFilesRequestMessage() {
     }
 
+    /**
+     *
+     * @param assignmentId
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public GetSourceCodeFilesRequestMessage(Long assignmentId, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.prepareAnnotationData(assignmentId);

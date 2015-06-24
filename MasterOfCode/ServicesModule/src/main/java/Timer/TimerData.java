@@ -30,6 +30,10 @@ public class TimerData implements Serializable {
         this.hintId = hintId;
     }
     
+    /**
+     *
+     * @param timerType
+     */
     public TimerData(TimerType timerType) {
         this.timerType = timerType;
     }

@@ -30,7 +30,8 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public EditSourceCodeRequestMessage(){}
+    public EditSourceCodeRequestMessage(){
+    }
     
     /**
      *

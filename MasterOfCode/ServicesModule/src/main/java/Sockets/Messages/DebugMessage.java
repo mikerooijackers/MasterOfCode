@@ -11,6 +11,11 @@ public class DebugMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.DebugMessage.toString();
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static DebugMessage decodeJSON(String s) {
         return new DebugMessage();
     }

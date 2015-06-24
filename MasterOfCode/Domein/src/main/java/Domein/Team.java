@@ -3,7 +3,6 @@ package Domein;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +22,7 @@ import org.json.simple.JSONObject;
 @Entity
 @NamedQueries ({
     @NamedQuery(name = "AllTeams", query = "select t FROM Team t"),
-    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")    
+    @NamedQuery(name = "GetTeamFromCompetition", query = "select t FROM Team t where t.competition LIKE :competitionID")
 })
 public class Team implements JSONAware,Serializable {
     @Transient
@@ -43,6 +42,13 @@ public class Team implements JSONAware,Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    /**
+     *
+     * @param workspacePath
+     * @param teamName
+     * @param serverName
+     * @param approved
+     */
     public Team(String workspacePath, String teamName, String serverName, boolean approved) {
         this.workspacePath = workspacePath;
         this.teamName = teamName;
@@ -50,6 +56,10 @@ public class Team implements JSONAware,Serializable {
         this.approved = approved;
     }
     
+    /**
+     *
+     * @param teamName
+     */
     public Team(String teamName) {
         this.teamName = teamName;
     }

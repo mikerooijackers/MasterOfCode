@@ -1,4 +1,7 @@
-angular.module('competitorClientApp').controller('homeController', function ($scope, $rootScope, SocketService, InformationService) {
+angular.module('competitorClientApp').controller('homeController', function ($scope, $rootScope, SocketService, InformationService, $location) {
+    if (!InformationService.user.team || InformationService.roundBusy === false) {
+        $location.path('/account');
+    }
     $rootScope.$on('StartRoundMessage', function (event, data) {
         var informationString = "Assignment creator: \n";
         informationString += data.AssignCreatorName;

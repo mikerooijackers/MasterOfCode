@@ -18,23 +18,46 @@ import java.util.logging.Logger;
  * @author Gebruiker
  */
 public class JMSSettings {
+
+    /**
+     * enums
+     */
     public enum RunMode {
                             MANUAL, AUTOMATICALLY 
                         }
     
+    /**
+     * static CREATE_WORKSPACE_REQUEST
+     */
     public static final String CREATE_WORKSPACE_REQUEST = "CREATE_WORKSPACE_REQUEST";
+
+    /**
+     * static CREATE_WORKSPACE_REPLY
+     */
     public static final String CREATE_WORKSPACE_REPLY = "CREATE_WORKSPACE_REPLY";
     private static RunMode runMode;
     private static HashMap<String, String> map;
 
+    /**
+     *
+     * @param runMode
+     */
     public static void setRunMode(RunMode runMode) {
        JMSSettings.runMode = runMode;
     }
 
+    /**
+     *
+     * @return
+     */
     public static RunMode getRunMode() {
        return JMSSettings.runMode;
     }
     
+    /**
+     *
+     * @param fileName
+     */
     public static void init(String fileName) {
         runMode = RunMode.AUTOMATICALLY;
         File file = new File(fileName);
@@ -56,6 +79,11 @@ public class JMSSettings {
         } 
     }
 
+    /**
+     *
+     * @param queue
+     * @return
+     */
     public synchronized static String get(String queue) {
         return map.get(queue);
     }   

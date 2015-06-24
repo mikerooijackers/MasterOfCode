@@ -17,6 +17,9 @@ import org.json.simple.JSONValue;
  */
 public class PauseRoundReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.PauseRoundReplyMessage.toString();
     
     /**

@@ -15,10 +15,17 @@ public class RunSingleTestReplyMessage extends CompetitionBasedOperationDrivenRe
     
     private String output;
     
+    /**
+     *
+     */
     public RunSingleTestReplyMessage() {
         
     }
     
+    /**
+     *
+     * @param output
+     */
     public RunSingleTestReplyMessage(String output) {
         this.output = output;
     }

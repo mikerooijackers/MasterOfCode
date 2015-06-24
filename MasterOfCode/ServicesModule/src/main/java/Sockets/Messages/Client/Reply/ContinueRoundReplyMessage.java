@@ -25,8 +25,14 @@ public class ContinueRoundReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public ContinueRoundReplyMessage(){}
+    public ContinueRoundReplyMessage(){
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static ContinueRoundReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new ContinueRoundReplyMessage();

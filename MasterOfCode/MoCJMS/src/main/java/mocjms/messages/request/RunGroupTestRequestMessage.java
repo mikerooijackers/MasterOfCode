@@ -18,10 +18,18 @@ public class RunGroupTestRequestMessage extends OperationDrivenRequestMessage {
     private List<String> group;
     private String directory;
     
+    /**
+     *
+     */
     public RunGroupTestRequestMessage() {
         
     }
 
+    /**
+     *
+     * @param group
+     * @param directory
+     */
     public RunGroupTestRequestMessage(List<String> group, String directory) {
         this.group = group;
         this.directory = directory;

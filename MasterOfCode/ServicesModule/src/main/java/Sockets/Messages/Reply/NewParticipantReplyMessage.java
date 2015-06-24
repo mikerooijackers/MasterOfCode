@@ -9,17 +9,32 @@ import org.json.simple.JSONValue;
 
 public class NewParticipantReplyMessage extends BaseMessage {
 
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.NewParticipantReplyMessage.toString();
 
     private MOCUser user;
     
+    /**
+     *
+     */
     public NewParticipantReplyMessage() {
     }
     
+    /**
+     *
+     * @param user
+     */
     public NewParticipantReplyMessage(MOCUser user) {
         this.user = user;
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static NewParticipantReplyMessage decodeJSON(String s) {
         
         JSONObject obj = (JSONObject) JSONValue.parse(s);

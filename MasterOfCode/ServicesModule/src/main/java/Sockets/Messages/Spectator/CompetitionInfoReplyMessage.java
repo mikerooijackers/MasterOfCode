@@ -25,8 +25,14 @@ public class CompetitionInfoReplyMessage extends BaseMessage {
     /**
      * Constructor
      */
-    public CompetitionInfoReplyMessage(){}
+    public CompetitionInfoReplyMessage(){
+    }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static CompetitionInfoReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new CompetitionInfoReplyMessage();

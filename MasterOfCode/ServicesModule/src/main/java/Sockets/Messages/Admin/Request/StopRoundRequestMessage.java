@@ -12,16 +12,33 @@ import org.json.simple.JSONValue;
  * @author Jay
  */
 public class StopRoundRequestMessage extends BaseMessage {
+
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.StopRoundRequestMessage.toString();
     
     private Long competitionId;
     
-    public StopRoundRequestMessage(){}
+    /**
+     *
+     */
+    public StopRoundRequestMessage(){
+    }
     
+    /**
+     *
+     * @param competitionId
+     */
     public StopRoundRequestMessage(Long competitionId) {
         this.competitionId = competitionId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static StopRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonCompetitionId = (Long) obj.get("CompetitionId");

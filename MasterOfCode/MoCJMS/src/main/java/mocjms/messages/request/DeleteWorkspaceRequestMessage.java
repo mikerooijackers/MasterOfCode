@@ -18,26 +18,50 @@ public class DeleteWorkspaceRequestMessage extends OperationDrivenRequestMessage
     private Long competitionId;
     private Long teamId;
 
+    /**
+     *
+     * @param competitionId
+     * @param teamId
+     */
     public DeleteWorkspaceRequestMessage(Long competitionId, Long teamId) {
         this.competitionId = competitionId;
         this.teamId = teamId;
     }
 
+    /**
+     *
+     */
     public DeleteWorkspaceRequestMessage() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCompetitionId() {
         return competitionId;
     }
 
+    /**
+     *
+     * @param competitionId
+     */
     public void setCompetitionId(Long competitionId) {
         this.competitionId = competitionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getTeamId() {
         return teamId;
     }
 
+    /**
+     *
+     * @param teamId
+     */
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
     }

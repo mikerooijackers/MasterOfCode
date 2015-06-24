@@ -20,27 +20,51 @@ public class ReadMetaDataReplyMessage extends CompetitionBasedOperationDrivenRep
     private AnnotationData assignmentMetaData;
     private List<AnnotationData> testsMetaData;
 
+    /**
+     *
+     */
     public ReadMetaDataReplyMessage() {
         this.testsMetaData = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param assignmentMetaData
+     * @param testsMetaData
+     */
     public ReadMetaDataReplyMessage(AnnotationData assignmentMetaData, List<AnnotationData> testsMetaData) {
         this.assignmentMetaData = assignmentMetaData;
         this.testsMetaData = testsMetaData;
     }
 
+    /**
+     *
+     * @return
+     */
     public AnnotationData getAssignmentMetaData() {
         return assignmentMetaData;
     }
 
+    /**
+     *
+     * @param assignmentMetaData
+     */
     public void setAssignmentMetaData(AnnotationData assignmentMetaData) {
         this.assignmentMetaData = assignmentMetaData;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<AnnotationData> getTestsMetaData() {
         return testsMetaData;
     }
 
+    /**
+     *
+     * @param testsMetaData
+     */
     public void setTestsMetaData(List<AnnotationData> testsMetaData) {
         this.testsMetaData = testsMetaData;
     }

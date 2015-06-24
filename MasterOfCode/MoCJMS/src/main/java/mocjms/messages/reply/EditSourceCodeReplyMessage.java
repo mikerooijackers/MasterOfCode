@@ -14,26 +14,54 @@ public class EditSourceCodeReplyMessage extends CompetitionBasedOperationDrivenR
 
     private boolean isSuccessful;
 
+    /**
+     *
+     * @param isSuccessful
+     */
     public EditSourceCodeReplyMessage(boolean isSuccessful) {
         this.isSuccessful = isSuccessful;
     }
 
+    /**
+     *
+     * @param isSuccessful
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public EditSourceCodeReplyMessage(boolean isSuccessful, Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
         this.isSuccessful = isSuccessful;
     }
 
+    /**
+     *
+     */
     public EditSourceCodeReplyMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public EditSourceCodeReplyMessage(Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isIsSuccessful() {
         return isSuccessful;
     }
 
+    /**
+     *
+     * @param isSuccessful
+     */
     public void setIsSuccessful(boolean isSuccessful) {
         this.isSuccessful = isSuccessful;
     }

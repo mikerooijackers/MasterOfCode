@@ -16,9 +16,18 @@ import mocjms.messages.reply.CompileReplyMessage;
  */
 public class CompileRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
     
+    /**
+     *
+     */
     public CompileRequestMessage() {
     }
 
+    /**
+     *
+     * @param teamId
+     * @param roundId
+     * @param competitionId
+     */
     public CompileRequestMessage(Long teamId, Long roundId, Long competitionId) {
         super(teamId, roundId, competitionId);
     }

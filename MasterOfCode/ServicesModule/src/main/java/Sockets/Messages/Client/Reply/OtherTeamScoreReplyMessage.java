@@ -31,8 +31,7 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
     
     /**
      * Constructor
-     * @param competitionId
-     * @param teamId
+     * @param teamName
      * @param teamScore
      */
     public OtherTeamScoreReplyMessage(String teamName, int teamScore) {

@@ -17,18 +17,35 @@ import org.json.simple.JSONValue;
  */
 public class AddMemberToTeamRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.AddMemberToTeamRequestMessage.toString();
     
     private Long teamId;
     private Long userId;
     
-    public AddMemberToTeamRequestMessage() {}
+    /**
+     *
+     */
+    public AddMemberToTeamRequestMessage() {
+    }
     
+    /**
+     *
+     * @param teamId
+     * @param userId
+     */
     public AddMemberToTeamRequestMessage(Long teamId, Long userId) {
         this.teamId = teamId;
         this.userId = userId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static AddMemberToTeamRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Long jsonTeamId = (Long) obj.get("TeamId");

@@ -18,16 +18,32 @@ import org.json.simple.JSONValue;
  */
 public class GetSourceFilesReplyMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.GetSourceFilesReplyMessage.toString();
     
     private Map<String, String> sourceFiles;
     
-    public GetSourceFilesReplyMessage(){}
+    /**
+     *
+     */
+    public GetSourceFilesReplyMessage(){
+    }
     
+    /**
+     *
+     * @param sourceFiles
+     */
     public GetSourceFilesReplyMessage(Map<String, String> sourceFiles) {
         this.sourceFiles = sourceFiles;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetSourceFilesReplyMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         Map<String, String> jsonSourceFiles = (Map<String, String>) obj.get("SourceFiles");

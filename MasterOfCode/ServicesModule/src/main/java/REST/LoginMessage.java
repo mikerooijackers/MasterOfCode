@@ -12,11 +12,13 @@ import Domein.Role;
  * @author mikerooijackers
  */
 class LoginMessage {
+
     private String email;
     private String password;
-    
-    public LoginMessage(){}
-    
+
+    public LoginMessage() {
+    }
+
     public LoginMessage(String email, String password) {
         this.email = email;
         this.password = password;
@@ -43,6 +45,5 @@ class LoginMessage {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
 }

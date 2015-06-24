@@ -18,18 +18,35 @@ import org.json.simple.JSONValue;
  */
 public class FreezeRoundRequestMessage extends BaseMessage {
     
+    /**
+     *
+     */
     public static final String messageType = MessageTypes.FreezeRoundRequestMessage.toString();
     
     private Long competitionId;
     private Long roundId;
     
-    public FreezeRoundRequestMessage(){}
+    /**
+     *
+     */
+    public FreezeRoundRequestMessage(){
+    }
     
+    /**
+     *
+     * @param competitionId
+     * @param roundId
+     */
     public FreezeRoundRequestMessage(Long competitionId, Long roundId) {
         this.competitionId = competitionId;
         this.roundId = roundId;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static FreezeRoundRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new FreezeRoundRequestMessage((Long) obj.get("CompetitionId"), (Long) obj.get("RoundId"));

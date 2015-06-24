@@ -19,7 +19,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "AllUsers", query = "SELECT m FROM MOCUser m"),
     @NamedQuery(name = "LoginUser", query = "SELECT m FROM MOCUser m WHERE m.email LIKE :email AND m.password LIKE :password"),
-    @NamedQuery(name = "FindUserByEmail", query = "SELECT m FROM MOCUser m WHERE m.email = :email")
+    @NamedQuery(name = "FindUserByEmail", query = "SELECT m FROM MOCUser m WHERE m.email = :email"),
+    @NamedQuery(name = "GetTeamMembers", query = "SELECT m FROM MOCUser m WHERE m.team = :team")
 })
 public class MOCUser implements Serializable, JSONAware {
 
@@ -57,6 +58,17 @@ public class MOCUser implements Serializable, JSONAware {
     public MOCUser() {
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param email
+     * @param fullName
+     * @param privilege
+     * @param team
+     * @param company
+     * @param telephoneNumber
+     */
     public MOCUser(String username, String password, String email, String fullName, Role privilege, Team team, String company, String telephoneNumber) {
         this.password = password;
         this.email = email;

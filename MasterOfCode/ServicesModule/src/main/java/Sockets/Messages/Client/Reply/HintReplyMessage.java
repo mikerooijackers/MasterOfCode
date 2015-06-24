@@ -27,8 +27,13 @@ public class HintReplyMessage extends BaseMessage implements Serializable {
     /**
      * Constructor
      */
-    public HintReplyMessage(){};
+    public HintReplyMessage(){
+    }
     
+    /**
+     *
+     * @param hintMessage
+     */
     public HintReplyMessage (String hintMessage) {
         this.hintMessage = hintMessage;
     }

@@ -16,7 +16,11 @@ public class CreateTeamMessage {
     private String initiator;
     private List<String> members;
     
-    public CreateTeamMessage(){}
+    /**
+     *
+     */
+    public CreateTeamMessage(){
+    }
     
     public CreateTeamMessage(String teamName, String initiator, List<String> members) {
         this.teamName = teamName;

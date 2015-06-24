@@ -31,6 +31,11 @@ public class GetUserTestsRequestMessage extends BaseMessage {
      public GetUserTestsRequestMessage() {
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static GetUserTestsRequestMessage decodeJSON(String s) {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         return new GetUserTestsRequestMessage();
@@ -43,7 +48,7 @@ public class GetUserTestsRequestMessage extends BaseMessage {
         descriptions.put("Test2", "This is the seconds test.");
         descriptions.put("Test3", "This is the third test.");
         GetUserTestsReplyMessage mess = new GetUserTestsReplyMessage(descriptions);
-        communicationBean.sendMessageToCompetitor("Noor", mess);
+        communicationBean.sendMessageToCompetitor(19L, mess);
     }
 
     @Override

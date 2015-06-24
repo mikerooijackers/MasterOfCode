@@ -5,12 +5,15 @@
  */
 package Service;
 
+import Competition.CompetitionDataService;
+import Domein.Competition;
 import Domein.MOCUser;
 import Domein.Role;
 import Domein.Team;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -24,6 +27,9 @@ public class UserService {
 
     @PersistenceContext(unitName = "masterofcodedb")
     private EntityManager em;
+    
+    @Inject
+    private CompetitionDataService competitionDataService;
 
     /**
      * login of a user
@@ -56,6 +62,8 @@ public class UserService {
      * @param activationCode
      * @param privilege
      * @param password
+     * @param company
+     * @param telephone
      * @return
      */
     public MOCUser Register(String email, String fullname, String password, Role privilege, String activationCode, String company, String telephone) {
@@ -93,6 +101,10 @@ public class UserService {
         return listUsers;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Team> GetAllTeams() {
         List<Team> listTeams;
         listTeams = em.createNamedQuery("AllTeams").getResultList();
@@ -108,6 +120,12 @@ public class UserService {
         return listTeams;
     }
 
+    /**
+     *
+     * @param userId
+     * @param teamId
+     * @return
+     */
     public MOCUser AddToTeam(long userId, long teamId) {
         MOCUser user = em.find(MOCUser.class, userId);
         Team team = em.find(Team.class, teamId);
@@ -119,6 +137,12 @@ public class UserService {
         return user;
     }
 
+    /**
+     *
+     * @param activationCode
+     * @param userId
+     * @return
+     */
     public String SetActivationCode(String activationCode, long userId) {
         MOCUser user = em.find(MOCUser.class, userId);
         if (user.getActivationCode() == null) {
@@ -134,6 +158,13 @@ public class UserService {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     public String changePassword(int id, String oldPassword, String newPassword) {
         MOCUser user = em.find(MOCUser.class, id);
         if (!user.getPassword().equals(oldPassword)) {
@@ -144,6 +175,13 @@ public class UserService {
         return "Password changed successfully.";
     }
 
+    /**
+     *
+     * @param teamName
+     * @param initiator
+     * @param members
+     * @return
+     */
     public Team createTeam(String teamName, String initiator, List<String> members) {
         Team team = new Team(teamName);
         List<MOCUser> MOCMembers = new ArrayList<>();
@@ -151,20 +189,36 @@ public class UserService {
         MOCUser mocInitiator = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", initiator).getSingleResult();
         
         team.setInitiator(mocInitiator);
+//        team.setCompetition(em.find(Competition.class, competitionDataService.getCurrentCompetition().getCompetitionId()));
+        
+        em.persist(team);
+        
+        mocInitiator.setTeam(team);
+        mocInitiator.setPrivilege(Role.INITIATOR);
+        em.merge(mocInitiator);
         
         for (String username : members) {
             MOCUser user = null;
             try {
                 user = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", username).getSingleResult();
-                if (!team.getMembers().contains(user)) {
-                    MOCMembers.add(user);
+                if (user.getTeam() == null) {
+                    user.setTeam(team);
+                    em.merge(user);
                 }
             } catch (NoResultException ex) {
                 System.out.println("TeamMember " + username + " ");
             }
         }
-        team.setMembers(MOCMembers);
-        em.persist(team);
+        return team;
+    }
+    
+    public List<MOCUser> getTeamMembers(Team team) {
+        List<MOCUser> members = em.createNamedQuery("GetTeamMembers").setParameter("team", team).getResultList();
+        return members;
+    }
+    
+    public Team getTeam(Long teamId) {
+        Team team = em.find(Team.class, teamId);
         return team;
     }
 }

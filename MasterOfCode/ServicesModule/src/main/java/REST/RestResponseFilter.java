@@ -13,7 +13,7 @@ import javax.ws.rs.ext.Provider;
 
 /**
  *
- * @author JordiK
+ * @author mikerooijackers
  */
 @Provider
 public class RestResponseFilter implements ContainerResponseFilter {

@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
-import org.testng.annotations.Test;
 
 /**
  *
@@ -33,6 +32,12 @@ public class ReflectionUtils {
     
     private static List<String> testMethodNames = Arrays.asList("testName", "groups", "priority", "description" );
 
+    /**
+     *
+     * @param path
+     * @param annotations
+     * @return
+     */
     public static List<AnnotationData> readAnnotationData(String path, Class<? extends Annotation>... annotations) {
         List<AnnotationData> annotationData = new ArrayList<>();
         File folder = new File(path);
@@ -47,6 +52,12 @@ public class ReflectionUtils {
         return annotationData;
     }
     
+    /**
+     *
+     * @param path
+     * @param annotations
+     * @return
+     */
     public static List<AnnotationData> readTestAnnotationData(String path, Class<? extends Annotation>... annotations) {
         List<AnnotationData> annotationData = new ArrayList<>();
         File folder = new File(path);
