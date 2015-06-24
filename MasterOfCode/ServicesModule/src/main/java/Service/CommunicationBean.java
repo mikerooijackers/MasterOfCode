@@ -12,6 +12,7 @@ import Domein.AnnotationMethod;
 import Domein.Assignment;
 import Domein.Competition;
 import Domein.Hint;
+import Domein.MOCUser;
 import Domein.Role;
 import Domein.Round;
 import Domein.RoundScore;
@@ -21,6 +22,7 @@ import Domein.UnitTestFile;
 import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
+import Sockets.Messages.Reply.GetParticipantsReplyMessage;
 import Sockets.Messages.Reply.StartRoundReplyMessage;
 import Timer.TimerData;
 import Timer.TimerSessionBean;
@@ -359,6 +361,15 @@ public class CommunicationBean {
         for (int i = 0; i < hints.size(); i++) {
             this.startTimer(new TimerData((long) i+1, hints.get(i).getDescription(), TimerType.HintTimer), (long) hints.get(i).getDelayInSeconds());
         }
+    }
+    
+    public void registerUser(MOCUser user){
+        userService.Register(user);
+    }
+    
+    public void sendParticipantListToAdmins(){
+        GetParticipantsReplyMessage message = new GetParticipantsReplyMessage(userService.GetAllUsers());
+        adminEndpoint.sendToAll(message);
     }
 
     @PostConstruct

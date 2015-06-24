@@ -80,6 +80,15 @@ public class UserService {
 //        em.close();
         return user;
     }
+    /**
+     * Register a user object as a user
+     * @param user
+     * @return 
+     */
+    public MOCUser Register(MOCUser user) {
+        em.persist(user);
+        return user;
+    }
 
     /**
      *
@@ -181,14 +190,14 @@ public class UserService {
      * @param members
      * @return
      */
-    public Team createTeam(String teamName, String initiator, List<String> members) {
+    public Team createTeam(String teamName, String initiator, List<String> members, Long competitionId) {
         Team team = new Team(teamName);
         List<MOCUser> MOCMembers = new ArrayList<>();
         
         MOCUser mocInitiator = (MOCUser) em.createNamedQuery("FindUserByEmail").setParameter("email", initiator).getSingleResult();
         
         team.setInitiator(mocInitiator);
-//        team.setCompetition(em.find(Competition.class, competitionDataService.getCurrentCompetition().getCompetitionId()));
+        team.setCompetition(em.find(Competition.class, competitionId));
         
         em.persist(team);
         

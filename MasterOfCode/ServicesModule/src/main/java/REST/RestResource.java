@@ -5,6 +5,7 @@
  */
 package REST;
 
+import Competition.CompetitionDataService;
 import Domein.Competition;
 import Domein.Hint;
 import Domein.MOCUser;
@@ -14,6 +15,7 @@ import Service.CommunicationBean;
 import Service.CompetitionService;
 import Service.UserService;
 import WebSocket.CompetitorEndPoint;
+import emailUtils.EmailMessenger;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -36,6 +38,8 @@ public class RestResource {
     CompetitionService competitionService;
     @Inject
     private CompetitorEndPoint endPoint;
+    @Inject
+    private EmailMessenger mailMessenger;
 
     @EJB
     private CommunicationBean communicationBean;
@@ -116,7 +120,13 @@ public class RestResource {
         String teamName = message.getTeamName();
         String initiator = message.getInitiator();
         List<String> members = message.getMembers();
-        Team team = userService.createTeam(teamName, initiator, members);
+        long competitionId = communicationBean.getCompetitionDataService().getCurrentCompetition().getId();
+        Team team = userService.createTeam(teamName, initiator, members, competitionId);
+        for (String address : members) {
+            if (!address.equals("")) {
+                mailMessenger.sendAddedToTeamMessage(address, members, team.getTeamName(), initiator);
+            }
+        }
         team.setInitiator(null);
 //        team.setMembers(userService.getTeamMembers(team));
         return team;
@@ -165,7 +175,7 @@ public class RestResource {
         return null;
 
     }
-    
+
     @GET
     @Path("getteammembers/{teamid}")
     public List<MOCUser> getTeamMembers(@PathParam(value = "teamid") Long teamId) {
@@ -193,7 +203,7 @@ public class RestResource {
         //communicationBean.sendRoundMetaData();
         //communicationBean.startNextRoundOfCompetition();
         //Competition currentCompetition = communicationBean.getCompetitionDataService().getCurrentCompetition();
-        
+
         //new Sockets.Messages.Client.Request.GetSourceFilesRequestMessage(1L).doAction(communicationBean);
         communicationBean.setRoundScoreOfUnsubmittedTeams();
         return "ok";

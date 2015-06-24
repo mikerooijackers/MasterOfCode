@@ -31,21 +31,21 @@ angular.module('adminClient')
                 for (var participant in InformationService.participants) {
                     var row = participantTable.insertRow();
                     var content = row.insertCell();
-                    content.innerHTML = "<a ng-click=\"fillParticipantInfoTable('" + participant + "')\">" + participant + "</a>";
+                    content.innerHTML = "<a ng-click=\"fillParticipantInfoTable('" + participant + "')\">" + InformationService.participants[participant].FullName + "</a>";
                 }
                 
                 participantTable.className = "borderedTable";
                 $compile(participantTable)($scope);
             };
 
-            $scope.fillParticipantInfoTable = function (fullName) {
+            $scope.fillParticipantInfoTable = function (email) {
                 var participantInfoTable = document.getElementById("participantInfoTable");
                 participantInfoTable.innerHTML = "";
-                participantInfoTable.innerHTML += "<b>Full name:</b> " + InformationService.participants[fullName].FullName + "<br>";
-                participantInfoTable.innerHTML += "<b>E-mail:</b> " + InformationService.participants[fullName].Email + "<br>";
-                participantInfoTable.innerHTML += "<b>Company:</b> " + InformationService.participants[fullName].Company + "<br>";
-                participantInfoTable.innerHTML += "<b>Telephone:</b> " + InformationService.participants[fullName].TelephoneNumber + "<br>";
-                participantInfoTable.innerHTML += "<b>Team:</b> " + InformationService.participants[fullName].Team + "<br>";
+                participantInfoTable.innerHTML += "<b>Full name:</b> " + InformationService.participants[email].FullName + "<br>";
+                participantInfoTable.innerHTML += "<b>E-mail:</b> " + InformationService.participants[email].Email + "<br>";
+                participantInfoTable.innerHTML += "<b>Company:</b> " + InformationService.participants[email].Company + "<br>";
+                participantInfoTable.innerHTML += "<b>Telephone:</b> " + InformationService.participants[email].TelephoneNumber + "<br>";
+                participantInfoTable.innerHTML += "<b>Team:</b> " + InformationService.participants[email].Team + "<br>";
             };
 
             // On initialization
