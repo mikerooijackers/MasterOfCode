@@ -81,6 +81,15 @@ public class UserService {
 //        em.close();
         return user;
     }
+    /**
+     * Register a user object as a user
+     * @param user
+     * @return 
+     */
+    public MOCUser Register(MOCUser user) {
+        em.persist(user);
+        return user;
+    }
 
     /**
      *
