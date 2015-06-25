@@ -24,10 +24,12 @@ import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
 import Sockets.Messages.Client.Reply.OtherTeamScoreReplyMessage;
 import Sockets.Messages.Reply.GetParticipantsReplyMessage;
 import Sockets.Messages.Reply.PauzeRoundReplyMessage;
+import Sockets.Messages.Reply.ResumeRoundReplyMessage;
 import Sockets.Messages.Reply.StartRoundReplyMessage;
 import Sockets.Messages.Reply.StopCompetitionReplyMessage;
 import Sockets.Messages.Reply.StopRoundReplyMessage;
 import Sockets.Messages.Reply.TeamActionReplyMessage;
+import Sockets.Messages.Reply.UnFreezeRoundReplyMessage;
 import Timer.TimerData;
 import Timer.TimerSessionBean;
 import Timer.TimerType;
@@ -269,6 +271,10 @@ public class CommunicationBean {
     public void FreezeTheRound() {
         Round currentRound = competitionDataService.getCurrentRound();
         competitionService.editRound(Status.FREEZE, currentRound.getId());
+        TimerData timerData = new TimerData(TimerType.RoundTimer);
+        pauseOrFreezeTimer(timerData);
+        PauzeRoundReplyMessage mes = new PauzeRoundReplyMessage();
+        sendMessageToEveryone(mes);
     }
 
     /**
@@ -278,6 +284,16 @@ public class CommunicationBean {
         Round currentRound = competitionDataService.getCurrentRound();
         competitionService.editRound(Status.PLAYING, currentRound.getId());
         this.resumeTimer();
+        ResumeRoundReplyMessage mes = new ResumeRoundReplyMessage();
+        this.sendMessageToEveryone(mes);
+    }
+    
+    public void UnfreezeRound() {
+        Round currentRound = competitionDataService.getCurrentRound();
+        competitionService.editRound(Status.PLAYING, currentRound.getId());
+        this.resumeTimer();
+        UnFreezeRoundReplyMessage mes = new UnFreezeRoundReplyMessage();
+        this.sendMessageToEveryone(mes);
     }
 
     /**
@@ -464,5 +480,6 @@ public class CommunicationBean {
     private void init() {
         this.setCurrentCompetition(1L);
         this.setCurrentRound(1L);
+        competitionDataService.setTeams(competitionService.GetTeamFromCompetition(1L));
     }
 }

@@ -56,11 +56,11 @@ public class StartRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {       
-//        communicationBean.startNextRoundOfCompetition();
+        communicationBean.startNextRoundOfCompetition();
 //        
 //        System.out.println("In the doAction of the StartRoundRequestMessage");
         
-        communicationBean.sendRoundMetaData();
+        //communicationBean.sendRoundMetaData();
     }
 
     @Override

@@ -6,3 +6,6 @@ pom.xml.next
 release.properties
 /MasterOfCode/CompetitorClient/nbproject/private/
 /MasterOfCode/AdminClient/nbproject/private/
+/MasterOfCode/ModuleX/nbproject/private/
+/MasterOfCode/ModuleX/build/
+/MasterOfCode/ModuleX/dist/
