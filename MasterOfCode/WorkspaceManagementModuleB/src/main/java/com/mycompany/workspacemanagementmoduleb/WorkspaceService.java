@@ -12,6 +12,7 @@ import com.mycompany.annotations.AssignInformation;
 import com.mycompany.annotations.Editable;
 import com.mycompany.annotations.Hints;
 import com.mycompany.utilitiesmodule.ZipUtils;
+import com.mycompany.workspacemanagementmoduleb.utils.CommandUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.FileUtils;
 import com.mycompany.workspacemanagementmoduleb.utils.ReflectionUtils;
 import java.io.BufferedReader;
@@ -41,9 +42,9 @@ import javax.tools.ToolProvider;
  * @author Gebruiker
  */
 public class WorkspaceService {
-    
+
     private static WorkspaceService instance;
-    
+
     /**
      *
      * @return
@@ -52,10 +53,10 @@ public class WorkspaceService {
         if (instance == null) {
             instance = new WorkspaceService();
         }
-        
+
         return instance;
     }
-    
+
     /**
      *
      */
@@ -70,7 +71,7 @@ public class WorkspaceService {
      *
      */
     public static final String DEFAULT_JAVA_SOURCECODE_PATH = "src\\main\\java";
-    
+
     /**
      *
      * @param competitionId
@@ -80,10 +81,10 @@ public class WorkspaceService {
     public String createWorkspace(Long competitionId, Long teamId) {
         String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId;
         new File(path).mkdirs();
-        
+
         return path;
     }
-    
+
     /**
      *
      * @param competitionId
@@ -91,9 +92,9 @@ public class WorkspaceService {
      * @return
      */
     public String deleteWorkspace(Long competitionId, Long teamId) {
-        String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId ;
+        String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId;
         this.deleteFolder(new File(path));
-        
+
         return path;
     }
 
@@ -143,7 +144,7 @@ public class WorkspaceService {
                 Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return succesful;
     }
 
@@ -156,7 +157,7 @@ public class WorkspaceService {
      * @return
      */
     public List<SourceCode> readSourceCode(Long teamId, Long competitionId, Long roundId, List<AnnotationData> annotationData) {
-        List<SourceCode> sourceCodeFiles = new ArrayList<>();      
+        List<SourceCode> sourceCodeFiles = new ArrayList<>();
 
         String path = WORKSPACES_PATH + File.separator + competitionId + File.separator + teamId + File.separator + roundId; //+ "\\" + sourceCodePath;
 
@@ -181,14 +182,14 @@ public class WorkspaceService {
 
     public List<AnnotationData> readAssignmentMetaData(Long assignmentId, boolean writeDataToFile, boolean readDataFromFile) {
         String path = ASSIGNMENTS_PATH + File.separator + assignmentId;
-        
+
         List<AnnotationData> annotationData = null;
 
         if (writeDataToFile || (!writeDataToFile && !readDataFromFile)) {
             annotationData = ReflectionUtils.readTestAnnotationData(path, org.testng.annotations.Test.class);
             annotationData.addAll(ReflectionUtils.readAnnotationData(path, AssignCreator.class, AssignInformation.class, Hints.class));
         }
-        
+
         if (writeDataToFile) {
             try {
                 FileOutputStream fos = new FileOutputStream(path + File.separator + "assignment.tmp");
@@ -201,7 +202,7 @@ public class WorkspaceService {
                 Logger.getLogger(WorkspaceService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         if (readDataFromFile) {
             try {
                 FileInputStream fis = new FileInputStream(path + File.separator + "assignment.tmp");
@@ -217,7 +218,6 @@ public class WorkspaceService {
             }
         }
 
-        
         return annotationData;
     }
 
@@ -239,23 +239,23 @@ public class WorkspaceService {
             }
         }
         ZipUtils.writeByteArrayToFile(blob, zipFile);
-        
+
         File competitionFolder = new File(destination);
         File[] teamWorkspaces = competitionFolder.listFiles();
-        
+
         for (File teamWorkspace : teamWorkspaces) {
             String teamWorkspaceDestination = destination + File.separator + teamWorkspace.getName() + File.separator + roundId;
-            
+
             new File(teamWorkspaceDestination).mkdirs();
 
             FileUtils.extractZIPFile(zipFile, teamWorkspaceDestination);
         }
-        
+
         return true;
 //+ File.separator + teamId + File.separator + roundId;
-        
+
     }
-    
+
     /**
      *
      * @param teamId
@@ -268,27 +268,22 @@ public class WorkspaceService {
         File folder = new File(pomPath);
         File[] files = folder.listFiles();
         pomPath += File.separator + files[0].getName();
-        
+
         String result;
         // Start a new process with the given sourcePath
-        try {
 
-            new ProcessBuilder(
-                    "pom.xml", "-cp", pomPath).start();
-            result = "Compilation successful";
+//            new ProcessBuilder(
+//                    "pom.xml", "-cp", pomPath).start();
+//            result = "Compilation successful";
+        result = CommandUtils.runCommand(pomPath, "cmd.exe /c mvn compile");
 
-            /**
-             * The project cannot be compiled if: 1: The sourcePath is null 2:
-             * The sourcePath is invalid
-             */
-        } catch (IOException ex) {
-            // access to the stack trace
-            StackTraceElement[] trace = ex.getStackTrace();
-            result = trace[0].toString();
-        }
+        /**
+         * The project cannot be compiled if: 1: The sourcePath is null 2: The
+         * sourcePath is invalid
+         */
         return result;
     }
-    
+
     /**
      *
      * @param group
@@ -302,11 +297,11 @@ public class WorkspaceService {
         File folder = new File(pomPath);
         File[] files = folder.listFiles();
         pomPath += File.separator + files[0].getName();
-        
+
         String command = "cmd.exe /c mvn test -Dgroup=" + group;
         return runCommand(command, pomPath);
     }
-    
+
     /**
      *
      * @param test
@@ -320,11 +315,11 @@ public class WorkspaceService {
         File folder = new File(pomPath);
         File[] files = folder.listFiles();
         pomPath += File.separator + files[0].getName();
-        
+
         String command = "cmd.exe /c mvn test -Dtest=" + test;
         return runCommand(command, pomPath);
     }
-    
+
     /**
      *
      * @param command

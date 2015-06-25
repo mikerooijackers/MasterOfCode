@@ -6,8 +6,9 @@
 package JMS;
 
 import Service.CommunicationBean;
-import Sockets.Messages.Client.Reply.GetSourceFilesReplyMessage;
 import Sockets.Messages.Client.Reply.GroupTestsReplyMessage;
+import Sockets.Messages.Client.Reply.OtherTeamScoreReplyMessage;
+import Sockets.Messages.Client.Reply.SubmitReplyMessage;
 import Sockets.Messages.Client.Reply.UserTestsReplyMessage;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -26,6 +27,7 @@ import mocjms.messages.reply.EditSourceCodeReplyMessage;
 import mocjms.messages.reply.ExtractAssignmentToWorkspacesReplyMessage;
 import mocjms.messages.reply.GetSourceCodeFilesReplyMessage;
 import mocjms.messages.reply.GroupTestReplyMessage;
+import mocjms.messages.reply.TurninReplyMessage;
 import mocjms.messages.reply.UserTestReplyMessage;
 
 
@@ -62,7 +64,7 @@ public class ReplyBean implements MessageListener {
                     System.out.println("[[INFO]] Compile reply message received");
                     CompileReplyMessage jmsMessage = (CompileReplyMessage) object;
                     Sockets.Messages.Client.Reply.CompileReplyMessage replyMessage = new Sockets.Messages.Client.Reply.CompileReplyMessage(jmsMessage.getResult(), jmsMessage.getTeamId());
-                    // TODO         communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
+                    communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
                 } else if (object instanceof CreateWorkspaceReplyMessage) {
                     System.out.println("[[INFO]] Create workspace reply message received");
                     // do nothing...
@@ -94,7 +96,17 @@ public class ReplyBean implements MessageListener {
                     System.out.println("[[INFO]] User test reply message received");
                     UserTestReplyMessage jmsMessage = (UserTestReplyMessage) object;
                     UserTestsReplyMessage replyMessage = new UserTestsReplyMessage(jmsMessage.getResult());
-                    // TODO        communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
+                    communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
+                } else if (object instanceof TurninReplyMessage) {
+                    System.out.println("[[INFO]] Turn in reply message received");
+                    TurninReplyMessage jmsMessage = (TurninReplyMessage) object;
+                    SubmitReplyMessage replyMessage = new SubmitReplyMessage(jmsMessage.getScore(), jmsMessage.isSucceeded());
+                    communicationBean.sendMessageToCompetitor(jmsMessage.getTeamId(), replyMessage);
+                    
+                    if (jmsMessage.isSucceeded()) {
+                        communicationBean.addScoreToTeam(jmsMessage.getTeamId(), jmsMessage.getScore());
+                        communicationBean.sendTeamScore(jmsMessage.getTeamId(), jmsMessage.getScore());
+                    }
                 }
                 
             } catch (JMSException ex) {

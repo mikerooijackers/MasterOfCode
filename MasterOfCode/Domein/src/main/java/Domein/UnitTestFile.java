@@ -5,11 +5,14 @@
  */
 package Domein;
 
+import org.json.simple.JSONAware;
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author Gebruiker
  */
-public class UnitTestFile {
+public class UnitTestFile implements JSONAware {
     private String name;
     private String description;
 
@@ -35,5 +38,13 @@ public class UnitTestFile {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toJSONString() {
+        JSONObject obj = new JSONObject();
+        obj.put("TestName", name);
+        obj.put("Description", this.description);
+        return obj.toJSONString();
     }
 }
