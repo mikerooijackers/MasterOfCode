@@ -12,6 +12,7 @@ import com.mycompany.annotations.ReadOnly;
 import com.mycompany.workspacemanagementmoduleb.WorkspaceService;
 import com.mycompany.workspacemanagementmoduleb.utils.ReflectionUtils;
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 import mocjms.messages.main.CompetitionBasedOperationDrivenReplyMessage;
 import mocjms.messages.main.CompetitionBasedOperationDrivenRequestMessage;
@@ -21,7 +22,7 @@ import mocjms.messages.reply.GetSourceCodeFilesReplyMessage;
  *
  * @author Gebruiker
  */
-public class GetSourceCodeFilesRequestMessage extends CompetitionBasedOperationDrivenRequestMessage {
+public class GetSourceCodeFilesRequestMessage extends CompetitionBasedOperationDrivenRequestMessage implements Serializable {
 
     private List<AnnotationData> annotationData;
     
@@ -50,7 +51,7 @@ public class GetSourceCodeFilesRequestMessage extends CompetitionBasedOperationD
     
     @Override
     public CompetitionBasedOperationDrivenReplyMessage generateReplyMessage() {
-        List<SourceCode> sourceCodeList = WorkspaceService.getInstance().readSourceCode(super.getTeamId(), super.getCompetitionId(), super.getRoundId(), this.annotationData);
+        List<SourceCode> sourceCodeList = WorkspaceService.getInstance().readSourceCode(this.getTeamId(), this.getCompetitionId(), this.getRoundId(), this.annotationData);
         
         GetSourceCodeFilesReplyMessage message = new GetSourceCodeFilesReplyMessage(sourceCodeList, super.getTeamId(), super.getRoundId(), super.getCompetitionId());
         return message;

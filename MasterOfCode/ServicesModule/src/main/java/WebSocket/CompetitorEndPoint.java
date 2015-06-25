@@ -71,7 +71,8 @@ public class CompetitorEndPoint {
     public void onMessage(final Session session, final BaseMessage message) {
         if (message instanceof NewUserSessionConnectionMessage) {
             this.addSession(session, (NewUserSessionConnectionMessage) message);
-            this.sendMessage(((NewUserSessionConnectionMessage)message).getTeamId(), new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", "Herp", 2, 4444));
+//            this.sendMessage(((NewUserSessionConnectionMessage)message).getTeamId(), new StartRoundReplyMessage("Herp", "Herp", "Herp", "Herp", "Herp", "Herp", "Herp", 2, 4444));
+//            communicationBean.sendRoundMetaData();
         } else {
             message.doAction(communicationBean);
         }

@@ -59,7 +59,8 @@ public class GetSourceFilesRequestMessage extends BaseMessage {
         Long competitionId = competitionDataService.getCurrentCompetition().getId();
         Long roundId = competitionDataService.getCurrentRound().getId();
         Long assignmentId = competitionDataService.getCurrentRound().getAssignment().getId();
-        communicationBean.sendMessageToWorkspaceManegementBean(new GetSourceCodeFilesRequestMessage(assignmentId, teamId, roundId, competitionId));
+        mocjms.messages.request.GetSourceCodeFilesRequestMessage mess = new mocjms.messages.request.GetSourceCodeFilesRequestMessage(assignmentId, teamId, roundId, competitionId);
+        communicationBean.sendMessageToWorkspaceManegementBean(mess);
     }
 
     @Override

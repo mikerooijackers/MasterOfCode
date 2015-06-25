@@ -121,6 +121,7 @@ public class EditSourceCodeRequestMessage extends BaseMessage {
     public void doAction(CommunicationBean communicationBean) {
         mocjms.messages.request.EditSourceCodeRequestMessage mess = new mocjms.messages.request.EditSourceCodeRequestMessage(this.sourceCodeFile, this.newSourceCode);
         communicationBean.sendMessageToWorkspaceManegementBean(mess);
+        communicationBean.sendTeamActionMessage(teamId, " has edited and saved a file!");
     }
 
     @Override

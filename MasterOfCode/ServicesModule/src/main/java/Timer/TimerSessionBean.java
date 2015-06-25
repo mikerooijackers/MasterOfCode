@@ -60,12 +60,13 @@ public class TimerSessionBean {
         switch (timerType) {
             case CompetitionCountDownTimer:
                 communicationBean.startNextRoundOfCompetition();
-                //communicationBean.sendMessageToWorkspaceManegementBean(new ExtractAssignmentToWorkspacesRequestMessage());
+//                communicationBean.sendMessageToWorkspaceManegementBean(new ExtractAssignmentToWorkspacesRequestMessage());
                 break;
             case HintTimer:
                 String hint = timerData.getHint();
                 System.out.println("[[INFO]] A hint timer stopped with hint: " + hint);
-                //communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
+                communicationBean.sendMessageToAllCompetitors(new HintReplyMessage(hint));
+                communicationBean.sendTeamActionMessage(-1L, "A hint has been released!");
                 break;
             case RoundTimer:
                 communicationBean.setRoundScoreOfUnsubmittedTeams();
@@ -129,5 +130,10 @@ public class TimerSessionBean {
         Timer timer = this.getTimer(timerData);
         timer.cancel();
         this.handleTimerExpired(timerData);
+    }
+    
+    public Long getTimerTimeRemaining(TimerData timerData) {
+        Timer timer = this.getTimer(timerData);
+        return timer.getTimeRemaining() / 1000L;
     }
 }

@@ -73,7 +73,7 @@ public class GetParticipantsReplyMessage extends BaseMessage {
                 team = user.getTeam().getTeamName();
             }
             
-            json += "\"" + user.getFullName() + "\" :";
+            json += "\"" + user.getEmail() + "\" :";
             json += "{";
             json += "\"FullName\": \"" + user.getFullName() + "\", ";
             json += "\"Email\": \"" + user.getEmail() + "\", ";

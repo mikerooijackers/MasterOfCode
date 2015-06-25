@@ -51,9 +51,7 @@ public class SubmitRequestMessage extends BaseMessage {
     
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        /*
-        TODO: PERFORM ACTIONS WHEN SOMEONE HANDS IN THEIR ASSIGNMENT
-        */
+        communicationBean.sendTurninRequest(teamId);
     }
 
     @Override

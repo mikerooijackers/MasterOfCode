@@ -8,6 +8,7 @@ package Sockets.Messages.Client.Request;
 import Enumerations.MessageTypes;
 import Service.CommunicationBean;
 import Sockets.Messages.BaseMessage;
+import Sockets.Messages.Reply.TeamActionReplyMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -66,8 +67,8 @@ public class CompileRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        mocjms.messages.request.CompileRequestMessage mess = new mocjms.messages.request.CompileRequestMessage(this.teamId, 2L, 2L);
-        communicationBean.sendMessageToWorkspaceManegementBean(mess);
+        communicationBean.sendCompileRequest(teamId);
+        communicationBean.sendTeamActionMessage(teamId, "is compiling their project!");
     }
 
     @Override

@@ -22,7 +22,7 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
      */
     public static final String messageType = MessageTypes.OtherTeamScoreReplyMessage.toString();
     private String teamName;
-    private int teamScore;
+    private Long teamScore;
     
     /**
      * Constructor
@@ -34,22 +34,8 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
      * @param teamName
      * @param teamScore
      */
-    public OtherTeamScoreReplyMessage(String teamName, int teamScore) {
+    public OtherTeamScoreReplyMessage(String teamName, Long teamScore) {
         this.teamName = teamName;
-        this.teamScore = teamScore;
-    }
-
-    /**
-     * @return the teamScore
-     */
-    public int getTeamScore() {
-        return teamScore;
-    }
-
-    /**
-     * @param teamScore the teamScore to set
-     */
-    public void setTeamScore(int teamScore) {
         this.teamScore = teamScore;
     }
     
@@ -62,7 +48,7 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
         JSONObject obj = (JSONObject) JSONValue.parse(s);
         
         String jsonTeamName = obj.get("TeamName").toString();
-        int jsonTeamScore = (int) obj.get("TeamScore");
+        Long jsonTeamScore = (Long) obj.get("TeamScore");
         
         return new OtherTeamScoreReplyMessage(jsonTeamName, jsonTeamScore);
     }
@@ -93,5 +79,19 @@ public class OtherTeamScoreReplyMessage extends BaseMessage {
      */
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    /**
+     * @return the teamScore
+     */
+    public Long getTeamScore() {
+        return teamScore;
+    }
+
+    /**
+     * @param teamScore the teamScore to set
+     */
+    public void setTeamScore(Long teamScore) {
+        this.teamScore = teamScore;
     }
 }

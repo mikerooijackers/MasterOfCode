@@ -7,7 +7,7 @@ angular.module('competitorClientApp').controller('editorController', function ($
     $scope.editorOption = {
         lineNumbers: true
     };
-    var javaEditor = CodeMirror.fromTextArea(document.getElementById("myTextArea"), {
+    $scope.javaEditor = CodeMirror.fromTextArea(document.getElementById("myTextArea"), {
         lineNumbers: true,
         theme: "neat",
         matchBrackets: true,
@@ -21,7 +21,7 @@ angular.module('competitorClientApp').controller('editorController', function ($
             }
         }
     });
-    javaEditor.setSize(null, 495);
+    $scope.javaEditor.setSize(null, 495);
 
     SocketService.sendMessage({MessageType: "GetSourceFilesRequestMessage", TeamId: InformationService.user.team.id});
 
@@ -32,11 +32,21 @@ angular.module('competitorClientApp').controller('editorController', function ($
         var headerRow = firstRow.insertCell();
         headerRow.innerHTML = "<b>Source files:<b>";
 
+        var readOnlyFileTable = document.getElementById('readOnlyFileTable');
+        var rFirstRow = readOnlyFileTable.insertRow();
+        rFirstRow.className = "tableHeader";
+        var rHeaderRow = rFirstRow.insertCell();
+        rHeaderRow.innerHTML = "<b>Read-only files:</b>";
+
         for (var file in InformationService.sourceFiles) {
-            var row = sourceFileTable.insertRow();
+            if (InformationService.sourceFiles[file].Editable) {
+                var row = sourceFileTable.insertRow();
+            } else {
+                var row = readOnlyFileTable.insertRow();
+            }
             row.className = "javaclass";
             var cell = row.insertCell();
-            cell.innerHTML = "<a ng-click=\"changeCode('" + file.replace(/\\/g, '\\\\') + "')\">" + file.substring(file.lastIndexOf('\\') + 1) + "</a>";
+            cell.innerHTML = "<a ng-click=\"changeCode(" + file + ", " + InformationService.sourceFiles[file].Editable + ")\">" + InformationService.sourceFiles[file].Path.substring(InformationService.sourceFiles[file].Path.lastIndexOf("\\") + 1) + "</a>";
             $compile(cell)($scope);
         }
     });
@@ -45,14 +55,16 @@ angular.module('competitorClientApp').controller('editorController', function ($
         $scope.sourceReplyOnFunction();
     });
 
-    $scope.changeCode = function (fileName) {
+    $scope.changeCode = function (fileName, editable) {
         console.log(fileName);
         $scope.fileName = fileName;
-        javaEditor.getDoc().setValue(InformationService.sourceFiles[fileName]);
+        $scope.javaEditor.getDoc().setValue(InformationService.sourceFiles[fileName].Content);
+        $scope.javaEditor.setOption("readOnly", !editable);
+        document.getElementById("saveButton").disabled = !editable;
     };
 
     $scope.save = function () {
-        InformationService.sourceFiles[$scope.fileName] = javaEditor.getDoc().getValue();
-        SocketService.sendMessage({MessageType: "EditSourceCodeRequestMessage", NewSourceCode: javaEditor.getDoc().getValue(), SourceCodeFile: $scope.fileName, RoundId: 1, TeamId: 1});
+        InformationService.sourceFiles[$scope.fileName].Content = $scope.javaEditor.getDoc().getValue();
+        SocketService.sendMessage({MessageType: "EditSourceCodeRequestMessage", NewSourceCode: $scope.javaEditor.getDoc().getValue(), SourceCodeFile: InformationService.sourceFiles[$scope.fileName].Path, RoundId: 1, TeamId: InformationService.user.team.id});
     }
 });

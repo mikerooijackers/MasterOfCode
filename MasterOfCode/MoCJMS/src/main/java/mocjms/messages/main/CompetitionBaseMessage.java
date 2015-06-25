@@ -5,11 +5,13 @@
  */
 package mocjms.messages.main;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Gebruiker
  */
-public class CompetitionBaseMessage {
+public class CompetitionBaseMessage implements Serializable {
     private Long teamId;
     private Long roundId;
     private Long competitionId;

@@ -25,7 +25,20 @@ public class AmbivilantTest extends AbstractTest {
     @Override
     public void doTest() {
         logTestDetails();
-        Assert.assertTrue(true);
     }
     
+    @Test
+    private void test1() {
+        Assert.assertTrue(true, "This test actually runs");
+    }
+    
+    @Test
+    private void test2() {
+        Assert.assertTrue(true, "IsHuman moet true zijn om deze test te passen.");
+    }
+    
+    @Test
+    private void test3() {
+        Assert.assertTrue(true, "Deze test failed ook.");
+    }
 }

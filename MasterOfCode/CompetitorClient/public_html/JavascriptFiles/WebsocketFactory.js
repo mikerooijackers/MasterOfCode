@@ -11,7 +11,7 @@ angular.module('competitorClientApp')
                     };
                     ws.onmessage = function (event) {
                         var Message = JSON.parse(event.data);
-                        console.log("Message received: " + Message.MessageType);
+                        console.log(Message);
                         $rootScope.$broadcast(Message.MessageType, Message);
                     };
                 },
