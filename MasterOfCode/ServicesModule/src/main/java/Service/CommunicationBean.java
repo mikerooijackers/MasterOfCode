@@ -16,15 +16,18 @@ import Domein.MOCUser;
 import Domein.Role;
 import Domein.Round;
 import Domein.Status;
+import Domein.Team;
 import Domein.UnitTestFile;
 import JMS.WorkspaceServiceRequestBean;
 import Sockets.Messages.BaseMessage;
 import Sockets.Messages.Client.Reply.GetUserTestsReplyMessage;
+import Sockets.Messages.Client.Reply.OtherTeamScoreReplyMessage;
 import Sockets.Messages.Reply.GetParticipantsReplyMessage;
 import Sockets.Messages.Reply.PauzeRoundReplyMessage;
 import Sockets.Messages.Reply.StartRoundReplyMessage;
 import Sockets.Messages.Reply.StopCompetitionReplyMessage;
 import Sockets.Messages.Reply.StopRoundReplyMessage;
+import Sockets.Messages.Reply.TeamActionReplyMessage;
 import Timer.TimerData;
 import Timer.TimerSessionBean;
 import Timer.TimerType;
@@ -36,6 +39,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -75,15 +79,15 @@ public class CommunicationBean {
     public CompetitionDataService getCompetitionDataService() {
         return this.competitionDataService;
     }
-    
+
     public UserService getUserService() {
         return this.userService;
     }
-    
+
     public void setRoundScoreOfUnsubmittedTeams() {
-        
+
         userService.Register("blaat", "blaat", "blaat", Role.ADMIN, "blaat", "blaat", "blaat");
-        
+
 //        List<Team> teams = competitionDataService.GetTeams();
 //        Long roundId = competitionDataService.getCurrentRound().getId();
 //        List<RoundScore> roundScoresOfRound = competitionService.getRoundScoresOfRound(roundId);
@@ -102,6 +106,7 @@ public class CommunicationBean {
 //        }
 //    }
     }
+
     /**
      * send Message To Competitor
      *
@@ -217,6 +222,11 @@ public class CommunicationBean {
         competitionDataService.setCurrentCompetition(competition);
     }
 
+    public void setCurrentRound(Long roundId) {
+        Round round = competitionService.FindRound(roundId);
+        competitionDataService.setCurrentRound(round);
+    }
+
     /**
      *
      */
@@ -315,7 +325,16 @@ public class CommunicationBean {
                     } else if (methodName.equals("spectatorDescription")) {
                         message.setAssignDescriptionSpectators((String) methodValue);
                     } else if (methodName.equals("difficulty")) {
-                        message.setAssignDifficulty((int) methodValue);
+                        switch (methodValue.toString()) {
+                            case "Easy":
+                                message.setAssignDifficulty(1);
+                            case "Medium":
+                                message.setAssignDifficulty(2);
+                            case "Hard":
+                                message.setAssignDifficulty(3);
+                            default:
+                                message.setAssignDifficulty(2);
+                        }
                     }
                 }
             } else if (annotationName.equals("Hints")) {
@@ -378,6 +397,8 @@ public class CommunicationBean {
         for (int i = 0; i < hints.size(); i++) {
             this.startTimer(new TimerData((long) i + 1, hints.get(i).getDescription(), TimerType.HintTimer), (long) hints.get(i).getDelayInSeconds());
         }
+
+        this.sendTeamActionMessage(-1L, "A round has started!");
     }
 
     public void registerUser(MOCUser user) {
@@ -398,5 +419,50 @@ public class CommunicationBean {
 
         StopCompetitionReplyMessage mes = new StopCompetitionReplyMessage();
         sendMessageToEveryone(mes);
+    }
+
+    public void sendCompileRequest(Long teamId) {
+        Long competitionId = competitionDataService.getCurrentCompetition().getId();
+        Long roundId = competitionDataService.getCurrentRound().getId();
+        mocjms.messages.request.CompileRequestMessage mess = new mocjms.messages.request.CompileRequestMessage(teamId, roundId, competitionId);
+        this.sendMessageToWorkspaceManegementBean(mess);
+    }
+
+    public void sendTeamActionMessage(Long teamId, String message) {
+        String messageToSend;
+        if (teamId > 0) {
+            Team team = userService.getTeam(teamId);
+            messageToSend = team.getTeamName() + " " + message;
+        } else {
+            messageToSend = message;
+        }
+        this.sendMessageToEveryone(new TeamActionReplyMessage(messageToSend));
+    }
+    
+    public void sendTurninRequest(Long teamId) {
+        Long remainingTime = timerSessionBean.getTimerTimeRemaining(new TimerData(TimerType.RoundTimer));
+        Long score = competitionDataService.getRoundMetaData().getAssignmentDifficulty() * remainingTime;
+        
+        Long competitionId = competitionDataService.getCurrentCompetition().getId();
+        Long roundId = competitionDataService.getCurrentRound().getId();
+        
+        mocjms.messages.request.TurninRequestMessage mess = new mocjms.messages.request.TurninRequestMessage(teamId, roundId, competitionId, score);
+        this.sendMessageToWorkspaceManegementBean(mess);
+    }
+    
+    public void sendTeamScore(Long teamId, Long score) {
+        String teamName = userService.getTeam(teamId).getTeamName();
+        
+        this.sendMessageToEveryone(new OtherTeamScoreReplyMessage(teamName, score));
+    }
+    
+    public void addScoreToTeam(Long teamId, Long score) {
+        userService.addToTeamScore(teamId, score);
+    }
+
+    @PostConstruct
+    private void init() {
+        this.setCurrentCompetition(1L);
+        this.setCurrentRound(1L);
     }
 }

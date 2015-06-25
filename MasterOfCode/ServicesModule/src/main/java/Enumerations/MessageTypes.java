@@ -72,7 +72,8 @@ public enum MessageTypes {
     StopRoundRequestMessage("StopRoundRequestMessage"),
     ChangePasswordRequestMessage("ChangePasswordRequestMessage"),
     ChangePasswordReplyMessage("ChangePasswordReplyMessage"),
-    NewUserSessionConnectionMessage("NewUserSessionConnectionMessage");
+    NewUserSessionConnectionMessage("NewUserSessionConnectionMessage"),
+    SubmitReplyMessage("SubmitReplyMessage");
     
     private String name;
     

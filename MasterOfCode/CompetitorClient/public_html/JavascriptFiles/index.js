@@ -81,6 +81,14 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
                 cellTeam.innerHTML = data.TeamName;
                 cellScore.innerHTML = data.TeamScore;
             });
+            
+            $rootScope.$on("SubmitReplyMessage", function(event, data) {
+                console.log(data.Succeeded);
+                if (data.Succeeded) {
+                    InformationService.roundBusy = false;
+                    $location.path('/account');
+                }
+            });
 
             $rootScope.$on("StartRoundReplyMessage", function (event, data) {
                 InformationService.assignCreatorName = data.AssignCreatorName;
@@ -90,7 +98,7 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
                 InformationService.assignName = data.AssignName;
                 InformationService.assignDescriptionCompetitors = data.AssignDescriptionCompetitors;
                 InformationService.assignDescriptionSpectators = data.AssignDescriptionSpectators;
-                
+
                 InformationService.roundBusy = true;
 
                 $scope.difficulty = data.AssignDifficulty;
@@ -129,6 +137,7 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
 
             $rootScope.$on("CompileReplyMessage", function (event, data) {
                 InformationService.lastCompileResult = data.Result;
+                InformationService.isCompiling = false;
             });
 
             var fadeIn;
@@ -154,9 +163,15 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
             });
 
             $rootScope.$on("GetUserTestsReplyMessage", function (event, data) {
-                for (var test in data.TestDescriptions) {
-                    InformationService.testDescriptions[test] = data.TestDescriptions[test];
+                console.log(data);
+                for (var i = 0; i < data.UserTests.length; i++) {
+                    InformationService.userTests.push(data.UserTests[i]);
                 }
+            });
+
+            $rootScope.$on("UserTestsReplyMessage", function (event, data) {
+                InformationService.lastTestsResult = data.Result;
+                InformationService.isTesting = false;
             });
 
             $scope.startFadeIn = function (data) {
@@ -189,4 +204,6 @@ angular.module('competitorClientApp', ['ngRoute', 'ngWebsocket', 'ngResource'])
                 localStorage.removeItem("userInformation");
                 window.location.href = "LoginPage.html";
             }
+
+            SocketService.sendMessage({MessageType: 'GetUserTestsRequestMessage'});
         });

@@ -17,9 +17,14 @@ angular.module('competitorClientApp').service('InformationService', function() {
     
     this.lastCompileResult = "";
     
+    this.lastTestsResult = "";
+    
     this.teamActions = [];
     
-    this.testDescriptions = [];
+    this.userTests = [];
     
     this.user = null;
+    
+    this.isCompiling = false;
+    this.isTesting = false;
 });

@@ -95,6 +95,7 @@ public class UserTestsRequestMessage extends BaseMessage {
         }
         mocjms.messages.request.UserTestRequestMessage mess = new mocjms.messages.request.UserTestRequestMessage(tests, teamId, 1L, 1L);
         communicationBean.sendMessageToWorkspaceManegementBean(mess);
+        communicationBean.sendTeamActionMessage(teamId, "is running tests!");
     }
     
     @Override

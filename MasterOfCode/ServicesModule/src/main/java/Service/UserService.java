@@ -229,4 +229,10 @@ public class UserService {
         Team team = em.find(Team.class, teamId);
         return team;
     }
+    
+    public void addToTeamScore(Long teamId, Long score) {
+        Team team = em.find(Team.class, teamId);
+        team.setScore(team.getScore() + score.intValue());
+        em.merge(team);
+    }
 }
