@@ -22,6 +22,7 @@ import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
+import mocjms.messages.request.CreateWorkspaceRequestMessage;
 
 /**
  * REST Web Service
@@ -121,7 +122,10 @@ public class RestResource {
         String initiator = message.getInitiator();
         List<String> members = message.getMembers();
         long competitionId = communicationBean.getCompetitionDataService().getCurrentCompetition().getId();
+        
         Team team = userService.createTeam(teamName, initiator, members, competitionId);
+        
+        communicationBean.sendMessageToWorkspaceManegementBean(new CreateWorkspaceRequestMessage(team.getId(), competitionId));
         for (String address : members) {
             if (!address.equals("")) {
                 mailMessenger.sendAddedToTeamMessage(address, members, team.getTeamName(), initiator);

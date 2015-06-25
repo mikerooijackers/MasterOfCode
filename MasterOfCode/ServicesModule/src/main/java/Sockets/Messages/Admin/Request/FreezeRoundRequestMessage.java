@@ -54,8 +54,7 @@ public class FreezeRoundRequestMessage extends BaseMessage {
 
     @Override
     public void doAction(CommunicationBean communicationBean) {
-        FreezeRoundReplyMessage mes = new FreezeRoundReplyMessage();
-        communicationBean.sendMessageToEveryone(mes);
+        communicationBean.FreezeTheRound();
         
         System.out.println("In the doAction of the FreezeRoundRequestMessage");
     }
