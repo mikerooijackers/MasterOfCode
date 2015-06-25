@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="home.HomeController">
+  <children>
+    <Button fx:id="btnSelectFolder" layoutX="461.0" layoutY="45.0" minHeight="32.0" mnemonicParsing="false" onAction="#btnSelectFolderClicked" prefHeight="30.0" text="Select folder" />
+    <TextField fx:id="textFieldAssgnmentFolder" layoutX="23.0" layoutY="46.0" prefWidth="425.0" />
+    <Label layoutX="23.0" layoutY="22.0" text="Step 1: Select assignment folder">
+      <font>
+        <Font name="System Bold" size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="23.0" layoutY="100.0" text="Step 2: Read meta data" />
+    <Button fx:id="btnReadMetaData" layoutX="23.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnReadMetaDataClicked" text="Read meta data" />
+  </children>
+</AnchorPane>
